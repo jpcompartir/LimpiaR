@@ -1,15 +1,9 @@
 Package: LimpiaR
-Title: What the Package Does (One Line, Title Case)
+Title: Allows For Fast Cleaning of Spanish and English Text Data
 Version: 0.0.0.9000
-Authors@R: 
-    person(given = "First",
-           family = "Last",
-           role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+Authors@R: person( "Jack", "Penzer", email = "jack.penzer@sharecreative.com",)
+Description: SHARE & SAMY Group's dedicated pre-processing suite for Spanish & English data sets. \n A range of functions for getting text data ready to be analysed.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
