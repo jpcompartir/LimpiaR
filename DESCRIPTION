@@ -1,0 +1,28 @@
+Package: LimpiaR
+Title: Allows For Fast Cleaning of Spanish and English Text Data
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Jack",
+           family = "Penzer",
+           role = c("aut", "cre"),
+           email = "jack.penzer@sharecreative.com",
+           comment = c(ORCID = "SHARE Creative"))
+Description: SHARE & SAMY Group's dedicated pre-processing suite for Spanish & English data sets. A range of functions for getting text data ready to be analysed.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Imports:
+    dplyr,
+    rlang,
+    stopwords,
+    stringr,
+    tibble,
+    tm,
+    utils,
+    magrittr,
+    tidyr
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
