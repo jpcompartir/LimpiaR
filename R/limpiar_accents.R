@@ -1,23 +1,33 @@
-library(stringr)
 
-#' Title
+#' limpiar_accents
 #'
-#' @param x A character vector
+#' Replaces accented characters with non-accented characters. Should be used within a dplyr::mutate() function call.
 #'
-#' @return
+#' @param x Name of text variable/character vector
+#'
+#' @return text variable/character vector with accents replaced
 #' @export
 #'
-#' @examples
-#'
+
+
 limpiar_accents <- function(x){
-  x <- str_replace_all(x, 'é', 'e')
-  x <- str_replace_all(x, 'ó', 'o')
-  x <- str_replace_all(x, 'á', 'a')
-  x <- str_replace_all(x, 'í', 'i')
-  x <- str_replace_all(x, 'ü', 'u')
-  x <- str_replace_all(x, 'ù', 'u')
-  x <- str_replace_all(x, 'ñ', 'n')
-  x <- str_replace_all(x, "è", "e")
-  x <- str_replace_all(x, "ú", "u")
+  x <- stringr::str_replace_all(x, '\u00E9', 'e')
+  x <- stringr::str_replace_all(x, '\u00F3', 'o')
+  x <- stringr::str_replace_all(x, '\u00E1', 'a')
+  x <- stringr::str_replace_all(x, '\u00ED', 'i')
+  x <- stringr::str_replace_all(x, '\u00FC', 'u')
+  x <- stringr::str_replace_all(x, '\u00F9', 'u')
+  x <- stringr::str_replace_all(x, '\u00F1', 'n')
+  x <- stringr::str_replace_all(x, "\u00E8", "e")
+  x <- stringr::str_replace_all(x, "\u00FA", "u")
+  x
 }
+
+
+# usage things:
+#  df %>%
+#    dplyr::mutate(x = limpiar_accents(x))
+#
+# x <- limpiar_accents(x)
+
 

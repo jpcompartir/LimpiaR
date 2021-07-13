@@ -2,19 +2,16 @@
 % Please edit documentation in R/limpiar_accents.R
 \name{limpiar_accents}
 \alias{limpiar_accents}
-\title{Title}
+\title{limpiar_accents}
 \usage{
 limpiar_accents(x)
 }
 \arguments{
-\item{x}{A character vector}
+\item{x}{Name of text variable/character vector}
 }
 \value{
-
+text variable/character vector with accents replaced
 }
 \description{
-Title
-}
-\examples{
-
+Replaces accented characters with non-accented characters. Should be used within a dplyr::mutate() function call.
 }
