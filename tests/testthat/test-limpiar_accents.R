@@ -4,7 +4,7 @@ test_that("Accents are removed", {
   cleaned_vec <- c("rollover","ultimatum","arsenal",
                "firing hose","fun","reed ","nino")
 
-  expect_equal(sort(cleaned), sort(limpiar_accents(test_vecs)))
+  expect_equal(sort(cleaned_vec), sort(limpiar_accents(dirty_vec)))
 })
 
 test_that("works within a pipe", {
