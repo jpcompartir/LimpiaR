@@ -2,13 +2,13 @@
 #'
 #' @param df Data Frame or Tibble Object
 #' @param text_var The text variable/character vector
-#'
+#' @importFrom magrittr %>%
 #' @return The original data frame with the text variable cleaned
 #' @export
 #'
 #' @examples
 #' print("hello world")
-#' @importFrom magrittr %>%
+
 
 
 limpiar_df <- function(df, text_var = .data$mention_content){
@@ -43,4 +43,4 @@ limpiar_df <- function(df, text_var = .data$mention_content){
 #                                          "boom boy", "keep this one, right?",
 #                                          "https::remove_me.com")))
 # df
-# limppi
+# limpiar_df(df, text_variable)

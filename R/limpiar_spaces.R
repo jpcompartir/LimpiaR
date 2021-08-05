@@ -4,7 +4,6 @@
 #'
 #' @param df Name of the Data Frame or Tibble object
 #' @param text_var Name of the text variable/character vector
-#' @importFrom magrittr %>%
 #' @return text variable/character vector with excess spaces removed
 #' @export
 #'
