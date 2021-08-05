@@ -16,9 +16,3 @@ limpiar_na_cols <- function(data, y){
   data <- data[colSums(is.na(data)) <= nrow(data) * y]
   data
 }
-
-#
-# #Usage things
-#  # limpiar_na_cols(data = df, y = 0.75)
-#  #
-#  # limpiar_na_cols(data = df ,y = 0.5)

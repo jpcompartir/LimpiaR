@@ -18,4 +18,3 @@ test_that("works within a pipe", {
   expect_equal(df %>%
                  dplyr::mutate(mention_content = limpiar_accents(mention_content)),df_two)
 })
-
