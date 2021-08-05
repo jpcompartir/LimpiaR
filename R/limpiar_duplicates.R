@@ -1,17 +1,21 @@
 #' limpiar_duplicates
 #'
-#' Removes duplicate posts and deleted or protected mentions
+#' Removes duplicate posts and 'deleted or protected mentions'
 #'
 #' @param data Data Frame or Tibble object
-#' @param x Name of the text variable/character vector
+#' @param text_var Name of the text variable/character vector
 #'
 #' @return text variable/character with duplicates removed
 #' @export
 #'
 #' @examples
-#' print("hello world")
-limpiar_duplicates <- function(data, x = .data$mention_content){
+#' df <- data.frame(text_variable = cbind(c("Deleted or protected mention", "hello", "goodbye", "goodbye")))
+#' limpiar_duplicates(df, text_variable)
+limpiar_duplicates <- function(data, text_var = .data$mention_content){
   data %>%
-    dplyr::filter(!stringr::str_detect(!!rlang::enquo(x), "Deleted or"))%>%
-    dplyr::filter(!duplicated(!!rlang::enquo(x)))
+    dplyr::filter(!stringr::str_detect(!!rlang::enquo(text_var), "(D|d)eleted or"))%>%
+    dplyr::filter(!duplicated(!!rlang::enquo(text_var)))
 }
+
+
+

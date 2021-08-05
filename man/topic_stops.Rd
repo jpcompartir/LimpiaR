@@ -3,7 +3,6 @@
 \docType{data}
 \name{topic_stops}
 \alias{topic_stops}
-\alias{sentiment_stops}
 \title{topic_stops}
 \format{
 A tibble with 2 columns & 704 rows
