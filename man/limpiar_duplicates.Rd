@@ -4,19 +4,20 @@
 \alias{limpiar_duplicates}
 \title{limpiar_duplicates}
 \usage{
-limpiar_duplicates(data, x = .data$mention_content)
+limpiar_duplicates(data, text_var = .data$mention_content)
 }
 \arguments{
 \item{data}{Data Frame or Tibble object}
 
-\item{x}{Name of the text variable/character vector}
+\item{text_var}{Name of the text variable/character vector}
 }
 \value{
 text variable/character with duplicates removed
 }
 \description{
-Removes duplicate posts and deleted or protected mentions
+Removes duplicate posts and 'deleted or protected mentions'
 }
 \examples{
-print("hello world")
+df <- data.frame(text_variable = cbind(c("Deleted or protected mention", "hello", "goodbye", "goodbye")))
+limpiar_duplicates(df, text_variable)
 }

@@ -4,12 +4,12 @@
 \alias{limpiar_spaces}
 \title{limpiar_spaces}
 \usage{
-limpiar_spaces(df, x = .data$mention_content)
+limpiar_spaces(df, text_var = .data$mention_content)
 }
 \arguments{
 \item{df}{Name of the Data Frame or Tibble object}
 
-\item{x}{Name of the text variable/character vector}
+\item{text_var}{Name of the text variable/character vector}
 }
 \value{
 text variable/character vector with excess spaces removed
@@ -18,5 +18,6 @@ text variable/character vector with excess spaces removed
 Remove excess spaces from the text variable
 }
 \examples{
-print("hello world")
+df <- data.frame(text_variable = "clean   the   spaces please")
+limpiar_spaces(df, text_var = text_variable)
 }

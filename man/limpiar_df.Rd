@@ -4,7 +4,7 @@
 \alias{limpiar_df}
 \title{limpiar_df}
 \usage{
-limpiar_df(df, text_var)
+limpiar_df(df, text_var = .data$mention_content)
 }
 \arguments{
 \item{df}{Data Frame or Tibble Object}

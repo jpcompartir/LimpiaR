@@ -10,6 +10,6 @@
 #' @name topic_stops
 #' @usage data("topic_stops")
 #'
-"sentiment_stops"
+"topic_stops"
 
 

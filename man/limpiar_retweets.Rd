@@ -4,16 +4,17 @@
 \alias{limpiar_retweets}
 \title{limpiar_retweets}
 \usage{
-limpiar_retweets(df, x = .data$mention_content)
+limpiar_retweets(df, text_var = .data$mention_content)
 }
 \arguments{
 \item{df}{Name of the Data Frame or Tibble Object}
 
-\item{x}{Name of the text variable/character vector}
+\item{text_var}{Name of the text variable/character vector}
 }
 \description{
 Removes all posts with the 'rt' tag
 }
 \examples{
-print("hello world")
+df <- data.frame(text_variable = cbind(c("rt <3", "RT <3", "original tweet")))
+limpiar_retweets(df, text_variable)
 }

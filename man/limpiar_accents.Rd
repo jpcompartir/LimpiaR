@@ -4,14 +4,18 @@
 \alias{limpiar_accents}
 \title{limpiar_accents}
 \usage{
-limpiar_accents(x)
+limpiar_accents(text_var)
 }
 \arguments{
-\item{x}{Name of text variable/character vector}
+\item{text_var}{Name of text variable/character vector}
 }
 \value{
 text variable/character vector with accents replaced
 }
 \description{
 Replaces accented characters with non-accented characters. Should be used within a dplyr::mutate() function call.
+}
+\examples{
+df <- data.frame(text_variable = "thé óld mán")
+dplyr::mutate(df, limpiar_accents(text_variable))
 }

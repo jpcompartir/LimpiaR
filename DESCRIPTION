@@ -23,7 +23,10 @@ Imports:
     utils,
     magrittr,
     tidyr,
-    usethis
+    usethis,
+    janitor,
+    ParseR,
+    tidytext
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
