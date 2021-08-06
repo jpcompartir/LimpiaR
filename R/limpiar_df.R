@@ -1,46 +1,31 @@
 #' limpiar_df
 #'
+#' used on a data frame to clean the column names, remove duplicates, empty rows and retweets,
+#' turn the text variable to all lower case (advisable to do any part of speech tagging before using).
+#' Function also cleans accents, common urls and trims excess white spaces.
+#'
 #' @param df Data Frame or Tibble Object
 #' @param text_var The text variable/character vector
 #' @importFrom magrittr %>%
-#' @return The original data frame with the text variable cleaned
+#' @return The original Data Frame with the text variable cleaned
 #' @export
 #'
 #' @examples
 #' print("hello world")
 
-
-
-limpiar_df <- function(df, text_var = .data$mention_content){
+limpiar_df <- function(df, text_var, retweets = TRUE){
   .col = rlang::enquo(text_var)
+
   df %>%
     janitor::clean_names()%>%
     janitor::remove_empty(which = "rows")%>%
-    limpiar_duplicates(text_var)%>%
+    limpiar_duplicates(!!rlang::enquo(text_var))%>%
     #tidy evaluation takes column input, quotes + unquotes
     dplyr::mutate(!!paste0("", rlang::quo_name(.col)) := tolower(!!rlang::enquo(text_var)))%>%
     dplyr::mutate(!!paste0("", rlang::quo_name(.col)) := limpiar_accents(!!rlang::enquo(text_var)))%>%
-    limpiar_retweets(text_var)%>%
-    dplyr::mutate(!!paste0("", rlang::quo_name(.col)) := limpiar_url(!!rlang::enquo(text_var)))%>%
-    limpiar_spaces(text_var)
+    limpiar_retweets(!!rlang::enquo(text_var))%>%
+    limpiar_url(!!rlang::enquo(text_var))%>%
+    limpiar_spaces(!!rlang::enquo(text_var))
 }
 
 
-
-# limpiar_df <- function(df, text_var = mention_content){
-#   .col = rlang::enquo(text_var)
-#   df %>%
-#     limpiaR::limpiar_duplicates()%>%
-#     #tidy evaluation takes column input, quotes + unquotes
-#     dplyr::mutate(!!paste0("", rlang::quo_name(.col)) := tolower(!!rlang::enquo(text_var)))%>%
-#     dplyr::mutate(!!paste0("", rlang::quo_name(.col)) := limpiaR::limpiar_accents(!!rlang::enquo(text_var)))%>%
-#     limpiaR::limpiar_retweets()%>%
-#     dplyr::mutate(!!paste0("", rlang::quo_name(.col)) := limpiaR::limpiar_url(!!rlang::enquo(text_var)))%>%
-#     limpiaR::limpiar_spaces()
-# }
-
-# df <- data.frame(text_variable = cbind(c("HEY YÁLL", "RT boom boy", "boom boy",
-#                                          "boom boy", "keep this one, right?",
-#                                          "https::remove_me.com")))
-# df
-# limpiar_df(df, text_variable)
