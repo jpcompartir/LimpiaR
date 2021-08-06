@@ -4,19 +4,24 @@
 \alias{limpiar_na_cols}
 \title{limpiar_na_cols}
 \usage{
-limpiar_na_cols(data, y)
+limpiar_na_cols(df, y)
 }
 \arguments{
-\item{data}{The Data Frame or Tibble Object}
+\item{df}{The Data Frame or Tibble object}
 
-\item{y}{A decimal between 0 and 1: The minimum proportion of NA values a column should contain to not be deleted.}
+\item{y}{Threshold of non-NA entries a column must exceed to be retained.}
 }
 \value{
-data frame or tibble
+Data Frame or Tibble with NA-heavy columns purged
 }
 \description{
-A function to remove columns with a specified proportion of NA/missing values.
+A function to remove NA-heavy columns. Retains columns
 }
 \examples{
-print("hello world")
+a <- cbind(c(NA, NA, NA, NA, NA))
+b <- cbind(c(NA, NA, 2, NA, 3))
+c <- cbind(c(1, 2, 3, 4, 5))
+df <- tibble::as_tibble(data.frame(a, b, c))
+df <- limpiar_na_cols(df, 0.4)
+
 }

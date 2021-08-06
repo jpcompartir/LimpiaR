@@ -1,18 +1,21 @@
 #' limpiar_na_cols
 #'
-#' A function to remove columns with a specified proportion of NA/missing values.
+#' A function to remove NA-heavy columns. Retains columns
 #'
-#' @param data The Data Frame or Tibble Object
-#' @param y A decimal between 0 and 1: The minimum proportion of NA values a column should contain to not be deleted.
 #'
-#' @return data frame or tibble
+#' @param df The Data Frame or Tibble object
+#' @param y Threshold of non-NA entries a column must exceed to be retained.
+#'
+#' @return Data Frame or Tibble with NA-heavy columns purged
 #' @export
 #'
 #' @examples
-#' print("hello world")
-
-
-limpiar_na_cols <- function(data, y){
-  data <- data[colSums(is.na(data)) <= nrow(data) * y]
-  data
+#' a <- cbind(c(NA, NA, NA, NA, NA))
+#' b <- cbind(c(NA, NA, 2, NA, 3))
+#' c <- cbind(c(1, 2, 3, 4, 5))
+#' df <- tibble::as_tibble(data.frame(a, b, c))
+#' df <- limpiar_na_cols(df, 0.4)
+#'
+limpiar_na_cols <- function(df, y){
+  df[colSums(!is.na(df)) /nrow(df)  >= y]
 }
