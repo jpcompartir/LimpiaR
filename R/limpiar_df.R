@@ -13,7 +13,7 @@
 #' @examples
 #' print("hello world")
 
-limpiar_df <- function(df, text_var, retweets = TRUE){
+limpiar_df <- function(df, text_var){
   .col = rlang::enquo(text_var)
 
   df %>%

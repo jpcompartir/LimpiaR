@@ -4,7 +4,7 @@
 \alias{limpiar_df}
 \title{limpiar_df}
 \usage{
-limpiar_df(df, text_var, retweets = TRUE)
+limpiar_df(df, text_var)
 }
 \arguments{
 \item{df}{Data Frame or Tibble Object}
