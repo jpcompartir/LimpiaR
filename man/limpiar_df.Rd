@@ -4,7 +4,7 @@
 \alias{limpiar_df}
 \title{limpiar_df}
 \usage{
-limpiar_df(df, text_var = .data$mention_content)
+limpiar_df(df, text_var, retweets = TRUE)
 }
 \arguments{
 \item{df}{Data Frame or Tibble Object}
@@ -12,10 +12,12 @@ limpiar_df(df, text_var = .data$mention_content)
 \item{text_var}{The text variable/character vector}
 }
 \value{
-The original data frame with the text variable cleaned
+The original Data Frame with the text variable cleaned
 }
 \description{
-limpiar_df
+used on a data frame to clean the column names, remove duplicates, empty rows and retweets,
+turn the text variable to all lower case (advisable to do any part of speech tagging before using).
+Function also cleans accents, common urls and trims excess white spaces.
 }
 \examples{
 print("hello world")

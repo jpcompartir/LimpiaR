@@ -15,4 +15,3 @@ limpiar_spaces <- function(df, text_var = .data$mention_content){
   df %>%
     dplyr::mutate(!!paste0("", rlang::quo_name(.col)) := stringr::str_replace_all(!!rlang::enquo(text_var), "\\s+", " "))
 }
-
