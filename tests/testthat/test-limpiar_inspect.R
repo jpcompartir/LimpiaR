@@ -1,4 +1,4 @@
-test_that("multiplication works", {
+test_that("inspection works", {
   a <- c("http.url.com")
   b <- a
   c <- b
