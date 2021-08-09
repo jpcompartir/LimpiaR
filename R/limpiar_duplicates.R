@@ -16,6 +16,3 @@ limpiar_duplicates <- function(data, text_var = .data$mention_content){
     dplyr::filter(!stringr::str_detect(!!rlang::enquo(text_var), "(D|d)eleted or"))%>%
     dplyr::filter(!duplicated(!!rlang::enquo(text_var)))
 }
-
-
-
