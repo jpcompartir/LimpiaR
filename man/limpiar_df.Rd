@@ -4,7 +4,7 @@
 \alias{limpiar_df}
 \title{limpiar_df}
 \usage{
-limpiar_df(df, text_var, remove_retweets = TRUE)
+limpiar_df(df, text_var, remove_retweets = TRUE, remove_punctuation = FALSE)
 }
 \arguments{
 \item{df}{Data Frame or Tibble Object}
@@ -12,6 +12,8 @@ limpiar_df(df, text_var, remove_retweets = TRUE)
 \item{text_var}{The text variable/character vector}
 
 \item{remove_retweets}{Whether or not to remove retweets, default is to remove}
+
+\item{remove_punctuation}{Whether or not to remove punctuation (and then clean whitespace)}
 }
 \value{
 The original Data Frame with the text variable cleaned

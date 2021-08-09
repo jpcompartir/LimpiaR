@@ -25,7 +25,6 @@ Imports:
     tidyr,
     usethis,
     janitor,
-    ParseR,
     tidytext
 Suggests: 
     testthat (>= 3.0.0)
