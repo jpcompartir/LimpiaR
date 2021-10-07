@@ -1,0 +1,8 @@
+pandoc: 2.11.4
+pkgdown: 1.6.1
+pkgdown_sha: ~
+articles:
+  LimpiaR_user_guide: LimpiaR_user_guide.html
+  Stopwords: Stopwords.html
+last_built: 2021-10-07T14:15Z
+

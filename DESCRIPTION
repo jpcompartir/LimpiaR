@@ -25,7 +25,8 @@ Imports:
     tidyr,
     usethis,
     janitor,
-    tidytext
+    tidytext,
+    hash
 Suggests: 
     rmarkdown,
     knitr,

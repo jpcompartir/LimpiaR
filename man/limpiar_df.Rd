@@ -19,10 +19,10 @@ limpiar_df(df, text_var, remove_retweets = TRUE, remove_punctuation = FALSE)
 The original Data Frame with the text variable cleaned
 }
 \description{
-used on a data frame to clean the column names, remove duplicates, empty rows and retweets,
+used on a data frame to remove duplicates, empty rows, and retweets,
 turn the text variable to all lower case (advisable to do any part of speech tagging before using).
-Function also cleans accents, common urls and trims excess white spaces.
-Use remove_retweets = FALSE to keep retweets in the text variable
+Function also cleans accents, common urls, punctuation if specified and trims excess white spaces.
+Use remove_retweets = FALSE to keep retweets in the text variable.
 }
 \examples{
 print("hello world")
