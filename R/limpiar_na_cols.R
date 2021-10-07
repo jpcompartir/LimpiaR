@@ -4,7 +4,7 @@
 #'
 #'
 #' @param df The Data Frame or Tibble object
-#' @param y Threshold of non-NA entries a column must exceed to be retained.
+#' @param threshold Threshold of non-NA entries a column must exceed to be retained.
 #'
 #' @return Data Frame or Tibble with NA-heavy columns purged
 #' @export
@@ -16,6 +16,6 @@
 #' df <- tibble::as_tibble(data.frame(a, b, c))
 #' df <- limpiar_na_cols(df, 0.4)
 #'
-limpiar_na_cols <- function(df, y){
-  df[colSums(!is.na(df)) /nrow(df)  >= y]
+limpiar_na_cols <- function(df, threshold){
+  df[colSums(!is.na(df)) /nrow(df)  >= threshold]
 }

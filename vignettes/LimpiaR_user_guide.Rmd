@@ -14,13 +14,22 @@ knitr::opts_chunk$set(
 )
 ```
 
-First we will load LimpiaR and the tidyverse package (which we use extensively)
-```{r setup, echo = FALSE}
+First we will load LimpiaR (you will usually want to load tidyverse too, but we do not do so in this Rmarkdown due to package-building complexities)"
+```{r}
 library(LimpiaR)
 library(tidyverse)
 ```
 
-LimpiaR is a small package built to speed up the data pre-processing and cleaning workflow. Let's create a very basic example data set to demonstrate a workflow with a mixture of LimpiaR functions and commonly-used pre-processing packages that covered the basic functionalities we were looking for.
+
+For later reference, we've added a table to guide you on which LimpiaR function you will need for our most common outputs/analyses:
+
+```{r, echo = FALSE}
+knitr::include_graphics("../vignettes/limpiar_check_guide.png")
+
+```
+
+
+LimpiaR is a small package built to speed up the data pre-processing and cleaning workflow. Let's create a very basic example data set to demonstrate a workflow with a mixture of LimpiaR functions and commonly-used text mining packages.
 
 ```{r}
 
@@ -45,6 +54,8 @@ df <- data.frame(`Mention Content` = cbind(c("Hello, what's your name?",
 
 ```
 
+## Cleaning Data Frame Names
+
 The first step is to clean up the column names, generally we want our columns to be all lowercase, with spaces marked by '_' (snake case) and no other punctuation. We can dip into the janitor package for a convenient and widely-used function to do this:
 
 ```{r}
@@ -54,11 +65,14 @@ df <- df %>%
 original <- df #We'll copy our data frame for later use
 
 names(df)
+df
 ```
 
-Cleaning the names like this every time you start a new project will save you a lot of time in the long run, as you won't get confused by capitals, and tab completion is much smoother when column names are in a uniform format.
+Cleaning the names like this every time you start a new project will save you a lot of time in the long run, as you won't get confused by capitals, and tab completion is much smoother when column names are in snake_case.
 
-In the future you may want to perform some actions on the text variable before doing any pre-processing, but for now we are going to go ahead and put our text variable to lowercase, which is something we want to do for virtually every data set that we analyse. We do this so that strings like "HelLo" aren't seen as different to "hello" or "Hello", which helps us when counting words and bigrams, or modelling topics!
+## Text Variable -> lower case
+
+In the future you may want to perform some actions on the text variable before doing any pre-processing, but for now we are going to go ahead and put our text variable to lowercase, which is something we want to do for virtually every data set that we analyse. We do this so that strings like "HelLo" aren't seen as different to "hello" or "HELLO", which helps us when counting words and bigrams, or modelling topics!
 
 ```{r, echo = FALSE}
 #We use the base R function tolower() on our text variable
@@ -67,15 +81,22 @@ df <- df %>%
 
 ```
 
-Let's take a look at the first LimpiaR function. This function will replace accented characters with non-accented, e.g. é becomes e and ñ becomes n. Converting ñ to n has some slightly unwanted effects in that words like año(s) become ano(s). Later on this may become an issue, but for now the trade off is ok. We call limpiar_accents() on the text variable with the help of mutate()
+Let's take a look at the first LimpiaR function. This function will replace accented characters with non-accented, e.g. é becomes e and ñ becomes n. Converting ñ to n has some slightly unwanted effects in that words like año(s) become ano(s). Later on this may become an issue, but for now the trade off is ok. We call limpiar_accents() on the text variable with the help of mutate() and use '<-' to keep the changges. 
 
 ```{r}
 df <- df %>% 
   mutate(mention_content = limpiar_accents(mention_content))
+
+#alternate syntax:
+# df <- limpiar_accents(df, mention_content)
 df
+
+
 ```
 
-Next, we'll remove duplicates and "Deleted or protected mentions" from the text variable.
+## Removing Duplicates
+
+Next, we'll remove duplicates and "Deleted or protected mentions" from the text variable. The main reason we remove duplicates is to eradicate spam.
 
 ```{r}
 df <- df %>%
@@ -83,7 +104,7 @@ df <- df %>%
 df
 
 ```
-At first glance, it looks like our function may not be functioning properly, as two seemingly-identical strings remain. However, the tibble output is masking some spaces in one of our 'a mi no me gustaria' strings. How could we see that?
+At first glance, it looks like our function may not be working properly, as two seemingly-identical strings remain. However, the tibble output is masking some spaces in one of our 'a mi no me gustaria' strings. How could we see that?
 
 ```{r}
 df %>%
@@ -96,10 +117,14 @@ So, we could use another LimpiaR function to remove the excess whitespaces and t
 df <- df %>%
   limpiar_spaces(mention_content)%>%
   limpiar_duplicates(mention_content)
+
 df
 ```
 
-Now our function seems to be working as expected. We can see that one of the posts begins with 'rt' which indicates that it is a retweet, oftentimes we will want to remove all posts that are retweets, so let's call anohter LimpiaR function: limpiar_retweets, on our data frame.
+
+## Removing Retweets
+
+Now our function seems to be working as expected. We can see that one of the posts begins with 'rt' which indicates that it is a retweet, often we will want to remove all retweets, so let's call another LimpiaR function: limpiar_retweets, on our data frame.
 
 ```{r}
 df <- df %>%
@@ -107,6 +132,13 @@ df <- df %>%
 df
 ```
 
+The decision to remove retweets or not should be made on a case-by-case basis. If you leave retweets in, they will dominate topic models & bigram networks. However, they are an indicator of viral events, which may be important for some analyses. 
+
+*If you decide to remove retweets, you can use the original data frame to analyse them*
+
+
+## Removing URLs
+ 
 Our data frame is getting pretty small, but in our larger data frames we often see the same URLs posted by many accounts or bots. We don't want our bigram networks, token charts or topic models to be filled with URLs. We will use another function: limpiar_url to remove URLs from our text variable:
 
 ```{r}
@@ -115,19 +147,25 @@ df <- df %>%
 df
 ```
 
-Looking at our data set on the qualitative level, we might want to see which article the post is referencing, or closely inspect all of the posts which feature a certain pattern, to then copy the URL and take a screenshot, or examine for traces of spam. The limpiar_inspect function gives us an inspectable data frame with just the text variable and the post url column for ease of inspection:
+## Inspecting/Investigating a Specific Pattern
+
+When working with larger data sets, we might want to inspect all of the posts which feature a certain pattern, to then copy the URL and take a screenshot, or examine for traces of spam. The limpiar_inspect function ouputs an inspectable data frame with just the text variable and the URL column for ease of inspection:
 
 ```{r}
 limpiar_inspect(df, "article", mention_content, mention_url)
 ```
 
-You may have noticed that our data frame has a column which is filled with NA values, when dealing with small data sets, this is no issue. However, in large data sets conserving memory can be helpful. As humans, reducing the dimensions of the data frame can also help us to see more things at once and put less strain on our working memories. 
+Personally I use limpiar_inspect heavily when I need to check the output of a bigram network.
 
-The next LimpiaR function allows you to reduce the columns of your data frame, by selecting a threshold of non-NA values a column must surpass to be retained. If the threshold is 0.1, a column must have 10% or more values which are not NA and so forth. 
+## Removing NA-heavy Columns
+
+You may have noticed that our data frame has a column which is filled with NA values, when dealing with small data sets, this is no issue. However, in large data sets (particularly when using RStudio) conserving memory is helpful. Reducing the dimensions of the data frame can also help us to put less strain on our working memories - as we can see more of the columns at once (underrated efficiency gain!).
+
+The next LimpiaR function allows you to reduce the columns of your data frame, by selecting a threshold of non-NA values a column must surpass to be retained. If the threshold is 0.1, a column must have 10% or more values which are not NA, which is another way of saying it must have fewer than 90% NA values. If we set the threshold to 0.4, we would be asking R to retain the columns with 40% or more non-NA values, so fewer than 60% NA values.
 
 ```{r}
 
-df <- limpiar_na_cols(df, 0.3)
+df <- limpiar_na_cols(df, 0.4)
 df
 ```
 
@@ -137,7 +175,19 @@ We see that the NA-heavy column is deleted. What happens if we change the thresh
 limpiar_na_cols(original, 0.2)
 ```
 
-We've now seen the majority of the LimpiaR first release functions. Often they will need to be used in conjunction, but sometimes we will want to use them together in one big function call. The final function we will look at, limpiar_df, effectively does this, as well as allowing for the removal of punctuation. However, removing punctuation is not a given and should be removed only if there is a valid reason for doing so.
+## Combining Functions
+
+We've now seen the majority of the first-release LimpiaR functions. Often they will need to be used separately , but sometimes we will want to use a few of them together in one big function call. The final function we will look at, limpiar_df, effectively does this, as well as allowing for the removal of punctuation. However, removing punctuation is not a given and should be removed only if there is a valid reason for doing so.
+
+limpiar_df can:
+remove empty rows
+transform the text variable to lower case
+replace accented characters with non-accented equivalents
+remove URLs
+remove retweets
+remove punctuation
+clean excess whitespace
+remove duplicates (after all of the preceding elements have been carried out)
 
 ```{r}
 limpiar_df(original, mention_content, remove_retweets = FALSE, remove_punctuation = FALSE)
@@ -151,29 +201,10 @@ limpiar_df(original, mention_content, remove_retweets = TRUE, remove_punctuation
 
 Using limpiar_df won't always be the correct answer, but once you understand what each function in LimpiaR does, you will be able to make an educated guess and use limpiar_df to drastically speed up your analyses.
 
-Finally, we're going to look at some stopwords, which have been stored in LimpiaR within data frames. We have two separate data frames, one for sentiment stopwords and another for topic stopwords; we'll explain why as we go. 
-
-The workflow is somewhat complicated, but if you're used to reading data into R, using common Tidyverse/dplyr commands like filter & mutate, you should have no problem in following the workflow. First we'll look at how our sentiment stop words are stored:
-
-```{r}
-data("sentiment_stops")
-sentiment_stops
-```
-We can see that our data frame has two columns, of 682 observations. Each observation is a different stop words. The 'sentiment' column has accents left in, for occasions that an analyst wishes to remove sentiment stop words without having removed accents. We will look at how to remove sentiment stop words both with and without accents, however, generally wou will want to remove accents, so the sentiment_no_accents column will be what you need.
+Next time we will be looking at LimpiaR's stop words dictionary, creating your own stop words lists and how to remove them from the text, a vital step in most text mining projects.
 
 
-- show why it's best to tolower, remove accents etc. at time
-
-```{r}
-sentiment_stopwords <- sentiment_stops$sentiment
-
-#load the tm package or call tm directly with tm::
-library(tm)
-
-original %>%
-  mutate(mention_content = tm::removeWords(mention_content, sentiment_stopwords))%>%
-  limpiar_spaces(mention_content) #Stripping whitespaces after calling the tm::remove family of functions is a good habit to cultivate
-```
 
 
- 
+
+

@@ -4,12 +4,12 @@
 \alias{limpiar_na_cols}
 \title{limpiar_na_cols}
 \usage{
-limpiar_na_cols(df, y)
+limpiar_na_cols(df, threshold)
 }
 \arguments{
 \item{df}{The Data Frame or Tibble object}
 
-\item{y}{Threshold of non-NA entries a column must exceed to be retained.}
+\item{threshold}{Threshold of non-NA entries a column must exceed to be retained.}
 }
 \value{
 Data Frame or Tibble with NA-heavy columns purged
