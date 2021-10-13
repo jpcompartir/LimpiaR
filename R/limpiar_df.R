@@ -46,6 +46,7 @@ limpiar_df <- function(df, text_var, remove_retweets = TRUE, remove_punctuation 
 
   #Now remove excess white spaces and duplicates
   df %>%
+    limpiar_shorthands(!!rlang::enquo(text_var))%>%
     limpiar_spaces(!!rlang::enquo(text_var))%>%
     limpiar_duplicates(!!rlang::enquo(text_var))
 }
