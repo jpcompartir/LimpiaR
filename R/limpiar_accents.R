@@ -25,8 +25,3 @@ limpiar_accents <- function(text_var){
   text_var <- stringr::str_replace_all(text_var, "\u00FA", "u")
   text_var
 }
-
-
-
-
-
