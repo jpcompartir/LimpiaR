@@ -25,5 +25,6 @@ Function also cleans accents, common urls, punctuation if specified and trims ex
 Use remove_retweets = FALSE to keep retweets in the text variable.
 }
 \examples{
-print("hello world")
+\dontrun
+limpiar_df(df, text_var = mention_content)
 }

@@ -189,13 +189,13 @@ remove punctuation
 clean excess whitespace
 remove duplicates (after all of the preceding elements have been carried out)
 
-```{r}
+```{r, eval=FALSE}
 limpiar_df(original, mention_content, remove_retweets = FALSE, remove_punctuation = FALSE)
 ```
 
 We could also decide to remove retweets and punctuation:
 
-```{r}
+```{r, eval= FALSE}
 limpiar_df(original, mention_content, remove_retweets = TRUE, remove_punctuation = TRUE)
 ```
 
