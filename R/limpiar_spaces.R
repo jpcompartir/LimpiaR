@@ -13,11 +13,11 @@
 limpiar_spaces <- function(df, text_var = .data$mention_content){
 
   df %>%
-    dplyr::mutate({{ text_var }} := stringr::str_trim({{ text_var }}))%>%
-    dplyr::mutate({{ text_var }} := stringr::str_squish({{ text_var }}))%>%
-    dplyr::mutate({{ text_var }} := stringr::str_replace_all({{ text_var }}, "[:space:]+\\.", "."))%>%
-    dplyr::mutate({{ text_var }} := stringr::str_replace_all({{ text_var }}, "[:space:]+\\,", ","))%>%
-    dplyr::mutate({{ text_var }} := stringr::str_replace_all({{ text_var }}, "[:space:]+:", ":"))%>%
-    dplyr::mutate({{ text_var }} := stringr::str_replace_all({{ text_var }}, "[:space:]+;", ","))%>%
-    dplyr::mutate({{ text_var }} := stringr::str_replace_all({{ text_var }}, "[:space:]+\\!", "!"))
+    dplyr::mutate({{ text_var }} := stringr::str_trim({{ text_var }}),
+                  {{ text_var }} := stringr::str_squish({{ text_var }}),
+                  {{ text_var }} := stringr::str_replace_all({{ text_var }}, "[:space:]+\\.", "."),
+                  {{ text_var }} := stringr::str_replace_all({{ text_var }}, "[:space:]+\\,", ","),
+                  {{ text_var }} := stringr::str_replace_all({{ text_var }}, "[:space:]+:", ":"),
+                  {{ text_var }} := stringr::str_replace_all({{ text_var }}, "[:space:]+;", ","),
+                  {{ text_var }} := stringr::str_replace_all({{ text_var }}, "[:space:]+\\!", "!"))
 }
