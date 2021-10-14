@@ -47,5 +47,6 @@ limpiar_df <- function(df, text_var, remove_retweets = TRUE, remove_punctuation 
   df %>%
     dplyr::mutate({{ text_var }} := limpiar_shorthands({{ text_var }}))%>%
     limpiar_spaces({{ text_var }})%>%
-    limpiar_duplicates({{ text_var }})
+    limpiar_duplicates({{ text_var }})%>%
+    limpiar_repeat_chars({{ text_var }})
 }
