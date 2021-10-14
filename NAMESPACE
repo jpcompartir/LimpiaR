@@ -3,6 +3,7 @@
 export(limpiar_accents)
 export(limpiar_df)
 export(limpiar_duplicates)
+export(limpiar_emojis)
 export(limpiar_inspect)
 export(limpiar_na_cols)
 export(limpiar_repeat_chars)

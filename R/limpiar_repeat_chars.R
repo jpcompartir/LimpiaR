@@ -25,7 +25,7 @@ limpiar_repeat_chars <- function(df, text_var = .data$mention_content){
   #replaces two or more of the same vowel with one of that same vowel
   repeat_vowels_replacement <- "\\1"
 
-  mutate(df,
+  dplyr::mutate(df,
          {{ text_var }} := stringr::str_replace_all({{ text_var }}, laughing_regex, laughing_replacement),
          {{text_var }} := stringr::str_replace_all({{ text_var }}, repeat_vowels_regex, repeat_vowels_replacement))
 }
