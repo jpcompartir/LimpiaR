@@ -20,6 +20,8 @@ limpiar_inspect(
 \item{text_var}{Name of the text variable/character vector}
 
 \item{post_url}{Name of the data frame's URL-column}
+
+\item{title}{Name of the viewable pane}
 }
 \description{
 Produces a viewable data frame with posts matching a regular expression and their url. Useful for investigating suspected spam posts.
