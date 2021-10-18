@@ -22,9 +22,12 @@
 limpiar_inspect <- function(data,
                             pattern,
                             text_var = mention_content,
-                            post_url = mention_url) {
+                            post_url = mention_url,
+                            title = "inspect") {
+  title_var = enquo(title)
+
   data %>%
     dplyr::filter(stringr::str_detect({{ text_var }}, pattern))%>%
     dplyr::select({{ text_var }}, {{ post_url }}) %>%
-    tibble::view()
+    tibble::view(title = title_var)
 }
