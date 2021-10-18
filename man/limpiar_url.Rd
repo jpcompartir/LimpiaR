@@ -4,7 +4,7 @@
 \alias{limpiar_url}
 \title{limpiar_url}
 \usage{
-limpiar_url(df, text_var = .data$mention_content)
+limpiar_url(df, text_var = mention_content)
 }
 \arguments{
 \item{df}{Data Frame or Tibble Object}

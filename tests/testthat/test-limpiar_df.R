@@ -17,7 +17,7 @@ test_that("data frame gets cleaned", {
                    Text_url= b)
 
   c <- cbind(c("hello, welcome to limpiar",
-               "url here ",
+               "url here",
                "hello, welcome to limpiar!"))
   d <- cbind(c("www.twitter.com",
                "guardian.net",

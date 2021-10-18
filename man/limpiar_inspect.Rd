@@ -7,8 +7,8 @@
 limpiar_inspect(
   data,
   pattern,
-  text_var = .data$mention_content,
-  post_url = .data$mention_url
+  text_var = mention_content,
+  post_url = mention_url
 )
 }
 \arguments{
