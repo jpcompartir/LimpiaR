@@ -34,7 +34,10 @@ limpiar_shorthands <- function(text_var, spaces_as_underscores = FALSE){
   }
 
 
-  my_hash <- hash::hash(keys = shorthands, values = shorthand_corrections)
+  my_hash <- hash::hash(keys = shorthands,
+                        values = shorthand_corrections)
 
-  (text_var <- stringr::str_replace_all(text_var, hash::values(my_hash), hash::keys(my_hash)))
+  (text_var <- stringr::str_replace_all(text_var,
+                                        hash::values(my_hash),
+                                        hash::keys(my_hash)))
 }
