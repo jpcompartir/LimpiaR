@@ -4,7 +4,7 @@
 \alias{limpiar_repeat_chars}
 \title{limpiar_repeat_chars}
 \usage{
-limpiar_repeat_chars(df, text_var = .data$mention_content)
+limpiar_repeat_chars(df, text_var = mention_content)
 }
 \arguments{
 \item{df}{Name of the Data Frame or Tibble object}
@@ -15,7 +15,7 @@ limpiar_repeat_chars(df, text_var = .data$mention_content)
 Data Frame or Tibble object with most repeat vowels & laughing pattterns normalised
 }
 \description{
-Removes all multiple vowels (holaaaa) and normalises common laughing patterns \n(jajaja, jejeje, ajajaaaaja)
+Removes multiple vowels (holaaaa) and normalises common laughing patterns \n(jajaja, jejeje, ajajaaaaja)
 }
 \examples{
 \dontrun

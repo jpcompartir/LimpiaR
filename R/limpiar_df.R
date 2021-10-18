@@ -17,7 +17,7 @@
 #' \dontrun
 #' limpiar_df(df, text_var = mention_content)
 
-limpiar_df <- function(df, text_var, remove_retweets = TRUE, remove_punctuation = FALSE){
+limpiar_df <- function(df, text_var = mention_content, remove_retweets = TRUE, remove_punctuation = FALSE){
   df <- df %>%
     janitor::remove_empty(which = "rows")%>%
     #tidy evaluation takes column input, quotes + unquotes

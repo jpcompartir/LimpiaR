@@ -14,7 +14,7 @@
 #' df %>% limpiar_emojis(text_var)
 #'
 #'
-limpiar_emojis <- function(df, text_var){
+limpiar_emojis <- function(df, text_var = mention_content){
 
   data("code_browser_emojis")
 
@@ -34,3 +34,4 @@ limpiar_emojis <- function(df, text_var){
                                               hash::keys(my_hash)),
          {{ text_var }} := stringr::str_replace_all({{ text_var }}, "emoji", "emoji "))
 }
+

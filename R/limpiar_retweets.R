@@ -11,10 +11,7 @@
 #' df <- data.frame(text_variable = cbind(c("rt <3", "RT <3", "original tweet")))
 #' limpiar_retweets(df, text_variable)
 
-limpiar_retweets <- function(df, text_var = .data$mention_content){
-  df %>%
-    dplyr::filter(!stringr::str_detect(!!rlang::enquo(text_var), "\\b(rt|RT)\\b"))
+limpiar_retweets <- function(df, text_var = mention_content){
+  dplyr::filter(df, !stringr::str_detect({{ text_var}}, "\\b(rt|RT)\\b"))
 }
-
-
 

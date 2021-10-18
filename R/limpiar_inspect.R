@@ -21,13 +21,10 @@
 
 limpiar_inspect <- function(data,
                             pattern,
-                            text_var = .data$mention_content,
-                            post_url =  .data$mention_url) {
+                            text_var = mention_content,
+                            post_url = mention_url) {
   data %>%
-    dplyr::filter(stringr::str_detect(!!rlang::enquo(text_var), pattern))%>%
-    dplyr::select(!!rlang::enquo(text_var), !!rlang::enquo(post_url)) %>%
+    dplyr::filter(stringr::str_detect({{ text_var }}, pattern))%>%
+    dplyr::select({{ text_var }}, {{ post_url }}) %>%
     tibble::view()
 }
-
-
-

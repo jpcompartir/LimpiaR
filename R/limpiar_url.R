@@ -11,10 +11,9 @@
 #' \dontrun
 #' df %>% limpiar_url()
 
-limpiar_url <- function(df, text_var = .data$mention_content){
-  .col = rlang::enquo(text_var)
-  df %>%
-    dplyr::mutate(!!paste0("", rlang::quo_name(.col)) := stringr::str_replace_all(!!rlang::enquo(text_var), "htt(p|ps)[[:alnum:][:punct:]]*", ""))%>%
-    dplyr::mutate(!!paste0("", rlang::quo_name(.col)) := stringr::str_replace_all(!!rlang::enquo(text_var), "[w]{3}\\.\\S+", ""))
-}
+limpiar_url <- function(df, text_var = mention_content){
 
+  df %>%
+    dplyr::mutate({{ text_var }} := stringr::str_replace_all({{ text_var }}, "htt(p|ps)[[:alnum:][:punct:]]*", ""))%>%
+    dplyr::mutate({{ text_var }} := stringr::str_replace_all({{ text_var }}, "[w]{3}\\.\\S+", ""))
+}

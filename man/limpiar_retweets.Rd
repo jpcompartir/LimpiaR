@@ -4,7 +4,7 @@
 \alias{limpiar_retweets}
 \title{limpiar_retweets}
 \usage{
-limpiar_retweets(df, text_var = .data$mention_content)
+limpiar_retweets(df, text_var = mention_content)
 }
 \arguments{
 \item{df}{Name of the Data Frame or Tibble Object}

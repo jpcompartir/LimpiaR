@@ -4,7 +4,7 @@
 \alias{limpiar_spaces}
 \title{limpiar_spaces}
 \usage{
-limpiar_spaces(df, text_var = .data$mention_content)
+limpiar_spaces(df, text_var = mention_content)
 }
 \arguments{
 \item{df}{Name of the Data Frame or Tibble object}

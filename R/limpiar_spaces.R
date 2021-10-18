@@ -10,7 +10,7 @@
 #' @examples
 #' df <- data.frame(text_variable = "clean   the   spaces please")
 #' limpiar_spaces(df, text_var = text_variable)
-limpiar_spaces <- function(df, text_var = .data$mention_content){
+limpiar_spaces <- function(df, text_var = mention_content){
 
   df %>%
     dplyr::mutate({{ text_var }} := stringr::str_trim({{ text_var }}),

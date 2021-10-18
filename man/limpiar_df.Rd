@@ -4,7 +4,12 @@
 \alias{limpiar_df}
 \title{limpiar_df}
 \usage{
-limpiar_df(df, text_var, remove_retweets = TRUE, remove_punctuation = FALSE)
+limpiar_df(
+  df,
+  text_var = mention_content,
+  remove_retweets = TRUE,
+  remove_punctuation = FALSE
+)
 }
 \arguments{
 \item{df}{Data Frame or Tibble Object}
