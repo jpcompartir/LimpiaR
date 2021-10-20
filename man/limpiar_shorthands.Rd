@@ -4,10 +4,16 @@
 \alias{limpiar_shorthands}
 \title{limpiar_shorthands}
 \usage{
-limpiar_shorthands(text_var, spaces_as_underscores = FALSE)
+limpiar_shorthands(
+  df,
+  text_var = mention_content,
+  spaces_as_underscores = FALSE
+)
 }
 \arguments{
-\item{text_var}{The text variable}
+\item{df}{Name of Data Frame or Tibble object}
+
+\item{text_var}{Name of text variable/character vector}
 
 \item{spaces_as_underscores}{Whether multi-word corrections e.g. 'te quiero mucho' should have spaces or underscores. Default = FALSE}
 }
@@ -15,7 +21,7 @@ limpiar_shorthands(text_var, spaces_as_underscores = FALSE)
 The text variable with shorthands replaced
 }
 \description{
-Replaces common Spanish shorthands and abbreviations with their longer form equivalents. Follows a similar design to limpiar_accents - so can be called inside a dplyr::mutate() function call
+Replaces common Spanish shorthands and abbreviations with their longer form equivalents.
 }
 \examples{
 \dontrun{

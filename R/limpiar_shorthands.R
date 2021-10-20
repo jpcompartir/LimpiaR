@@ -1,8 +1,11 @@
 #' limpiar_shorthands
 #'
-#' Replaces common Spanish shorthands and abbreviations with their longer form equivalents. Follows a similar design to limpiar_accents - so can be called inside a dplyr::mutate() function call
-#' @param text_var The text variable
+#' Replaces common Spanish shorthands and abbreviations with their longer form equivalents.
+#'
+#' @param df Name of Data Frame or Tibble object
+#' @param text_var Name of text variable/character vector
 #' @param spaces_as_underscores Whether multi-word corrections e.g. 'te quiero mucho' should have spaces or underscores. Default = FALSE
+
 #'
 #' @return The text variable with shorthands replaced
 #' @export
@@ -12,7 +15,7 @@
 #' df <- df %>% mutate(text_var = limpiar_shorthands(text_var))
 #' text_var <- limpiar_shorthands(text_var)
 #' }
-limpiar_shorthands <- function(text_var, spaces_as_underscores = FALSE){
+limpiar_shorthands <- function(df, text_var = mention_content, spaces_as_underscores = FALSE){
 
   shorthands <- c("\\bporq\\b","\\btqm\\b", "\\btq\\b", "\\bpq\\b", "\\bxq\\b", "\\bq\\b", "\\bk\\b", "\\bxk\\b",
                   "\\bpk\\b", "\\bxfa\\b", "\\bxa q\\b", "\\bmxo\\b", "\\bbst\\b", "\\btam\\b", "\\bpti\\b",
@@ -41,7 +44,7 @@ limpiar_shorthands <- function(text_var, spaces_as_underscores = FALSE){
   my_hash <- hash::hash(keys = shorthands,
                         values = shorthand_corrections)
 
-  (text_var <- stringr::str_replace_all(text_var,
+  dplyr::mutate(df, {{ text_var }} := stringr::str_replace_all({{ text_var }},
                                         hash::values(my_hash),
                                         hash::keys(my_hash)))
 }
