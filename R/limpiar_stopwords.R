@@ -2,17 +2,19 @@
 #'
 #'stop word list is editable via data("sentiment_stops") or data("topic_stops")
 #'
+#' @param df Name of Data Frame or Tibble object
 #' @param text_var name of the text variable
 #' @param stop_words "sentiment" or "topics" - sentiment retains negtion cues\n
+
 #'
 #' @return the text variable with specified stopw ords removed
 #' @export
 #'
 #' @examples
 #' \dontrun
-#' df %>% mutate(text = limpiar_stopwords(text, "sentiment"))%>%
+#' df %>% limpiar_stopwords(stop_words = "sentiment") %>%
 #' limpiar_spaces(text_var = text)
-limpiar_stopwords <- function(text_var = text, stop_words){
+limpiar_stopwords <- function(df, text_var = mention_content, stop_words){
 
   data("sentiment_stops")
 
@@ -30,18 +32,26 @@ limpiar_stopwords <- function(text_var = text, stop_words){
 
 
   if(stop_words == "sentiment"){
-    text_var <- stringr::str_replace_all(text_var,
-                                          hash::values(sentiment_hash),
-                                          hash::keys(sentiment_hash))
+    df <- dplyr::mutate(df, {{ text_var }} := stringr::str_replace_all({{ text_var }},
+                                                                 hash::values(sentiment_hash),
+                                                                 hash::keys(sentiment_hash)))
+  }else{}
 
-  }else{
-   text_var <- text_var
-  }
   if(stop_words == "topics"){
-    text_var <- stringr::str_replace_all(text_var,
-                                         hash::values(topic_hash),
-                                         hash::keys(topic_hash))
-  }else{text_var <- text_var}
+    df <- dplyr::mutate(df, {{ text_var }} := stringr::str_replace_all({{ text_var }},
+                                                                 hash::values(topic_hash),
+                                                                 hash::keys(topic_hash)))
+  }else{}
 
-  text_var
+  df
 }
+
+
+
+
+
+
+
+
+
+

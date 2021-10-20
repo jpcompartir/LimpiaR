@@ -4,9 +4,11 @@
 \alias{limpiar_stopwords}
 \title{limpiar_stopwords}
 \usage{
-limpiar_stopwords(text_var = text, stop_words)
+limpiar_stopwords(df, text_var = mention_content, stop_words)
 }
 \arguments{
+\item{df}{Name of Data Frame or Tibble object}
+
 \item{text_var}{name of the text variable}
 
 \item{stop_words}{"sentiment" or "topics" - sentiment retains negtion cues\n}
@@ -19,6 +21,6 @@ stop word list is editable via data("sentiment_stops") or data("topic_stops")
 }
 \examples{
 \dontrun
-df \%>\% mutate(text = limpiar_stopwords(text, "sentiment"))\%>\%
+df \%>\% limpiar_stopwords(stop_words = "sentiment") \%>\%
 limpiar_spaces(text_var = text)
 }
