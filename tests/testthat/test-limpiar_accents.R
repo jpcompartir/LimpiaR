@@ -1,13 +1,4 @@
-test_that("Accents are removed", {
-  dirty_vec <- c('róllover','ùltimatüm', 'ársénal','fíring hose', 'fún',
-                 'reèd ', 'ñino')
-  cleaned_vec <- c("rollover","ultimatum","arsenal",
-               "firing hose","fun","reed ","nino")
-
-  expect_equal(sort(cleaned_vec), sort(limpiar_accents(dirty_vec)))
-})
-
-test_that("Works within a pipe", {
+test_that("Test that accents are removed", {
   dirty_vec <- c('róllover','ùltimatüm', 'ársénal','fíring hose', 'fún',
                  'reèd ', 'ñino')
   cleaned_vec <- c("rollover","ultimatum","arsenal",
@@ -16,5 +7,5 @@ test_that("Works within a pipe", {
   df_two <- tibble::as_tibble(data.frame(mention_content = unlist(cleaned_vec)))
 
   expect_equal(df %>%
-                 dplyr::mutate(mention_content = limpiar_accents(mention_content)),df_two)
+                 limpiar_accents(),df_two)
 })
