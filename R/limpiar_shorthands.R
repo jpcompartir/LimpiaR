@@ -14,14 +14,14 @@
 #' }
 limpiar_shorthands <- function(text_var, spaces_as_underscores = FALSE){
 
-  shorthands <- c("\\btqm\\b", "\\btq\\b", "\\bpq\\b", "\\bxq\\b", "\\bq\\b", "\\bk\\b", "\\bxk\\b",
+  shorthands <- c("\\bporq\\b","\\btqm\\b", "\\btq\\b", "\\bpq\\b", "\\bxq\\b", "\\bq\\b", "\\bk\\b", "\\bxk\\b",
                   "\\bpk\\b", "\\bxfa\\b", "\\bxa q\\b", "mxo", "bst", "\\btam\\b", "pti",
                   "\\bkn\\b", "ntnc", "\\btonces\\b", "\\bgnl\\b", "\\bkyat\\b",
                   "\\bfin d\\b", "\\bKO\\b", "\\b(TQI|tqi)\\b", "\\b(TKI|tki)\\b",
                   "\\b(NPN|npn)\\b", "\\bvrd\\b", "\\bvdd\\b", "\\bntp\\b", "\\b(GPI|gpi)\\b", "\\bslds\\b", "\\bctm\\b",
                   "\\bgrax\\b", "\\bwn\\b")
 
-  shorthand_corrections <- c("te_quiero_mucho", "te_quiero", "porque", "porque", "que", "que",
+  shorthand_corrections <- c("\\bporque\\b", "te_quiero_mucho", "te_quiero", "porque", "porque", "que", "que",
                              "porque", "porque", "por_favor", "para_que", "mucho", "besitos",
                              "te_amo_mucho", "para_ti", "quien", "entonces", "entonces", "genial", "callate",
                              "fin_de_semana", "muerto", "tengo_que_irme", "tengo_que_irme",
