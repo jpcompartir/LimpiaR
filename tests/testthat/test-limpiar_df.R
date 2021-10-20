@@ -13,7 +13,7 @@ test_that("data frame gets cleaned", {
                "guardian.net",
                "www.randomlink.com"))
 
-  df <- data.frame(Mention_content = a,
+  df <- data.frame(mention_content = a,
                    Text_url= b)
 
   c <- cbind(c("hello, welcome to limpiar",
@@ -22,12 +22,8 @@ test_that("data frame gets cleaned", {
   d <- cbind(c("www.twitter.com",
                "guardian.net",
                "www.randomlink.com"))
-  answer_df <- data.frame(Mention_content = c,
+  answer_df <- data.frame(mention_content = c,
                           Text_url = d)
 
-  expect_equal(limpiar_df(df, Mention_content), answer_df)
+  expect_equal(limpiar_df(df, mention_content), answer_df)
 })
-
-
-
-

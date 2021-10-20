@@ -19,7 +19,7 @@ limpiar_repeat_chars <- function(df, text_var = mention_content){
   laughing_replacement <- "jaja"
 
   #Creates a capture group for any vowel seen 2 or more times
-  repeat_vowels_regex <-  "([a|e|i|o|u])\\1{2,}"
+  repeat_vowels_regex <-  "([a|e|i|o|u])\\1{1,}"
 
   #replaces two or more of the same vowel with one of that same vowel
   repeat_vowels_replacement <- "\\1"

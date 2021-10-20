@@ -45,7 +45,7 @@ limpiar_df <- function(df, text_var = mention_content, remove_retweets = TRUE, r
 
   #Now remove excess white spaces, duplicates, and normalise shorthands.
   df %>%
-    dplyr::mutate({{ text_var }} := limpiar_shorthands({{ text_var }}))%>%
+    limpiar_shorthands({{ text_var }})%>%
     limpiar_spaces({{ text_var }})%>%
     limpiar_duplicates({{ text_var }})%>%
     limpiar_repeat_chars({{ text_var }})
