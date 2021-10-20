@@ -24,7 +24,7 @@ library(tidyverse)
 For later reference, we've added a table to guide you on which LimpiaR function you will need for our most common outputs/analyses:
 
 ```{r, echo = FALSE}
-knitr::include_graphics("../vignettes/limpiar_check_guide.png")
+knitr::include_graphics("~/Documents_local/LimpiaR/vignettes/limpiar_check_guide.png")
 
 ```
 
@@ -135,7 +135,6 @@ df
 The decision to remove retweets or not should be made on a case-by-case basis. If you leave retweets in, they will dominate topic models & bigram networks. However, they are an indicator of viral events, which may be important for some analyses. 
 
 *If you decide to remove retweets, you can use the original data frame to analyse them*
-
 
 ## Removing URLs
  

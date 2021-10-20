@@ -23,7 +23,7 @@ limpiar_shorthands <- function(text_var, spaces_as_underscores = FALSE){
                   "\\bvns\\b", "\\baora\\b", "\\bbn\\b", "\\bnx\\b","\\bcdo\\b", "\\bdim\\b",
                   "\\bdcr\\b", "\\bkntm\\b", "\\bnph\\b", "\\bre100\\b", "\\btvo\\b", "\\bweno\\b")
 
-  shorthand_corrections <- c("\\bporque\\b", "te_quiero_mucho", "te_quiero", "porque", "porque", "que", "que",
+  shorthand_corrections <- c("porque", "te_quiero_mucho", "te_quiero", "porque", "porque", "que", "que",
                              "porque", "porque", "por_favor", "para_que", "mucho", "besitos",
                              "te_amo_mucho", "para_ti", "quien", "entonces", "entonces", "genial", "callate",
                              "fin_de_semana", "muerto", "tengo_que_irme", "tengo_que_irme",
@@ -45,4 +45,3 @@ limpiar_shorthands <- function(text_var, spaces_as_underscores = FALSE){
                                         hash::values(my_hash),
                                         hash::keys(my_hash)))
 }
-
