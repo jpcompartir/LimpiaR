@@ -25,6 +25,6 @@ limpiar_repeat_chars <- function(df, text_var = mention_content){
   repeat_vowels_replacement <- "\\1"
 
   dplyr::mutate(df,
-                {{ text_var }} := stringr::str_replace_all({{ text_var }}, laughing_regex, laughing_replacement),
-                {{ text_var }} := stringr::str_replace_all({{ text_var }}, repeat_vowels_regex, repeat_vowels_replacement))
+                {{ text_var }} := stringr::str_replace_all({{ text_var }}, repeat_vowels_regex, repeat_vowels_replacement),
+                {{ text_var }} := stringr::str_replace_all({{ text_var }}, laughing_regex, laughing_replacement))
 }
