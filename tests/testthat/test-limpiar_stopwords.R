@@ -10,7 +10,7 @@ test_that("Stop words are removed from the text variable", {
                                           "this sentence should not be edited"))
 
   expect_equal(data %>%
-                 dplyr::mutate(sentences = limpiar_stopwords(text_var = sentences, stop_words = "sentiment"))%>%
+                 limpiar_stopwords(text_var = sentences, stop_words = "sentiment")%>%
                  limpiar_spaces(text_var = sentences),
                solution_df)
 })
