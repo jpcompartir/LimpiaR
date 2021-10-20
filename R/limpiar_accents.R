@@ -1,27 +1,31 @@
-
 #' limpiar_accents
 #'
-#' Replaces accented characters with non-accented characters. Should be used within a dplyr::mutate() function call.
+#' Replaces accented characters with non-accented characters.
 #'
+#' @param df Name of Data Frame or Tibble object
 #' @param text_var Name of text variable/character vector
 #'
 #' @return text variable/character vector with accents replaced
 #' @examples
-#' df <- data.frame(text_variable = "thé óld mán")
-#' dplyr::mutate(df, limpiar_accents(text_variable))
+#' \dontrun
+#' df %>% limpiar_accents(text_var = message)
+#'
 #' @export
 
+limpiar_accents <- function(df, text_var = mention_content){
 
+  keys <- c('\u00E9', '\u00F3','\u00E1', '\u00ED', '\u00FC', '\u00F9',
+            '\u00F1', '\u00E8', '\u00FA')
+  values <- c('e', 'o', 'a', 'i', 'u', 'u', 'n', 'e', 'u')
 
-limpiar_accents <- function(text_var){
-  text_var <- stringr::str_replace_all(text_var, '\u00E9', 'e')
-  text_var <- stringr::str_replace_all(text_var, '\u00F3', 'o')
-  text_var <- stringr::str_replace_all(text_var, '\u00E1', 'a')
-  text_var <- stringr::str_replace_all(text_var, '\u00ED', 'i')
-  text_var <- stringr::str_replace_all(text_var, '\u00FC', 'u')
-  text_var <- stringr::str_replace_all(text_var, '\u00F9', 'u')
-  text_var <- stringr::str_replace_all(text_var, '\u00F1', 'n')
-  text_var <- stringr::str_replace_all(text_var, "\u00E8", "e")
-  text_var <- stringr::str_replace_all(text_var, "\u00FA", "u")
-  text_var
+  my_hash <- hash::hash(keys = keys, values = values)
+
+  dplyr::mutate(df, {{ text_var }} := stringr::str_replace_all({{ text_var }},
+                                                               hash::values(my_hash),
+                                                               hash::keys(my_hash)))
+
 }
+
+
+
+

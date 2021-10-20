@@ -8,7 +8,7 @@ test_that("Shorthands are altered", {
                               c("te quiero mucho bebe, porque no me quieras?",
                                 "eres un wuevon jajajaja!",
                                 "porque no me amas de verdad?"))
-  expect_equal(test_df %>% mutate(mention_content = limpiar_shorthands(mention_content)),
+  expect_equal(test_df %>% limpiar_shorthands(),
                                   solution_df)
 })
 

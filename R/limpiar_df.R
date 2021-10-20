@@ -22,7 +22,7 @@ limpiar_df <- function(df, text_var = mention_content, remove_retweets = TRUE, r
     janitor::remove_empty(which = "rows")%>%
     #tidy evaluation takes column input, quotes + unquotes
     dplyr::mutate({{ text_var }} := tolower({{ text_var }}))%>%
-    dplyr::mutate({{ text_var }} := limpiar_accents({{ text_var }}))%>%
+    limpiar_accents({{ text_var }})%>%
     limpiar_url({{ text_var }})
 
 

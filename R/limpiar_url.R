@@ -14,6 +14,6 @@
 limpiar_url <- function(df, text_var = mention_content){
 
   df %>%
-    dplyr::mutate({{ text_var }} := stringr::str_replace_all({{ text_var }}, "htt(p|ps)[[:alnum:][:punct:]]*", ""))%>%
+    dplyr::mutate({{ text_var }} := stringr::str_replace_all({{ text_var }}, "htt(p|ps)\\S+", ""))%>%
     dplyr::mutate({{ text_var }} := stringr::str_replace_all({{ text_var }}, "[w]{3}\\.\\S+", ""))
 }
