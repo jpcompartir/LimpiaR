@@ -11,6 +11,6 @@
 #' @examples
 #' df <- data.frame(text_variable = cbind(c("Deleted or protected mention", "hello", "goodbye", "goodbye")))
 #' limpiar_duplicates(df, text_variable)
-limpiar_duplicates <- function(data, text_var = .data$mention_content){
+limpiar_duplicates <- function(data, text_var = mention_content){
   dplyr::filter(data, !stringr::str_detect({{ text_var }}, "(D|d)eleted or") & !duplicated({{ text_var}}))
 }

@@ -4,7 +4,7 @@
 \alias{limpiar_duplicates}
 \title{limpiar_duplicates}
 \usage{
-limpiar_duplicates(data, text_var = .data$mention_content)
+limpiar_duplicates(data, text_var = mention_content)
 }
 \arguments{
 \item{data}{Data Frame or Tibble object}
