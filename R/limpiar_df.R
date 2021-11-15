@@ -14,8 +14,8 @@
 #' @export
 #'
 #' @examples
-#' \dontrun
-#' limpiar_df(df, text_var = mention_content)
+#' \dontrun{limpiar_df(df, text_var = mention_content)}
+#'
 
 limpiar_df <- function(df, text_var = mention_content, remove_retweets = TRUE, remove_punctuation = FALSE){
   df <- df %>%

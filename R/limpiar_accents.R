@@ -7,8 +7,8 @@
 #'
 #' @return text variable/character vector with accents replaced
 #' @examples
-#' \dontrun
-#' df %>% limpiar_accents(text_var = message)
+#' \dontrun{df %>% limpiar_accents(text_var = message)}
+#'
 #'
 #' @export
 

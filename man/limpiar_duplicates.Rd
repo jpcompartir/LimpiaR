@@ -18,6 +18,10 @@ text variable/character with duplicates removed
 Removes duplicate posts and 'deleted or protected mentions'
 }
 \examples{
-df <- data.frame(text_variable = cbind(c("Deleted or protected mention", "hello", "goodbye", "goodbye")))
+\dontrun{
+df <- data.frame(text_variable = cbind(c(
+"Deleted or protected mention", "hello", "goodbye", "goodbye")))
 limpiar_duplicates(df, text_variable)
+}
+
 }

@@ -11,16 +11,21 @@ limpiar_stopwords(df, text_var = mention_content, stop_words)
 
 \item{text_var}{name of the text variable}
 
-\item{stop_words}{"sentiment" or "topics" - sentiment retains negtion cues\n}
+\item{stop_words}{"sentiment" or "topics" - sentiment retains negation cues}
 }
 \value{
 the text variable with specified stopw ords removed
 }
 \description{
-stop word list is editable via data("sentiment_stops") or data("topic_stops")
+The two lists - sentiment & topics, are very similar, in that most words are in both lists.
+However, sentiment analysis is sensitive to negation, so negation cues e.g.
+"no", "nada" etc. are not removed by the sentiment list. For most purposes, topics
+are the go-to lists, but care is always advised when removing stop words.
+}
+\details{
+stop word list is editable via data("sentiment_stops") or data("topic_stops").
 }
 \examples{
-\dontrun
-df \%>\% limpiar_stopwords(stop_words = "sentiment") \%>\%
-limpiar_spaces(text_var = text)
+\dontrun{df \%>\% limpiar_stopwords(stop_words = "sentiment") \%>\%
+limpiar_spaces(text_var = text)}
 }

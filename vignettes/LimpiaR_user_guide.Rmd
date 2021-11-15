@@ -17,7 +17,9 @@ knitr::opts_chunk$set(
 First we will load LimpiaR (you will usually want to load tidyverse too, but we do not do so in this Rmarkdown due to package-building complexities)"
 ```{r}
 library(LimpiaR)
-library(tidyverse)
+library(magrittr)
+library(dplyr)
+library(stringr)
 ```
 
 
@@ -85,11 +87,7 @@ Let's take a look at the first LimpiaR function. This function will replace acce
 
 ```{r}
 df <- df %>% 
-  mutate(mention_content = limpiar_accents(mention_content))
-
-#alternate syntax:
-# df <- limpiar_accents(df, mention_content)
-df
+  limpiar_accents(text_var = mention_content)
 
 
 ```

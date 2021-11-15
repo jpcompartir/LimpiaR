@@ -18,6 +18,5 @@ text variable/character vector with URLs removed
 Removes the most common forms of URLs from a text variable of a data frame/tibble
 }
 \examples{
-\dontrun
-df \%>\% limpiar_url()
+\dontrun{df \%>\% limpiar_url()}
 }

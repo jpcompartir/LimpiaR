@@ -1,6 +1,6 @@
 #' limpiar_repeat_chars
 #'
-#' Removes multiple vowels (holaaaa) and normalises common laughing patterns \n(jajaja, jejeje, ajajaaaaja)
+#' Removes multiple vowels (holaaaa) and normalises common laughing patterns (jajaja, jejeje, ajajaaaaja)
 #'
 #' @param df Name of the Data Frame or Tibble object
 #' @param text_var Name of the text variable/character vector. Default is mention_content
@@ -9,8 +9,8 @@
 #' @export
 #'
 #' @examples
-#' \dontrun
-#' df %>% limpiar_repeat_chars(text_var = text)
+#' \dontrun{df %>% limpiar_repeat_chars(text_var = text)}
+#'
 #'
 limpiar_repeat_chars <- function(df, text_var = mention_content){
   #Checks there is a j + (e or i or a) and at least characters made from j + a i e.

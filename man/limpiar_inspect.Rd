@@ -27,6 +27,8 @@ limpiar_inspect(
 Produces a viewable data frame with posts matching a regular expression and their url. Useful for investigating suspected spam posts.
 }
 \examples{
-df <- data.frame(text_variable = rbind("check me out", "don't look at me"),text_url = rbind("www.twitter.com", "www.facebook.com"))
+df <- data.frame(
+text_variable = rbind("check me out", "don't look at me"),
+text_url = rbind("www.twitter.com", "www.facebook.com"))
 limpiar_inspect(df, "check", text_var = text_variable, post_url = text_url)
 }

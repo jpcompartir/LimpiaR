@@ -18,8 +18,5 @@ Data Frame with most emojis cleaned
 functions to replace most emojis with a snakecase descrition + '_emoji'
 }
 \examples{
-\dontrun
-df \%>\% limpiar_emojis(text_var)
-
-
+\dontrun{df \%>\% limpiar_emojis(text_var)}
 }
