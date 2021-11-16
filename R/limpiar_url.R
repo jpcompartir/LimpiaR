@@ -5,11 +5,10 @@
 #' @param text_var Name of the text variable/character vector
 #'
 #' @return text variable/character vector with URLs removed
-#' @export
 #'
 #' @examples
-#' \dontrun
-#' df %>% limpiar_url()
+#' \dontrun{df %>% limpiar_url()}
+#' @export
 
 limpiar_url <- function(df, text_var = mention_content){
 

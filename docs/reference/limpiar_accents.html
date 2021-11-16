@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="limpiar_accents — limpiar_accents" />
-<meta property="og:description" content="Replaces accented characters with non-accented characters. Should be used within a dplyr::mutate() function call." />
+<meta property="og:description" content="Replaces accented characters with non-accented characters." />
 
 
 
@@ -124,14 +124,18 @@
     </div>
 
     <div class="ref-description">
-    <p>Replaces accented characters with non-accented characters. Should be used within a dplyr::mutate() function call.</p>
+    <p>Replaces accented characters with non-accented characters.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>limpiar_accents</span><span class='op'>(</span><span class='va'>text_var</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>limpiar_accents</span><span class='op'>(</span><span class='va'>df</span>, text_var <span class='op'>=</span> <span class='va'>mention_content</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>df</th>
+      <td><p>Name of Data Frame or Tibble object</p></td>
+    </tr>
     <tr>
       <th>text_var</th>
       <td><p>Name of text variable/character vector</p></td>
@@ -143,10 +147,10 @@
     <p>text variable/character vector with accents replaced</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>text_variable <span class='op'>=</span> <span class='st'>"thé óld mán"</span><span class='op'>)</span>
-<span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span><span class='va'>df</span>, <span class='fu'>limpiar_accents</span><span class='op'>(</span><span class='va'>text_variable</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   text_variable limpiar_accents(text_variable)
-#&gt; 1   thé óld mán                    the old man</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='va'>df</span> <span class='op'>%&gt;%</span> <span class='fu'>limpiar_accents</span><span class='op'>(</span>text_var <span class='op'>=</span> <span class='va'>message</span><span class='op'>)</span>
+
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

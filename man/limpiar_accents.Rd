@@ -18,7 +18,7 @@ text variable/character vector with accents replaced
 Replaces accented characters with non-accented characters.
 }
 \examples{
-\dontrun
-df \%>\% limpiar_accents(text_var = message)
+\dontrun{df \%>\% limpiar_accents(text_var = message)}
+
 
 }

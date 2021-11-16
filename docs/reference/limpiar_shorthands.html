@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="limpiar_shorthands — limpiar_shorthands" />
-<meta property="og:description" content="Replaces common Spanish shorthands and abbreviations with their longer form equivalents. Follows a similar design to limpiar_accents - so can be called inside a dplyr::mutate() function call" />
+<meta property="og:description" content="Replaces common Spanish shorthands and abbreviations with their longer form equivalents." />
 
 
 
@@ -124,17 +124,25 @@
     </div>
 
     <div class="ref-description">
-    <p>Replaces common Spanish shorthands and abbreviations with their longer form equivalents. Follows a similar design to limpiar_accents - so can be called inside a dplyr::mutate() function call</p>
+    <p>Replaces common Spanish shorthands and abbreviations with their longer form equivalents.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>limpiar_shorthands</span><span class='op'>(</span><span class='va'>text_var</span>, spaces_as_underscores <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>limpiar_shorthands</span><span class='op'>(</span>
+  <span class='va'>df</span>,
+  text_var <span class='op'>=</span> <span class='va'>mention_content</span>,
+  spaces_as_underscores <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>df</th>
+      <td><p>Name of Data Frame or Tibble object</p></td>
+    </tr>
+    <tr>
       <th>text_var</th>
-      <td><p>The text variable</p></td>
+      <td><p>Name of text variable/character vector</p></td>
     </tr>
     <tr>
       <th>spaces_as_underscores</th>

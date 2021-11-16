@@ -7,16 +7,13 @@
 #' @param text_var Name of text variable
 #'
 #' @return Data Frame with most emojis cleaned
-#' @export
 #'
 #' @examples
-#' \dontrun
-#' df %>% limpiar_emojis(text_var)
-#'
-#'
+#' \dontrun{df %>% limpiar_emojis(text_var)}
+#' @export
 limpiar_emojis <- function(df, text_var = mention_content){
 
-  data("code_browser_emojis")
+  data("code_browser_emojis", envir = environment())
 
   keys <- code_browser_emojis %>%
     dplyr::filter(!stringr::str_detect(cldr_short_name, "keycap: \\*"))%>%
