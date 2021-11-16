@@ -2,7 +2,7 @@
 % Please edit documentation in R/limpiar_url.R
 \name{limpiar_url}
 \alias{limpiar_url}
-\title{limpiar_url}
+\title{Clean URLs from the text variable}
 \usage{
 limpiar_url(df, text_var = mention_content)
 }
@@ -15,7 +15,7 @@ limpiar_url(df, text_var = mention_content)
 text variable/character vector with URLs removed
 }
 \description{
-Removes the most common forms of URLs from a text variable of a data frame/tibble
+Removes the most common forms of URLs from the text variable
 }
 \examples{
 \dontrun{df \%>\% limpiar_url()}

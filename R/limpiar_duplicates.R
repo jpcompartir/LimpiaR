@@ -1,7 +1,6 @@
-#' limpiar_duplicates
+#' Clean the text variable for duplicate posts
 #'
-#' Removes duplicate posts and 'deleted or protected mentions'
-#'
+#' Removes duplicate posts, and posts which are deleted or protected by APIs
 #' @param data Data Frame or Tibble object
 #' @param text_var Name of the text variable/character vector
 #'

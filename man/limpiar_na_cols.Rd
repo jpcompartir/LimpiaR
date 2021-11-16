@@ -2,7 +2,7 @@
 % Please edit documentation in R/limpiar_na_cols.R
 \name{limpiar_na_cols}
 \alias{limpiar_na_cols}
-\title{limpiar_na_cols}
+\title{Clean NA-heavy columns from a Data Frame or Tibble}
 \usage{
 limpiar_na_cols(df, threshold)
 }
@@ -15,7 +15,9 @@ limpiar_na_cols(df, threshold)
 Data Frame or Tibble with NA-heavy columns purged
 }
 \description{
-A function to remove NA-heavy columns. Retains columns
+Remove columns whose proportion of NAs is higher than determined threshold.
+Setting threshold of 0.25 asks R to remove all columns with 25\% or more NA values.
+Can be useful when dealing with large data frames, where many columns are redundant.
 }
 \examples{
 a <- cbind(c(NA, NA, NA, NA, NA))

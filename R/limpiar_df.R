@@ -1,4 +1,4 @@
-#' limpiar_df
+#' Call multiple LimpiaR functions together
 #'
 #' used on a data frame to remove duplicates, empty rows, and retweets,
 #' turn the text variable to all lower case (advisable to do any part of speech tagging before using).

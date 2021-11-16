@@ -2,7 +2,7 @@
 % Please edit documentation in R/limpiar_shorthands.R
 \name{limpiar_shorthands}
 \alias{limpiar_shorthands}
-\title{limpiar_shorthands}
+\title{Clean shorthands and abbreviations}
 \usage{
 limpiar_shorthands(
   df,
@@ -22,6 +22,8 @@ The text variable with shorthands replaced
 }
 \description{
 Replaces common Spanish shorthands and abbreviations with their longer form equivalents.
+Choose whether to link the replacements with snake case or not, with spaces_as_underscores.
+Useful primarily for normalising text ahead of sentiment classification.
 }
 \examples{
 \dontrun{

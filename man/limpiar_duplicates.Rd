@@ -2,7 +2,7 @@
 % Please edit documentation in R/limpiar_duplicates.R
 \name{limpiar_duplicates}
 \alias{limpiar_duplicates}
-\title{limpiar_duplicates}
+\title{Clean the text variable for duplicate posts}
 \usage{
 limpiar_duplicates(data, text_var = mention_content)
 }
@@ -15,7 +15,7 @@ limpiar_duplicates(data, text_var = mention_content)
 text variable/character with duplicates removed
 }
 \description{
-Removes duplicate posts and 'deleted or protected mentions'
+Removes duplicate posts, and posts which are deleted or protected by APIs
 }
 \examples{
 \dontrun{

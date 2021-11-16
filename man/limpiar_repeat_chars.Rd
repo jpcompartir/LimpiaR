@@ -2,7 +2,7 @@
 % Please edit documentation in R/limpiar_repeat_chars.R
 \name{limpiar_repeat_chars}
 \alias{limpiar_repeat_chars}
-\title{limpiar_repeat_chars}
+\title{Clean repeated charaaaacters}
 \usage{
 limpiar_repeat_chars(df, text_var = mention_content)
 }
@@ -12,10 +12,11 @@ limpiar_repeat_chars(df, text_var = mention_content)
 \item{text_var}{Name of the text variable/character vector. Default is mention_content}
 }
 \value{
-Data Frame or Tibble object with most repeat vowels & laughing pattterns normalised
+Data Frame or Tibble object with most repeat vowels & laughing patterns normalised
 }
 \description{
-Removes multiple vowels (holaaaa) and normalises common laughing patterns (jajaja, jejeje, ajajaaaaja)
+Removes multiple vowels (holaaaa) and normalises common laughing patterns (jajaja, jejeje, ajajaaaaja).
+Useful for visualisations, and reducing the overall number of tokens present in the text variable.
 }
 \examples{
 \dontrun{df \%>\% limpiar_repeat_chars(text_var = text)}

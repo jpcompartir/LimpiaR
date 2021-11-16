@@ -2,7 +2,7 @@
 % Please edit documentation in R/limpiar_stopwords.R
 \name{limpiar_stopwords}
 \alias{limpiar_stopwords}
-\title{limpiar_stopwords}
+\title{Clean stopwords for visualisations}
 \usage{
 limpiar_stopwords(df, text_var = mention_content, stop_words)
 }

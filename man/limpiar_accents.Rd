@@ -2,7 +2,7 @@
 % Please edit documentation in R/limpiar_accents.R
 \name{limpiar_accents}
 \alias{limpiar_accents}
-\title{limpiar_accents}
+\title{Clean accented characters}
 \usage{
 limpiar_accents(df, text_var = mention_content)
 }
@@ -15,7 +15,7 @@ limpiar_accents(df, text_var = mention_content)
 text variable/character vector with accents replaced
 }
 \description{
-Replaces accented characters with non-accented characters.
+Useful for text normalisation
 }
 \examples{
 \dontrun{df \%>\% limpiar_accents(text_var = message)}

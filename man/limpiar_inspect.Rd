@@ -2,7 +2,7 @@
 % Please edit documentation in R/limpiar_inspect.R
 \name{limpiar_inspect}
 \alias{limpiar_inspect}
-\title{limpiar_inspect}
+\title{Inspect every post and URL which contains a pattern}
 \usage{
 limpiar_inspect(
   data,
@@ -24,7 +24,9 @@ limpiar_inspect(
 \item{title}{Name of the viewable pane}
 }
 \description{
-Produces a viewable data frame with posts matching a regular expression and their url. Useful for investigating suspected spam posts.
+Produces a viewable data frame with posts matching a regular expression and their url.
+Useful for investigating suspected spam posts, or other patterns of interest.
+Set the name of the title to avoid new frames overwriting old ones.
 }
 \examples{
 df <- data.frame(

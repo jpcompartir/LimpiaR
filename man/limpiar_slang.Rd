@@ -2,7 +2,7 @@
 % Please edit documentation in R/limpiar_slang.R
 \name{limpiar_slang}
 \alias{limpiar_slang}
-\title{limpiar_slang}
+\title{Clean slang from multiple dialects}
 \usage{
 limpiar_slang(df, text_var = mention_content)
 }
@@ -17,7 +17,6 @@ Data Frame or Tibble object with text variable altered
 \description{
 Replaces slang phrases from various Spanish dialects with everyday terms.
 Function's primary use is to normalise text for Deep Learning sentiment algorithm.
-Uses a hashing function and stringr::str_replace_all().
 }
 \examples{
 \dontrun{

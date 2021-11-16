@@ -1,6 +1,7 @@
-#' limpiar_retweets
+#' Clean retweets from the text variable
 #'
-#' Removes all posts with the 'rt' tag
+#' Removes all posts with the 'rt' or 'RT' tag. Useful when visualising organic posts.
+#' Particularly useful in conjunction with the ParseR & SegmentR visualisations.
 #'
 #' @param df Name of the Data Frame or Tibble Object
 #' @param text_var Name of the text variable/character vector

@@ -2,7 +2,7 @@
 % Please edit documentation in R/limpiar_spaces.R
 \name{limpiar_spaces}
 \alias{limpiar_spaces}
-\title{limpiar_spaces}
+\title{Clean redundant spaces}
 \usage{
 limpiar_spaces(df, text_var = mention_content)
 }
@@ -15,7 +15,7 @@ limpiar_spaces(df, text_var = mention_content)
 text variable/character vector with excess spaces removed
 }
 \description{
-Remove excess spaces from the text variable
+Remove excess spaces from the text variable.
 }
 \examples{
 df <- data.frame(text_variable = "clean   the   spaces please")

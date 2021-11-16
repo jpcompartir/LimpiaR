@@ -1,6 +1,6 @@
-#' limpiar_accents
+#' Clean accented characters
 #'
-#' Replaces accented characters with non-accented characters.
+#' Useful for text normalisation
 #'
 #' @param df Name of Data Frame or Tibble object
 #' @param text_var Name of text variable/character vector
