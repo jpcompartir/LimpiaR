@@ -1,0 +1,312 @@
+---
+title: "Introduction to LimpiaR"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to LimpiaR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Loading Everything Into R
+
+```{r setup, echo = TRUE, results = "hide", warning = FALSE, message = FALSE}
+library(magrittr)
+library(dplyr)
+library(stringr)
+library(LimpiaR)
+
+#library(tidyverse)
+```
+
+Productivity tip for those of you who are just setting out on your programming/R journey: all of LimpiaR's functions begin with limpiar_. Once the library has been loaded, typing limpiar_ in an Rstudio script or Rmarkdown code block, will produce a drop down menu of all LimpiaR functions, so you don't need to remember the names of all of them.
+
+```{r, eval = TRUE, echo = FALSE, warning= FALSE}
+data <- data.frame(
+  `Mention Url` = c("www.twitter.com/post1",
+                  "www.twitter.com/post2",
+                  "www.facebook.com/post1",
+                  "www.facebook.com/post2",
+                  "www.twitter.com/post3",
+                  "www.youtube.com/post1",
+                  "www.instagram.com/post1",
+                  "www.youtube.com/post2",
+                  "www.youtube.com/post3",
+                  "www.youtube.com/post4"),
+  `Mention Content` = c(  "holaaaaaa! cóómo    estás @magdalena   ?!",
+                      "  han visto este articulo!? Que horror! https://guardian.com/emojisbanned NO SE PUEDE!!",
+                      "ayyyyyy a mi me   gustaria ir a londres yaaa #llevame #porfavor",
+                      "jajajajaja eres un wn!",
+                      "RT dale un click a ver una mujer baila con su perro",
+                      "grax ntonces q?",
+                      "yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣 ",
+                      "grax ntonces q?",
+                      "grax ntonces q?",
+                      "grax ntonces q?"))%>%
+  tibble()%>%
+  relocate(Mention.Content)
+```
+
+```{r}
+data
+```
+
+### Column Names
+
+We created a data frame of posts and URLs. After loading libraries and data, the first part of any workflow should be to clean the column names, this makes using tab completion, and accessing column names much faster (which in the long run = big productivity gains). For this, we'll use the janitor package. You can uncomment the code to install janitor if it is not already installed on your machine.
+
+```{r}
+# ifelse(!"janitor" %in% installed.packages(),
+#    install.packages("janitor"), library(janitor))
+
+(data <- data %>% 
+   janitor::clean_names())
+
+```
+
+## Lower Case Text Variable
+
+For most workflows, the next step will be to make the text variable lower case. We do this to make tokens like 'AMAZING' or 'Amazing' -> 'amazing'. You do not need a LimpiaR function for this, as the base R function tolower() works just fine.
+```{r}
+(data <- data %>%
+  mutate(mention_content = tolower(mention_content)))
+
+```
+
+
+## Limpiar Functions
+
+## limpiar_accents
+
+Now we're going to look at LimpiaR's functions individually. The first function is limpiar_accents, this will replace the accents most common in Spanish words from the text variable, with their Latin-alphabet equivalents e.g. 'é -> e' . We will use the assignment operator to make sure these changes are saved. 
+
+Tip: you can type ?limpiar_accents to access the documentation, and see which arguments you need to fill in.
+
+```{r}
+(data <- data %>%
+  limpiar_accents(text_var = mention_content))
+```
+
+### limpiar_duplicates
+
+Now we'll remove duplicate posts, notice that we don't actually need to type text_var = mention_content, because the default argument for text_var is already mention_content. 
+
+```{r}
+(data <- data %>%
+  limpiar_duplicates())
+```
+
+Note: If the text column in our data frame were called 'text' we would have to specify text_var = text, or call:
+
+```r
+data %>% rename(mention_content = text) 
+```
+
+### limpiar_retweets
+If you need to remove retweets, for example to create a bigram network, limpiar has a function just for that. 
+```{r}
+(data <- data %>% 
+   limpiar_retweets())
+```
+
+### limpiar_url
+We generally don't want URLs appearing in our charts or analyses, so we can remove them with the limpiar_url function.
+
+```{r}
+(data <- data %>%
+   limpiar_url())
+```
+
+
+### limpiar_spaces
+Next we'll look at how to use LimpiaR to remove annoying white spaces, like those at the beginning of a sentence, or between punctuation, or multiple white spaces for no reason; as is common in the messy data we often encounter.
+
+```{r}
+(data <- data %>%
+  limpiar_spaces())
+```
+
+### limpiar_tags
+We can also remove user handles (e.g. @magdalena) and hashtags with the limpiar_tags function. Remember, you can type ?limpiar_tags to access documentation.
+
+Replace only hashtags:
+```{r}
+data %>%
+  limpiar_tags(user = FALSE, hashtag = TRUE)
+```
+
+Replace only user tags:
+```{r}
+data %>%
+  limpiar_tags(user = TRUE, hashtag = FALSE)
+
+```
+
+Replace both hashtags and user handles:
+```{r}
+data %>%
+  limpiar_tags()
+```
+
+
+### Quick recap - we've looked at:
+
+* cleaning column names with janitor::clean_names()
+* making the text variable lower case with mutate() &  tolower() 
+* cleaning accents with limpiar_accents()
+* cleaning duplicate posts with limpiar_duplicates()
+* cleaning retweets with limpiar_retweets()
+* cleaning urls with limpiar_url()
+* cleaning spaces with limpiar_spaces()
+* cleaning user handles and hashtags with limpiar_tags()
+
+### limpiar_shorthands
+One of the biggest problems with the messy data we encounter, are shorthands. Generally, algorithms have been trained on clean, standard language, so they do not encounter shorthands and abbreviations. Shorthands also change all the time, making it impractical to continuously train algorithms as new shorthands arise. This function attempts to bridge that gap, by normalising the most common shorthands.
+
+```{r}
+(data <- data %>%
+   limpiar_shorthands())
+```
+
+### limpiar_repeated_chars
+We don't want our algorithm to have to learn the difference between 'ajajaj' and 'jaja' or 'ay' and 'ayyyy' as practically speaking, there is none. We also don't want to introduce unnecessary tokens, so we normalise the most common occurrences of repeated or additional characters.
+
+```{r}
+(data <- data %>%
+   limpiar_repeat_chars())
+```
+
+Generally, the steps we've taken so far will be used in each and every analysis/project to help clean the data. We will now look at some of the more circumstantial functions, i.e. they will not be used in every analysis.
+
+### limpiar_emojis
+We don't need to use limpiar_emojis for every analysis, as many ParseR & SegmentR functions ignore them implicitly. However, if we know that we need to for a special purpose, we can can use limpiar_emojis(). One problem with this, and the reason it is for special cases only, is the emoji's encodings are in English. We may, at some point, translate them to Spanish, but it seems unlikely.
+
+```{r}
+data %>%
+  limpiar_emojis(text_var = mention_content, with_emoji_tag = FALSE)
+```
+
+or with the default settings:
+```{r}
+data %>%
+  limpiar_emojis()
+```
+
+### limpiar_stopwords
+Stop words are common words that do not provide us with much information as to an utterance's meaning. For example, in the sentence: 'the man is in prison for theft', if we knew only one word from this sentence, and that word was 'is', 'in', 'the', or 'for' then we wouldn't have much idea what the sentence is about. However, 'prison' or 'theft', would give us a lot more information.
+
+For many analyses, we remove stop words to help us see the 'highest information' words, to get a high-level understanding of large bodies of texts (such as in topic modelling and bigram networks.) For virtually all scenarios, you will want to use the limpiar_stopwords() with the argument stop_words = "topics" like so:
+
+```{r}
+data %>%
+  limpiar_stopwords(stop_words = "topics") %>%
+  limpiar_spaces() #to clear the spaces of words that were removed
+
+```
+
+Sentences can look quite strange without stopwords, and a lot of social posts are virtually meaningless. It's also worth pointing out, that a lot of information can be lost when removing stop words. Many phrases in English and Spanish have very different meanings when a stop word is removed.
+
+## Utility Functions
+We are nearly at the end of this introduction to LimpiaR, but before we finish, let's look at two utility functions which may be useful. We've conjoured up a new data frame called df, which we will use to show the last two functions and how to chain everything together.
+
+```{r, eval = TRUE, echo = FALSE, warning= FALSE}
+df <- data.frame(
+  `Mention Url` = c("www.twitter.com/post1",
+                  "www.twitter.com/post2",
+                  "www.facebook.com/post1",
+                  "www.facebook.com/post2",
+                  "www.twitter.com/post3",
+                  "www.youtube.com/post1",
+                  "www.instagram.com/post1",
+                  "www.youtube.com/post2",
+                  "www.youtube.com/post3",
+                  "www.youtube.com/post4"),
+  `Mention Content` = c(  "holaaaaaa! cóómo    estás @magdalena   ?!",
+                      "  han visto este articulo!? Que horror! https://guardian.com/emojisbanned NO SE PUEDE!!",
+                      "ayyyyyy a mi me   gustaria ir a londres yaaa #llevame #porfavor",
+                      "jajajajaja eres un wn!",
+                      "RT dale un click a ver una mujer baila con su perro",
+                      "grax ntonces q?",
+                      "yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣 ",
+                      "grax ntonces q?",
+                      "grax ntonces q?",
+                      "grax ntonces q?"),
+  na_col = c(NA, NA, NA, NA, NA, NA, NA, NA, "tadaa", NA))%>%
+  tibble()%>%
+  relocate(Mention.Content)%>%
+  janitor::clean_names()
+```
+ 
+```{r}
+df
+```
+### limpiar_inpsect
+So, imagine that we see a strange pattern, and we want to check what's going on with that specific pattern. We can use limpiar_inspect to view all posts which contain that pattern in an interactive frame!
+
+```{r, eval = FALSE}
+limpiar_inspect(df, pattern = "ntonces", text_var = mention_content,
+                post_url = mention_url, title = "ntonces")
+```
+
+
+```{r, eval = TRUE, echo = FALSE}
+limpiar_inspect(df, pattern = "ntonces", text_var = mention_content,
+                post_url = mention_url, title = "ntonces")%>%
+  knitr::kable() 
+
+```
+
+Whilst it's pretty obvious that all of the 'grax ntonces q?' posts are exactly the same, in the real world we're going to have 10,000 times as many posts, and searching for suspicious patterns will take up a lot of our time. The vie
+
+### limpiar_na_cols
+This final function is useful when we want to remove 'mostly NA' columns of a data frame. We may want to do this to save memory, for example if we have 400,000 posts and 80 columns. In this case we'll get rid of all columns for which 25% or more of their values are NA.
+
+```{r}
+limpiar_na_cols(df,threshold =  0.25)
+```
+
+## Putting It All Together
+
+To speed things up, we can call the functions together in one big long pipe.  
+```{r}
+df %>%
+  limpiar_na_cols(threshold = 0.25)%>%
+  limpiar_accents()%>%
+  limpiar_retweets()%>%
+  limpiar_shorthands()%>%
+  limpiar_repeat_chars()%>%
+  limpiar_url()%>%
+  limpiar_emojis()%>%
+  limpiar_shorthands()%>%
+  limpiar_spaces()%>%
+  limpiar_duplicates()
+```
+However, on very large data frames, it will often be better to prioritise one, or a few functions at a time, assigning your data frame as you go.
+
+## Bonus Function
+Once you're familiar with how LimpiaR works, you may want to use a bonus function, limpiar_df to do a bunch of things at once and speed everything up. limpiar_df also has an option to remove punctuation!
+
+```{r}
+limpiar_df(df, text_var = mention_content, remove_punctuation = TRUE)
+```
+
+If you wanted to, you could pipe in limpiar_na_cols, limpiar_emojis (or any other pipe-able function!).
+
+
+
+
+
+
+
+
+
+
+
+
+
