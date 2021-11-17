@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>limpiar_emojis — limpiar_emojis • LimpiaR</title>
+<title>Cleean emojis -- replacing with a text description — limpiar_emojis • LimpiaR</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,9 @@
 
 
 
-<meta property="og:title" content="limpiar_emojis — limpiar_emojis" />
-<meta property="og:description" content="functions to replace most emojis with  e.g. 'smiling_face_emoji' (snakecase linked) or 'smiling face'" />
+<meta property="og:title" content="Cleean emojis -- replacing with a text description — limpiar_emojis" />
+<meta property="og:description" content="Main usage is for pre-processing the text variable as part of Deep Learning pipeline.
+The most important argument is whether or not to add the emoji tag, which will also print in snake case." />
 
 
 
@@ -95,7 +96,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/limpiar_intro.html">limpiar_intro</a>
+      <a href="../articles/limpiar_intro.html">Introduction to LimpiaR</a>
     </li>
   </ul>
 </li>
@@ -115,13 +116,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>limpiar_emojis</h1>
+    <h1>Cleean emojis -- replacing with a text description</h1>
     
     <div class="hidden name"><code>limpiar_emojis.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>functions to replace most emojis with  e.g. 'smiling_face_emoji' (snakecase linked) or 'smiling face'</p>
+    <p>Main usage is for pre-processing the text variable as part of Deep Learning pipeline.
+The most important argument is whether or not to add the emoji tag, which will also print in snake case.</p>
     </div>
 
     <pre class="usage"><span class='fu'>limpiar_emojis</span><span class='op'>(</span><span class='va'>df</span>, text_var <span class='op'>=</span> <span class='va'>mention_content</span>, with_emoji_tag <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
