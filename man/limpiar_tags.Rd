@@ -2,7 +2,7 @@
 % Please edit documentation in R/limpiar_tags.R
 \name{limpiar_tags}
 \alias{limpiar_tags}
-\title{limpiar_tags}
+\title{Clean user handles and hashtags}
 \usage{
 limpiar_tags(df, text_var = mention_content, user = TRUE, hashtag = TRUE)
 }
@@ -19,6 +19,14 @@ limpiar_tags(df, text_var = mention_content, user = TRUE, hashtag = TRUE)
 the df object with the text_var cleaned of user / # tags
 }
 \description{
-Function replaces user handles and hashtags and replaces them with neutral tags.
+Function replaces user handles and hashtags with neutral tags.
 You can choose whether to replace both hashtags & users or either one.
+}
+\examples{
+\dontrun{
+data <- data \%>\% limpiar_tags(text_var = text_var, user = TRUE, hashtag = FALSE)
+
+data <- data \%>\% limpiar_tags(text_var = text_var, user = FALSE, hashtag = TRUE)
+}
+
 }

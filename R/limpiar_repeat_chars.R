@@ -1,11 +1,12 @@
-#' limpiar_repeat_chars
+#' Clean repeated charaaaacters
 #'
-#' Removes multiple vowels (holaaaa) and normalises common laughing patterns (jajaja, jejeje, ajajaaaaja)
+#' Removes multiple vowels (holaaaa) and normalises common laughing patterns (jajaja, jejeje, ajajaaaaja).
+#' Useful for visualisations, and reducing the overall number of tokens present in the text variable.
 #'
 #' @param df Name of the Data Frame or Tibble object
 #' @param text_var Name of the text variable/character vector. Default is mention_content
 #'
-#' @return Data Frame or Tibble object with most repeat vowels & laughing pattterns normalised
+#' @return Data Frame or Tibble object with most repeat vowels & laughing patterns normalised
 #' @export
 #'
 #' @examples
@@ -19,7 +20,7 @@ limpiar_repeat_chars <- function(df, text_var = mention_content){
   laughing_replacement <- "jaja"
 
   #Creates a capture group for any vowel seen 2 or more times
-  repeat_vowels_regex <-  "([a|e|i|o|u])\\1{1,}"
+  repeat_vowels_regex <-  "([a|e|i|o|u|y])\\1{1,}"
 
   #replaces two or more of the same vowel with one of that same vowel
   repeat_vowels_replacement <- "\\1"

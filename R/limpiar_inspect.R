@@ -1,8 +1,8 @@
-
-#' limpiar_inspect
+#' Inspect every post and URL which contains a pattern
 #'
-#' Produces a viewable data frame with posts matching a regular expression and their url. Useful for investigating suspected spam posts.
-#'
+#' Produces a viewable data frame with posts matching a regular expression and their url.
+#' Useful for investigating suspected spam posts, or other patterns of interest.
+#' Set the name of the title to avoid new frames overwriting old ones.
 #'
 #' @param data Data frame or tibble object
 #' @param pattern Pattern you wish to inspect e.g. "link bio"

@@ -1,6 +1,6 @@
-#' limpiar_tags
+#' Clean user handles and hashtags
 #'
-#' Function replaces user handles and hashtags and replaces them with neutral tags.
+#' Function replaces user handles and hashtags with neutral tags.
 #' You can choose whether to replace both hashtags & users or either one.
 #'
 #' @param df Name of Data Frame or Tibble object
@@ -9,14 +9,19 @@
 #' @param hashtag Whether to replace hashtags or not TRUE = replace
 #'
 #' @return the df object with the text_var cleaned of user / # tags
-#' @example
+#' @examples
 #' \dontrun{
 #' data <- data %>% limpiar_tags(text_var = text_var, user = TRUE, hashtag = FALSE)
+#'
+#' data <- data %>% limpiar_tags(text_var = text_var, user = FALSE, hashtag = TRUE)
 #' }
 #'
 #' @export
 #'
 limpiar_tags <- function(df, text_var = mention_content, user = TRUE, hashtag = TRUE){
+
+
+  #These functions use the \\B boundary tags instead of \\b to avoid accidentalyl normalising email addresses
 
   #Return just user tags relaced if user = TRUE and hashtag = FALSE
   if(user & !hashtag){

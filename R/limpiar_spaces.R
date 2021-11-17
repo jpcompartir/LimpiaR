@@ -1,6 +1,6 @@
-#' limpiar_spaces
+#' Clean redundant spaces
 #'
-#' Remove excess spaces from the text variable
+#' Remove excess spaces from the text variable.
 #'
 #' @param df Name of the Data Frame or Tibble object
 #' @param text_var Name of the text variable/character vector

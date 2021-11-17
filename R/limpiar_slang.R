@@ -1,8 +1,7 @@
-#' limpiar_slang
+#' Clean slang from multiple dialects
 #'
 #' Replaces slang phrases from various Spanish dialects with everyday terms.
 #' Function's primary use is to normalise text for Deep Learning sentiment algorithm.
-#' Uses a hashing function and stringr::str_replace_all().
 #'
 #' @param df Name of Data Frame or Tibble object
 #' @param text_var Name of text variable/character vector

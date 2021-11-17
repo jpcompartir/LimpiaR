@@ -1,6 +1,7 @@
-#' limpiar_url
+#' Clean URLs from the text variable
 #'
-#' Removes the most common forms of URLs from a text variable of a data frame/tibble
+#' Removes the most common forms of URLs from the text variable
+#'
 #' @param df Data Frame or Tibble Object
 #' @param text_var Name of the text variable/character vector
 #'

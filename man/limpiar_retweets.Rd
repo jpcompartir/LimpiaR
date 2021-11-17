@@ -2,7 +2,7 @@
 % Please edit documentation in R/limpiar_retweets.R
 \name{limpiar_retweets}
 \alias{limpiar_retweets}
-\title{limpiar_retweets}
+\title{Clean retweets from the text variable}
 \usage{
 limpiar_retweets(df, text_var = mention_content)
 }
@@ -12,7 +12,8 @@ limpiar_retweets(df, text_var = mention_content)
 \item{text_var}{Name of the text variable/character vector}
 }
 \description{
-Removes all posts with the 'rt' tag
+Removes all posts with the 'rt' or 'RT' tag. Useful when visualising organic posts.
+Particularly useful in conjunction with the ParseR & SegmentR visualisations.
 }
 \examples{
 df <- data.frame(text_variable = cbind(c("rt <3", "RT <3", "original tweet")))

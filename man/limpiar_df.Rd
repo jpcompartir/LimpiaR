@@ -2,7 +2,7 @@
 % Please edit documentation in R/limpiar_df.R
 \name{limpiar_df}
 \alias{limpiar_df}
-\title{limpiar_df}
+\title{Call multiple LimpiaR functions together}
 \usage{
 limpiar_df(
   df,

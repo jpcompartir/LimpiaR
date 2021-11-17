@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>limpiar_shorthands — limpiar_shorthands • LimpiaR</title>
+<title>limpiar_tags — limpiar_tags • LimpiaR</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,9 @@
 
 
 
-<meta property="og:title" content="limpiar_shorthands — limpiar_shorthands" />
-<meta property="og:description" content="Replaces common Spanish shorthands and abbreviations with their longer form equivalents." />
+<meta property="og:title" content="limpiar_tags — limpiar_tags" />
+<meta property="og:description" content="Function replaces user handles and hashtags with neutral tags.
+You can choose whether to replace both hashtags &amp;amp; users or either one." />
 
 
 
@@ -115,20 +116,17 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>limpiar_shorthands</h1>
+    <h1>limpiar_tags</h1>
     
-    <div class="hidden name"><code>limpiar_shorthands.Rd</code></div>
+    <div class="hidden name"><code>limpiar_tags.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Replaces common Spanish shorthands and abbreviations with their longer form equivalents.</p>
+    <p>Function replaces user handles and hashtags with neutral tags.
+You can choose whether to replace both hashtags &amp; users or either one.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>limpiar_shorthands</span><span class='op'>(</span>
-  <span class='va'>df</span>,
-  text_var <span class='op'>=</span> <span class='va'>mention_content</span>,
-  spaces_as_underscores <span class='op'>=</span> <span class='cn'>FALSE</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>limpiar_tags</span><span class='op'>(</span><span class='va'>df</span>, text_var <span class='op'>=</span> <span class='va'>mention_content</span>, user <span class='op'>=</span> <span class='cn'>TRUE</span>, hashtag <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -142,20 +140,26 @@
       <td><p>Name of text variable/character vector</p></td>
     </tr>
     <tr>
-      <th>spaces_as_underscores</th>
-      <td><p>Whether multi-word corrections e.g. 'te quiero mucho' should have spaces or underscores. Default = FALSE</p></td>
+      <th>user</th>
+      <td><p>Whether to replace user handles or not TRUE = replace</p></td>
+    </tr>
+    <tr>
+      <th>hashtag</th>
+      <td><p>Whether to replace hashtags or not TRUE = replace</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The text variable with shorthands replaced</p>
+    <p>the df object with the text_var cleaned of user / # tags</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>df</span> <span class='op'>&lt;-</span> <span class='va'>df</span> <span class='op'>%&gt;%</span> <span class='fu'>mutate</span><span class='op'>(</span>text_var <span class='op'>=</span> <span class='fu'>limpiar_shorthands</span><span class='op'>(</span><span class='va'>text_var</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>text_var</span> <span class='op'>&lt;-</span> <span class='fu'>limpiar_shorthands</span><span class='op'>(</span><span class='va'>text_var</span><span class='op'>)</span>
+<span class='va'>data</span> <span class='op'>&lt;-</span> <span class='va'>data</span> <span class='op'>%&gt;%</span> <span class='fu'>limpiar_tags</span><span class='op'>(</span>text_var <span class='op'>=</span> <span class='va'>text_var</span>, user <span class='op'>=</span> <span class='cn'>TRUE</span>, hashtag <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+
+<span class='va'>data</span> <span class='op'>&lt;-</span> <span class='va'>data</span> <span class='op'>%&gt;%</span> <span class='fu'>limpiar_tags</span><span class='op'>(</span>text_var <span class='op'>=</span> <span class='va'>text_var</span>, user <span class='op'>=</span> <span class='cn'>FALSE</span>, hashtag <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 <span class='op'>}</span>
+
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

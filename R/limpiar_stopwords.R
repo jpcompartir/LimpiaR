@@ -1,4 +1,4 @@
-#' limpiar_stopwords
+#' Clean stopwords for visualisations
 #'
 #'The two lists - sentiment & topics, are very similar, in that most words are in both lists.
 #'However, sentiment analysis is sensitive to negation, so negation cues e.g.
