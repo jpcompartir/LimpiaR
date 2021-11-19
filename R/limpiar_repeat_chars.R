@@ -15,7 +15,7 @@
 #'
 limpiar_repeat_chars <- function(df, text_var = mention_content){
   #Checks there is a j + (e or i or a) and at least characters made from j + a i e.
-  laughing_regex <- "(?=.+j)((?=.+j)|(?=.+a)|(?=.+e)|(?=.+i))[(j|a|i|e)+(j|a|i|e)+]{4,}"
+  laughing_regex <- "\\b(?=.+j)((?=.+j)|(?=.+a)|(?=.+e)|(?=.+i))[(j|a|i|e)+(j|a|i|e)+]{4,}"
   #Replaces messy laughing strings with "jaja"
   laughing_replacement <- "jaja"
 
