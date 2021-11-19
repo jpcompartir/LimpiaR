@@ -1,0 +1,43 @@
+navbar:
+  structure:
+    left: [home, intro, reference, articles]
+    right: [github]
+
+reference:
+- title: Cleaning Posts
+  desc: >
+    Functions for editing the text variable in place.
+  contents:
+  - '`limpiar_accents`'
+  - '`limpiar_spaces`'
+  - '`limpiar_url`'
+  - '`limpiar_repeat_chars`'
+  - '`limpiar_shorthands`'
+  - '`limpiar_tags`'
+  - '`limpiar_emojis`'
+  - '`limpiar_stopwords`'
+
+- title: Removing Posts
+  desc: >
+    Functions for removing unwanted posts entirely (rather than cleaning).
+  contents:
+  - '`limpiar_duplicates`'
+  - '`limpiar_retweets`'
+
+- title: Utility Functions
+  desc: >
+    Miscellaneous functions designed to speed up aspects of cleaning text.
+  contents:
+  - '`limpiar_inspect`'
+  - '`limpiar_na_cols`'
+  - '`limpiar_df`'
+
+repo:
+  url:
+    home: https://github.com/jpcompartir/LimpiaR
+    source: https://github.com/jpcompartir/LimpiaR/tree/main
+
+home:
+  links:
+  - text: Report an issue
+    href: https://github.com/jpcompartir/Limpiar/issues
