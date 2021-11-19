@@ -2,7 +2,7 @@
 
 ## What is LimpiaR?
 
-LimpiaR is an R library of pre-processing functions for text data.
+LimpiaR is an R library of functions for cleaning & pre-processing text data.
 
 Limpiar is a Spanish verb and translates in English to 'to clean'. So generally, when you're calling a LimpiaR function, you can think of it as 'clean...'
 
