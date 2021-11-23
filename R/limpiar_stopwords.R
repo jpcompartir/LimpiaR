@@ -1,4 +1,4 @@
-#' Clean stopwords for visualisations
+#' Clean stop words for visualisations
 #'
 #'The two lists - sentiment & topics, are very similar, in that most words are in both lists.
 #'However, sentiment analysis is sensitive to negation, so negation cues e.g.
@@ -11,11 +11,14 @@
 #' @param text_var name of the text variable
 #' @param stop_words "sentiment" or "topics" - sentiment retains negation cues
 #'
-#' @return the text variable with specified stopw ords removed
+#' @return the text variable with stop words from specified list removed
 #'
 #' @examples
-#' \dontrun{df %>% limpiar_stopwords(stop_words = "sentiment") %>%
-#' limpiar_spaces(text_var = text)}
+#' limpiar_examples %>% dplyr::select(mention_content)
+#'
+#' limpiar_examples %>% limpiar_stopwords(stop_words = "topics") %>%
+#' dplyr::select(mention_content) %>% limpiar_spaces()
+#'
 #' @export
 limpiar_stopwords <- function(df, text_var = mention_content, stop_words){
 

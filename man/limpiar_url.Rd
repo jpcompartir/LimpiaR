@@ -12,11 +12,14 @@ limpiar_url(df, text_var = mention_content)
 \item{text_var}{Name of the text variable/character vector}
 }
 \value{
-text variable/character vector with URLs removed
+Data Frame or Tibble object with URLs removed from the text variable
 }
 \description{
 Removes the most common forms of URLs from the text variable
 }
 \examples{
-\dontrun{df \%>\% limpiar_url()}
+limpiar_examples \%>\% dplyr::select(mention_content)
+
+limpiar_examples \%>\% limpiar_url() \%>\% dplyr::select(mention_content)
+
 }

@@ -12,13 +12,15 @@ limpiar_accents(df, text_var = mention_content)
 \item{text_var}{Name of text variable/character vector}
 }
 \value{
-text variable/character vector with accents replaced
+Data Frame or Tibble object with accents in the text variable replaced
 }
 \description{
-Useful for text normalisation
+Useful for reducing overall number of tokens.
+Warning: removing accents results in loss of information, so should be done with care.
 }
 \examples{
-\dontrun{df \%>\% limpiar_accents(text_var = message)}
+limpiar_examples \%>\% dplyr::select(mention_content)
+limpiar_examples \%>\% limpiar_accents() \%>\% dplyr::select(mention_content)
 
 
 }

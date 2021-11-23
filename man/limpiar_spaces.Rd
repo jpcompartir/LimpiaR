@@ -20,4 +20,8 @@ Remove excess spaces from the text variable.
 \examples{
 df <- data.frame(text_variable = "clean   the   spaces please")
 limpiar_spaces(df, text_var = text_variable)
+
+limpiar_examples \%>\% dplyr::select(mention_content)
+
+limpiar_examples \%>\% limpiar_spaces() \%>\% dplyr::select(mention_content)
 }

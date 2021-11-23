@@ -13,10 +13,10 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' df <- df %>% mutate(text_var = limpiar_shorthands(text_var))
-#' text_var <- limpiar_shorthands(text_var)
-#' }
+#' limpiar_examples %>% dplyr::select(mention_content)
+#'
+#' limpiar_examples %>% limpiar_shorthands() %>% dplyr::select(mention_content)
+#'
 limpiar_shorthands <- function(df, text_var = mention_content, spaces_as_underscores = FALSE){
 
   shorthands <- c("\\bporq\\b","\\btqm\\b", "\\btq\\b", "\\bpq\\b", "\\bxq\\b", "\\bq\\b", "\\bk\\b", "\\bxk\\b",

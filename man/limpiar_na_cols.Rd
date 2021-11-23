@@ -20,10 +20,8 @@ Setting threshold of 0.25 asks R to remove all columns with 25\% or more NA valu
 Can be useful when dealing with large data frames, where many columns are redundant.
 }
 \examples{
-a <- cbind(c(NA, NA, NA, NA, NA))
-b <- cbind(c(NA, NA, 2, NA, 3))
-c <- cbind(c(1, 2, 3, 4, 5))
-df <- tibble::as_tibble(data.frame(a, b, c))
-df <- limpiar_na_cols(df, 0.4)
+limpiar_examples
+
+limpiar_examples \%>\% limpiar_na_cols(0.1)
 
 }

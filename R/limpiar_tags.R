@@ -8,13 +8,18 @@
 #' @param user Whether to replace user handles or not TRUE = replace
 #' @param hashtag Whether to replace hashtags or not TRUE = replace
 #'
-#' @return the df object with the text_var cleaned of user / # tags
+#' @return The Data Frame or Tibble object with user handles and/or hashtags removed from the text variable
 #' @examples
-#' \dontrun{
-#' data <- data %>% limpiar_tags(text_var = text_var, user = TRUE, hashtag = FALSE)
+#' limpiar_examples
 #'
-#' data <- data %>% limpiar_tags(text_var = text_var, user = FALSE, hashtag = TRUE)
-#' }
+#' #Both user and hashtags
+#' limpiar_examples %>% limpiar_tags() %>% dplyr::select(mention_content)
+#'
+#' #Just user tags
+#' limpiar_examples %>% limpiar_tags(hashtag = FALSE) %>% dplyr::select(mention_content)
+#'
+#' #Just hashtags
+#' limpiar_examples %>% limpiar_tags(user = FALSE) %>% dplyr::select(mention_content)
 #'
 #' @export
 #'

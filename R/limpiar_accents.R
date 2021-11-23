@@ -1,13 +1,15 @@
 #' Clean accented characters
 #'
-#' Useful for text normalisation
+#' Useful for reducing overall number of tokens.
+#' Warning: removing accents results in loss of information, so should be done with care.
 #'
 #' @param df Name of Data Frame or Tibble object
 #' @param text_var Name of text variable/character vector
-#'
-#' @return text variable/character vector with accents replaced
+#' @importFrom magrittr %>%
+#' @return Data Frame or Tibble object with accents in the text variable replaced
 #' @examples
-#' \dontrun{df %>% limpiar_accents(text_var = message)}
+#' limpiar_examples %>% dplyr::select(mention_content)
+#' limpiar_examples %>% limpiar_accents() %>% dplyr::select(mention_content)
 #'
 #'
 #' @export

@@ -16,17 +16,22 @@ limpiar_tags(df, text_var = mention_content, user = TRUE, hashtag = TRUE)
 \item{hashtag}{Whether to replace hashtags or not TRUE = replace}
 }
 \value{
-the df object with the text_var cleaned of user / # tags
+The Data Frame or Tibble object with user handles and/or hashtags removed from the text variable
 }
 \description{
 Function replaces user handles and hashtags with neutral tags.
 You can choose whether to replace both hashtags & users or either one.
 }
 \examples{
-\dontrun{
-data <- data \%>\% limpiar_tags(text_var = text_var, user = TRUE, hashtag = FALSE)
+limpiar_examples
 
-data <- data \%>\% limpiar_tags(text_var = text_var, user = FALSE, hashtag = TRUE)
-}
+#Both user and hashtags
+limpiar_examples \%>\% limpiar_tags() \%>\% dplyr::select(mention_content)
+
+#Just user tags
+limpiar_examples \%>\% limpiar_tags(hashtag = FALSE) \%>\% dplyr::select(mention_content)
+
+#Just hashtags
+limpiar_examples \%>\% limpiar_tags(user = FALSE) \%>\% dplyr::select(mention_content)
 
 }

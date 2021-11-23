@@ -26,8 +26,8 @@ Choose whether to link the replacements with snake case or not, with spaces_as_u
 Useful primarily for normalising text ahead of sentiment classification.
 }
 \examples{
-\dontrun{
-df <- df \%>\% mutate(text_var = limpiar_shorthands(text_var))
-text_var <- limpiar_shorthands(text_var)
-}
+limpiar_examples \%>\% dplyr::select(mention_content)
+
+limpiar_examples \%>\% limpiar_shorthands() \%>\% dplyr::select(mention_content)
+
 }
