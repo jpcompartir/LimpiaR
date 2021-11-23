@@ -40,7 +40,8 @@
 
 
 <meta property="og:title" content="Clean accented characters — limpiar_accents" />
-<meta property="og:description" content="Useful for text normalisation" />
+<meta property="og:description" content="Useful for text normalisation and reducing overall number of tokens.
+Warning: removing accents results in loss of information, so should be done with care." />
 
 
 
@@ -101,7 +102,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/jpcompartir/LimpiaR">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -116,12 +122,13 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Clean accented characters</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/jpcompartir/LimpiaR/tree/mainR/limpiar_accents.R'><code>R/limpiar_accents.R</code></a></small>
     <div class="hidden name"><code>limpiar_accents.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Useful for text normalisation</p>
+    <p>Useful for text normalisation and reducing overall number of tokens.
+Warning: removing accents results in loss of information, so should be done with care.</p>
     </div>
 
     <pre class="usage"><span class='fu'>limpiar_accents</span><span class='op'>(</span><span class='va'>df</span>, text_var <span class='op'>=</span> <span class='va'>mention_content</span><span class='op'>)</span></pre>
@@ -141,11 +148,36 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>text variable/character vector with accents replaced</p>
+    <p>Data Frame or Tibble object with accents replaced in text_var</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='va'>df</span> <span class='op'>%&gt;%</span> <span class='fu'>limpiar_accents</span><span class='op'>(</span>text_var <span class='op'>=</span> <span class='va'>message</span><span class='op'>)</span>
-
+    <pre class="examples"><div class='input'><span class='va'>limpiar_examples</span> <span class='op'>%&gt;%</span> <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>mention_content</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 10 × 1</span>
+#&gt;    mention_content                                                      
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                                                                
+#&gt; <span style='color: #BCBCBC;'> 1</span> <span style='color: #949494;'>"</span>mi amigo sancho es un wn de vdd jajaja<span style='color: #949494;'>"</span>                             
+#&gt; <span style='color: #BCBCBC;'> 2</span> <span style='color: #949494;'>"</span>RT mi amigo sancho es un wn de vdd jajaja<span style='color: #949494;'>"</span>                          
+#&gt; <span style='color: #BCBCBC;'> 3</span> <span style='color: #949494;'>"</span>@don_quijote no digas eso, tu amigo es muy honorable #vamos #sancho<span style='color: #949494;'>"</span>
+#&gt; <span style='color: #BCBCBC;'> 4</span> <span style='color: #949494;'>"</span>nos han metido en una muy dificil situación<span style='color: #949494;'>"</span>                        
+#&gt; <span style='color: #BCBCBC;'> 5</span> <span style='color: #949494;'>"</span>nos han metido en una muy dificil situación<span style='color: #949494;'>"</span>                        
+#&gt; <span style='color: #BCBCBC;'> 6</span> <span style='color: #949494;'>"</span>   Lo q no tenemos es tiempo.   Mañana    debemos luchar.   <span style='color: #949494;'>"</span>       
+#&gt; <span style='color: #BCBCBC;'> 7</span> <span style='color: #949494;'>"</span>a mi es muy grave quitarle la vida al otro<span style='color: #949494;'>"</span>                         
+#&gt; <span style='color: #BCBCBC;'> 8</span> <span style='color: #949494;'>"</span>ayyy nooo @robert_jordan 😢 😢 😢 <span style='color: #949494;'>"</span>                                 
+#&gt; <span style='color: #BCBCBC;'> 9</span> <span style='color: #949494;'>"</span>todos se unen a nuestro grupo hagale un clic https::larebelion.es<span style='color: #949494;'>"</span>  
+#&gt; <span style='color: #BCBCBC;'>10</span> <span style='color: #949494;'>"</span>a mi me gustaría quedarme un ratito más<span style='color: #949494;'>"</span>                            </div><div class='input'><span class='va'>limpiar_examples</span> <span class='op'>%&gt;%</span> <span class='fu'>limpiar_accents</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>mention_content</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 10 × 1</span>
+#&gt;    mention_content                                                      
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                                                                
+#&gt; <span style='color: #BCBCBC;'> 1</span> <span style='color: #949494;'>"</span>mi amigo sancho es un wn de vdd jajaja<span style='color: #949494;'>"</span>                             
+#&gt; <span style='color: #BCBCBC;'> 2</span> <span style='color: #949494;'>"</span>RT mi amigo sancho es un wn de vdd jajaja<span style='color: #949494;'>"</span>                          
+#&gt; <span style='color: #BCBCBC;'> 3</span> <span style='color: #949494;'>"</span>@don_quijote no digas eso, tu amigo es muy honorable #vamos #sancho<span style='color: #949494;'>"</span>
+#&gt; <span style='color: #BCBCBC;'> 4</span> <span style='color: #949494;'>"</span>nos han metido en una muy dificil situacion<span style='color: #949494;'>"</span>                        
+#&gt; <span style='color: #BCBCBC;'> 5</span> <span style='color: #949494;'>"</span>nos han metido en una muy dificil situacion<span style='color: #949494;'>"</span>                        
+#&gt; <span style='color: #BCBCBC;'> 6</span> <span style='color: #949494;'>"</span>   Lo q no tenemos es tiempo.   Manana    debemos luchar.   <span style='color: #949494;'>"</span>       
+#&gt; <span style='color: #BCBCBC;'> 7</span> <span style='color: #949494;'>"</span>a mi es muy grave quitarle la vida al otro<span style='color: #949494;'>"</span>                         
+#&gt; <span style='color: #BCBCBC;'> 8</span> <span style='color: #949494;'>"</span>ayyy nooo @robert_jordan 😢 😢 😢 <span style='color: #949494;'>"</span>                                 
+#&gt; <span style='color: #BCBCBC;'> 9</span> <span style='color: #949494;'>"</span>todos se unen a nuestro grupo hagale un clic https::larebelion.es<span style='color: #949494;'>"</span>  
+#&gt; <span style='color: #BCBCBC;'>10</span> <span style='color: #949494;'>"</span>a mi me gustaria quedarme un ratito mas<span style='color: #949494;'>"</span>                            </div><div class='input'>
 
 </div></pre>
   </div>

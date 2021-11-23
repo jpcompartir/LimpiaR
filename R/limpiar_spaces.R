@@ -10,6 +10,10 @@
 #' @examples
 #' df <- data.frame(text_variable = "clean   the   spaces please")
 #' limpiar_spaces(df, text_var = text_variable)
+#'
+#' limpiar_examples %>% dplyr::select(mention_content)
+#'
+#' limpiar_examples %>% limpiar_spaces() %>% dplyr::select(mention_content)
 limpiar_spaces <- function(df, text_var = mention_content){
 
   df %>%
@@ -19,5 +23,6 @@ limpiar_spaces <- function(df, text_var = mention_content){
                   {{ text_var }} := stringr::str_replace_all({{ text_var }}, "[:space:]+\\,", ","),
                   {{ text_var }} := stringr::str_replace_all({{ text_var }}, "[:space:]+:", ":"),
                   {{ text_var }} := stringr::str_replace_all({{ text_var }}, "[:space:]+;", ","),
-                  {{ text_var }} := stringr::str_replace_all({{ text_var }}, "[:space:]+\\!", "!"))
+                  {{ text_var }} := stringr::str_replace_all({{ text_var }}, "[:space:]+\\!", "!"),
+                  {{ text_var }} := stringr::str_replace_all({{ text_var }}, "[:space:]+\\?", "?"))
 }

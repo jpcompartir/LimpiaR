@@ -40,10 +40,9 @@
 
 
 <meta property="og:title" content="Call multiple LimpiaR functions together — limpiar_df" />
-<meta property="og:description" content="used on a data frame to remove duplicates, empty rows, and retweets,
-turn the text variable to all lower case (advisable to do any part of speech tagging before using).
-Function also cleans accents, common urls, punctuation if specified and trims excess white spaces.
-Use remove_retweets = FALSE to keep retweets in the text variable." />
+<meta property="og:description" content="Used on a data frame to remove duplicates, empty rows, and retweet.
+Transform the text variable to lower case and remove user handles and hash tags.
+Clean accents, urls, shorthands, repeated characters and  punctuation if specified." />
 
 
 
@@ -104,7 +103,12 @@ Use remove_retweets = FALSE to keep retweets in the text variable." />
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/jpcompartir/LimpiaR">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -119,15 +123,14 @@ Use remove_retweets = FALSE to keep retweets in the text variable." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Call multiple LimpiaR functions together</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/jpcompartir/LimpiaR/tree/mainR/limpiar_df.R'><code>R/limpiar_df.R</code></a></small>
     <div class="hidden name"><code>limpiar_df.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>used on a data frame to remove duplicates, empty rows, and retweets,
-turn the text variable to all lower case (advisable to do any part of speech tagging before using).
-Function also cleans accents, common urls, punctuation if specified and trims excess white spaces.
-Use remove_retweets = FALSE to keep retweets in the text variable.</p>
+    <p>Used on a data frame to remove duplicates, empty rows, and retweet.
+Transform the text variable to lower case and remove user handles and hash tags.
+Clean accents, urls, shorthands, repeated characters and  punctuation if specified.</p>
     </div>
 
     <pre class="usage"><span class='fu'>limpiar_df</span><span class='op'>(</span>
@@ -154,17 +157,30 @@ Use remove_retweets = FALSE to keep retweets in the text variable.</p>
     </tr>
     <tr>
       <th>remove_punctuation</th>
-      <td><p>Whether or not to remove punctuation (and then clean whitespace)</p></td>
+      <td><p>Whether or not to remove punctuation, default is not to remove</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>The original Data Frame with the text variable cleaned</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>You should only use this function when you are sure you want to execute each of the steps.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='fu'>limpiar_df</span><span class='op'>(</span><span class='va'>df</span>, text_var <span class='op'>=</span> <span class='va'>mention_content</span><span class='op'>)</span>
-
+    <pre class="examples"><div class='input'><span class='fu'>limpiar_df</span><span class='op'>(</span><span class='va'>limpiar_examples</span>, text_var <span class='op'>=</span> <span class='va'>mention_content</span>, remove_punctuation <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 8 × 5</span>
+#&gt;   doc_id author_name   mention_content          mention_url     platform_intera…
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span>           
+#&gt; <span style='color: #BCBCBC;'>1</span>      1 don_quijote   mi amigo sancho es un w… www.twitter.co… <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'>2</span>      3 edmond_dantes user no digas eso tu am… www.twitter.co… <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'>3</span>      4 el_sordo      nos han metido en una m… www.fakebook.c… <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'>4</span>      6 robert_jordan lo que no tenemos es ti… www.youtube.no… <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'>5</span>      7 anselmo       a mi es muy grave quita… www.twitter.co… <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'>6</span>      8 maria         ay no user 😢 😢 😢      www.twitter.co… <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'>7</span>      9 pablo         todos se unen a nuestro… www.instagram.… <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'>8</span>     10 pilar         a mi me gustaria quedar… www.instagram.… <span style='color: #BB0000;'>NA</span>              </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

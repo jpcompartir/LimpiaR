@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Clean the text variable for duplicate posts — limpiar_duplicates • LimpiaR</title>
+<title>Clean the text variable of duplicate posts — limpiar_duplicates • LimpiaR</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Clean the text variable for duplicate posts — limpiar_duplicates" />
+<meta property="og:title" content="Clean the text variable of duplicate posts — limpiar_duplicates" />
 <meta property="og:description" content="Removes duplicate posts, and posts which are deleted or protected by APIs" />
 
 
@@ -101,7 +101,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/jpcompartir/LimpiaR">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -115,8 +120,8 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Clean the text variable for duplicate posts</h1>
-    
+    <h1>Clean the text variable of duplicate posts</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jpcompartir/LimpiaR/tree/mainR/limpiar_duplicates.R'><code>R/limpiar_duplicates.R</code></a></small>
     <div class="hidden name"><code>limpiar_duplicates.Rd</code></div>
     </div>
 
@@ -141,15 +146,43 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>text variable/character with duplicates removed</p>
+    <p>The Data Frame or Tibble object with duplicate posts removed from the text variable</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>text_variable <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
+    <pre class="examples"><div class='input'><span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>text_variable <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
 <span class='st'>"Deleted or protected mention"</span>, <span class='st'>"hello"</span>, <span class='st'>"goodbye"</span>, <span class='st'>"goodbye"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
 <span class='fu'>limpiar_duplicates</span><span class='op'>(</span><span class='va'>df</span>, <span class='va'>text_variable</span><span class='op'>)</span>
-<span class='op'>}</span>
+</div><div class='output co'>#&gt;   text_variable
+#&gt; 1         hello
+#&gt; 2       goodbye</div><div class='input'>
+<span class='va'>limpiar_examples</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 10 × 5</span>
+#&gt;    doc_id author_name       mention_content       mention_url   platform_intera…
+#&gt;     <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                 <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span>           
+#&gt; <span style='color: #BCBCBC;'> 1</span>      1 don_quijote       <span style='color: #949494;'>"</span>mi amigo sancho es … www.twitter.… <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'> 2</span>      2 sancho_panza      <span style='color: #949494;'>"</span>RT mi amigo sancho … www.twitter.… <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'> 3</span>      3 edmond_dantes     <span style='color: #949494;'>"</span>@don_quijote no dig… www.twitter.… <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'> 4</span>      4 el_sordo          <span style='color: #949494;'>"</span>nos han metido en u… www.fakebook… <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'> 5</span>      5 commander_miranda <span style='color: #949494;'>"</span>nos han metido en u… www.fakebook… <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'> 6</span>      6 robert_jordan     <span style='color: #949494;'>"</span>   Lo q no tenemos … www.youtube.… <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'> 7</span>      7 anselmo           <span style='color: #949494;'>"</span>a mi es muy grave q… www.twitter.… <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'> 8</span>      8 maria             <span style='color: #949494;'>"</span>ayyy nooo @robert_j… www.twitter.… <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'> 9</span>      9 pablo             <span style='color: #949494;'>"</span>todos se unen a nue… www.instagra… <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'>10</span>     10 pilar             <span style='color: #949494;'>"</span>a mi me gustaría qu… www.instagra… <span style='color: #BB0000;'>NA</span>              </div><div class='input'>
 
+<span class='va'>limpiar_examples</span> <span class='op'>%&gt;%</span> <span class='fu'>limpiar_duplicates</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 9 × 5</span>
+#&gt;   doc_id author_name   mention_content          mention_url     platform_intera…
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span>           
+#&gt; <span style='color: #BCBCBC;'>1</span>      1 don_quijote   <span style='color: #949494;'>"</span>mi amigo sancho es un … www.twitter.co… <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'>2</span>      2 sancho_panza  <span style='color: #949494;'>"</span>RT mi amigo sancho es … www.twitter.co… <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'>3</span>      3 edmond_dantes <span style='color: #949494;'>"</span>@don_quijote no digas … www.twitter.co… <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'>4</span>      4 el_sordo      <span style='color: #949494;'>"</span>nos han metido en una … www.fakebook.c… <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'>5</span>      6 robert_jordan <span style='color: #949494;'>"</span>   Lo q no tenemos es … www.youtube.no… <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'>6</span>      7 anselmo       <span style='color: #949494;'>"</span>a mi es muy grave quit… www.twitter.co… <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'>7</span>      8 maria         <span style='color: #949494;'>"</span>ayyy nooo @robert_jord… www.twitter.co… <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'>8</span>      9 pablo         <span style='color: #949494;'>"</span>todos se unen a nuestr… www.instagram.… <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'>9</span>     10 pilar         <span style='color: #949494;'>"</span>a mi me gustaría queda… www.instagram.… <span style='color: #BB0000;'>NA</span>              </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

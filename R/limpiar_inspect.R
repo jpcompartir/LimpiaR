@@ -4,6 +4,7 @@
 #' Useful for investigating suspected spam posts, or other patterns of interest.
 #' Set the name of the title to avoid new frames overwriting old ones.
 #'
+#'
 #' @param data Data frame or tibble object
 #' @param pattern Pattern you wish to inspect e.g. "link bio"
 #' @param text_var Name of the text variable/character vector
@@ -11,9 +12,7 @@
 #' @param title Name of the viewable pane
 #'
 #' @importFrom rlang enquo
-#' @importFrom rlang quo_name
 #' @importFrom rlang :=
-#' @importFrom rlang .data
 #' @examples
 #' df <- data.frame(
 #' text_variable = rbind("check me out", "don't look at me"),

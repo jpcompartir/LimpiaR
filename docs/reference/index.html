@@ -100,7 +100,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/jpcompartir/LimpiaR">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -128,8 +133,8 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
+          <h2 id="section-cleaning-posts" class="hasAnchor"><a href="#section-cleaning-posts" class="anchor"></a>Cleaning Posts</h2>
+          <p class="section-desc"><p>Functions for editing the text variable in place.</p></p>
         </th>
       </tr>
       
@@ -140,34 +145,90 @@
       <tr>
         
         <td>
-          <p><code><a href="code_browser_emojis.html">code_browser_emojis</a></code> </p>
-        </td>
-        <td><p>code_browser_emojis</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="limpiar_accents.html">limpiar_accents()</a></code> </p>
         </td>
         <td><p>Clean accented characters</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="limpiar_df.html">limpiar_df()</a></code> </p>
+          <p><code><a href="limpiar_spaces.html">limpiar_spaces()</a></code> </p>
         </td>
-        <td><p>Call multiple LimpiaR functions together</p></td>
+        <td><p>Clean redundant spaces</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="limpiar_duplicates.html">limpiar_duplicates()</a></code> </p>
+          <p><code><a href="limpiar_url.html">limpiar_url()</a></code> </p>
         </td>
-        <td><p>Clean the text variable for duplicate posts</p></td>
+        <td><p>Clean URLs from the text variable</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="limpiar_repeat_chars.html">limpiar_repeat_chars()</a></code> </p>
+        </td>
+        <td><p>Clean repeated charaaaacters</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="limpiar_shorthands.html">limpiar_shorthands()</a></code> </p>
+        </td>
+        <td><p>Clean shorthands and abbreviations</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="limpiar_tags.html">limpiar_tags()</a></code> </p>
+        </td>
+        <td><p>Clean user handles and hashtags</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="limpiar_emojis.html">limpiar_emojis()</a></code> </p>
         </td>
-        <td><p>Cleean emojis -- replacing with a text description</p></td>
+        <td><p>Replace emojis with a textual description</p></td>
       </tr><tr>
+        
+        <td>
+          <p><code><a href="limpiar_stopwords.html">limpiar_stopwords()</a></code> </p>
+        </td>
+        <td><p>Clean stop words for visualisations</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-removing-posts" class="hasAnchor"><a href="#section-removing-posts" class="anchor"></a>Removing Posts</h2>
+          <p class="section-desc"><p>Functions for removing unwanted posts entirely (rather than cleaning).</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="limpiar_duplicates.html">limpiar_duplicates()</a></code> </p>
+        </td>
+        <td><p>Clean the text variable of duplicate posts</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="limpiar_retweets.html">limpiar_retweets()</a></code> </p>
+        </td>
+        <td><p>Clean retweets from the text variable</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-utility-functions" class="hasAnchor"><a href="#section-utility-functions" class="anchor"></a>Utility Functions</h2>
+          <p class="section-desc"><p>Miscellaneous functions designed to speed up aspects of cleaning text.</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
           <p><code><a href="limpiar_inspect.html">limpiar_inspect()</a></code> </p>
@@ -182,63 +243,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="limpiar_repeat_chars.html">limpiar_repeat_chars()</a></code> </p>
+          <p><code><a href="limpiar_df.html">limpiar_df()</a></code> </p>
         </td>
-        <td><p>Clean repeated charaaaacters</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="limpiar_retweets.html">limpiar_retweets()</a></code> </p>
-        </td>
-        <td><p>Clean retweets from the text variable</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="limpiar_shorthands.html">limpiar_shorthands()</a></code> </p>
-        </td>
-        <td><p>Clean shorthands and abbreviations</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="limpiar_slang.html">limpiar_slang()</a></code> </p>
-        </td>
-        <td><p>Clean slang from multiple dialects</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="limpiar_spaces.html">limpiar_spaces()</a></code> </p>
-        </td>
-        <td><p>Clean redundant spaces</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="limpiar_stopwords.html">limpiar_stopwords()</a></code> </p>
-        </td>
-        <td><p>Clean stopwords for visualisations</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="limpiar_tags.html">limpiar_tags()</a></code> </p>
-        </td>
-        <td><p>Clean user handles and hashtags</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="limpiar_url.html">limpiar_url()</a></code> </p>
-        </td>
-        <td><p>Clean URLs from the text variable</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sentiment_stops.html">sentiment_stops</a></code> </p>
-        </td>
-        <td><p>sentiment_stops</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="topic_stops.html">topic_stops</a></code> </p>
-        </td>
-        <td><p>topic_stops</p></td>
+        <td><p>Call multiple LimpiaR functions together</p></td>
       </tr>
     </tbody>
     </table>

@@ -1,5 +1,5 @@
 Package: LimpiaR
-Title: Allows For Fast Cleaning of Spanish and English Text Data
+Title: LimpiaR
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Jack",

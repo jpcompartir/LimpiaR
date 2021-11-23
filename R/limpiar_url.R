@@ -5,10 +5,12 @@
 #' @param df Data Frame or Tibble Object
 #' @param text_var Name of the text variable/character vector
 #'
-#' @return text variable/character vector with URLs removed
-#'
+#' @return Data Frame or Tibble object with URLs removed from the text variable
 #' @examples
-#' \dontrun{df %>% limpiar_url()}
+#' limpiar_examples %>% dplyr::select(mention_content)
+#'
+#' limpiar_examples %>% limpiar_url() %>% dplyr::select(mention_content)
+#'
 #' @export
 
 limpiar_url <- function(df, text_var = mention_content){

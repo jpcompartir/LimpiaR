@@ -1,16 +1,19 @@
-#' Clean the text variable for duplicate posts
+#' Clean the text variable of duplicate posts
 #'
 #' Removes duplicate posts, and posts which are deleted or protected by APIs
 #' @param data Data Frame or Tibble object
 #' @param text_var Name of the text variable/character vector
 #'
-#' @return text variable/character with duplicates removed
+#' @return The Data Frame or Tibble object with duplicate posts removed from the text variable
 #' @examples
-#' \dontrun{
 #' df <- data.frame(text_variable = cbind(c(
 #' "Deleted or protected mention", "hello", "goodbye", "goodbye")))
 #' limpiar_duplicates(df, text_variable)
-#' }
+#'
+#' limpiar_examples
+#'
+#'
+#' limpiar_examples %>% limpiar_duplicates()
 #'
 #' @export
 limpiar_duplicates <- function(data, text_var = mention_content){

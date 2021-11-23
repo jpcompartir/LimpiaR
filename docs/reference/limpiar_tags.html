@@ -102,7 +102,12 @@ You can choose whether to replace both hashtags &amp;amp; users or either one." 
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/jpcompartir/LimpiaR">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -117,7 +122,7 @@ You can choose whether to replace both hashtags &amp;amp; users or either one." 
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Clean user handles and hashtags</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/jpcompartir/LimpiaR/tree/mainR/limpiar_tags.R'><code>R/limpiar_tags.R</code></a></small>
     <div class="hidden name"><code>limpiar_tags.Rd</code></div>
     </div>
 
@@ -151,15 +156,68 @@ You can choose whether to replace both hashtags &amp; users or either one.</p>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>the df object with the text_var cleaned of user / # tags</p>
+    <p>The Data Frame or Tibble object with user handles and/or hashtags removed from the text variable</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>data</span> <span class='op'>&lt;-</span> <span class='va'>data</span> <span class='op'>%&gt;%</span> <span class='fu'>limpiar_tags</span><span class='op'>(</span>text_var <span class='op'>=</span> <span class='va'>text_var</span>, user <span class='op'>=</span> <span class='cn'>TRUE</span>, hashtag <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-
-<span class='va'>data</span> <span class='op'>&lt;-</span> <span class='va'>data</span> <span class='op'>%&gt;%</span> <span class='fu'>limpiar_tags</span><span class='op'>(</span>text_var <span class='op'>=</span> <span class='va'>text_var</span>, user <span class='op'>=</span> <span class='cn'>FALSE</span>, hashtag <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='op'>}</span>
-
+    <pre class="examples"><div class='input'><span class='va'>limpiar_examples</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 10 × 5</span>
+#&gt;    doc_id author_name       mention_content       mention_url   platform_intera…
+#&gt;     <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                 <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span>           
+#&gt; <span style='color: #BCBCBC;'> 1</span>      1 don_quijote       <span style='color: #949494;'>"</span>mi amigo sancho es … www.twitter.… <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'> 2</span>      2 sancho_panza      <span style='color: #949494;'>"</span>RT mi amigo sancho … www.twitter.… <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'> 3</span>      3 edmond_dantes     <span style='color: #949494;'>"</span>@don_quijote no dig… www.twitter.… <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'> 4</span>      4 el_sordo          <span style='color: #949494;'>"</span>nos han metido en u… www.fakebook… <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'> 5</span>      5 commander_miranda <span style='color: #949494;'>"</span>nos han metido en u… www.fakebook… <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'> 6</span>      6 robert_jordan     <span style='color: #949494;'>"</span>   Lo q no tenemos … www.youtube.… <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'> 7</span>      7 anselmo           <span style='color: #949494;'>"</span>a mi es muy grave q… www.twitter.… <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'> 8</span>      8 maria             <span style='color: #949494;'>"</span>ayyy nooo @robert_j… www.twitter.… <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'> 9</span>      9 pablo             <span style='color: #949494;'>"</span>todos se unen a nue… www.instagra… <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'>10</span>     10 pilar             <span style='color: #949494;'>"</span>a mi me gustaría qu… www.instagra… <span style='color: #BB0000;'>NA</span>              </div><div class='input'>
+<span class='co'>#Both user and hashtags</span>
+<span class='va'>limpiar_examples</span> <span class='op'>%&gt;%</span> <span class='fu'>limpiar_tags</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>mention_content</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 10 × 1</span>
+#&gt;    mention_content                                                    
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                                                              
+#&gt; <span style='color: #BCBCBC;'> 1</span> <span style='color: #949494;'>"</span>mi amigo sancho es un wn de vdd jajaja<span style='color: #949494;'>"</span>                           
+#&gt; <span style='color: #BCBCBC;'> 2</span> <span style='color: #949494;'>"</span>RT mi amigo sancho es un wn de vdd jajaja<span style='color: #949494;'>"</span>                        
+#&gt; <span style='color: #BCBCBC;'> 3</span> <span style='color: #949494;'>"</span>@user no digas eso, tu amigo es muy honorable hashtag hashtag<span style='color: #949494;'>"</span>    
+#&gt; <span style='color: #BCBCBC;'> 4</span> <span style='color: #949494;'>"</span>nos han metido en una muy dificil situación<span style='color: #949494;'>"</span>                      
+#&gt; <span style='color: #BCBCBC;'> 5</span> <span style='color: #949494;'>"</span>nos han metido en una muy dificil situación<span style='color: #949494;'>"</span>                      
+#&gt; <span style='color: #BCBCBC;'> 6</span> <span style='color: #949494;'>"</span>   Lo q no tenemos es tiempo.   Mañana    debemos luchar.   <span style='color: #949494;'>"</span>     
+#&gt; <span style='color: #BCBCBC;'> 7</span> <span style='color: #949494;'>"</span>a mi es muy grave quitarle la vida al otro<span style='color: #949494;'>"</span>                       
+#&gt; <span style='color: #BCBCBC;'> 8</span> <span style='color: #949494;'>"</span>ayyy nooo @user 😢 😢 😢 <span style='color: #949494;'>"</span>                                        
+#&gt; <span style='color: #BCBCBC;'> 9</span> <span style='color: #949494;'>"</span>todos se unen a nuestro grupo hagale un clic https::larebelion.es<span style='color: #949494;'>"</span>
+#&gt; <span style='color: #BCBCBC;'>10</span> <span style='color: #949494;'>"</span>a mi me gustaría quedarme un ratito más<span style='color: #949494;'>"</span>                          </div><div class='input'>
+<span class='co'>#Just user tags</span>
+<span class='va'>limpiar_examples</span> <span class='op'>%&gt;%</span> <span class='fu'>limpiar_tags</span><span class='op'>(</span>hashtag <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>mention_content</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 10 × 1</span>
+#&gt;    mention_content                                                    
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                                                              
+#&gt; <span style='color: #BCBCBC;'> 1</span> <span style='color: #949494;'>"</span>mi amigo sancho es un wn de vdd jajaja<span style='color: #949494;'>"</span>                           
+#&gt; <span style='color: #BCBCBC;'> 2</span> <span style='color: #949494;'>"</span>RT mi amigo sancho es un wn de vdd jajaja<span style='color: #949494;'>"</span>                        
+#&gt; <span style='color: #BCBCBC;'> 3</span> <span style='color: #949494;'>"</span>@user no digas eso, tu amigo es muy honorable #vamos #sancho<span style='color: #949494;'>"</span>     
+#&gt; <span style='color: #BCBCBC;'> 4</span> <span style='color: #949494;'>"</span>nos han metido en una muy dificil situación<span style='color: #949494;'>"</span>                      
+#&gt; <span style='color: #BCBCBC;'> 5</span> <span style='color: #949494;'>"</span>nos han metido en una muy dificil situación<span style='color: #949494;'>"</span>                      
+#&gt; <span style='color: #BCBCBC;'> 6</span> <span style='color: #949494;'>"</span>   Lo q no tenemos es tiempo.   Mañana    debemos luchar.   <span style='color: #949494;'>"</span>     
+#&gt; <span style='color: #BCBCBC;'> 7</span> <span style='color: #949494;'>"</span>a mi es muy grave quitarle la vida al otro<span style='color: #949494;'>"</span>                       
+#&gt; <span style='color: #BCBCBC;'> 8</span> <span style='color: #949494;'>"</span>ayyy nooo @user 😢 😢 😢 <span style='color: #949494;'>"</span>                                        
+#&gt; <span style='color: #BCBCBC;'> 9</span> <span style='color: #949494;'>"</span>todos se unen a nuestro grupo hagale un clic https::larebelion.es<span style='color: #949494;'>"</span>
+#&gt; <span style='color: #BCBCBC;'>10</span> <span style='color: #949494;'>"</span>a mi me gustaría quedarme un ratito más<span style='color: #949494;'>"</span>                          </div><div class='input'>
+<span class='co'>#Just hashtags</span>
+<span class='va'>limpiar_examples</span> <span class='op'>%&gt;%</span> <span class='fu'>limpiar_tags</span><span class='op'>(</span>user <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>mention_content</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 10 × 1</span>
+#&gt;    mention_content                                                       
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                                                                 
+#&gt; <span style='color: #BCBCBC;'> 1</span> <span style='color: #949494;'>"</span>mi amigo sancho es un wn de vdd jajaja<span style='color: #949494;'>"</span>                              
+#&gt; <span style='color: #BCBCBC;'> 2</span> <span style='color: #949494;'>"</span>RT mi amigo sancho es un wn de vdd jajaja<span style='color: #949494;'>"</span>                           
+#&gt; <span style='color: #BCBCBC;'> 3</span> <span style='color: #949494;'>"</span>@don_quijote no digas eso, tu amigo es muy honorable hashtag hashtag<span style='color: #949494;'>"</span>
+#&gt; <span style='color: #BCBCBC;'> 4</span> <span style='color: #949494;'>"</span>nos han metido en una muy dificil situación<span style='color: #949494;'>"</span>                         
+#&gt; <span style='color: #BCBCBC;'> 5</span> <span style='color: #949494;'>"</span>nos han metido en una muy dificil situación<span style='color: #949494;'>"</span>                         
+#&gt; <span style='color: #BCBCBC;'> 6</span> <span style='color: #949494;'>"</span>   Lo q no tenemos es tiempo.   Mañana    debemos luchar.   <span style='color: #949494;'>"</span>        
+#&gt; <span style='color: #BCBCBC;'> 7</span> <span style='color: #949494;'>"</span>a mi es muy grave quitarle la vida al otro<span style='color: #949494;'>"</span>                          
+#&gt; <span style='color: #BCBCBC;'> 8</span> <span style='color: #949494;'>"</span>ayyy nooo @robert_jordan 😢 😢 😢 <span style='color: #949494;'>"</span>                                  
+#&gt; <span style='color: #BCBCBC;'> 9</span> <span style='color: #949494;'>"</span>todos se unen a nuestro grupo hagale un clic https::larebelion.es<span style='color: #949494;'>"</span>   
+#&gt; <span style='color: #BCBCBC;'>10</span> <span style='color: #949494;'>"</span>a mi me gustaría quedarme un ratito más<span style='color: #949494;'>"</span>                             </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

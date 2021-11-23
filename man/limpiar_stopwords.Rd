@@ -2,7 +2,7 @@
 % Please edit documentation in R/limpiar_stopwords.R
 \name{limpiar_stopwords}
 \alias{limpiar_stopwords}
-\title{Clean stopwords for visualisations}
+\title{Clean stop words for visualisations}
 \usage{
 limpiar_stopwords(df, text_var = mention_content, stop_words)
 }
@@ -14,7 +14,7 @@ limpiar_stopwords(df, text_var = mention_content, stop_words)
 \item{stop_words}{"sentiment" or "topics" - sentiment retains negation cues}
 }
 \value{
-the text variable with specified stopw ords removed
+the text variable with stop words from specified list removed
 }
 \description{
 The two lists - sentiment & topics, are very similar, in that most words are in both lists.
@@ -26,6 +26,9 @@ are the go-to lists, but care is always advised when removing stop words.
 stop word list is editable via data("sentiment_stops") or data("topic_stops").
 }
 \examples{
-\dontrun{df \%>\% limpiar_stopwords(stop_words = "sentiment") \%>\%
-limpiar_spaces(text_var = text)}
+limpiar_examples \%>\% dplyr::select(mention_content)
+
+limpiar_examples \%>\% limpiar_stopwords(stop_words = "topics") \%>\%
+dplyr::select(mention_content) \%>\% limpiar_spaces()
+
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/limpiar_duplicates.R
 \name{limpiar_duplicates}
 \alias{limpiar_duplicates}
-\title{Clean the text variable for duplicate posts}
+\title{Clean the text variable of duplicate posts}
 \usage{
 limpiar_duplicates(data, text_var = mention_content)
 }
@@ -12,16 +12,19 @@ limpiar_duplicates(data, text_var = mention_content)
 \item{text_var}{Name of the text variable/character vector}
 }
 \value{
-text variable/character with duplicates removed
+The Data Frame or Tibble object with duplicate posts removed from the text variable
 }
 \description{
 Removes duplicate posts, and posts which are deleted or protected by APIs
 }
 \examples{
-\dontrun{
 df <- data.frame(text_variable = cbind(c(
 "Deleted or protected mention", "hello", "goodbye", "goodbye")))
 limpiar_duplicates(df, text_variable)
-}
+
+limpiar_examples
+
+
+limpiar_examples \%>\% limpiar_duplicates()
 
 }

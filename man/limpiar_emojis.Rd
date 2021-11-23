@@ -2,7 +2,7 @@
 % Please edit documentation in R/limpiar_emojis.R
 \name{limpiar_emojis}
 \alias{limpiar_emojis}
-\title{Cleean emojis -- replacing with a text description}
+\title{Replace emojis with a textual description}
 \usage{
 limpiar_emojis(df, text_var = mention_content, with_emoji_tag = TRUE)
 }
@@ -14,14 +14,14 @@ limpiar_emojis(df, text_var = mention_content, with_emoji_tag = TRUE)
 \item{with_emoji_tag}{Whether to replace with snakecase linked words or not}
 }
 \value{
-Data Frame with most emojis cleaned from the text variable
+The Data Frame or Tibble object with most emojis cleaned from the text variable
 }
 \description{
 Main usage is for pre-processing the text variable as part of Deep Learning pipeline.
 The most important argument is whether or not to add the emoji tag, which will also print in snake case.
 }
 \examples{
-\dontrun{
-df \%>\% limpiar_emojis(text_var, with_emoji_tag = FALSE)
-df \%>\% limpiar_emojis(text_var, with_emoji_tag = TRUE)}
+limpiar_examples \%>\% dplyr::select(mention_content)
+
+limpiar_examples \%>\% limpiar_emojis() \%>\% dplyr::select(mention_content)
 }

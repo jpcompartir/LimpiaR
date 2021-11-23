@@ -18,18 +18,20 @@ limpiar_df(
 
 \item{remove_retweets}{Whether or not to remove retweets, default is to remove}
 
-\item{remove_punctuation}{Whether or not to remove punctuation (and then clean whitespace)}
+\item{remove_punctuation}{Whether or not to remove punctuation, default is not to remove}
 }
 \value{
 The original Data Frame with the text variable cleaned
 }
 \description{
-used on a data frame to remove duplicates, empty rows, and retweets,
-turn the text variable to all lower case (advisable to do any part of speech tagging before using).
-Function also cleans accents, common urls, punctuation if specified and trims excess white spaces.
-Use remove_retweets = FALSE to keep retweets in the text variable.
+Used on a data frame to remove duplicates, empty rows, and retweets.
+Transform the text variable to lower case and remove user handles and hashtags.
+Clean accents, urls, shorthands, repeated characters, and if specified punctuation.
+}
+\details{
+You should only use this function when you are sure you want to execute each of the steps.
 }
 \examples{
-\dontrun{limpiar_df(df, text_var = mention_content)}
+limpiar_df(limpiar_examples, text_var = mention_content, remove_punctuation = TRUE)
 
 }

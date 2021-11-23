@@ -101,7 +101,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/jpcompartir/LimpiaR">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -116,7 +121,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Clean redundant spaces</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/jpcompartir/LimpiaR/tree/mainR/limpiar_spaces.R'><code>R/limpiar_spaces.R</code></a></small>
     <div class="hidden name"><code>limpiar_spaces.Rd</code></div>
     </div>
 
@@ -147,7 +152,35 @@
     <pre class="examples"><div class='input'><span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>text_variable <span class='op'>=</span> <span class='st'>"clean   the   spaces please"</span><span class='op'>)</span>
 <span class='fu'>limpiar_spaces</span><span class='op'>(</span><span class='va'>df</span>, text_var <span class='op'>=</span> <span class='va'>text_variable</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;             text_variable
-#&gt; 1 clean the spaces please</div></pre>
+#&gt; 1 clean the spaces please</div><div class='input'>
+<span class='va'>limpiar_examples</span> <span class='op'>%&gt;%</span> <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>mention_content</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 10 × 1</span>
+#&gt;    mention_content                                                      
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                                                                
+#&gt; <span style='color: #BCBCBC;'> 1</span> <span style='color: #949494;'>"</span>mi amigo sancho es un wn de vdd jajaja<span style='color: #949494;'>"</span>                             
+#&gt; <span style='color: #BCBCBC;'> 2</span> <span style='color: #949494;'>"</span>RT mi amigo sancho es un wn de vdd jajaja<span style='color: #949494;'>"</span>                          
+#&gt; <span style='color: #BCBCBC;'> 3</span> <span style='color: #949494;'>"</span>@don_quijote no digas eso, tu amigo es muy honorable #vamos #sancho<span style='color: #949494;'>"</span>
+#&gt; <span style='color: #BCBCBC;'> 4</span> <span style='color: #949494;'>"</span>nos han metido en una muy dificil situación<span style='color: #949494;'>"</span>                        
+#&gt; <span style='color: #BCBCBC;'> 5</span> <span style='color: #949494;'>"</span>nos han metido en una muy dificil situación<span style='color: #949494;'>"</span>                        
+#&gt; <span style='color: #BCBCBC;'> 6</span> <span style='color: #949494;'>"</span>   Lo q no tenemos es tiempo.   Mañana    debemos luchar.   <span style='color: #949494;'>"</span>       
+#&gt; <span style='color: #BCBCBC;'> 7</span> <span style='color: #949494;'>"</span>a mi es muy grave quitarle la vida al otro<span style='color: #949494;'>"</span>                         
+#&gt; <span style='color: #BCBCBC;'> 8</span> <span style='color: #949494;'>"</span>ayyy nooo @robert_jordan 😢 😢 😢 <span style='color: #949494;'>"</span>                                 
+#&gt; <span style='color: #BCBCBC;'> 9</span> <span style='color: #949494;'>"</span>todos se unen a nuestro grupo hagale un clic https::larebelion.es<span style='color: #949494;'>"</span>  
+#&gt; <span style='color: #BCBCBC;'>10</span> <span style='color: #949494;'>"</span>a mi me gustaría quedarme un ratito más<span style='color: #949494;'>"</span>                            </div><div class='input'>
+<span class='va'>limpiar_examples</span> <span class='op'>%&gt;%</span> <span class='fu'>limpiar_spaces</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>mention_content</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 10 × 1</span>
+#&gt;    mention_content                                                    
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                                                              
+#&gt; <span style='color: #BCBCBC;'> 1</span> mi amigo sancho es un wn de vdd jajaja                             
+#&gt; <span style='color: #BCBCBC;'> 2</span> RT mi amigo sancho es un wn de vdd jajaja                          
+#&gt; <span style='color: #BCBCBC;'> 3</span> @don_quijote no digas eso, tu amigo es muy honorable #vamos #sancho
+#&gt; <span style='color: #BCBCBC;'> 4</span> nos han metido en una muy dificil situación                        
+#&gt; <span style='color: #BCBCBC;'> 5</span> nos han metido en una muy dificil situación                        
+#&gt; <span style='color: #BCBCBC;'> 6</span> Lo q no tenemos es tiempo. Mañana debemos luchar.                  
+#&gt; <span style='color: #BCBCBC;'> 7</span> a mi es muy grave quitarle la vida al otro                         
+#&gt; <span style='color: #BCBCBC;'> 8</span> ayyy nooo @robert_jordan 😢 😢 😢                                  
+#&gt; <span style='color: #BCBCBC;'> 9</span> todos se unen a nuestro grupo hagale un clic https::larebelion.es  
+#&gt; <span style='color: #BCBCBC;'>10</span> a mi me gustaría quedarme un ratito más                            </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

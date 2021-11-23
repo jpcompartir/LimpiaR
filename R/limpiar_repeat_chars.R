@@ -6,11 +6,13 @@
 #' @param df Name of the Data Frame or Tibble object
 #' @param text_var Name of the text variable/character vector. Default is mention_content
 #'
-#' @return Data Frame or Tibble object with most repeat vowels & laughing patterns normalised
+#' @return Data Frame or Tibble object with most repeat vowels & laughing patterns removed from the text variable
 #' @export
 #'
 #' @examples
-#' \dontrun{df %>% limpiar_repeat_chars(text_var = text)}
+#' limpiar_examples %>% dplyr::select(mention_content)
+#'
+#' limpiar_examples %>% limpiar_repeat_chars() %>% dplyr::select(mention_content)
 #'
 #'
 limpiar_repeat_chars <- function(df, text_var = mention_content){

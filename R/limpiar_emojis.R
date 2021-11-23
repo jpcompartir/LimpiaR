@@ -1,4 +1,4 @@
-#' Cleean emojis -- replacing with a text description
+#' Replace emojis with a textual description
 #'
 #' Main usage is for pre-processing the text variable as part of Deep Learning pipeline.
 #' The most important argument is whether or not to add the emoji tag, which will also print in snake case.
@@ -7,12 +7,12 @@
 #' @param text_var Name of text variable
 #' @param with_emoji_tag Whether to replace with snakecase linked words or not
 #'
-#' @return Data Frame with most emojis cleaned from the text variable
+#' @return The Data Frame or Tibble object with most emojis cleaned from the text variable
 #'
 #' @examples
-#' \dontrun{
-#' df %>% limpiar_emojis(text_var, with_emoji_tag = FALSE)
-#' df %>% limpiar_emojis(text_var, with_emoji_tag = TRUE)}
+#' limpiar_examples %>% dplyr::select(mention_content)
+#'
+#' limpiar_examples %>% limpiar_emojis() %>% dplyr::select(mention_content)
 #' @export
 limpiar_emojis <- function(df, text_var = mention_content, with_emoji_tag = TRUE){
 
