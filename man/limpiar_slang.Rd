@@ -2,7 +2,7 @@
 % Please edit documentation in R/limpiar_slang.R
 \name{limpiar_slang}
 \alias{limpiar_slang}
-\title{Clean slang from multiple dialects}
+\title{Clean slang from multiple Spanish dialects}
 \usage{
 limpiar_slang(df, text_var = mention_content)
 }

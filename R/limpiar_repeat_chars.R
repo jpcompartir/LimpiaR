@@ -21,8 +21,12 @@ limpiar_repeat_chars <- function(df, text_var = mention_content){
   #Replaces messy laughing strings with "jaja"
   laughing_replacement <- "jaja"
 
-  #Creates a capture group for any vowel seen 2 or more times
-  repeat_vowels_regex <-  "([a|e|i|o|u|y])\\1{1,}"
+  #Creates a capture group for any vowel seen 2 or more times.
+  #This part needs some work. holaaaaa will become hola, but holaa will not become hola.
+  #If we want holaa to become hola, then we have to deal with annoying outcomes like:
+  #leer' > 'ler', google > gogle
+  #for now the best trade-off seems to be like this, but we may need to re-work.
+  repeat_vowels_regex <-  "([a|e|i|o|u|y])\\1{2,}"
 
   #replaces two or more of the same vowel with one of that same vowel
   repeat_vowels_replacement <- "\\1"
