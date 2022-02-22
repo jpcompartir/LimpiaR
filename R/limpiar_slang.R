@@ -2,6 +2,9 @@
 #'
 #' Replaces slang phrases from various Spanish dialects with everyday terms.
 #' Function's primary use is to normalise text for Deep Learning sentiment algorithm.
+#' Care should be taken when using this function, e.g. panda -> grupo, as that is by far the most common usage in the texts we use.
+#' However, in a data set where many people talk about panda bears or 'oso panda', there will be unwanted changes.
+#' I have tried to avoid this problem where possible, by including things like 'me la suda' instead of changing 'suda'.
 #'
 #' @param df Name of Data Frame or Tibble object
 #' @param text_var Name of text variable/character vector
@@ -30,7 +33,7 @@ limpiar_slang <- function(df, text_var = mention_content){
              "que pedo", "una chela", "de poca madre", "que poca madre", "me vale madre", "vale madres", "que chimba",
              "\\bbobo\\b", "mala mia", "guacala|guacatela", "cheto", "chevere", "paila\\b", "piola", "crack", "boludo",
              "quilombo", "medio pelo", "jallalla", "\\bopa\\b", "cojudo", "\\byema\\b", "camote", "pintudo",
-            "huaso", "jailon", "pucha", "yesca", "no manches"
+            "huaso", "jailon", "pucha", "yesca", "no manches", "panda"
              )
 
   corrections <- c("nino", "me gusta", "mucho", "casa", "instituto", "estupendo", "por partes iguales",
@@ -46,7 +49,7 @@ limpiar_slang <- function(df, text_var = mention_content){
                    "que pasa", "una cerveza", "muy buena", "que pena", "no me importa", "sin valor", "que bien",
                    "tonto", "perdon", "asco", "persona de buen estatus economico", "bien", "desasgtro", "inteligente",
                    "campeon", "retrasado", "desastre", "mediocre", "hola", "idiota", "tonto", "borracho", "enamorado", "genial",
-                   "maleducado", "inutil", "maldita sea", "arruinado", "no molestes"
+                   "maleducado", "inutil", "maldita sea", "arruinado", "no molestes", "grupo"
                    )
 
   slang_hash <- hash::hash(keys = slang, values = corrections)
