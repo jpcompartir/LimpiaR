@@ -4,7 +4,7 @@
 \alias{limpiar_emojis}
 \title{Replace emojis with a textual description}
 \usage{
-limpiar_emojis(df, text_var = mention_content, with_emoji_tag = TRUE)
+limpiar_emojis(df, text_var = mention_content, with_emoji_tag = FALSE)
 }
 \arguments{
 \item{df}{Name of Data Frame or Tibble Object}

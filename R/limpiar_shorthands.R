@@ -27,7 +27,8 @@ limpiar_shorthands <- function(df, text_var = mention_content, spaces_as_undersc
                   "\\bgrax\\b", "\\bwn\\b", "\\basdc\\b", "\\b100pre\\b", "\\b(k|q) aces\\b", "\\bsbs\\b",
                   "\\bvns\\b", "\\baora\\b", "\\bbn\\b", "\\bnx\\b","\\bcdo\\b", "\\bdim\\b",
                   "\\bdcr\\b", "\\bkntm\\b", "\\bnph\\b", "\\bre100\\b", "\\btvo\\b", "\\bweno\\b", "\\bbb\\b", "\\bntonces","\\Bporfavor",
-                  "\\beske\\b", "\\btb\\b", "\\bijo\\b", "\\bm\\b", "\\bbno\\bn", "\\btol\\b", "\\bntr\\b", "\\bx\\b")
+                  "\\beske\\b", "\\btb\\b", "\\bijo\\b", "\\bm\\b", "\\bbno\\bn", "\\btol\\b", "\\bntr\\b", "\\bx\\b", "\\bdsd\\b", "\\bbno\\b",
+                  "\\bde vd\\b", "\\bkedarse\\b", "\\bkedar\\b", "\\bkeda\\b", "\\bdps\\b", "\\btmb\\b", "\\bmnn\\b")
 
   shorthand_corrections <- c("porque", "te_quiero_mucho", "te_quiero", "porque", "porque", "que", "que",
                              "porque", "porque", "por_favor", "para_que", "mucho", "besitos",
@@ -37,7 +38,8 @@ limpiar_shorthands <- function(df, text_var = mention_content, spaces_as_undersc
                              "saludos", "chinga_tu_madre", "gracias", "wuevon", "a_salir_de_casa", "siempre",
                              "que haces", "sabes", "vienes", "ahora", "bien", "buenas noches", "cuando", "dime",
                              "decir", "cuentame", "no_puedo_hablar", "recien", "te_veo", "bueno", "bebe", "entonces",
-                             "porfavor", "es que", "tambien", "hijo", "me", "bueno", "todo el", "nosotros", "por")
+                             "porfavor", "es que", "tambien", "hijo", "me", "bueno", "todo el", "nosotros", "por", "desde", "bueno",
+                             "de verdad", "quedarse", "quedar", "queda", "despues", "tambien", "manana")
   if(spaces_as_underscores){
     shorhand_corrections <- shorthand_corrections
   }else{

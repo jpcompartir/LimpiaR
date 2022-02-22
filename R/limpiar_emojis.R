@@ -14,7 +14,7 @@
 #'
 #' limpiar_examples %>% limpiar_emojis() %>% dplyr::select(mention_content)
 #' @export
-limpiar_emojis <- function(df, text_var = mention_content, with_emoji_tag = TRUE){
+limpiar_emojis <- function(df, text_var = mention_content, with_emoji_tag = FALSE){
 
 
   data("code_browser_emojis", envir = environment())
@@ -33,7 +33,7 @@ limpiar_emojis <- function(df, text_var = mention_content, with_emoji_tag = TRUE
     dplyr::mutate(df,
                   {{ text_var }} := stringr::str_replace_all({{ text_var }},
                                                              hash::values(my_hash),
-                                                             hash::keys(my_hash)),
+                                                             paste0(" ",hash::keys(my_hash))),
                   {{ text_var }} := stringr::str_replace_all({{ text_var }}, "emoji", "emoji "))
 
     #This is for situations in which we don't want the snake case or the emoji tag (such as when making a bigram network, topics etc.)
@@ -52,10 +52,11 @@ limpiar_emojis <- function(df, text_var = mention_content, with_emoji_tag = TRUE
     dplyr::mutate(df,
                   {{ text_var }} := stringr::str_replace_all({{ text_var }},
                                                              hash::values(my_hash),
-                                                             hash::keys(my_hash)))
+                                                             paste0(" ",hash::keys(my_hash))))
 
   }
 
 
 }
+
 
