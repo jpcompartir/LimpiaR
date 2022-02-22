@@ -27,14 +27,16 @@ limpiar_emojis <- function(df, text_var = mention_content, with_emoji_tag = FALS
     values <- code_browser_emojis %>%
       dplyr::filter(!stringr::str_detect(cldr_short_name, "keycap: \\*"))%>%
       dplyr::pull(description)
+    values <- paste(" ", values)
 
     my_hash <- hash::hash(keys = keys, values = values)
 
     dplyr::mutate(df,
                   {{ text_var }} := stringr::str_replace_all({{ text_var }},
                                                              hash::values(my_hash),
-                                                             paste0(" ",hash::keys(my_hash))),
-                  {{ text_var }} := stringr::str_replace_all({{ text_var }}, "emoji", "emoji "))
+                                                             hash::keys(my_hash)),
+                  {{ text_var }} := stringr::str_replace_all({{ text_var }}, "emoji", "emoji "))%>%
+      limpiar_spaces(text_var = {{text_var}})
 
     #This is for situations in which we don't want the snake case or the emoji tag (such as when making a bigram network, topics etc.)
     #But I would generally advise just not using limpiar_emojis in such cases.
@@ -47,12 +49,16 @@ limpiar_emojis <- function(df, text_var = mention_content, with_emoji_tag = FALS
       dplyr::filter(!stringr::str_detect(cldr_short_name, "keycap: \\*"))%>%
       dplyr::mutate(cldr_short_name = paste0(cldr_short_name, " "))%>%
       dplyr::pull(cldr_short_name)
+
+    values <- paste(" ", values)
     my_hash <- hash::hash(keys = keys, values = values)
 
     dplyr::mutate(df,
                   {{ text_var }} := stringr::str_replace_all({{ text_var }},
                                                              hash::values(my_hash),
-                                                             paste0(" ",hash::keys(my_hash))))
+                                                            hash::keys(my_hash)))%>%
+      limpiar_spaces(text_var = {{text_var}})
+
 
   }
 
