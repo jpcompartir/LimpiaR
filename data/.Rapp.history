@@ -1,0 +1,3 @@
+load("/Users/jackpenzer/Documents_local/LimpiaR/data/code_browser_emojis.rda")
+df <- load("/Users/jackpenzer/Documents_local/LimpiaR/data/code_browser_emojis.rda")
+df

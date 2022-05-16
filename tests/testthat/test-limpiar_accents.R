@@ -1,8 +1,8 @@
 test_that("Test that accents are removed", {
   dirty_vec <- c('róllover','ùltimatüm', 'ársénal','fíring hose', 'fún',
-                 'reèd ', 'ñino')
+                 'reèd ', 'niño')
   cleaned_vec <- c("rollover","ultimatum","arsenal",
-               "firing hose","fun","reed ","nino")
+               "firing hose","fun","reed ","ninyo")
   df <- tibble::as_tibble(data.frame(mention_content = unlist(dirty_vec)))
   df_two <- tibble::as_tibble(data.frame(mention_content = unlist(cleaned_vec)))
 

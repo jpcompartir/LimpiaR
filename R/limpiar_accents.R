@@ -18,7 +18,7 @@ limpiar_accents <- function(df, text_var = mention_content){
 
   keys <- c('\u00E9', '\u00F3','\u00E1', '\u00ED', '\u00FC', '\u00F9',
             '\u00F1', '\u00E8', '\u00FA')
-  values <- c('e', 'o', 'a', 'i', 'u', 'u', 'n', 'e', 'u')
+  values <- c('e', 'o', 'a', 'i', 'u', 'u', 'ny', 'e', 'u')
 
   my_hash <- hash::hash(keys = keys, values = values)
 
