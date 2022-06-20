@@ -29,7 +29,7 @@ limpiar_shorthands <- function(df, text_var = mention_content, spaces_as_undersc
                   "\\bdcr\\b", "\\bkntm\\b", "\\bnph\\b", "\\bre100\\b", "\\btvo\\b", "\\bweno\\b", "\\bbb\\b", "\\bntonces","\\Bporfavor",
                   "\\beske\\b", "\\btb\\b", "\\bijo\\b", "\\bm\\b", "\\bbno\\bn", "\\btol\\b", "\\bntr\\b", "\\bx\\b", "\\bdsd\\b", "\\bbno\\b",
                   "\\bde vd\\b", "\\bkedarse\\b", "\\bkedar\\b", "\\bkeda\\b", "\\bdps\\b", "\\btmb\\b", "\\bmnn\\b", "dmierda", "\\besq\\b", "\\bvd\\b",
-                  "\\buds\\b",  "\\btkm\\b")
+                  "\\buds\\b",  "\\btkm\\b", "\\bchtm\\b")
 
   shorthand_corrections <- c("porque", "te_quiero_mucho", "te_quiero", "porque", "porque", "que", "que",
                              "porque", "porque", "por_favor", "para_que", "mucho", "besitos",
@@ -41,7 +41,7 @@ limpiar_shorthands <- function(df, text_var = mention_content, spaces_as_undersc
                              "decir", "cuentame", "no_puedo_hablar", "recien", "te_veo", "bueno", "bebe", "entonces",
                              "porfavor", "es que", "tambien", "hijo", "me", "bueno", "todo el", "nosotros", "por", "desde", "bueno",
                              "de verdad", "quedarse", "quedar", "queda", "despues", "tambien", "manyana", "demierda", "es que", "verdad",
-                             "ustedes", "te quiero mucho")
+                             "ustedes", "te quiero mucho", "chinga tu madre")
   if(spaces_as_underscores){
     shorhand_corrections <- shorthand_corrections
   }else{
