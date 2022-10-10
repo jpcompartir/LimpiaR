@@ -20,12 +20,8 @@ Imports:
     stringr,
     tibble,
     tm,
-    utils,
     magrittr,
-    tidyr,
-    usethis,
     janitor,
-    tidytext,
     hash
 Suggests: 
     rmarkdown,
