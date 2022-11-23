@@ -17,6 +17,10 @@
 limpiar_pp_products <- function(df, text_var){
   entities <- LimpiaR::entities
 
+  entities <- entities %>%
+    dplyr::filter(!token %in% c("\\bmicrosoft\\b","\\b|apple\\b", "\\bsamsung\\b", "\\bwhatsapp\\b", "\\bintel\\b", "\\bamazon\\b",
+                                "\\bsony\\b", "\\binstagram\\b"))
+
   strings <- entities$token
   strings <- paste0(strings, collapse = "|")
   replacement <- "product"
