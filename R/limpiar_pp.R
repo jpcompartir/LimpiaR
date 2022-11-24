@@ -20,7 +20,8 @@ limpiar_pp_products <- function(df, text_var){
   entities <- entities %>%
     dplyr::filter(!token %in% c("\\bmicrosoft\\b","\\bapple\\b", "\\bsamsung\\b", "\\bwhatsapp\\b", "\\bintel\\b", "\\bamazon\\b", "\\bsony\\b", "\\binstagram\\b"))
 
-  extras <- c("\\bsurface pro 8\\b", "\\bwin 11\\b", "\\bwin11\\b", "\\bsurface pro\\b")
+  extras <- c("\\bsurface pro 8\\b", "\\bwin 11\\b", "\\bwin11\\b", "\\bsurface pro\\b", "\\bonenote\\b", "\\bevernote\\b",
+               "\\blinux\\b", "\\bsurface book\\b","\\bwin 10\\b", "\\bwin10\\b",  "\\bsurface x pro\\b","\\bsurface x\\b", "\\bdropbox\\b", "\\baskjeeves\\b", "\\bonenote\\b", "\\bevernote\\b", "\\bsurface laptop\\b", "\\bsurface dock\\b","\\bmicrosoft surface pro\\b" ,"\\bmicrosoft surface\\b")
 
   strings <- entities$token
   strings <- c(strings, extras)
@@ -58,3 +59,4 @@ limpiar_pp_companies <- function(df, text_var){
   df %>%
     dplyr::mutate({{text_var}} := stringr::str_replace_all({{text_var}}, companies, replacement))
 }
+
