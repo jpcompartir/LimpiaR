@@ -19,9 +19,9 @@ limpiar_spam_grams <- function(data, text_var, n_gram = 8, top_n = 1000, min_fre
   #Tidy evaluate supplied text variable (symbol as column in data)
   text_sym <- rlang::ensym(text_var)
 
-  grams <- df  %>%
+  grams <- data  %>%
     dplyr::mutate(document = dplyr::row_number()) %>%
-    dplyr::select(document,{{text_var}}) %>%
+    dplyr::select(document, {{text_var}}) %>%
     tidytext::unnest_tokens(ngrams, !!text_sym, token = "ngrams", format = "text", n = 6) %>%
     dplyr::add_count(ngrams, name = "n_ngram")
 
