@@ -3,9 +3,5 @@ pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   limpiar_intro: limpiar_intro.html
-<<<<<<< HEAD
-last_built: 2022-12-01T11:56Z
-=======
-last_built: 2022-12-01T12:00Z
->>>>>>> 62c2460 (rebuilding github pages.)
+last_built: 2022-12-01T12:15Z
 

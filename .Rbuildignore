@@ -6,3 +6,4 @@
 ^docs$
 ^pkgdown$
 ^.nojekyll$
+^limpiar_release
