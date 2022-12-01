@@ -89,73 +89,85 @@
 <h2 id="loading-everything-into-r">Loading Everything Into R<a class="anchor" aria-label="anchor" href="#loading-everything-into-r"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://stringr.tidyverse.org" class="external-link">stringr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">LimpiaR</span><span class="op">)</span>
-
-<span class="co">#library(tidyverse)</span></code></pre></div>
-<p>Productivity tip for those of you who are just setting out on your programming/R journey: all of LimpiaR’s functions begin with limpiar_. Once the library has been loaded, typing limpiar_ in an Rstudio script or Rmarkdown code block, will produce a drop down menu of all LimpiaR functions, so you don’t need to remember the names of all of them.</p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://stringr.tidyverse.org" class="external-link">stringr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">LimpiaR</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#library(tidyverse)</span></span></code></pre></div>
+<p>Productivity tip for those of you who are just setting out on your
+programming/R journey: all of LimpiaR’s functions begin with limpiar_.
+Once the library has been loaded, typing limpiar_ in an Rstudio script
+or Rmarkdown code block, will produce a drop down menu of all LimpiaR
+functions, so you don’t need to remember the names of all of them.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">data</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 2</span></span>
-<span class="co">#&gt;    Mention.Content                                                   Mention.Url</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">"</span>holaaaaaa! cóómo    estás @magdalena   ?!<span style="color: #949494;">"</span>                       www.twitte…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> <span style="color: #949494;">"</span>  han visto este articulo!? Que horror! https://guardian.com/em… www.twitte…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> <span style="color: #949494;">"</span>ayyyyyy a mi me   gustaria ir a londres yaaa #llevame #porfavor<span style="color: #949494;">"</span> www.facebo…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> <span style="color: #949494;">"</span>jajajajaja eres un wn!<span style="color: #949494;">"</span>                                          www.facebo…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> <span style="color: #949494;">"</span>RT dale un click a ver una mujer baila con su perro<span style="color: #949494;">"</span>             www.twitte…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> <span style="color: #949494;">"</span>yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣 <span style="color: #949494;">"</span>                    www.instag…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">data</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 2</span></span></span>
+<span><span class="co">#&gt;    Mention.Content                                                   Mention.Url</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">"</span>holaaaaaa! cóómo    estás @magdalena   ?!<span style="color: #949494;">"</span>                       www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> <span style="color: #949494;">"</span>  han visto este articulo!? Que horror! https://guardian.com/em… www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> <span style="color: #949494;">"</span>ayyyyyy a mi me   gustaria ir a londres yaaa #llevame #porfavor<span style="color: #949494;">"</span> www.facebo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> <span style="color: #949494;">"</span>jajajajaja eres un wn!<span style="color: #949494;">"</span>                                          www.facebo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> <span style="color: #949494;">"</span>RT dale un click a ver una mujer baila con su perro<span style="color: #949494;">"</span>             www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> <span style="color: #949494;">"</span>yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣 <span style="color: #949494;">"</span>                    www.instag…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="column-names">Column Names<a class="anchor" aria-label="anchor" href="#column-names"></a>
 </h3>
-<p>We created a data frame of posts and URLs. After loading libraries and data, the first part of any workflow should be to clean the column names, this makes using tab completion, and accessing column names much faster (which in the long run = big productivity gains). For this, we’ll use the janitor package. You can uncomment the code to install janitor if it is not already installed on your machine.</p>
+<p>We created a data frame of posts and URLs. After loading libraries
+and data, the first part of any workflow should be to clean the column
+names, this makes using tab completion, and accessing column names much
+faster (which in the long run = big productivity gains). For this, we’ll
+use the janitor package. You can uncomment the code to install janitor
+if it is not already installed on your machine.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># ifelse(!"janitor" %in% installed.packages(),</span>
-<span class="co">#    install.packages("janitor"), library(janitor))</span>
-
-<span class="op">(</span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
-   <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/janitor/man/clean_names.html" class="external-link">clean_names</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 2</span></span>
-<span class="co">#&gt;    mention_content                                                   mention_url</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">"</span>holaaaaaa! cóómo    estás @magdalena   ?!<span style="color: #949494;">"</span>                       www.twitte…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> <span style="color: #949494;">"</span>  han visto este articulo!? Que horror! https://guardian.com/em… www.twitte…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> <span style="color: #949494;">"</span>ayyyyyy a mi me   gustaria ir a londres yaaa #llevame #porfavor<span style="color: #949494;">"</span> www.facebo…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> <span style="color: #949494;">"</span>jajajajaja eres un wn!<span style="color: #949494;">"</span>                                          www.facebo…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> <span style="color: #949494;">"</span>RT dale un click a ver una mujer baila con su perro<span style="color: #949494;">"</span>             www.twitte…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> <span style="color: #949494;">"</span>yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣 <span style="color: #949494;">"</span>                    www.instag…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># ifelse(!"janitor" %in% installed.packages(),</span></span>
+<span><span class="co">#    install.packages("janitor"), library(janitor))</span></span>
+<span></span>
+<span><span class="op">(</span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>   <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/janitor/man/clean_names.html" class="external-link">clean_names</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 2</span></span></span>
+<span><span class="co">#&gt;    mention_content                                                   mention_url</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">"</span>holaaaaaa! cóómo    estás @magdalena   ?!<span style="color: #949494;">"</span>                       www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> <span style="color: #949494;">"</span>  han visto este articulo!? Que horror! https://guardian.com/em… www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> <span style="color: #949494;">"</span>ayyyyyy a mi me   gustaria ir a londres yaaa #llevame #porfavor<span style="color: #949494;">"</span> www.facebo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> <span style="color: #949494;">"</span>jajajajaja eres un wn!<span style="color: #949494;">"</span>                                          www.facebo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> <span style="color: #949494;">"</span>RT dale un click a ver una mujer baila con su perro<span style="color: #949494;">"</span>             www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> <span style="color: #949494;">"</span>yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣 <span style="color: #949494;">"</span>                    www.instag…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
 <h2 id="lower-case-text-variable">Lower Case Text Variable<a class="anchor" aria-label="anchor" href="#lower-case-text-variable"></a>
 </h2>
-<p>For most workflows, the next step will be to make the text variable lower case. We do this to make tokens like ‘AMAZING’ or ‘Amazing’ -&gt; ‘amazing’. You do not need a LimpiaR function for this, as the base R function tolower() works just fine.</p>
+<p>For most workflows, the next step will be to make the text variable
+lower case. We do this to make tokens like ‘AMAZING’ or ‘Amazing’ -&gt;
+‘amazing’. You do not need a LimpiaR function for this, as the base R
+function tolower() works just fine.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="op">(</span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>mention_content <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/chartr.html" class="external-link">tolower</a></span><span class="op">(</span><span class="va">mention_content</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 2</span></span>
-<span class="co">#&gt;    mention_content                                                   mention_url</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">"</span>holaaaaaa! cóómo    estás @magdalena   ?!<span style="color: #949494;">"</span>                       www.twitte…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> <span style="color: #949494;">"</span>  han visto este articulo!? que horror! https://guardian.com/em… www.twitte…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> <span style="color: #949494;">"</span>ayyyyyy a mi me   gustaria ir a londres yaaa #llevame #porfavor<span style="color: #949494;">"</span> www.facebo…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> <span style="color: #949494;">"</span>jajajajaja eres un wn!<span style="color: #949494;">"</span>                                          www.facebo…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> <span style="color: #949494;">"</span>rt dale un click a ver una mujer baila con su perro<span style="color: #949494;">"</span>             www.twitte…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> <span style="color: #949494;">"</span>yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣 <span style="color: #949494;">"</span>                    www.instag…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></code></pre></div>
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>mention_content <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/chartr.html" class="external-link">tolower</a></span><span class="op">(</span><span class="va">mention_content</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 2</span></span></span>
+<span><span class="co">#&gt;    mention_content                                                   mention_url</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">"</span>holaaaaaa! cóómo    estás @magdalena   ?!<span style="color: #949494;">"</span>                       www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> <span style="color: #949494;">"</span>  han visto este articulo!? que horror! https://guardian.com/em… www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> <span style="color: #949494;">"</span>ayyyyyy a mi me   gustaria ir a londres yaaa #llevame #porfavor<span style="color: #949494;">"</span> www.facebo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> <span style="color: #949494;">"</span>jajajajaja eres un wn!<span style="color: #949494;">"</span>                                          www.facebo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> <span style="color: #949494;">"</span>rt dale un click a ver una mujer baila con su perro<span style="color: #949494;">"</span>             www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> <span style="color: #949494;">"</span>yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣 <span style="color: #949494;">"</span>                    www.instag…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="limpiar-functions">Limpiar Functions<a class="anchor" aria-label="anchor" href="#limpiar-functions"></a>
@@ -164,146 +176,162 @@
 <div class="section level2">
 <h2 id="limpiar_accents">limpiar_accents<a class="anchor" aria-label="anchor" href="#limpiar_accents"></a>
 </h2>
-<p>Now we’re going to look at LimpiaR’s functions individually. The first function is limpiar_accents, this will replace the accents most common in Spanish words from the text variable, with their Latin-alphabet equivalents e.g. ‘é -&gt; e’ . We will use the assignment operator to make sure these changes are saved.</p>
-<p>Tip: you can type ?limpiar_accents to access the documentation, and see which arguments you need to fill in.</p>
+<p>Now we’re going to look at LimpiaR’s functions individually. The
+first function is limpiar_accents, this will replace the accents most
+common in Spanish words from the text variable, with their
+Latin-alphabet equivalents e.g. ‘é -&gt; e’ . We will use the assignment
+operator to make sure these changes are saved.</p>
+<p>Tip: you can type ?limpiar_accents to access the documentation, and
+see which arguments you need to fill in.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="op">(</span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/limpiar_accents.html">limpiar_accents</a></span><span class="op">(</span>text_var <span class="op">=</span> <span class="va">mention_content</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 2</span></span>
-<span class="co">#&gt;    mention_content                                                   mention_url</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">"</span>holaaaaaa! coomo    estas @magdalena   ?!<span style="color: #949494;">"</span>                       www.twitte…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> <span style="color: #949494;">"</span>  han visto este articulo!? que horror! https://guardian.com/em… www.twitte…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> <span style="color: #949494;">"</span>ayyyyyy a mi me   gustaria ir a londres yaaa #llevame #porfavor<span style="color: #949494;">"</span> www.facebo…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> <span style="color: #949494;">"</span>jajajajaja eres un wn!<span style="color: #949494;">"</span>                                          www.facebo…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> <span style="color: #949494;">"</span>rt dale un click a ver una mujer baila con su perro<span style="color: #949494;">"</span>             www.twitte…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> <span style="color: #949494;">"</span>yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣 <span style="color: #949494;">"</span>                    www.instag…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></code></pre></div>
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/limpiar_accents.html">limpiar_accents</a></span><span class="op">(</span>text_var <span class="op">=</span> <span class="va">mention_content</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 2</span></span></span>
+<span><span class="co">#&gt;    mention_content                                                   mention_url</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">"</span>holaaaaaa! coomo    estas @magdalena   ?!<span style="color: #949494;">"</span>                       www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> <span style="color: #949494;">"</span>  han visto este articulo!? que horror! https://guardian.com/em… www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> <span style="color: #949494;">"</span>ayyyyyy a mi me   gustaria ir a londres yaaa #llevame #porfavor<span style="color: #949494;">"</span> www.facebo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> <span style="color: #949494;">"</span>jajajajaja eres un wn!<span style="color: #949494;">"</span>                                          www.facebo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> <span style="color: #949494;">"</span>rt dale un click a ver una mujer baila con su perro<span style="color: #949494;">"</span>             www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> <span style="color: #949494;">"</span>yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣 <span style="color: #949494;">"</span>                    www.instag…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="limpiar_duplicates">limpiar_duplicates<a class="anchor" aria-label="anchor" href="#limpiar_duplicates"></a>
 </h3>
-<p>Now we’ll remove duplicate posts, notice that we don’t actually need to type text_var = mention_content, because the default argument for text_var is already mention_content.</p>
+<p>Now we’ll remove duplicate posts, notice that we don’t actually need
+to type text_var = mention_content, because the default argument for
+text_var is already mention_content.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="op">(</span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/limpiar_duplicates.html">limpiar_duplicates</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 7 × 2</span></span>
-<span class="co">#&gt;   mention_content                                                    mention_url</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> <span style="color: #949494;">"</span>holaaaaaa! coomo    estas @magdalena   ?!<span style="color: #949494;">"</span>                        www.twitte…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> <span style="color: #949494;">"</span>  han visto este articulo!? que horror! https://guardian.com/emo… www.twitte…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> <span style="color: #949494;">"</span>ayyyyyy a mi me   gustaria ir a londres yaaa #llevame #porfavor<span style="color: #949494;">"</span>  www.facebo…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> <span style="color: #949494;">"</span>jajajajaja eres un wn!<span style="color: #949494;">"</span>                                           www.facebo…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> <span style="color: #949494;">"</span>rt dale un click a ver una mujer baila con su perro<span style="color: #949494;">"</span>              www.twitte…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                  www.youtub…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">7</span> <span style="color: #949494;">"</span>yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣 <span style="color: #949494;">"</span>                     www.instag…</span></code></pre></div>
-<p>Note: If the text column in our data frame were called ‘text’ we would have to specify text_var = text, or call:</p>
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/limpiar_duplicates.html">limpiar_duplicates</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7 × 2</span></span></span>
+<span><span class="co">#&gt;   mention_content                                                    mention_url</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> <span style="color: #949494;">"</span>holaaaaaa! coomo    estas @magdalena   ?!<span style="color: #949494;">"</span>                        www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> <span style="color: #949494;">"</span>  han visto este articulo!? que horror! https://guardian.com/emo… www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> <span style="color: #949494;">"</span>ayyyyyy a mi me   gustaria ir a londres yaaa #llevame #porfavor<span style="color: #949494;">"</span>  www.facebo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> <span style="color: #949494;">"</span>jajajajaja eres un wn!<span style="color: #949494;">"</span>                                           www.facebo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> <span style="color: #949494;">"</span>rt dale un click a ver una mujer baila con su perro<span style="color: #949494;">"</span>              www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                  www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> <span style="color: #949494;">"</span>yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣 <span style="color: #949494;">"</span>                     www.instag…</span></span></code></pre></div>
+<p>Note: If the text column in our data frame were called ‘text’ we
+would have to specify text_var = text, or call:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>mention_content <span class="op">=</span> <span class="va">text</span><span class="op">)</span> </code></pre></div>
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>mention_content <span class="op">=</span> <span class="va">text</span><span class="op">)</span> </span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="limpiar_retweets">limpiar_retweets<a class="anchor" aria-label="anchor" href="#limpiar_retweets"></a>
 </h3>
-<p>If you need to remove retweets, for example to create a bigram network, limpiar has a function just for that.</p>
+<p>If you need to remove retweets, for example to create a bigram
+network, limpiar has a function just for that.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="op">(</span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
-   <span class="fu"><a href="../reference/limpiar_retweets.html">limpiar_retweets</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span>
-<span class="co">#&gt;   mention_content                                                    mention_url</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> <span style="color: #949494;">"</span>holaaaaaa! coomo    estas @magdalena   ?!<span style="color: #949494;">"</span>                        www.twitte…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> <span style="color: #949494;">"</span>  han visto este articulo!? que horror! https://guardian.com/emo… www.twitte…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> <span style="color: #949494;">"</span>ayyyyyy a mi me   gustaria ir a londres yaaa #llevame #porfavor<span style="color: #949494;">"</span>  www.facebo…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> <span style="color: #949494;">"</span>jajajajaja eres un wn!<span style="color: #949494;">"</span>                                           www.facebo…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                  www.youtub…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> <span style="color: #949494;">"</span>yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣 <span style="color: #949494;">"</span>                     www.instag…</span></code></pre></div>
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>   <span class="fu"><a href="../reference/limpiar_retweets.html">limpiar_retweets</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span></span>
+<span><span class="co">#&gt;   mention_content                                                    mention_url</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> <span style="color: #949494;">"</span>holaaaaaa! coomo    estas @magdalena   ?!<span style="color: #949494;">"</span>                        www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> <span style="color: #949494;">"</span>  han visto este articulo!? que horror! https://guardian.com/emo… www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> <span style="color: #949494;">"</span>ayyyyyy a mi me   gustaria ir a londres yaaa #llevame #porfavor<span style="color: #949494;">"</span>  www.facebo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> <span style="color: #949494;">"</span>jajajajaja eres un wn!<span style="color: #949494;">"</span>                                           www.facebo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                  www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> <span style="color: #949494;">"</span>yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣 <span style="color: #949494;">"</span>                     www.instag…</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="limpiar_url">limpiar_url<a class="anchor" aria-label="anchor" href="#limpiar_url"></a>
 </h3>
-<p>We generally don’t want URLs appearing in our charts or analyses, so we can remove them with the limpiar_url function.</p>
+<p>We generally don’t want URLs appearing in our charts or analyses, so
+we can remove them with the limpiar_url function.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="op">(</span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-   <span class="fu"><a href="../reference/limpiar_url.html">limpiar_url</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span>
-<span class="co">#&gt;   mention_content                                                   mention_url </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> <span style="color: #949494;">"</span>holaaaaaa! coomo    estas @magdalena   ?!<span style="color: #949494;">"</span>                       www.twitter…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> <span style="color: #949494;">"</span>  han visto este articulo!? que horror!  no se puede!!<span style="color: #949494;">"</span>          www.twitter…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> <span style="color: #949494;">"</span>ayyyyyy a mi me   gustaria ir a londres yaaa #llevame #porfavor<span style="color: #949494;">"</span> www.faceboo…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> <span style="color: #949494;">"</span>jajajajaja eres un wn!<span style="color: #949494;">"</span>                                          www.faceboo…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtube…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> <span style="color: #949494;">"</span>yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣 <span style="color: #949494;">"</span>                    www.instagr…</span></code></pre></div>
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>   <span class="fu"><a href="../reference/limpiar_url.html">limpiar_url</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span></span>
+<span><span class="co">#&gt;   mention_content                                                   mention_url </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> <span style="color: #949494;">"</span>holaaaaaa! coomo    estas @magdalena   ?!<span style="color: #949494;">"</span>                       www.twitter…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> <span style="color: #949494;">"</span>  han visto este articulo!? que horror!  no se puede!!<span style="color: #949494;">"</span>          www.twitter…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> <span style="color: #949494;">"</span>ayyyyyy a mi me   gustaria ir a londres yaaa #llevame #porfavor<span style="color: #949494;">"</span> www.faceboo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> <span style="color: #949494;">"</span>jajajajaja eres un wn!<span style="color: #949494;">"</span>                                          www.faceboo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtube…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> <span style="color: #949494;">"</span>yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣 <span style="color: #949494;">"</span>                    www.instagr…</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="limpiar_spaces">limpiar_spaces<a class="anchor" aria-label="anchor" href="#limpiar_spaces"></a>
 </h3>
-<p>Next we’ll look at how to use LimpiaR to remove annoying white spaces, like those at the beginning of a sentence, or between punctuation, or multiple white spaces for no reason; as is common in the messy data we often encounter.</p>
+<p>Next we’ll look at how to use LimpiaR to remove annoying white
+spaces, like those at the beginning of a sentence, or between
+punctuation, or multiple white spaces for no reason; as is common in the
+messy data we often encounter.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="op">(</span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/limpiar_spaces.html">limpiar_spaces</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span>
-<span class="co">#&gt;   mention_content                                               mention_url     </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> holaaaaaa! coomo estas @magdalena?!                           www.twitter.com…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> han visto este articulo!? que horror! no se puede!!           www.twitter.com…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> ayyyyyy a mi me gustaria ir a londres yaaa #llevame #porfavor www.facebook.co…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> jajajajaja eres un wn!                                        www.facebook.co…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> grax ntonces q?                                               www.youtube.com…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣                   www.instagram.c…</span></code></pre></div>
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/limpiar_spaces.html">limpiar_spaces</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span></span>
+<span><span class="co">#&gt;   mention_content                                               mention_url     </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> holaaaaaa! coomo estas @magdalena?!                           www.twitter.com…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> han visto este articulo!? que horror! no se puede!!           www.twitter.com…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> ayyyyyy a mi me gustaria ir a londres yaaa #llevame #porfavor www.facebook.co…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> jajajajaja eres un wn!                                        www.facebook.co…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> grax ntonces q?                                               www.youtube.com…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣                   www.instagram.c…</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="limpiar_tags">limpiar_tags<a class="anchor" aria-label="anchor" href="#limpiar_tags"></a>
 </h3>
-<p>We can also remove user handles (e.g. <span class="citation">@magdalena</span>) and hashtags with the limpiar_tags function. Remember, you can type ?limpiar_tags to access documentation.</p>
+<p>We can also remove user handles (e.g. <span class="citation">@magdalena</span>) and hashtags with the limpiar_tags
+function. Remember, you can type ?limpiar_tags to access
+documentation.</p>
 <p>Replace only hashtags:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/limpiar_tags.html">limpiar_tags</a></span><span class="op">(</span>user <span class="op">=</span> <span class="cn">FALSE</span>, hashtag <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span>
-<span class="co">#&gt;   mention_content                                            mention_url        </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> holaaaaaa! coomo estas @magdalena?!                        www.twitter.com/po…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> han visto este articulo!? que horror! no se puede!!        www.twitter.com/po…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> ayyyyyy a mi me gustaria ir a londres yaaa hashtag hashtag www.facebook.com/p…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> jajajajaja eres un wn!                                     www.facebook.com/p…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> grax ntonces q?                                            www.youtube.com/po…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣                www.instagram.com/…</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/limpiar_tags.html">limpiar_tags</a></span><span class="op">(</span>user <span class="op">=</span> <span class="cn">FALSE</span>, hashtag <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span></span>
+<span><span class="co">#&gt;   mention_content                                            mention_url        </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> holaaaaaa! coomo estas @magdalena?!                        www.twitter.com/po…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> han visto este articulo!? que horror! no se puede!!        www.twitter.com/po…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> ayyyyyy a mi me gustaria ir a londres yaaa hashtag hashtag www.facebook.com/p…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> jajajajaja eres un wn!                                     www.facebook.com/p…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> grax ntonces q?                                            www.youtube.com/po…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣                www.instagram.com/…</span></span></code></pre></div>
 <p>Replace only user tags:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/limpiar_tags.html">limpiar_tags</a></span><span class="op">(</span>user <span class="op">=</span> <span class="cn">TRUE</span>, hashtag <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span>
-<span class="co">#&gt;   mention_content                                               mention_url     </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> holaaaaaa! coomo estas @user?!                                www.twitter.com…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> han visto este articulo!? que horror! no se puede!!           www.twitter.com…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> ayyyyyy a mi me gustaria ir a londres yaaa #llevame #porfavor www.facebook.co…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> jajajajaja eres un wn!                                        www.facebook.co…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> grax ntonces q?                                               www.youtube.com…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣                   www.instagram.c…</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/limpiar_tags.html">limpiar_tags</a></span><span class="op">(</span>user <span class="op">=</span> <span class="cn">TRUE</span>, hashtag <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span></span>
+<span><span class="co">#&gt;   mention_content                                               mention_url     </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> holaaaaaa! coomo estas @user?!                                www.twitter.com…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> han visto este articulo!? que horror! no se puede!!           www.twitter.com…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> ayyyyyy a mi me gustaria ir a londres yaaa #llevame #porfavor www.facebook.co…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> jajajajaja eres un wn!                                        www.facebook.co…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> grax ntonces q?                                               www.youtube.com…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣                   www.instagram.c…</span></span></code></pre></div>
 <p>Replace both hashtags and user handles:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/limpiar_tags.html">limpiar_tags</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span>
-<span class="co">#&gt;   mention_content                                            mention_url        </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> holaaaaaa! coomo estas @user?!                             www.twitter.com/po…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> han visto este articulo!? que horror! no se puede!!        www.twitter.com/po…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> ayyyyyy a mi me gustaria ir a londres yaaa hashtag hashtag www.facebook.com/p…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> jajajajaja eres un wn!                                     www.facebook.com/p…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> grax ntonces q?                                            www.youtube.com/po…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣                www.instagram.com/…</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/limpiar_tags.html">limpiar_tags</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span></span>
+<span><span class="co">#&gt;   mention_content                                            mention_url        </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> holaaaaaa! coomo estas @user?!                             www.twitter.com/po…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> han visto este articulo!? que horror! no se puede!!        www.twitter.com/po…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> ayyyyyy a mi me gustaria ir a londres yaaa hashtag hashtag www.facebook.com/p…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> jajajajaja eres un wn!                                     www.facebook.com/p…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> grax ntonces q?                                            www.youtube.com/po…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣                www.instagram.com/…</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="quick-recap---weve-looked-at">Quick recap - we’ve looked at:<a class="anchor" aria-label="anchor" href="#quick-recap---weve-looked-at"></a>
 </h3>
 <ul>
 <li>cleaning column names with janitor::clean_names()</li>
-<li>making the text variable lower case with mutate() &amp; tolower()</li>
+<li>making the text variable lower case with mutate() &amp;
+tolower()</li>
 <li>cleaning accents with limpiar_accents()</li>
 <li>cleaning duplicate posts with limpiar_duplicates()</li>
 <li>cleaning retweets with limpiar_retweets()</li>
@@ -315,115 +343,152 @@
 <div class="section level3">
 <h3 id="limpiar_shorthands">limpiar_shorthands<a class="anchor" aria-label="anchor" href="#limpiar_shorthands"></a>
 </h3>
-<p>One of the biggest problems with the messy data we encounter, are shorthands. Generally, algorithms have been trained on clean, standard language, so they do not encounter shorthands and abbreviations. Shorthands also change all the time, making it impractical to continuously train algorithms as new shorthands arise. This function attempts to bridge that gap, by normalising the most common shorthands.</p>
+<p>One of the biggest problems with the messy data we encounter, are
+shorthands. Generally, algorithms have been trained on clean, standard
+language, so they do not encounter shorthands and abbreviations.
+Shorthands also change all the time, making it impractical to
+continuously train algorithms as new shorthands arise. This function
+attempts to bridge that gap, by normalising the most common
+shorthands.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="op">(</span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-   <span class="fu"><a href="../reference/limpiar_shorthands.html">limpiar_shorthands</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span>
-<span class="co">#&gt;   mention_content                                               mention_url     </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> holaaaaaa! coomo estas @magdalena?!                           www.twitter.com…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> han visto este articulo!? que horror! no se puede!!           www.twitter.com…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> ayyyyyy a mi me gustaria ir a londres yaaa #llevame #porfavor www.facebook.co…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> jajajajaja eres un wuevon!                                    www.facebook.co…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> gracias entonces que?                                         www.youtube.com…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣                   www.instagram.c…</span></code></pre></div>
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>   <span class="fu"><a href="../reference/limpiar_shorthands.html">limpiar_shorthands</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span></span>
+<span><span class="co">#&gt;   mention_content                                               mention_url     </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> holaaaaaa! coomo estas @magdalena?!                           www.twitter.com…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> han visto este articulo!? que horror! no se puede!!           www.twitter.com…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> ayyyyyy a mi me gustaria ir a londres yaaa #llevame #porfavor www.facebook.co…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> jajajajaja eres un wuevon!                                    www.facebook.co…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> gracias entonces que?                                         www.youtube.com…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣                   www.instagram.c…</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="limpiar_repeated_chars">limpiar_repeated_chars<a class="anchor" aria-label="anchor" href="#limpiar_repeated_chars"></a>
 </h3>
-<p>We don’t want our algorithm to have to learn the difference between ‘ajajaj’ and ‘jaja’ or ‘ay’ and ‘ayyyy’ as practically speaking, there is none. We also don’t want to introduce unnecessary tokens, so we normalise the most common occurrences of repeated or additional characters.</p>
+<p>We don’t want our algorithm to have to learn the difference between
+‘ajajaj’ and ‘jaja’ or ‘ay’ and ‘ayyyy’ as practically speaking, there
+is none. We also don’t want to introduce unnecessary tokens, so we
+normalise the most common occurrences of repeated or additional
+characters.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="op">(</span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-   <span class="fu"><a href="../reference/limpiar_repeat_chars.html">limpiar_repeat_chars</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span>
-<span class="co">#&gt;   mention_content                                        mention_url            </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> hola! coomo estas @magdalena?!                         www.twitter.com/post1  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> han visto este articulo!? que horror! no se puede!!    www.twitter.com/post2  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> ay a mi me gustaria ir a londres ya #llevame #porfavor www.facebook.com/post1 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> jaja eres un wuevon!                                   www.facebook.com/post2 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> gracias entonces que?                                  www.youtube.com/post1  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣            www.instagram.com/post1</span></code></pre></div>
-<p>Generally, the steps we’ve taken so far will be used in each and every analysis/project to help clean the data. We will now look at some of the more circumstantial functions, i.e. they will not be used in every analysis.</p>
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>   <span class="fu"><a href="../reference/limpiar_repeat_chars.html">limpiar_repeat_chars</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span></span>
+<span><span class="co">#&gt;   mention_content                                        mention_url            </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> hola! coomo estas @magdalena?!                         www.twitter.com/post1  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> han visto este articulo!? que horror! no se puede!!    www.twitter.com/post2  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> ay a mi me gustaria ir a londres ya #llevame #porfavor www.facebook.com/post1 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> jaja eres un wuevon!                                   www.facebook.com/post2 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> gracias entonces que?                                  www.youtube.com/post1  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣            www.instagram.com/post1</span></span></code></pre></div>
+<p>Generally, the steps we’ve taken so far will be used in each and
+every analysis/project to help clean the data. We will now look at some
+of the more circumstantial functions, i.e. they will not be used in
+every analysis.</p>
 </div>
 <div class="section level3">
 <h3 id="limpiar_emojis">limpiar_emojis<a class="anchor" aria-label="anchor" href="#limpiar_emojis"></a>
 </h3>
-<p>We don’t need to use limpiar_emojis for every analysis, as many ParseR &amp; SegmentR functions ignore them implicitly. However, if we know that we need to for a special purpose, we can can use limpiar_emojis(). One problem with this, and the reason it is for special cases only, is the emoji’s encodings are in English. We may, at some point, translate them to Spanish, but it seems unlikely.</p>
+<p>We don’t need to use limpiar_emojis for every analysis, as many
+ParseR &amp; SegmentR functions ignore them implicitly. However, if we
+know that we need to for a special purpose, we can can use
+limpiar_emojis(). One problem with this, and the reason it is for
+special cases only, is the emoji’s encodings are in English. We may, at
+some point, translate them to Spanish, but it seems unlikely.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/limpiar_emojis.html">limpiar_emojis</a></span><span class="op">(</span>text_var <span class="op">=</span> <span class="va">mention_content</span>, with_emoji_tag <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span>
-<span class="co">#&gt;   mention_content                                                    mention_url</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> hola! coomo estas @magdalena?!                                     www.twitte…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> han visto este articulo!? que horror! no se puede!!                www.twitte…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> ay a mi me gustaria ir a londres ya #llevame #porfavor             www.facebo…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> jaja eres un wuevon!                                               www.facebo…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> gracias entonces que?                                              www.youtub…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> yo soy el mejor face with tears of joy face with tears of joy fac… www.instag…</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/limpiar_emojis.html">limpiar_emojis</a></span><span class="op">(</span>text_var <span class="op">=</span> <span class="va">mention_content</span>, with_emoji_tag <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span></span>
+<span><span class="co">#&gt;   mention_content                                                    mention_url</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> hola! coomo estas @magdalena?!                                     www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> han visto este articulo!? que horror! no se puede!!                www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> ay a mi me gustaria ir a londres ya #llevame #porfavor             www.facebo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> jaja eres un wuevon!                                               www.facebo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> gracias entonces que?                                              www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> yo soy el mejor face with tears of joy face with tears of joy fac… www.instag…</span></span></code></pre></div>
 <p>or with the default settings:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/limpiar_emojis.html">limpiar_emojis</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span>
-<span class="co">#&gt;   mention_content                                                    mention_url</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> hola! coomo estas @magdalena?!                                     www.twitte…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> han visto este articulo!? que horror! no se puede!!                www.twitte…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> ay a mi me gustaria ir a londres ya #llevame #porfavor             www.facebo…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> jaja eres un wuevon!                                               www.facebo…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> gracias entonces que?                                              www.youtub…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> yo soy el mejor face with tears of joy face with tears of joy fac… www.instag…</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/limpiar_emojis.html">limpiar_emojis</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span></span>
+<span><span class="co">#&gt;   mention_content                                                    mention_url</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> hola! coomo estas @magdalena?!                                     www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> han visto este articulo!? que horror! no se puede!!                www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> ay a mi me gustaria ir a londres ya #llevame #porfavor             www.facebo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> jaja eres un wuevon!                                               www.facebo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> gracias entonces que?                                              www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> yo soy el mejor face with tears of joy face with tears of joy fac… www.instag…</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="limpiar_stopwords">limpiar_stopwords<a class="anchor" aria-label="anchor" href="#limpiar_stopwords"></a>
 </h3>
-<p>Stop words are common words that do not provide us with much information as to an utterance’s meaning. For example, in the sentence: ‘the man is in prison for theft’, if we knew only one word from this sentence, and that word was ‘is’, ‘in’, ‘the’, or ‘for’ then we wouldn’t have much idea what the sentence is about. However, ‘prison’ or ‘theft’, would give us a lot more information.</p>
-<p>For many analyses, we remove stop words to help us see the ‘highest information’ words, to get a high-level understanding of large bodies of texts (such as in topic modelling and bigram networks.) For virtually all scenarios, you will want to use the limpiar_stopwords() with the argument stop_words = “topics” like so:</p>
+<p>Stop words are common words that do not provide us with much
+information as to an utterance’s meaning. For example, in the sentence:
+‘the man is in prison for theft’, if we knew only one word from this
+sentence, and that word was ‘is’, ‘in’, ‘the’, or ‘for’ then we wouldn’t
+have much idea what the sentence is about. However, ‘prison’ or ‘theft’,
+would give us a lot more information.</p>
+<p>For many analyses, we remove stop words to help us see the ‘highest
+information’ words, to get a high-level understanding of large bodies of
+texts (such as in topic modelling and bigram networks.) For virtually
+all scenarios, you will want to use the limpiar_stopwords() with the
+argument stop_words = “topics” like so:</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/limpiar_stopwords.html">limpiar_stopwords</a></span><span class="op">(</span>stop_words <span class="op">=</span> <span class="st">"topics"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/limpiar_spaces.html">limpiar_spaces</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#to clear the spaces of words that were removed</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span>
-<span class="co">#&gt;   mention_content                        mention_url            </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> hola! coomo @magdalena?!               www.twitter.com/post1  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> visto articulo!? horror!!!             www.twitter.com/post2  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> ay gustaria londres #llevame #porfavor www.facebook.com/post1 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> jaja wuevon!                           www.facebook.com/post2 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> gracias?                               www.youtube.com/post1  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 😂😂😂,!! 🤣🤣                         www.instagram.com/post1</span></code></pre></div>
-<p>Sentences can look quite strange without stopwords, and a lot of social posts are virtually meaningless. It’s also worth pointing out, that a lot of information can be lost when removing stop words. Many phrases in English and Spanish have very different meanings when a stop word is removed.</p>
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/limpiar_stopwords.html">limpiar_stopwords</a></span><span class="op">(</span>stop_words <span class="op">=</span> <span class="st">"topics"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/limpiar_spaces.html">limpiar_spaces</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#to clear the spaces of words that were removed</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span></span>
+<span><span class="co">#&gt;   mention_content                        mention_url            </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> hola! coomo @magdalena?!               www.twitter.com/post1  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> visto articulo!? horror!!!             www.twitter.com/post2  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> ay gustaria londres #llevame #porfavor www.facebook.com/post1 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> jaja wuevon!                           www.facebook.com/post2 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> gracias?                               www.youtube.com/post1  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 😂😂😂,!! 🤣🤣                         www.instagram.com/post1</span></span></code></pre></div>
+<p>Sentences can look quite strange without stopwords, and a lot of
+social posts are virtually meaningless. It’s also worth pointing out,
+that a lot of information can be lost when removing stop words. Many
+phrases in English and Spanish have very different meanings when a stop
+word is removed.</p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="utility-functions">Utility Functions<a class="anchor" aria-label="anchor" href="#utility-functions"></a>
 </h2>
-<p>We are nearly at the end of this introduction to LimpiaR, but before we finish, let’s look at two utility functions which may be useful. We’ve conjoured up a new data frame called df, which we will use to show the last two functions and how to chain everything together.</p>
+<p>We are nearly at the end of this introduction to LimpiaR, but before
+we finish, let’s look at two utility functions which may be useful.
+We’ve conjoured up a new data frame called df, which we will use to show
+the last two functions and how to chain everything together.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 3</span></span>
-<span class="co">#&gt;    mention_content                                            mention_url na_col</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">"</span>holaaaaaa! cóómo    estás @magdalena   ?!<span style="color: #949494;">"</span>                www.twitte… <span style="color: #BB0000;">NA</span>    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> <span style="color: #949494;">"</span>  han visto este articulo!? Que horror! https://guardian… www.twitte… <span style="color: #BB0000;">NA</span>    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> <span style="color: #949494;">"</span>ayyyyyy a mi me   gustaria ir a londres yaaa #llevame #p… www.facebo… <span style="color: #BB0000;">NA</span>    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> <span style="color: #949494;">"</span>jajajajaja eres un wn!<span style="color: #949494;">"</span>                                   www.facebo… <span style="color: #BB0000;">NA</span>    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> <span style="color: #949494;">"</span>RT dale un click a ver una mujer baila con su perro<span style="color: #949494;">"</span>      www.twitte… <span style="color: #BB0000;">NA</span>    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                          www.youtub… <span style="color: #BB0000;">NA</span>    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> <span style="color: #949494;">"</span>yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣 <span style="color: #949494;">"</span>             www.instag… <span style="color: #BB0000;">NA</span>    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                          www.youtub… <span style="color: #BB0000;">NA</span>    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                          www.youtub… tadaa </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                          www.youtub… <span style="color: #BB0000;">NA</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 3</span></span></span>
+<span><span class="co">#&gt;    mention_content                                            mention_url na_col</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">"</span>holaaaaaa! cóómo    estás @magdalena   ?!<span style="color: #949494;">"</span>                www.twitte… <span style="color: #BB0000;">NA</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> <span style="color: #949494;">"</span>  han visto este articulo!? Que horror! https://guardian… www.twitte… <span style="color: #BB0000;">NA</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> <span style="color: #949494;">"</span>ayyyyyy a mi me   gustaria ir a londres yaaa #llevame #p… www.facebo… <span style="color: #BB0000;">NA</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> <span style="color: #949494;">"</span>jajajajaja eres un wn!<span style="color: #949494;">"</span>                                   www.facebo… <span style="color: #BB0000;">NA</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> <span style="color: #949494;">"</span>RT dale un click a ver una mujer baila con su perro<span style="color: #949494;">"</span>      www.twitte… <span style="color: #BB0000;">NA</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                          www.youtub… <span style="color: #BB0000;">NA</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> <span style="color: #949494;">"</span>yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣 <span style="color: #949494;">"</span>             www.instag… <span style="color: #BB0000;">NA</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                          www.youtub… <span style="color: #BB0000;">NA</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                          www.youtub… tadaa </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                          www.youtub… <span style="color: #BB0000;">NA</span></span></span></code></pre></div>
 <div class="section level3">
 <h3 id="limpiar_inpsect">limpiar_inpsect<a class="anchor" aria-label="anchor" href="#limpiar_inpsect"></a>
 </h3>
-<p>So, imagine that we see a strange pattern, and we want to check what’s going on with that specific pattern. We can use limpiar_inspect to view all posts which contain that pattern in an interactive frame!</p>
+<p>So, imagine that we see a strange pattern, and we want to check
+what’s going on with that specific pattern. We can use limpiar_inspect
+to view all posts which contain that pattern in an interactive
+frame!</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/limpiar_inspect.html">limpiar_inspect</a></span><span class="op">(</span><span class="va">df</span>, pattern <span class="op">=</span> <span class="st">"ntonces"</span>, text_var <span class="op">=</span> <span class="va">mention_content</span>,
-                post_url <span class="op">=</span> <span class="va">mention_url</span>, title <span class="op">=</span> <span class="st">"ntonces"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/limpiar_inspect.html">limpiar_inspect</a></span><span class="op">(</span><span class="va">df</span>, pattern <span class="op">=</span> <span class="st">"ntonces"</span>, text_var <span class="op">=</span> <span class="va">mention_content</span>,</span>
+<span>                post_url <span class="op">=</span> <span class="va">mention_url</span>, title <span class="op">=</span> <span class="st">"ntonces"</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">mention_content</th>
@@ -448,72 +513,84 @@
 </tr>
 </tbody>
 </table>
-<p>Whilst it’s pretty obvious that all of the ‘grax ntonces q?’ posts are exactly the same, in the real world we’re going to have 10,000 times as many posts, and searching for suspicious patterns will take up a lot of our time. The vie</p>
+<p>Whilst it’s pretty obvious that all of the ‘grax ntonces q?’ posts
+are exactly the same, in the real world we’re going to have 10,000 times
+as many posts, and searching for suspicious patterns will take up a lot
+of our time. The vie</p>
 </div>
 <div class="section level3">
 <h3 id="limpiar_na_cols">limpiar_na_cols<a class="anchor" aria-label="anchor" href="#limpiar_na_cols"></a>
 </h3>
-<p>This final function is useful when we want to remove ‘mostly NA’ columns of a data frame. We may want to do this to save memory, for example if we have 400,000 posts and 80 columns. In this case we’ll get rid of all columns for which 25% or more of their values are NA.</p>
+<p>This final function is useful when we want to remove ‘mostly NA’
+columns of a data frame. We may want to do this to save memory, for
+example if we have 400,000 posts and 80 columns. In this case we’ll get
+rid of all columns for which 25% or more of their values are NA.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/limpiar_na_cols.html">limpiar_na_cols</a></span><span class="op">(</span><span class="va">df</span>,threshold <span class="op">=</span>  <span class="fl">0.25</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 2</span></span>
-<span class="co">#&gt;    mention_content                                                   mention_url</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">"</span>holaaaaaa! cóómo    estás @magdalena   ?!<span style="color: #949494;">"</span>                       www.twitte…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> <span style="color: #949494;">"</span>  han visto este articulo!? Que horror! https://guardian.com/em… www.twitte…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> <span style="color: #949494;">"</span>ayyyyyy a mi me   gustaria ir a londres yaaa #llevame #porfavor<span style="color: #949494;">"</span> www.facebo…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> <span style="color: #949494;">"</span>jajajajaja eres un wn!<span style="color: #949494;">"</span>                                          www.facebo…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> <span style="color: #949494;">"</span>RT dale un click a ver una mujer baila con su perro<span style="color: #949494;">"</span>             www.twitte…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> <span style="color: #949494;">"</span>yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣 <span style="color: #949494;">"</span>                    www.instag…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/limpiar_na_cols.html">limpiar_na_cols</a></span><span class="op">(</span><span class="va">df</span>,threshold <span class="op">=</span>  <span class="fl">0.25</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 2</span></span></span>
+<span><span class="co">#&gt;    mention_content                                                   mention_url</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">"</span>holaaaaaa! cóómo    estás @magdalena   ?!<span style="color: #949494;">"</span>                       www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> <span style="color: #949494;">"</span>  han visto este articulo!? Que horror! https://guardian.com/em… www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> <span style="color: #949494;">"</span>ayyyyyy a mi me   gustaria ir a londres yaaa #llevame #porfavor<span style="color: #949494;">"</span> www.facebo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> <span style="color: #949494;">"</span>jajajajaja eres un wn!<span style="color: #949494;">"</span>                                          www.facebo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> <span style="color: #949494;">"</span>RT dale un click a ver una mujer baila con su perro<span style="color: #949494;">"</span>             www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> <span style="color: #949494;">"</span>yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣 <span style="color: #949494;">"</span>                    www.instag…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
 <h2 id="putting-it-all-together">Putting It All Together<a class="anchor" aria-label="anchor" href="#putting-it-all-together"></a>
 </h2>
-<p>To speed things up, we can call the functions together in one big long pipe.</p>
+<p>To speed things up, we can call the functions together in one big
+long pipe.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/limpiar_na_cols.html">limpiar_na_cols</a></span><span class="op">(</span>threshold <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span><span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/limpiar_accents.html">limpiar_accents</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/limpiar_retweets.html">limpiar_retweets</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/limpiar_shorthands.html">limpiar_shorthands</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/limpiar_repeat_chars.html">limpiar_repeat_chars</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/limpiar_url.html">limpiar_url</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/limpiar_emojis.html">limpiar_emojis</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/limpiar_shorthands.html">limpiar_shorthands</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/limpiar_spaces.html">limpiar_spaces</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/limpiar_duplicates.html">limpiar_duplicates</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span>
-<span class="co">#&gt;   mention_content                                                    mention_url</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> hola! coomo estas @magdalena?!                                     www.twitte…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> han visto este articulo!? Que horror! NO SE PUEDE!!                www.twitte…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> ay a mi me gustaria ir a londres ya #llevame #porfavor             www.facebo…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> jaja eres un wuevon!                                               www.facebo…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> gracias entonces que?                                              www.youtub…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> yo soy el mejor face with tears of joy face with tears of joy fac… www.instag…</span></code></pre></div>
-<p>However, on very large data frames, it will often be better to prioritise one, or a few functions at a time, assigning your data frame as you go.</p>
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/limpiar_na_cols.html">limpiar_na_cols</a></span><span class="op">(</span>threshold <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span><span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/limpiar_accents.html">limpiar_accents</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/limpiar_retweets.html">limpiar_retweets</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/limpiar_shorthands.html">limpiar_shorthands</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/limpiar_repeat_chars.html">limpiar_repeat_chars</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/limpiar_url.html">limpiar_url</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/limpiar_emojis.html">limpiar_emojis</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/limpiar_shorthands.html">limpiar_shorthands</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/limpiar_spaces.html">limpiar_spaces</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/limpiar_duplicates.html">limpiar_duplicates</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span></span>
+<span><span class="co">#&gt;   mention_content                                                    mention_url</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> hola! coomo estas @magdalena?!                                     www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> han visto este articulo!? Que horror! NO SE PUEDE!!                www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> ay a mi me gustaria ir a londres ya #llevame #porfavor             www.facebo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> jaja eres un wuevon!                                               www.facebo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> gracias entonces que?                                              www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> yo soy el mejor face with tears of joy face with tears of joy fac… www.instag…</span></span></code></pre></div>
+<p>However, on very large data frames, it will often be better to
+prioritise one, or a few functions at a time, assigning your data frame
+as you go.</p>
 </div>
 <div class="section level2">
 <h2 id="bonus-function">Bonus Function<a class="anchor" aria-label="anchor" href="#bonus-function"></a>
 </h2>
-<p>Once you’re familiar with how LimpiaR works, you may want to use a bonus function, limpiar_df to do a bunch of things at once and speed everything up. limpiar_df also has an option to remove punctuation!</p>
+<p>Once you’re familiar with how LimpiaR works, you may want to use a
+bonus function, limpiar_df to do a bunch of things at once and speed
+everything up. limpiar_df also has an option to remove punctuation!</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/limpiar_df.html">limpiar_df</a></span><span class="op">(</span><span class="va">df</span>, text_var <span class="op">=</span> <span class="va">mention_content</span>, remove_punctuation <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 3</span></span>
-<span class="co">#&gt;   mention_content                                     mention_url         na_col</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> hola coomo estas user                               www.twitter.com/po… <span style="color: #BB0000;">NA</span>    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> han visto este articulo que horror no se puede      www.twitter.com/po… <span style="color: #BB0000;">NA</span>    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> ay a mi me gustaria ir a londres ya hashtag hashtag www.facebook.com/p… <span style="color: #BB0000;">NA</span>    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> jaja eres un wuevon                                 www.facebook.com/p… <span style="color: #BB0000;">NA</span>    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> gracias entonces que                                www.youtube.com/po… <span style="color: #BB0000;">NA</span>    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> yo soy el mejor 😂😂😂 no eres nada 🤣🤣            www.instagram.com/… <span style="color: #BB0000;">NA</span></span></code></pre></div>
-<p>If you wanted to, you could pipe in limpiar_na_cols, limpiar_emojis (or any other pipe-able function!).</p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/limpiar_df.html">limpiar_df</a></span><span class="op">(</span><span class="va">df</span>, text_var <span class="op">=</span> <span class="va">mention_content</span>, remove_punctuation <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 3</span></span></span>
+<span><span class="co">#&gt;   mention_content                                     mention_url         na_col</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> hola coomo estas user                               www.twitter.com/po… <span style="color: #BB0000;">NA</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> han visto este articulo que horror no se puede      www.twitter.com/po… <span style="color: #BB0000;">NA</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> ay a mi me gustaria ir a londres ya hashtag hashtag www.facebook.com/p… <span style="color: #BB0000;">NA</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> jaja eres un wuevon                                 www.facebook.com/p… <span style="color: #BB0000;">NA</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> gracias entonces que                                www.youtube.com/po… <span style="color: #BB0000;">NA</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> yo soy el mejor 😂😂😂 no eres nada 🤣🤣            www.instagram.com/… <span style="color: #BB0000;">NA</span></span></span></code></pre></div>
+<p>If you wanted to, you could pipe in limpiar_na_cols, limpiar_emojis
+(or any other pipe-able function!).</p>
 </div>
   </div>
 
@@ -534,7 +611,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>

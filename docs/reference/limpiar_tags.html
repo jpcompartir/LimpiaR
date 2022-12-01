@@ -62,28 +62,37 @@ You can choose whether to replace both hashtags &amp; users or either one.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">limpiar_tags</span><span class="op">(</span><span class="va">df</span>, text_var <span class="op">=</span> <span class="va">mention_content</span>, user <span class="op">=</span> <span class="cn">TRUE</span>, hashtag <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">limpiar_tags</span><span class="op">(</span><span class="va">df</span>, text_var <span class="op">=</span> <span class="va">mention_content</span>, user <span class="op">=</span> <span class="cn">TRUE</span>, hashtag <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>df</dt>
 <dd><p>Name of Data Frame or Tibble object</p></dd>
+
+
 <dt>text_var</dt>
 <dd><p>Name of text variable/character vector</p></dd>
+
+
 <dt>user</dt>
 <dd><p>Whether to replace user handles or not TRUE = replace</p></dd>
+
+
 <dt>hashtag</dt>
 <dd><p>Whether to replace hashtags or not TRUE = replace</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The Data Frame or Tibble object with user handles and/or hashtags removed from the text variable</p>
+    
+
+<p>The Data Frame or Tibble object with user handles and/or hashtags removed from the text variable</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">limpiar_examples</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">limpiar_examples</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    doc_id author_name       mention_content         mention_url platform_intera…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>           </span>
@@ -97,9 +106,9 @@ You can choose whether to replace both hashtags &amp; users or either one.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>      8 maria             <span style="color: #949494;">"</span>ayyy nooo @robert_jor… www.twitte… <span style="color: #BB0000;">NA</span>              </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>      9 pablo             <span style="color: #949494;">"</span>todos se unen a nuest… www.instag… <span style="color: #BB0000;">NA</span>              </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>     10 pilar             <span style="color: #949494;">"</span>a mi me gustaría qued… www.instag… <span style="color: #BB0000;">NA</span>              </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">#Both user and hashtags</span></span>
-<span class="r-in"><span class="va">limpiar_examples</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">limpiar_tags</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">mention_content</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#Both user and hashtags</span></span></span>
+<span class="r-in"><span><span class="va">limpiar_examples</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">limpiar_tags</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">mention_content</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 1</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    mention_content                                                    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                              </span>
@@ -113,9 +122,9 @@ You can choose whether to replace both hashtags &amp; users or either one.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">"</span>ayyy nooo @user 😢 😢 😢 <span style="color: #949494;">"</span>                                        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span>todos se unen a nuestro grupo hagale un clic https::larebelion.es<span style="color: #949494;">"</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>a mi me gustaría quedarme un ratito más<span style="color: #949494;">"</span>                          </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">#Just user tags</span></span>
-<span class="r-in"><span class="va">limpiar_examples</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">limpiar_tags</span><span class="op">(</span>hashtag <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">mention_content</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#Just user tags</span></span></span>
+<span class="r-in"><span><span class="va">limpiar_examples</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">limpiar_tags</span><span class="op">(</span>hashtag <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">mention_content</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 1</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    mention_content                                                    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                              </span>
@@ -129,9 +138,9 @@ You can choose whether to replace both hashtags &amp; users or either one.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">"</span>ayyy nooo @user 😢 😢 😢 <span style="color: #949494;">"</span>                                        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span>todos se unen a nuestro grupo hagale un clic https::larebelion.es<span style="color: #949494;">"</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>a mi me gustaría quedarme un ratito más<span style="color: #949494;">"</span>                          </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">#Just hashtags</span></span>
-<span class="r-in"><span class="va">limpiar_examples</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">limpiar_tags</span><span class="op">(</span>user <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">mention_content</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#Just hashtags</span></span></span>
+<span class="r-in"><span><span class="va">limpiar_examples</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">limpiar_tags</span><span class="op">(</span>user <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">mention_content</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 1</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    mention_content                                                       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                                 </span>
@@ -145,7 +154,7 @@ You can choose whether to replace both hashtags &amp; users or either one.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">"</span>ayyy nooo @robert_jordan 😢 😢 😢 <span style="color: #949494;">"</span>                                  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span>todos se unen a nuestro grupo hagale un clic https::larebelion.es<span style="color: #949494;">"</span>   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>a mi me gustaría quedarme un ratito más<span style="color: #949494;">"</span>                             </span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -160,7 +169,7 @@ You can choose whether to replace both hashtags &amp; users or either one.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

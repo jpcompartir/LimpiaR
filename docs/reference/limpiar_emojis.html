@@ -62,26 +62,33 @@ The most important argument is whether or not to add the emoji tag, which will a
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">limpiar_emojis</span><span class="op">(</span><span class="va">df</span>, text_var <span class="op">=</span> <span class="va">mention_content</span>, with_emoji_tag <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">limpiar_emojis</span><span class="op">(</span><span class="va">df</span>, text_var <span class="op">=</span> <span class="va">mention_content</span>, with_emoji_tag <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>df</dt>
 <dd><p>Name of Data Frame or Tibble Object</p></dd>
+
+
 <dt>text_var</dt>
 <dd><p>Name of text variable</p></dd>
+
+
 <dt>with_emoji_tag</dt>
 <dd><p>Whether to replace with snakecase linked words or not</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The Data Frame or Tibble object with most emojis cleaned from the text variable</p>
+    
+
+<p>The Data Frame or Tibble object with most emojis cleaned from the text variable</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">limpiar_examples</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">mention_content</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">limpiar_examples</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">mention_content</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 1</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    mention_content                                                      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                                </span>
@@ -95,8 +102,8 @@ The most important argument is whether or not to add the emoji tag, which will a
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">"</span>ayyy nooo @robert_jordan 😢 😢 😢 <span style="color: #949494;">"</span>                                 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span>todos se unen a nuestro grupo hagale un clic https::larebelion.es<span style="color: #949494;">"</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>a mi me gustaría quedarme un ratito más<span style="color: #949494;">"</span>                            </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">limpiar_examples</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">limpiar_emojis</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">mention_content</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">limpiar_examples</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">limpiar_emojis</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">mention_content</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 1</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    mention_content                                                    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                              </span>
@@ -124,7 +131,7 @@ The most important argument is whether or not to add the emoji tag, which will a
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

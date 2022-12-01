@@ -64,28 +64,37 @@ Clean accents, urls, shorthands, repeated characters, and if specified punctuati
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">limpiar_df</span><span class="op">(</span>
-  <span class="va">df</span>,
-  text_var <span class="op">=</span> <span class="va">mention_content</span>,
-  remove_retweets <span class="op">=</span> <span class="cn">TRUE</span>,
-  remove_punctuation <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">limpiar_df</span><span class="op">(</span></span>
+<span>  <span class="va">df</span>,</span>
+<span>  text_var <span class="op">=</span> <span class="va">mention_content</span>,</span>
+<span>  remove_retweets <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  remove_punctuation <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>df</dt>
 <dd><p>Data Frame or Tibble Object</p></dd>
+
+
 <dt>text_var</dt>
 <dd><p>The text variable/character vector</p></dd>
+
+
 <dt>remove_retweets</dt>
 <dd><p>Whether or not to remove retweets, default is to remove</p></dd>
+
+
 <dt>remove_punctuation</dt>
 <dd><p>Whether or not to remove punctuation, default is not to remove</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The original Data Frame with the text variable cleaned</p>
+    
+
+<p>The original Data Frame with the text variable cleaned</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -94,7 +103,7 @@ Clean accents, urls, shorthands, repeated characters, and if specified punctuati
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">limpiar_df</span><span class="op">(</span><span class="va">limpiar_examples</span>, text_var <span class="op">=</span> <span class="va">mention_content</span>, remove_punctuation <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">limpiar_df</span><span class="op">(</span><span class="va">limpiar_examples</span>, text_var <span class="op">=</span> <span class="va">mention_content</span>, remove_punctuation <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 8 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   doc_id author_name   mention_content              mention_url platform_intera…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>           </span>
@@ -106,7 +115,7 @@ Clean accents, urls, shorthands, repeated characters, and if specified punctuati
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>      8 maria         ay no user 😢 😢 😢          www.twitte… <span style="color: #BB0000;">NA</span>              </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span>      9 pablo         todos se unen a nuestro gru… www.instag… <span style="color: #BB0000;">NA</span>              </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span>     10 pilar         a mi me gustaria quedarme u… www.instag… <span style="color: #BB0000;">NA</span>              </span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -121,7 +130,7 @@ Clean accents, urls, shorthands, repeated characters, and if specified punctuati
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

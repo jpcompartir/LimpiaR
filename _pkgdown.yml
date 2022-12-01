@@ -16,6 +16,11 @@ reference:
   - '`limpiar_tags`'
   - '`limpiar_emojis`'
   - '`limpiar_stopwords`'
+  - '`limpiar_slang`'
+  - '`limpiar_emojis`'
+  - '`limpiar_emojis_es`'
+  - '`limpiar_pp_products`'
+  - '`limpiar_pp_companies`'
 
 - title: Removing Posts
   desc: >
@@ -23,6 +28,7 @@ reference:
   contents:
   - '`limpiar_duplicates`'
   - '`limpiar_retweets`'
+  - '`limpiar_spam_grams`'
 
 - title: Utility Functions
   desc: >
@@ -31,6 +37,7 @@ reference:
   - '`limpiar_inspect`'
   - '`limpiar_na_cols`'
   - '`limpiar_df`'
+  - '`limpiar_link_click`'
 
 repo:
   url:

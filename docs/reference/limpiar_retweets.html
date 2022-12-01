@@ -62,25 +62,28 @@ Particularly effective when used in conjunction with ParseR &amp; SegmentR visua
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">limpiar_retweets</span><span class="op">(</span><span class="va">df</span>, text_var <span class="op">=</span> <span class="va">mention_content</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">limpiar_retweets</span><span class="op">(</span><span class="va">df</span>, text_var <span class="op">=</span> <span class="va">mention_content</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>df</dt>
 <dd><p>Name of the Data Frame or Tibble Object</p></dd>
+
+
 <dt>text_var</dt>
 <dd><p>Name of the text variable/character vector</p></dd>
+
 </dl></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>text_variable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rt &lt;3"</span>, <span class="st">"RT &lt;3"</span>, <span class="st">"original tweet"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">limpiar_retweets</span><span class="op">(</span><span class="va">df</span>, <span class="va">text_variable</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>text_variable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rt &lt;3"</span>, <span class="st">"RT &lt;3"</span>, <span class="st">"original tweet"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">limpiar_retweets</span><span class="op">(</span><span class="va">df</span>, <span class="va">text_variable</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    text_variable</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 original tweet</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">limpiar_examples</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">limpiar_examples</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    doc_id author_name       mention_content         mention_url platform_intera…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>           </span>
@@ -94,8 +97,8 @@ Particularly effective when used in conjunction with ParseR &amp; SegmentR visua
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>      8 maria             <span style="color: #949494;">"</span>ayyy nooo @robert_jor… www.twitte… <span style="color: #BB0000;">NA</span>              </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>      9 pablo             <span style="color: #949494;">"</span>todos se unen a nuest… www.instag… <span style="color: #BB0000;">NA</span>              </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>     10 pilar             <span style="color: #949494;">"</span>a mi me gustaría qued… www.instag… <span style="color: #BB0000;">NA</span>              </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">limpiar_examples</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">limpiar_retweets</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">limpiar_examples</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">limpiar_retweets</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 9 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   doc_id author_name       mention_content          mention_url platform_intera…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>           </span>
@@ -122,7 +125,7 @@ Particularly effective when used in conjunction with ParseR &amp; SegmentR visua
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

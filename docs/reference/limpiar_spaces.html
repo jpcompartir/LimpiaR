@@ -60,29 +60,34 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">limpiar_spaces</span><span class="op">(</span><span class="va">df</span>, text_var <span class="op">=</span> <span class="va">mention_content</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">limpiar_spaces</span><span class="op">(</span><span class="va">df</span>, text_var <span class="op">=</span> <span class="va">mention_content</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>df</dt>
 <dd><p>Name of the Data Frame or Tibble object</p></dd>
+
+
 <dt>text_var</dt>
 <dd><p>Name of the text variable/character vector</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>text variable/character vector with excess spaces removed</p>
+    
+
+<p>text variable/character vector with excess spaces removed</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>text_variable <span class="op">=</span> <span class="st">"clean   the   spaces please"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">limpiar_spaces</span><span class="op">(</span><span class="va">df</span>, text_var <span class="op">=</span> <span class="va">text_variable</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>text_variable <span class="op">=</span> <span class="st">"clean   the   spaces please"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">limpiar_spaces</span><span class="op">(</span><span class="va">df</span>, text_var <span class="op">=</span> <span class="va">text_variable</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             text_variable</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 clean the spaces please</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">limpiar_examples</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">mention_content</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">limpiar_examples</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">mention_content</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 1</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    mention_content                                                      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                                </span>
@@ -96,8 +101,8 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">"</span>ayyy nooo @robert_jordan 😢 😢 😢 <span style="color: #949494;">"</span>                                 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span>todos se unen a nuestro grupo hagale un clic https::larebelion.es<span style="color: #949494;">"</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>a mi me gustaría quedarme un ratito más<span style="color: #949494;">"</span>                            </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">limpiar_examples</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">limpiar_spaces</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">mention_content</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">limpiar_examples</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">limpiar_spaces</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">mention_content</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 1</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    mention_content                                                    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                              </span>
@@ -125,7 +130,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
