@@ -22,7 +22,7 @@ limpiar_spam_grams <- function(data, text_var, n_gram = 8, top_n = 1000, min_fre
   grams <- data  %>%
     dplyr::mutate(document = dplyr::row_number()) %>%
     dplyr::select(document, {{text_var}}) %>%
-    tidytext::unnest_tokens(ngrams, !!text_sym, token = "ngrams", format = "text", n = 6) %>%
+    tidytext::unnest_tokens(ngrams, !!text_sym, token = "ngrams", format = "text", n_gram) %>%
     dplyr::add_count(ngrams, name = "n_ngram")
 
   grams <- grams %>%
