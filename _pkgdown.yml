@@ -38,6 +38,7 @@ reference:
   - '`limpiar_na_cols`'
   - '`limpiar_df`'
   - '`limpiar_link_click`'
+  - '`limpiar_ex_subreddits`'
 
 repo:
   url:
