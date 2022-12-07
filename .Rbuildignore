@@ -7,3 +7,4 @@
 ^pkgdown$
 ^.nojekyll$
 ^limpiar_release
+R/deprecated.R

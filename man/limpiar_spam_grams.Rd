@@ -2,16 +2,9 @@
 % Please edit documentation in R/limpiar_spam_grams.R
 \name{limpiar_spam_grams}
 \alias{limpiar_spam_grams}
-\title{Remove posts with suspicious n-grams}
+\title{Remove posts containing spam-like n-grams}
 \usage{
-limpiar_spam_grams(
-  data,
-  text_var,
-  n_gram = 8,
-  top_n = 1000,
-  min_freq = 5,
-  in_parallel = TRUE
-)
+limpiar_spam_grams(data, text_var, n_gram, min_freq)
 }
 \arguments{
 \item{data}{Data frame or tibble object}
@@ -20,17 +13,13 @@ limpiar_spam_grams(
 
 \item{n_gram}{Number of words in the n-gram i.e. n = 2 = bigram}
 
-\item{top_n}{Number of n-grams to keep}
-
-\item{min_freq}{Minimum number of}
-
-\item{in_parallel}{Whether to run the function with parallel processing}
+\item{min_freq}{Minimum number of times n-gram should be seen to be removed}
 }
 \value{
-A list with the suspicious-looking ngrams, removed posts, data & regex pattern
+A list of 3 data frames 1. suspicious-looking n-grams, 2. data with them removed, 3. rows of data frame that were removed
 }
 \description{
-Function identifies posts which contain suspicious-looking n-gram patterns.
+#' Function identifies posts which contain suspicious-looking n-gram patterns.
 Posts can then be removed, the pattern inspected, and the posts that were removed too.
 You can re-assign your current data frame to the 'clean' data frame through the third element of the list.
 }
