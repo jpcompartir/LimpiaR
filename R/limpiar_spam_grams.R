@@ -37,5 +37,5 @@ limpiar_spam_grams <- function(data, text_var, n_gram, min_freq){
   remove <- data %>%
     dplyr::filter(document %in% docs)
 
-  list(ngrams, keep, remove)
+  list("spam_grams" = ngrams, "data" = keep, "deleted" = remove)
 }
