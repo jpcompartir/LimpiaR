@@ -8,7 +8,7 @@ limpiar_inspect(
   data,
   pattern,
   text_var = mention_content,
-  post_url = mention_url,
+  url_var = mention_url,
   title = "inspect"
 )
 }
@@ -19,7 +19,7 @@ limpiar_inspect(
 
 \item{text_var}{Name of the text variable/character vector}
 
-\item{post_url}{Name of the data frame's URL-column}
+\item{url_var}{Name of the data frame's URL-column}
 
 \item{title}{Name of the viewable pane}
 }
