@@ -23,7 +23,7 @@ limpiar_spam_grams <- function(data, text_var, n_gram, min_freq){
                             n = n_gram, format = "text") %>%
     dplyr::add_count(ngrams, name = "n_ngram") %>%
     dplyr::filter(!is.na(ngrams)) %>%
-    dplyr::filter(n_ngram > min_freq)
+    dplyr::filter(n_ngram >= min_freq)
 
   docs <- ngrams %>% dplyr::pull(document) %>% unique()
 
