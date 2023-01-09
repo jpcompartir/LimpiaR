@@ -8,7 +8,7 @@ limpiar_inspect(
   data,
   pattern,
   text_var = mention_content,
-  post_url = mention_url,
+  url_var = mention_url,
   title = "inspect"
 )
 }
@@ -19,7 +19,7 @@ limpiar_inspect(
 
 \item{text_var}{Name of the text variable/character vector}
 
-\item{post_url}{Name of the data frame's URL-column}
+\item{url_var}{Name of the data frame's URL-column}
 
 \item{title}{Name of the viewable pane}
 }
@@ -32,5 +32,5 @@ Set the name of the title to avoid new frames overwriting old ones.
 df <- data.frame(
 text_variable = rbind("check me out", "don't look at me"),
 text_url = rbind("www.twitter.com", "www.facebook.com"))
-limpiar_inspect(df, "check", text_var = text_variable, post_url = text_url)
+limpiar_inspect(df, "check", text_var = text_variable, url_var = text_url)
 }

@@ -1,6 +1,6 @@
 #Record global variables
 utils::globalVariables(c("mention_content", "code_browser_emojis",
-                         "description", "cldr_short_name", "mention_url","data", "descripcion", "nombre"))
+                         "description", "cldr_short_name", "mention_url","data", "descripcion", "nombre", "document", "n_ngram", "token", "permalink"))
 
 
 #' Tibble of examples for LimpiaR functions
@@ -63,7 +63,7 @@ utils::globalVariables(c("mention_content", "code_browser_emojis",
 #' @name code_browser_emojis
 #' @usage data("spanish_emojis_df")
 #' @keywords internal
-"code_browser_emojis"
+"spanish_emojis_df"
 
 #' code_browser_emojis
 #'
@@ -81,4 +81,21 @@ utils::globalVariables(c("mention_content", "code_browser_emojis",
 "code_browser_emojis"
 
 
+#' entities
+#'
+#' data frame with entities for converting and removing
+#'
+#' @format 4 columns 193 rows
+#' \describe{
+#'   \item{token}{regex pattern for product}
+#'   \item{replacement}{string to replace with}
+#'   \item{n}{count of entity in original data}
+#'   \item{word_count}{number of words entity's string comprises}
+#' }
+#' @docType data
+#' @name entities
+#' @usage data("entities")
+#' @keywords internal
+#'
+"entities"
 

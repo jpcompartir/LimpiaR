@@ -44,4 +44,5 @@ limpiar_tags <- function(df, text_var = mention_content, user = TRUE, hashtag = 
     (df <- dplyr::mutate(df, {{ text_var }} := stringr::str_replace_all({{ text_var }},"\\B#\\S+", "hashtag")))
   }else{df}
 
+  return(df)
 }

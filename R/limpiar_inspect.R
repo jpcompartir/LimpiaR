@@ -8,7 +8,7 @@
 #' @param data Data frame or tibble object
 #' @param pattern Pattern you wish to inspect e.g. "link bio"
 #' @param text_var Name of the text variable/character vector
-#' @param post_url Name of the data frame's URL-column
+#' @param url_var Name of the data frame's URL-column
 #' @param title Name of the viewable pane
 #'
 #' @importFrom rlang enquo
@@ -17,7 +17,7 @@
 #' df <- data.frame(
 #' text_variable = rbind("check me out", "don't look at me"),
 #' text_url = rbind("www.twitter.com", "www.facebook.com"))
-#' limpiar_inspect(df, "check", text_var = text_variable, post_url = text_url)
+#' limpiar_inspect(df, "check", text_var = text_variable, url_var = text_url)
 #' @export
 #'
 
@@ -25,12 +25,12 @@
 limpiar_inspect <- function(data,
                             pattern,
                             text_var = mention_content,
-                            post_url = mention_url,
+                            url_var = mention_url,
                             title = "inspect") {
   title_var = enquo(title)
 
   data %>%
     dplyr::filter(stringr::str_detect({{ text_var }}, pattern))%>%
-    dplyr::select({{ text_var }}, {{ post_url }}) %>%
+    dplyr::select({{ text_var }}, {{ url_var }}) %>%
     tibble::view(title = title_var)
 }
