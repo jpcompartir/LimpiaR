@@ -12,22 +12,23 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 Imports:
-    dplyr,
-    rlang,
-    stopwords,
-    stringr,
-    tibble,
-    tm,
-    magrittr,
-    janitor,
-    hash
+    dplyr (>= 1.0.10),
+    rlang (>= 1.0.6),
+    stringr (>= 1.5.0),
+    tibble (>= 3.1.8),
+    tm (>= 0.7.10),
+    magrittr (>= 2.0.3),
+    janitor (>= 2.1.0),
+    hash (>= 2.2.6.2),
+    tidytext (>= 0.4.0)
 Suggests: 
-    rmarkdown,
-    knitr,
+    rmarkdown (>= 2.14),
+    knitr (>= 1.39),
     testthat (>= 3.0.0),
-    tidyr
+    tidyr (>= 1.2.1),
+    LandscapeR
 Config/testthat/edition: 3
 Depends: 
     R (>= 2.10)

@@ -15,7 +15,7 @@
 limpiar_spam_grams <- function(data, text_var, n_gram, min_freq){
 
   data <- data %>%
-    dplyr::mutate(document = row_number())
+    dplyr::mutate(document = dplyr::row_number())
 
   ngrams <- data %>%
     dplyr::select(document, {{text_var}}) %>%

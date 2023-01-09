@@ -32,5 +32,5 @@ Set the name of the title to avoid new frames overwriting old ones.
 df <- data.frame(
 text_variable = rbind("check me out", "don't look at me"),
 text_url = rbind("www.twitter.com", "www.facebook.com"))
-limpiar_inspect(df, "check", text_var = text_variable, post_url = text_url)
+limpiar_inspect(df, "check", text_var = text_variable, url_var = text_url)
 }

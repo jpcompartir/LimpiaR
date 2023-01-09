@@ -6,10 +6,12 @@
 #' @return df with an additional column
 #' @export
 #'
-#'@usage df %>% limpiar_ex_subreddits(url_var = permalink)
+#'@usage
+#'limpiar_ex_subreddits(df, url_var = permalink)
 #'
 limpiar_ex_subreddits <- function(df, url_var = permalink){
 
+  requireNamespace("LandscapeR")
   url_type <- LandscapeR::column_type_checker(data = df, column = {{url_var}}, type = "character")
   if(url_type == "no") stop("url_var should be a character vector")
 

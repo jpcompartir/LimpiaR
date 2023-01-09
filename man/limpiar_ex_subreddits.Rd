@@ -4,7 +4,7 @@
 \alias{limpiar_ex_subreddits}
 \title{Quickly extract subreddits from a link variable}
 \usage{
-df %>% limpiar_ex_subreddits(url_var = permalink)
+limpiar_ex_subreddits(df, url_var = permalink)
 }
 \arguments{
 \item{df}{Data Frame or Tibble Object}

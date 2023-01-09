@@ -3,6 +3,7 @@
 \docType{data}
 \name{code_browser_emojis}
 \alias{code_browser_emojis}
+\alias{spanish_emojis_df}
 \title{spanish_emojis_df}
 \format{
 6 columns 1307 rows

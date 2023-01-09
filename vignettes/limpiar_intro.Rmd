@@ -251,15 +251,16 @@ So, imagine that we see a strange pattern, and we want to check what's going on 
 
 ```{r, eval = FALSE}
 limpiar_inspect(df, pattern = "ntonces", text_var = mention_content,
-                post_url = mention_url, title = "ntonces")
+                url_var = mention_url, title = "ntonces")
 ```
 
 
 ```{r, eval = TRUE, echo = FALSE}
 limpiar_inspect(df, pattern = "ntonces", text_var = mention_content,
-                post_url = mention_url, title = "ntonces")%>%
+                url_var = mention_url, title = "ntonces")%>%
   knitr::kable() 
 
+df
 ```
 
 Whilst it's pretty obvious that all of the 'grax ntonces q?' posts are exactly the same, in the real world we're going to have 10,000 times as many posts, and searching for suspicious patterns will take up a lot of our time. The vie
