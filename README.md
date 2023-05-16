@@ -1,7 +1,5 @@
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
-# LimpiaR
+<img src="man/figures/SHARExLimpiaR.png" align="center" width="100%" style="padding: 25px 50px 25px 0px;"/>
 
 <!-- badges: start -->
 
@@ -9,7 +7,17 @@
 [![R-CMD-check](https://github.com/jpcompartir/LimpiaR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jpcompartir/LimpiaR/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The goal of LimpiaR is to …
+## What is LimpiaR?
+
+LimpiaR is an R library of functions for cleaning & pre-processing text
+data. The name comes from ‘limpiar’ the Spanish verb’to clean’.
+Generally when calling a LimpiaR function, you can think of it as
+‘clean…’.
+
+LimpiaR is primarily used for cleaning unstructured text data, such as
+that which comes from social media or reviews. In its initial release,
+it is focused around the Spanish language, however, some of its
+functions are language-ambivalent.
 
 ## Installation
 
