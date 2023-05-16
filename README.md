@@ -1,17 +1,22 @@
 
-<img src="man/figures/SHARExLimpiaR.png" align="center" width="100%" style="padding: 25px 50px 25px 0px;"/>
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 
-## What is LimpiaR?
+# LimpiaR
 
-LimpiaR is an R library of functions for cleaning & pre-processing text data.
+<!-- badges: start -->
 
-The name comes from 'limpiar' the Spanish verb'to clean'. Generally when calling a LimpiaR function, you can think of it as 'clean...'.
+[![pkgdown](https://github.com/jpcompartir/LimpiaR/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/jpcompartir/LimpiaR/actions/workflows/pkgdown.yaml)
+[![R-CMD-check](https://github.com/jpcompartir/LimpiaR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jpcompartir/LimpiaR/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
 
-LimpiaR is primarily used for cleaning unstructured text data, such as that which comes from social media or reviews. In its initial release, it is focused around the Spanish language, however, some of its functions are language-ambivalent. 
+The goal of LimpiaR is to …
 
+## Installation
 
-## Installing the package
+You can install the development version of LimpiaR from
+[GitHub](https://github.com/) with:
 
-Install the package using the `install_github` function from the `devtools` package. 
-
-`devtools::install_github(repo = "jpcompartir/LimpiaR")`
+``` r
+# install.packages("devtools")
+devtools::install_github("jpcompartir/LimpiaR")
+```
