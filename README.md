@@ -1,17 +1,58 @@
 
-<img src="man/figures/SHARExLimpiaR.png" align="center" width="100%" style="padding: 25px 50px 25px 0px;"/>
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 
-## What is LimpiaR?
+# LimpiaR
 
-LimpiaR is an R library of functions for cleaning & pre-processing text data.
+<!-- badges: start -->
 
-The name comes from 'limpiar' the Spanish verb'to clean'. Generally when calling a LimpiaR function, you can think of it as 'clean...'.
+[![pkgdown](https://github.com/jpcompartir/LimpiaR/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/jpcompartir/LimpiaR/actions/workflows/pkgdown.yaml)
+[![R-CMD-check](https://github.com/jpcompartir/LimpiaR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jpcompartir/LimpiaR/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
 
-LimpiaR is primarily used for cleaning unstructured text data, such as that which comes from social media or reviews. In its initial release, it is focused around the Spanish language, however, some of its functions are language-ambivalent. 
+The goal of LimpiaR is to …
 
+## Installation
 
-## Installing the package
+You can install the development version of LimpiaR from
+[GitHub](https://github.com/) with:
 
-Install the package using the `install_github` function from the `devtools` package. 
+``` r
+# install.packages("devtools")
+devtools::install_github("jpcompartir/LimpiaR")
+```
 
-`devtools::install_github(repo = "jpcompartir/LimpiaR")`
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+``` r
+library(LimpiaR)
+## basic example code
+```
+
+What is special about using `README.Rmd` instead of just `README.md`?
+You can include R chunks like so:
+
+``` r
+summary(cars)
+#>      speed           dist       
+#>  Min.   : 4.0   Min.   :  2.00  
+#>  1st Qu.:12.0   1st Qu.: 26.00  
+#>  Median :15.0   Median : 36.00  
+#>  Mean   :15.4   Mean   : 42.98  
+#>  3rd Qu.:19.0   3rd Qu.: 56.00  
+#>  Max.   :25.0   Max.   :120.00
+```
+
+You’ll still need to render `README.Rmd` regularly, to keep `README.md`
+up-to-date. `devtools::build_readme()` is handy for this. You could also
+use GitHub Actions to re-render `README.Rmd` every time you push. An
+example workflow can be found here:
+<https://github.com/r-lib/actions/tree/v1/examples>.
+
+You can also embed plots, for example:
+
+<img src="man/figures/README-pressure-1.png" width="100%" />
+
+In that case, don’t forget to commit and push the resulting figure
+files, so they display on GitHub and CRAN.
