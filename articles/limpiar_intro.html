@@ -91,7 +91,7 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://stringr.tidyverse.org" class="external-link">stringr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://stringr.tidyverse.org" class="external-link">stringr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">LimpiaR</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#library(tidyverse)</span></span></code></pre></div>
@@ -129,7 +129,7 @@ if it is not already installed on your machine.</p>
 <span><span class="co">#    install.packages("janitor"), library(janitor))</span></span>
 <span></span>
 <span><span class="op">(</span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
-<span>   <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/janitor/man/clean_names.html" class="external-link">clean_names</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span>   <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/clean_names.html" class="external-link">clean_names</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 2</span></span></span>
 <span><span class="co">#&gt;    mention_content                                                   mention_url</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
@@ -488,7 +488,7 @@ to view all posts which contain that pattern in an interactive
 frame!</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/limpiar_inspect.html">limpiar_inspect</a></span><span class="op">(</span><span class="va">df</span>, pattern <span class="op">=</span> <span class="st">"ntonces"</span>, text_var <span class="op">=</span> <span class="va">mention_content</span>,</span>
-<span>                post_url <span class="op">=</span> <span class="va">mention_url</span>, title <span class="op">=</span> <span class="st">"ntonces"</span><span class="op">)</span></span></code></pre></div>
+<span>                url_var <span class="op">=</span> <span class="va">mention_url</span>, title <span class="op">=</span> <span class="st">"ntonces"</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">mention_content</th>
@@ -513,6 +513,19 @@ frame!</p>
 </tr>
 </tbody>
 </table>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 3</span></span></span>
+<span><span class="co">#&gt;    mention_content                                            mention_url na_col</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">"</span>holaaaaaa! cóómo    estás @magdalena   ?!<span style="color: #949494;">"</span>                www.twitte… <span style="color: #BB0000;">NA</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> <span style="color: #949494;">"</span>  han visto este articulo!? Que horror! https://guardian… www.twitte… <span style="color: #BB0000;">NA</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> <span style="color: #949494;">"</span>ayyyyyy a mi me   gustaria ir a londres yaaa #llevame #p… www.facebo… <span style="color: #BB0000;">NA</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> <span style="color: #949494;">"</span>jajajajaja eres un wn!<span style="color: #949494;">"</span>                                   www.facebo… <span style="color: #BB0000;">NA</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> <span style="color: #949494;">"</span>RT dale un click a ver una mujer baila con su perro<span style="color: #949494;">"</span>      www.twitte… <span style="color: #BB0000;">NA</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                          www.youtub… <span style="color: #BB0000;">NA</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> <span style="color: #949494;">"</span>yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣 <span style="color: #949494;">"</span>             www.instag… <span style="color: #BB0000;">NA</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                          www.youtub… <span style="color: #BB0000;">NA</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                          www.youtub… tadaa </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                          www.youtub… <span style="color: #BB0000;">NA</span></span></span></code></pre>
 <p>Whilst it’s pretty obvious that all of the ‘grax ntonces q?’ posts
 are exactly the same, in the real world we’re going to have 10,000 times
 as many posts, and searching for suspicious patterns will take up a lot
@@ -525,7 +538,7 @@ of our time. The vie</p>
 columns of a data frame. We may want to do this to save memory, for
 example if we have 400,000 posts and 80 columns. In this case we’ll get
 rid of all columns for which 25% or more of their values are NA.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/limpiar_na_cols.html">limpiar_na_cols</a></span><span class="op">(</span><span class="va">df</span>,threshold <span class="op">=</span>  <span class="fl">0.25</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 2</span></span></span>
 <span><span class="co">#&gt;    mention_content                                                   mention_url</span></span>
@@ -547,7 +560,7 @@ rid of all columns for which 25% or more of their values are NA.</p>
 </h2>
 <p>To speed things up, we can call the functions together in one big
 long pipe.</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/limpiar_na_cols.html">limpiar_na_cols</a></span><span class="op">(</span>threshold <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span><span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/limpiar_accents.html">limpiar_accents</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -578,7 +591,7 @@ as you go.</p>
 <p>Once you’re familiar with how LimpiaR works, you may want to use a
 bonus function, limpiar_df to do a bunch of things at once and speed
 everything up. limpiar_df also has an option to remove punctuation!</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/limpiar_df.html">limpiar_df</a></span><span class="op">(</span><span class="va">df</span>, text_var <span class="op">=</span> <span class="va">mention_content</span>, remove_punctuation <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 3</span></span></span>
 <span><span class="co">#&gt;   mention_content                                     mention_url         na_col</span></span>
@@ -611,7 +624,7 @@ everything up. limpiar_df also has an option to remove punctuation!</p>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
