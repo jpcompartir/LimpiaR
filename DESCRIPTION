@@ -30,6 +30,8 @@ Suggests:
     tidyr (>= 1.2.1),
     LandscapeR
 Config/testthat/edition: 3
+Remotes:
+    jpcompartir/LandscapeR
 Depends: 
-    R (>= 2.10)
+    R (>= 3.50)
 VignetteBuilder: knitr
