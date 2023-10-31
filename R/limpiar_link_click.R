@@ -20,6 +20,39 @@
 limpiar_link_click <- function(df, url_var){
   url_sym <- rlang::ensym(url_var)
 
-  df %>%
+  already_formatted <- df %>%
+    dplyr::slice_sample(n = 5) %>%
+    dplyr::filter(stringr::str_detect(!!url_sym, "^<a href")) %>%
+    nrow()
+
+  if(already_formatted > 0) {
+    message("url_var already detected as a clickable link, returning input data frame.")
+    return(df)
+  }
+
+  data <- df %>%
     dplyr::mutate({{url_var}}:= paste0("<a href='", !!url_sym, "' target='blank'>", "Click to View", "</a>"))
+
+  return(data)
+}
+
+
+limpiar_link_click_reverse <- function(df, url_var) {
+  url_sym <- rlang::ensym(url_var)
+
+  already_formatted <- df %>%
+    dplyr::slice_sample(n = 5) %>%
+    dplyr::filter(stringr::str_detect(!!url_sym, "^<a href")) %>%
+    nrow()
+
+  if(already_formatted == 0) {
+    message("url_var not detected as a clickable link, returning input data frame.")
+    return(df)
+  }
+
+  data <- df %>%
+    dplyr::mutate({{url_var}}:= stringr::str_replace_all(!!url_sym, "<a href='", "")) %>%
+    dplyr::mutate({{url_var}}:= stringr::str_replace_all(!!url_sym, "' target=.*", ""))
+
+  return(data)
 }
