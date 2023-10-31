@@ -1,9 +1,11 @@
-#' Prepare a URL column to be clickable in Shiny/Data Table
+#' @title Prepare a URL column to be clickable in Shiny/Data Table
 #'
-#' Will allow you to click the hyperlink to load a URL, e.g. for selecting an image.
-#' Make sure that DataTable is rendered with the argument 'escape = FALSE' or column will be all text.=
+#' @description Will allow you to click the hyperlink to load a URL, e.g. for selecting an image.
+#' @details Make sure that DataTable is rendered with the argument 'escape = FALSE' or column will be all text.
 #'
-#' @param df Data Farame or Tibble Object
+#' The function now checks if your url_var was a clickable link, and if it is then it won't add any new formatting.
+#'
+#' @param df Data Frame or Tibble Object
 #' @param url_var URL Column
 #'
 #' @return data frame with URL column edited to be clickable
@@ -37,6 +39,24 @@ limpiar_link_click <- function(df, url_var){
 }
 
 
+#' @title Reverses (inverts) limpiar_link_click
+#'
+#' @description Undoes the effects of the limpiar_link_click function, giving you the original url variable back.
+#'
+#'
+#' @param df Data Farame or Tibble Object
+#' @param url_var URL Column
+#'
+#' @return Data frame with the url_var in original form
+#' @export
+#'
+#' @examples
+#' df <- LimpiaR::limpiar_examples[1, ]
+#'
+#' df <- df %>% limpiar_link_click(mention_url)
+#' df$mention_url
+#' df %>% limpiar_link_click_reverse(mention_url)
+#'
 limpiar_link_click_reverse <- function(df, url_var) {
   url_sym <- rlang::ensym(url_var)
 

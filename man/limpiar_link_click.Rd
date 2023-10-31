@@ -7,7 +7,7 @@
 limpiar_link_click(df, url_var)
 }
 \arguments{
-\item{df}{Data Farame or Tibble Object}
+\item{df}{Data Frame or Tibble Object}
 
 \item{url_var}{URL Column}
 }
@@ -16,7 +16,11 @@ data frame with URL column edited to be clickable
 }
 \description{
 Will allow you to click the hyperlink to load a URL, e.g. for selecting an image.
-Make sure that DataTable is rendered with the argument 'escape = FALSE' or column will be all text.=
+}
+\details{
+Make sure that DataTable is rendered with the argument 'escape = FALSE' or column will be all text.
+
+The function now checks if your url_var was a clickable link, and if it is then it won't add any new formatting.
 }
 \examples{
 \dontrun{
