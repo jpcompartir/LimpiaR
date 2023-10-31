@@ -37,7 +37,7 @@ reference:
   - '`limpiar_inspect`'
   - '`limpiar_na_cols`'
   - '`limpiar_df`'
-  - '`limpiar_link_click`'
+  - contains("limpiar_link_click")
   - '`limpiar_ex_subreddits`'
 
 repo:
