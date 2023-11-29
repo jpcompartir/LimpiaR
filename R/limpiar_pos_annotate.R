@@ -55,7 +55,11 @@ limpiar_pos_annotate <- function(data,
   }
 
   # fix the typo in the function call
-  output <- udpipe::udpipe(x = text_var, object = saved_model, parallel.cores = parallel.cores, parallel.chunksize = parallel.chunksize, parser = parse_text)
+  output <- udpipe::udpipe(x = text_var,
+                           object = saved_model,
+                           parallel.cores = parallel.cores,
+                           parallel.chunksize = parallel.chunksize,
+                           parser = parse_text)
 
   return(output)
 }
