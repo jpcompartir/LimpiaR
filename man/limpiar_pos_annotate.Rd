@@ -7,9 +7,10 @@
 limpiar_pos_annotate(
   data,
   text_var,
-  saved_model,
+  pos_model,
   in_parallel = FALSE,
   parse_text = FALSE,
+  pos_tagging = TRUE,
   ...
 )
 }
@@ -18,13 +19,15 @@ limpiar_pos_annotate(
 
 \item{text_var}{Any texts or sentences the user wishes to perform the parts of speech annotations on.}
 
-\item{saved_model}{A UDPipe model loaded into memory using \code{limpiar_pos_load_model}, and must be of class 'udpipe_model'.}
+\item{pos_model}{A UDPipe model imported using \code{limpiar_pos_import_model}, and must be of class 'udpipe_model'.}
 
-\item{in_parallel}{A logical argument allowing the user to leverage parallel processing to speed the function up. If set to TRUE,  the function will select the number of available cores minus 1 and process more efficiently(faster).}
+\item{in_parallel}{A logical argument allowing the user to leverage parallel processing to speed the function up. If set to TRUE,  the function will select the number of available cores minus one, processing more efficiently(faster), leaving one core to manage other computations.}
 
 \item{parse_text}{Whether to perform dependency parsing on tokens. The default is set to "parser". The user may skip this step by supplying the argument with "none".}
 
-\item{...}{To enable the user to supply any additonal arguments.}
+\item{pos_tagging}{A logical argument stating whether to perform parts of speech tagging on tokens, such as differentiating between Nouns, Verbs Adjectives etc... The default is set to TRUE.}
+
+\item{...}{To enable the user to supply any additional arguments.}
 }
 \value{
 Returns a data frame object derived from CONLL-U formatting, where each row is an annotation of a word. To find out more on the formatting methods, read \href{https://universaldependencies.org/format.html}{here}.

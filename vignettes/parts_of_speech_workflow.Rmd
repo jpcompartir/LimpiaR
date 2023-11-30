@@ -18,30 +18,12 @@ library(dplyr)
 library(stringr)
 ```
 
-First, we must select what model it is that that we want to download. UDPipe pre-trained models build upon  Universal Dependencies treebanks and are made available for more than 65 languages based on 101 treebanks. For the purpose of this documentation, we will select the `english` model.
-
-Using `limpiar_pos_download_model()`, we can select the `language` we want the model to be trained on, the directory or folder we want to save the model whether locally or on a drive using the `model_directory` argument and inputting a string pointing to a specific directory. For this example, lets imagine that we want to create a file in 'Documents' called 'saved_model' and save the model there, the model will look something like this 'english-ewt-ud-2.5-191206.udpipe'. There remains one more argument, and that is `overwrite`, which is set to `TRUE` by default meaning it will download the model and overwrite the file if the file already existed. If set to `FALSE`, the model will only be downloaded if it does not already exist on disk.
+First, we must select what model it is that that we want to download. UDPipe pre-trained models build upon  Universal Dependencies treebanks and are made available for more than 65 languages based on 101 treebanks. For the purpose of this documentation, we will select the `english` model, and we can do so using the `limpiar_pos_import_model` function and supplying the only argument, `language` with the desired model we want.
 
 ```{r}
-model <- limpiar_pos_download_model(language = "english", model_directory = "~/Documents/saved_model", overwrite = TRUE)
+model <- limpiar_pos_import_model(language = "english")
 ```
-
-Now we have a model downloaded and saved somewhere that suits us, we can now load this model in anytime with the help of `limpiar_pos_load_model()`, that simply takes in the same path provided when downloading the model using the `model_directory` argument. There are two ways to feed this information to the function.
-```{r}
-model_loaded <- limpiar_pos_load_model(model_directory = "~/Documents/saved_model/english-ewt-ud-2.5-191206.udpipe")
-```
-OR
-```{r}
-# this approach will only work if the 'model' object is still loaded into memory(appearing in the Environment pane of Rstudio)
-model_loaded <- limpiar_pos_load_model(model_directory = model$file_model) 
-```
-
-
-It's worth noting that before annotating, we must ensure that the model we want to use is not the object we create with `limpiar_pos_download_model()` but the loaded model using `limpiar_pos_load_model()` otherwise the user will be met with error message:
-
-'Error in limpiar_pos_annotate(saved_model = model, texts = data$text,  : 
-  saved_model should be of class udpipe_model as returned by the function limpiar_pos_load_model'
-  
+ 
 For example, lets use the data object derived from {stringr} package containing sentences ideal for tagging, tokenizing, lemmatizing and parsing for parts of speech analysis.
 ```{r}
 data <- dplyr::tibble(text = tolower(stringr::sentences[1:100]), document = 1:100)
@@ -54,6 +36,6 @@ It's worth noting that the output is dependent on cleaning steps performed on te
 When using LimpiaR's annotate function we tokenize all sentences of our text variable(text_var) within a selected data frame or tibble(data), enabling us to perform Parts of Speech tagging, lemmatization and dependency parsing(parse_text). We can also speed the process up by calling TRUE on the parallel processing argument(in_parallel).
 
 ```{r}
-annotations <- limpiar_pos_annotate(data = data, text_var = text, saved_model = model_loaded, in_parallel = FALSE, parse_text = TRUE)
+annotations <- limpiar_pos_annotate(data = data, text_var = text, pos_model = model, in_parallel = TRUE, parse_text = TRUE)
 ```
 
