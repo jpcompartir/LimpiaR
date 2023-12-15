@@ -6,7 +6,7 @@
 #'
 #' @param language The chosen language that the user wishes to select. There are 65 options to choose from
 #'
-#' @return Loads the model into memory, ready for the annotation steps in the parts of speech workflow
+#' @return Loads the model into memory, ready for the annotation steps in the parts of speech workflow.
 #' @export
 #'
 #' @examples
@@ -17,10 +17,11 @@ limpiar_pos_import_model <- function(language) {
 
   model <- udpipe::udpipe_download_model(language = language,
                                          model_dir = tempdir(),
-                                         overwrite = TRUE)
+                                         overwrite = FALSE)
 
   model_loaded <- udpipe::udpipe_load_model(file = model$file)
 
   return(model_loaded)
 
 }
+

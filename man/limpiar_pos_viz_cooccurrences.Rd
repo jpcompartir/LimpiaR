@@ -5,15 +5,15 @@
 \title{Visualize Parts of Speech Co-occurrences within sentences}
 \usage{
 limpiar_pos_viz_cooccurrences(
-  annotated_df,
+  data,
   chosen_pos = c("PROPN", "ADJ", "NOUN", "VERB", "ADV"),
   n_occurrences = 40
 )
 }
 \arguments{
-\item{annotated_df}{The output given from the limpiar_pos_annotate function as a data.frame object.}
+\item{data}{The output given from the limpiar_pos_annotate function as a data.frame object.}
 
-\item{chosen_pos}{The chosen parts of speech the user wishes to visualise, tese can be either c("PROPN", "ADJ", "NOUN", "VERB").}
+\item{chosen_pos}{The chosen parts of speech the user wishes to visualise, these can be either c("PROPN", "ADJ", "NOUN", "VERB").}
 
 \item{n_occurrences}{How many different terms does the user wish to plot, the default is set to 40.}
 }

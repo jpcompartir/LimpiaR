@@ -17,6 +17,7 @@ library(tibble)
 library(dplyr)
 library(stringr)
 ```
+LimpiaR's parts of speech(POS) functions lean on existing functionality of {udpipe} and allow for users to import one of their existing trained models for parts of speech analysis, to later annotate texts by tokenizing(breaking sentences up into words). By doing so we can begin to label each token based on parts of speech, whether verb, adjective etc.
 
 First, we must select what model it is that that we want to download. UDPipe pre-trained models build upon  Universal Dependencies treebanks and are made available for more than 65 languages based on 101 treebanks. For the purpose of this documentation, we will select the `english` model, and we can do so using the `limpiar_pos_import_model` function and supplying the only argument, `language` with the desired model we want.
 
@@ -36,6 +37,10 @@ It's worth noting that the output is dependent on cleaning steps performed on te
 When using LimpiaR's annotate function we tokenize all sentences of our text variable(text_var) within a selected data frame or tibble(data), enabling us to perform Parts of Speech tagging, lemmatization and dependency parsing(parse_text). We can also speed the process up by calling TRUE on the parallel processing argument(in_parallel).
 
 ```{r}
-annotations <- limpiar_pos_annotate(data = data, text_var = text, pos_model = model, in_parallel = TRUE, parse_text = TRUE)
+annotations <- limpiar_pos_annotate(data = data, text_var = text, pos_model = model, in_parallel = FALSE, parse_text = TRUE, id_var = "document")
 ```
 
+We can see that there's a doc_id, paragraph_id, sentence_id, the sentence, the token_id,token, lemma, upos, xpos, feats (seems like features?) 
+- explain these features
+- how to summarise/filter by particular features & use this to inform what other functions should be built 
+- then look at feeding the output into some ParseR/topic modelling visualisations to get a feel for the difference + complete the vignette

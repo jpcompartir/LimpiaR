@@ -40,6 +40,14 @@ reference:
   - contains("limpiar_link_click")
   - '`limpiar_ex_subreddits`'
 
+- title: Processing Parts of Speech
+  desc: >
+    A collection of functions that collectively make up a Parts of Speech(POS) analysis and workflow.
+  contents:
+  - '`limpiar_pos_import_model`'
+  - '`limpiar_pos_annotate`'
+  - '`limpiar_pos_viz_cooccurences`'
+
 repo:
   url:
     home: https://github.com/jpcompartir/LimpiaR
