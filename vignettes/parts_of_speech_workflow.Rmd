@@ -10,22 +10,22 @@ In this vignette we'll be looking at how to use LimpiaR to process a text variab
 
 The main motivation for processing and extraction parts of speech is to home in on the particular aspects of language which are most informative for answering a given research question. For example, if you want to know what people think about something, you might focus on adjectives and nouns. If you want to know how people are using something, you might focus more on verbs/phrasal verbs.
 
-Before we start, we must ensure that we have the necessary libraries installed and loaded, including LimpiaR, and a few others for wrangling purposes.
+Before we start, we must ensure that we have the necessary libraries installed and loaded, including LimpiaR, and a few others for data wrangling purposes.
 ```{r}
 library(LimpiaR)
 library(tibble)
 library(dplyr)
 library(stringr)
 ```
-LimpiaR's parts of speech(POS) functions lean on existing functionality of {udpipe} and allow for users to import one of their existing trained models for parts of speech analysis, to later annotate texts by tokenizing(breaking sentences up into words). By doing so we can begin to label each token based on parts of speech, whether verb, adjective etc.
+LimpiaR's parts of speech(POS) workflow leans on existing functionality of {udpipe} and allow for users to import one of their existing trained models for parts of speech analysis, to later annotate texts by tokenizing(breaking sentences up into words) and also enables users to perform dependency parsing on tokens, 'a technique which provides to each word in a sentence the link to another word in the sentence, which is called its syntactical head. This link between each 2 words furthermore has a certain type of relationship giving you further details about it', see [here](https://www.r-bloggers.com/2019/07/dependency-parsing-with-udpipe/) for more.
 
-First, we must select what model it is that that we want to download. UDPipe pre-trained models build upon  Universal Dependencies treebanks and are made available for more than 65 languages based on 101 treebanks. For the purpose of this documentation, we will select the `english` model, and we can do so using the `limpiar_pos_import_model` function and supplying the only argument, `language` with the desired model we want.
+First, we must select what model it is that that we want to download. UDPipe pre-trained models are built upon Universal Dependencies treebanks and are made available for more than 65 languages based on 101 treebanks. For the purpose of this documentation, we will select the 'english' model, and we can do so using the `limpiar_pos_import_model` function and supplying its only argument, `language` with the desired model we want.
 
 ```{r}
 model <- limpiar_pos_import_model(language = "english")
 ```
  
-For example, lets use the data object derived from {stringr} package containing sentences ideal for tagging, tokenizing, lemmatizing and parsing for parts of speech analysis.
+For the purpose of this demo, lets use the data object derived from the {stringr} package containing sentences ideal for tagging, tokenizing, lemmatizing and parsing for parts of speech analysis.
 ```{r}
 data <- dplyr::tibble(text = tolower(stringr::sentences[1:100]), document = 1:100)
 ```
