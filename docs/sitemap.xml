@@ -16,6 +16,9 @@
     <loc>/articles/limpiar_intro.html</loc>
   </url>
   <url>
+    <loc>/articles/parts_of_speech_workflow.html</loc>
+  </url>
+  <url>
     <loc>/authors.html</loc>
   </url>
   <url>
@@ -58,7 +61,16 @@
     <loc>/reference/limpiar_link_click.html</loc>
   </url>
   <url>
+    <loc>/reference/limpiar_link_click_reverse.html</loc>
+  </url>
+  <url>
     <loc>/reference/limpiar_na_cols.html</loc>
+  </url>
+  <url>
+    <loc>/reference/limpiar_pos_annotate.html</loc>
+  </url>
+  <url>
+    <loc>/reference/limpiar_pos_import_model.html</loc>
   </url>
   <url>
     <loc>/reference/limpiar_pp_companies.html</loc>

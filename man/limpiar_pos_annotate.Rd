@@ -7,7 +7,7 @@
 limpiar_pos_annotate(
   data,
   text_var,
-  id_var = universal_message_id,
+  id_var,
   pos_model,
   in_parallel = FALSE,
   parse_text = FALSE,
@@ -23,9 +23,9 @@ limpiar_pos_annotate(
 
 \item{pos_model}{A UDPipe model imported using \code{limpiar_pos_import_model}, and must be of class 'udpipe_model'.}
 
-\item{in_parallel}{A logical argument allowing the user to leverage parallel processing to speed the function up. If set to TRUE,  the function will select the number of available cores minus one, processing more efficiently(faster), leaving one core to manage other computations.}
+\item{in_parallel}{A logical argument allowing the user to initiate parallel processing to speed the annotate function up. If set to TRUE,  the function will select the number of available cores minus one, processing more efficiently(faster), leaving one core to manage other computations. The default is FALSE.}
 
-\item{parse_text}{Whether to perform dependency parsing on tokens. The default is set to FALSE. If the user wishs to perform parsing on tokens, they may do so by calling TRUE.}
+\item{parse_text}{Whether to perform dependency parsing on tokens. The default is set to FALSE. If the user wishes to perform parsing on tokens, they may do so by calling TRUE.}
 
 \item{...}{To enable the user to supply any additional arguments.}
 }
@@ -36,9 +36,12 @@ The additional arguments with tagged POS information are as follows:
 \item paragraph_id: The identifier indicating the paragraph the annotated token is derived from.
 \item sentence_id: Similar to paragraph_id but at a sentence level.
 \item sentence: The sentence the annotated token is derived from.
+\item token_id: Token index, integer starting at 1 for each new sentence. May be a range for multiword tokens or a decimal number for empty nodes.
 \item token: The token(or word) being annotated for parts of speech.
 \item lemma: The lemmatized version of the annotated token.
 \item pos_tag: The universal parts of speech tag of the token. \href{https://universaldependencies.org/format.html}{Here} for more information.
+\item xpos: The treebank-specific parts of speech tag of the token.
+\item feats: The morphological features of the token, used for dependency parsing visualisations,.
 \item head_token_id: Indicating what is the token id of the head of the token, indicating to which other token in the sentence it is related.
 \item dependency_tag: The information regarding dependency parsing of tokens, displaying the type of relation the token has with the head_token_id. \href{https://universaldependencies.org/format.html}{Here} for more information.
 }
@@ -47,11 +50,13 @@ The additional arguments with tagged POS information are as follows:
 Annotate Texts for Parts of Speech Analysis
 }
 \examples{
-model <- limpiar_pos_import_model(language = "english")
+data <- dplyr::tibble(text = tolower(stringr::sentences[1:100]),
+document = 1:100)
+model <- LimpiaR::limpiar_pos_import_model(language = "english")
 annotations <- limpiar_pos_annotate(data = data,
                                    text_var = text,
-                                   id_var = universal_message_id,
+                                   id_var = document,
                                    pos_model = model,
-                                   in_parallel = TRUE,
-                                   parse_text = FALSE)
+                                   in_parallel = FALSE,
+                                   parse_text = TRUE)
 }

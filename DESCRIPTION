@@ -22,13 +22,15 @@ Imports:
     magrittr (>= 2.0.3),
     janitor (>= 2.1.0),
     hash (>= 2.2.6.2),
-    tidytext (>= 0.4.0)
+    tidytext (>= 0.4.0),
+    udpipe
 Suggests: 
     rmarkdown (>= 2.14),
     knitr (>= 1.39),
     testthat (>= 3.0.0),
     tidyr (>= 1.2.1),
-    LandscapeR
+    LandscapeR,
+    DT
 Config/testthat/edition: 3
 Remotes:
     jpcompartir/LandscapeR

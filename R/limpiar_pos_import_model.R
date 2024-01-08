@@ -13,15 +13,17 @@
 #' pos_model <- limpiar_pos_import_model(language = "english")
 limpiar_pos_import_model <- function(language) {
 
+  # stop if not statement, for language input being of string class
   stopifnot(rlang::is_string(language))
 
+  # save model to a temporary directory and don't overwrite unless models not already in the temp directory
   model <- udpipe::udpipe_download_model(language = language,
                                          model_dir = tempdir(),
                                          overwrite = FALSE)
 
+  # load model from the temp directory
   model_loaded <- udpipe::udpipe_load_model(file = model$file)
 
   return(model_loaded)
-
 }
 

@@ -46,7 +46,6 @@ reference:
   contents:
   - '`limpiar_pos_import_model`'
   - '`limpiar_pos_annotate`'
-  - '`limpiar_pos_viz_cooccurences`'
 
 repo:
   url:
