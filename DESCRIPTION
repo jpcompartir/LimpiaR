@@ -30,7 +30,10 @@ Suggests:
     testthat (>= 3.0.0),
     tidyr (>= 1.2.1),
     LandscapeR,
-    DT
+    DT,
+    ggplot2,
+    ggraph,
+    igraph
 Config/testthat/edition: 3
 Remotes:
     jpcompartir/LandscapeR
