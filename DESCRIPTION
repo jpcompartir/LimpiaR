@@ -29,11 +29,7 @@ Suggests:
     knitr (>= 1.39),
     testthat (>= 3.0.0),
     tidyr (>= 1.2.1),
-    LandscapeR,
-    DT,
-    ggplot2,
-    ggraph,
-    igraph
+    LandscapeR
 Config/testthat/edition: 3
 Remotes:
     jpcompartir/LandscapeR

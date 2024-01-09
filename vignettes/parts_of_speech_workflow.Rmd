@@ -45,10 +45,9 @@ annotations <- limpiar_pos_annotate(data = data, text_var = text, id_var = unive
 ```
 
 Now that we have our texts tokenized, parsed and POS annotations are complete. Lets take a look at the output in a data table.
-```{r}
+```{r, message=FALSE, warning=FALSE}
 annotations %>% 
-  dplyr::slice_head(n = 50) %>% 
-  DT::datatable() 
+  dplyr::slice_head(n = 50)
 ```
 
 Our first observation might be that the data frame output is significantly larger than the one we provided in terms of row number. This is due to each row now representing an annotation of each token derived from sentences belonging to documents. We can also see some additional columns containing information regarding each annotation, the columns we will pay closer attention to are; paragraph_id, sentence_id, sentence, token, lemma, pos_tag, dependency_tag and id_var all of which can be useful in a number of NLP objectives. 
@@ -64,8 +63,7 @@ Now that we have a bit more context as to what all of this information means, le
 annotations %>% 
   dplyr::filter(pos_tag %in% c("ADJ")) %>%  # select which parts of speech we want to inspect
   dplyr::count(.by = lemma, lemma, sort = TRUE) %>% 
-  utils::head(n = 10) %>% 
-  DT::datatable()
+  utils::head(n = 10)
 ```
 
 So here, we can see that 'old' is the most frequent adjective followed by adjectives such as 'high', 'fine' and others within our text documents. Now lets look at frequent nouns.
@@ -74,15 +72,12 @@ So here, we can see that 'old' is the most frequent adjective followed by adject
 annotations %>% 
   dplyr::filter(pos_tag %in% c("NOUN")) %>% # this time selecting nouns
   dplyr::count(.by = lemma, lemma, sort = TRUE) %>% 
-  utils::head(n = 10) %>%
-  DT::datatable()
+  utils::head(n = 10)
 ```
 
 Okay, so we can see that 'man' is the most used noun within the data set. This paired with the adjective counts, can start to tell a story about whats in the data and how these parts of speech are distributed across our documents. 
 
 So we've observed 'old' as the most frequent adjective and 'man' as the most used noun, this isn't to say that a majority of posts are consistent of the term 'old man', but if we wanted to investigate adjective and noun relationships we can so do by calculating these co-occurrences within documents using `udpipe::cooccurrence()`.
-
-### The following section needs to be revisited and most of it likely removed or edited, need to think how to do the same thing differently...
 
 ```{r, message=FALSE, warning=FALSE}
 co_occurrences <- udpipe::cooccurrence(x = subset(annotations, pos_tag %in% c("NOUN", "ADJ")),
@@ -91,38 +86,4 @@ co_occurrences <- udpipe::cooccurrence(x = subset(annotations, pos_tag %in% c("N
 utils::head(co_occurrences)
 ```
 
-We then have the option to  visualize these byway of looking at the co-occurrences both in the same document as well as those that follow one another. For example, lets take a look at the co-occurrences within documents.
-
-```{r, echo = FALSE, message=FALSE, warning=FALSE}
-library(igraph)
-library(ggraph)
-library(ggplot2)
-
-wordnetwork <- utils::head(co_occurrences, 24)
-wordnetwork <- igraph::graph_from_data_frame(wordnetwork)
-
-ggraph::ggraph(wordnetwork, layout = "fr") +
-  ggraph::geom_edge_link(aes(width = cooc, edge_alpha = cooc), edge_colour = "pink") +
-  ggraph::geom_node_text(aes(label = name), col = "darkgreen", size = 3.5) +
-  ggraph::theme_graph(base_family = "Arial Narrow") +
-  ggplot2::theme(legend.position = "none") +
-  ggplot2::labs(title = "Co-occurrences within\ndocuments", subtitle = "Nouns & Adjective")
-```
-
-The above visualization is rather fragmented but this is a result of having sentence data such as this one where documents aren't consistent of multiple nouns and adjectives. Finally, lets look at the nouns and adjectives that follow one another. 
-
-```{r, echo = FALSE, message=FALSE, warning=FALSE}
-co_occurrances2 <- udpipe::cooccurrence(annotations$lemma, relevant = annotations$pos_tag %in% c("NOUN", "ADJ"), skipgram = 1)
-utils::head(co_occurrances2)
-
-wordnetwork2 <- utils::head(co_occurrances2, 12)
-wordnetwork2 <- igraph::graph_from_data_frame(wordnetwork2)
-
-ggraph::ggraph(wordnetwork2, layout = "fr") +
-  ggraph::geom_edge_link(aes(width = cooc, edge_alpha = cooc)) +
-  ggraph::geom_node_text(aes(label = name), col = "darkgreen", size = 3.5) +
-  ggraph::theme_graph(base_family = "Arial Narrow") +
-  ggplot2::labs(title = "Co-occurrences following\none another", subtitle = "Nouns & Adjective")
-```
-
-We see that 'hot sun' remains most frequent with a count of 3 occurrences throughout our documents.
+Once we have the information regarding the co-occurrences of Nouns and Adjectives within documents, we are able to tell what entities appear throughout our data, as well as the type of language used in conjunction with and toward them. We can later do so by visualizing the frequency of terms appearing within the same document as well as those that are explicitly used one after another like the example above, where we see 'hot sun' appear most frequent.
