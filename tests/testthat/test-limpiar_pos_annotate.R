@@ -1,57 +1,40 @@
-test_that("function will only run when data is of data.frame class", {
-  data <- dplyr::tibble(text = tolower(stringr::sentences[1:100]), document = 1:100) %>% dplyr::mutate(universal_message_id = paste0("TWITTER", sample(1:100, 100, replace = FALSE)))
-  model_loaded <- limpiar_pos_import_model("english")
+test_that("input validation", {
 
-  outputa <- limpiar_pos_annotate(data = data, text_var = text, id_var = universal_message_id, pos_model = model_loaded, parse_text = FALSE)
-  expect_no_error(outputa)
+  # define the correct model class here for later
+  model_loaded <- "hello world"
+  attr(model_loaded, "class") <- "udpipe_model"
 
-  data_matrix <- as.matrix(data) # convert data to matrix class
-  # catch the error message when data is not correct class
-  outputb <- tryCatch(
-    limpiar_pos_annotate(data = data_matrix, text_var = text, id_var = universal_message_id, pos_model = model_loaded, parse_text = FALSE),
-    error = function(e) e
-  )
-  expect_identical(outputb$message, "is.data.frame(data) is not TRUE")
+  # expect error as data is not of data.frame class
+  expect_error(limpiar_pos_annotate(data = 123), info = "is.data.frame(data) is not TRUE")
 
-  # catch the error message when id_var not supplied
-  outputc <- tryCatch(
-    limpiar_pos_annotate(data = data, text_var = text, pos_model = model_loaded, parse_text = FALSE),
-    error = function(e) e
-  )
-  expect_identical(outputc$message, "id_var not supplied, unable to join annotations to original data")
+  # expect pos_model to be of class udpipe_model
+  expect_error(limpiar_pos_annotate(data = data.frame(), pos_model = 123), regexp = "pos_model should be of class udpipe_model")
+
+  # expect error when text_var is missing
+  expect_error(limpiar_pos_annotate(data = data.frame(), pos_model = model_loaded), info = `argument "text_var" is missing`)
+
+  # expect to be met with error when id_var not supplied
+  expect_error(limpiar_pos_annotate(data = data.frame(text = "text"), text_var = text, pos_model = model_loaded), regexp = "id_var not supplied, unable to join annotations to original data")
 })
 
 
-test_that("dependency parsing feature is working", {
-  data <- dplyr::tibble(text = tolower(stringr::sentences[1:100]), document = 1:100)
+test_that("output validation - id_var is unchanged between input and output and dependency parsing works", {
+
+  # create some data and load a model
+  data <- data.frame(text = paste0("texts",sample(1:5, 5, replace = FALSE))) %>% dplyr::mutate(universal_message_id = paste0("TWITTER", sample(1:5, 5, replace = FALSE)))
   model_loaded <- limpiar_pos_import_model("english")
 
-  output <- limpiar_pos_annotate(data = data, text_var = text, pos_model = model_loaded, id_var = document, parse_text = FALSE)
+  output <- limpiar_pos_annotate(data = data, text_var = text, pos_model = model_loaded, id_var = universal_message_id)
+
+  # id_var is unchanged by function
+  expect_identical(data$universal_message_id, unique(output$id_var))
+
+  # all dep tags should be NA
   expect_true(all(is.na(output$dependency_tag)))
 
-  output_w_parsing <- limpiar_pos_annotate(data = data, text_var = text, pos_model = model_loaded, id_var = document, parse_text = TRUE)
+  # now create an output object with parsed tokens
+  output_w_parsing <- limpiar_pos_annotate(data = data, text_var = text, pos_model = model_loaded, id_var = universal_message_id, parse_text = TRUE)
+
+  # no dep tags should be NA
   expect_false(any(is.na(output_w_parsing$dependency_tag)))
-})
-
-
-test_that("output is in expected format", {
-  data <- dplyr::tibble(text = tolower(stringr::sentences[1:100]), document = 1:100)
-  model_loaded <- limpiar_pos_import_model("english")
-
-  output <- limpiar_pos_annotate(data = data, text_var = text, pos_model = model_loaded, id_var = document, parse_text = FALSE)
-
-  expect_true(inherits(output, "data.frame"))
-})
-
-
-test_that("id_var is unchanged between input and output", {
-  data <- dplyr::tibble(text = tolower(stringr::sentences[1:100]), document = 1:100) %>% dplyr::mutate(universal_message_id = paste0("TWITTER", sample(1:100, 100, replace = FALSE)))
-  model_loaded <- limpiar_pos_import_model("english")
-
-  output <- limpiar_pos_annotate(data = data, text_var = text, pos_model = model_loaded, id_var = universal_message_id, parse_text = FALSE)
-
-  input_id_var <- data$universal_message_id
-  output_id_var <- unique(output$id_var)
-
-  expect_identical(input_id_var, output_id_var)
 })

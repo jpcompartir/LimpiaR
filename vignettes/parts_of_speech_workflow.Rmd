@@ -36,9 +36,9 @@ data <- dplyr::tibble(text = tolower(stringr::sentences[1:1000]), document = 1:1
 
 Now we have our data and we should have our loaded model, we can begin annotating with the `limpiar_pos_annotate()` function. 
 
-It's worth noting that the output can entirely depend on any cleaning steps performed on texts before annotating. For example, it is possible that with the removal of punctuation, the dependency parsing bits of the function may under-perform. This could also be said for the Parts of Speech(POS) tagging process as nouns(PRON) and proper-nouns(PROPN) will be harder to differentiate if punctuation is removed as well as all text being lowercase.
+It's worth noting that the output can entirely depend on any cleaning steps performed on texts before annotating. For example, it is possible that with the removal of punctuation, the dependency parsing bits of the function may under-perform. This could also be said for the Parts of Speech(POS) tagging process as nouns(NOUN) and proper-nouns(PROPN) will be harder to differentiate if punctuation is removed as well as all text being lowercase.
 
-When using LimpiaR's annotate function we first tokenize all sentences of our text variable(text_var) within a selected data frame object(data), enabling us to perform POS tagging and lemmatization on tokens. We can also speed this process up by calling `TRUE` on the parallel processing argument(in_parallel). The user can also decide whether to parse tokens for term dependencies, by supplying the parse_text argument with a logical input of `TRUE`, but is `FALSE` by default as this step can be expensive on compute and memory if performed on large sets of data unnecessarily or unwillingly. When using `limpiar_pos_annotate()` its important to supply the id_var with an appropriate identifying variable. This can either be; universal_message_id, doc_id, doc_number or anything similar that represents a unique document of text which the annotations are then performed upon.
+When using LimpiaR's annotate function we first tokenize all sentences of our text variable(text_var) within a selected data frame object(data), enabling us to perform POS tagging and lemmatization on tokens. We can also speed this process up by calling `TRUE` on the parallel processing argument(in_parallel). The user can also decide whether to parse tokens for term dependencies, by supplying the parse_text argument with a logical input of `TRUE`, but is `FALSE` by default as this step can be expensive on compute and memory if performed on large sets of data unnecessarily or unwillingly. When using `limpiar_pos_annotate()`, its important to supply the id_var with an appropriate identifying variable. This can either be; universal_message_id, doc_id, doc_number or anything similar that represents a unique document of text which the annotations are then performed upon.
 
 ```{r, message=FALSE} 
 annotations <- limpiar_pos_annotate(data = data, text_var = text, id_var = universal_message_id, pos_model = model,parse_text = TRUE)
@@ -50,12 +50,12 @@ annotations %>%
   dplyr::slice_head(n = 50)
 ```
 
-Our first observation might be that the data frame output is significantly larger than the one we provided in terms of row number. This is due to each row now representing an annotation of each token derived from sentences belonging to documents. We can also see some additional columns containing information regarding each annotation, the columns we will pay closer attention to are; paragraph_id, sentence_id, sentence, token, lemma, pos_tag, dependency_tag and id_var all of which can be useful in a number of NLP objectives. 
+Our first observation might be that the data frame output is significantly larger than the one we provided in terms of row number. This is due to each row now representing an annotation of each token derived from sentences belonging to documents. We can also see some additional columns containing information regarding each annotation, the columns we will pay closer attention to are; paragraph_id, sentence_id, sentence, token, lemma, pos_tag, dependency_tag and id_var, all of which can be useful in a number of NLP objectives. 
 
 First, we must understand what they all mean. Starting with `paragraph_id` and `sentence_id`, we see the identifying value for both the sentence in which the annotated token is derived, as well as the paragraph. As our example data consists of sentences its likely that the values here for paragraph_id and sentence_id will be an equal match given that no document consists of more than one sentence. We then of course, have the `sentence` in question along with the `token` being annotated along with its respective `lemma`(the token in its root form), understanding the lemma column can be best visualized when looking at row number 43 where 'served' of document 5 becomes 'serve' once lemmatized. 
 
-We then see `pos_tag`, `head_token_id`, `dependency_tag` and `id_var`. Starting with pos_tag(or Parts of Speech tag), this column is where information regarding how tokens are classified as any of the parts of speech labels such as; Noun(NOUN), Proper Noun(PROPN), Pronoun(PRON), Verb(VERB), Adjective(ADJ) etc. For more on the exact tags and what they mean see [here](https://universaldependencies.org/u/pos/index.html). We then have columns; `head_token_id` and `dependency_tag` which along with a few other columns, we will need if we wish to conduct dependency parsing analysis on our documents and visualize those. If the user calls parse_text = FALSE, then dependency tags will show as NA. These two columns are important and are closely linked as dependency_tag shows the relationship the annotated token has with the head_token_id.
-Finally, the finally and quite possibly the most important column; `id_var`, this is the id_var that the users inputs when calling the annotate function and is necessary to join the original data back to the annotations throughout the process. If not supplied, the function will not run.
+We then see `pos_tag`, `head_token_id`, `dependency_tag` and `id_var`. Starting with pos_tag(or Parts of Speech tag), this column is where information regarding how tokens are classified as any of the parts of speech labels such as; Noun(NOUN), Proper Noun(PROPN), Pronoun(PRON), Verb(VERB), Adjective(ADJ) etc. For more on the exact tags and what they mean see [here](https://universaldependencies.org/u/pos/index.html). We then have columns; `head_token_id` and `dependency_tag` which along with a few other columns we will need if we wish to conduct dependency parsing analysis on our documents and visualize those. If the user calls parse_text = FALSE, then dependency tags will show as NA. These two columns are important and are closely linked as dependency_tag shows the relationship the annotated token has with the head_token_id.
+Finally, the last and quite possibly most important column; `id_var`, this is the variable that the users inputs when calling the annotate function and is necessary to join the original data back to the annotations throughout the process. If not supplied, the function will not run, and if supplied incorrectly, the output is likely to be hindered and therefore causing the user problems further down the line, so take care when supplying the function with this variable.
 
 Now that we have a bit more context as to what all of this information means, lets dive in and see if we can manipulate this data so we can see what adjectives are most common in their lemmatized form. To do so, we only require some basic {dplyr} functionality and we will use `head()` from {utils} package to select only the top 10 most frequent.
 
@@ -66,7 +66,7 @@ annotations %>%
   utils::head(n = 10)
 ```
 
-So here, we can see that 'old' is the most frequent adjective followed by adjectives such as 'high', 'fine' and others within our text documents. Now lets look at frequent nouns.
+So here, we can see that 'old' is the most frequent adjective followed by the likes of 'high', 'fine' along with a few others within our text documents. Now lets look at frequent nouns.
 
 ```{r}
 annotations %>% 
@@ -75,9 +75,9 @@ annotations %>%
   utils::head(n = 10)
 ```
 
-Okay, so we can see that 'man' is the most used noun within the data set. This paired with the adjective counts, can start to tell a story about whats in the data and how these parts of speech are distributed across our documents. 
+Okay, so we can see that 'man' is the most used noun within the data set. This paired with the adjective counts, can start to tell a story about what's in the data and how these parts of speech are distributed across our documents. 
 
-So we've observed 'old' as the most frequent adjective and 'man' as the most used noun, this isn't to say that a majority of posts are consistent of the term 'old man', but if we wanted to investigate adjective and noun relationships we can so do by calculating these co-occurrences within documents using `udpipe::cooccurrence()`.
+So far, we've observed 'old' as the most frequent adjective and 'man' as the most used noun, this isn't to say that a majority of posts are consistent of the term 'old man', but if we wanted to investigate adjective and noun relationships we can so do by calculating these co-occurrences within documents using `udpipe::cooccurrence()`.
 
 ```{r, message=FALSE, warning=FALSE}
 co_occurrences <- udpipe::cooccurrence(x = subset(annotations, pos_tag %in% c("NOUN", "ADJ")),
@@ -86,4 +86,4 @@ co_occurrences <- udpipe::cooccurrence(x = subset(annotations, pos_tag %in% c("N
 utils::head(co_occurrences)
 ```
 
-Once we have the information regarding the co-occurrences of Nouns and Adjectives within documents, we are able to tell what entities appear throughout our data, as well as the type of language used in conjunction with and toward them. We can later do so by visualizing the frequency of terms appearing within the same document as well as those that are explicitly used one after another like the example above, where we see 'hot sun' appear most frequent.
+Once we have the information regarding the co-occurrences of Nouns and Adjectives within our documents, we are able to evidence what entities appear throughout our data, as well as the type of language used in conjunction with and toward them. We can later add to this, by visualizing the frequency of terms appearing within the same document as well as those that are explicitly used one after another, just like the example above, where we see 'hot sun' appear as most frequent.

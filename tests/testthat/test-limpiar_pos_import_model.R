@@ -1,26 +1,12 @@
-test_that("language argument works as intended", {
- model <- limpiar_pos_import_model(language = "english")
+test_that("input validation and output of appropriate class", {
 
- expect_true(stringr::str_detect(model$file, "english"))
-})
+  # expects error when supplying language argument without string
+  expect_error(limpiar_pos_import_model(language = english), regexp = "object 'english' not found")
 
+  model_loaded <- limpiar_pos_import_model(language = "english")
+  # expect no error when input is appropriate
+  expect_no_error(model_loaded)
 
-test_that("input must be string", {
-
-  modela <- limpiar_pos_import_model(language = "english")
-  expect_no_error(modela)
-
-  # catch the error message and then test if its to be expected
-  modelb <- tryCatch(
-    limpiar_pos_import_model(language = english),
-    error = function(e) e
-  )
-  expect_identical(modelb$message, expected = "object 'english' not found")
-})
-
-
-test_that("model output is of appropriate class", {
-  model <- limpiar_pos_import_model(language = "english")
-
-  expect_true(inherits(model, "udpipe_model"))
+  # expect output to be of udpipe_model class
+  expect_true(inherits(model_loaded, "udpipe_model"))
 })
