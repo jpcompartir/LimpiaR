@@ -9,9 +9,10 @@ limpiar_pos_annotate(
   text_var,
   id_var,
   pos_model,
+  ...,
   in_parallel = FALSE,
-  parse_text = FALSE,
-  ...
+  dependency_parse = FALSE,
+  update_progress = 100
 )
 }
 \arguments{
@@ -23,11 +24,13 @@ limpiar_pos_annotate(
 
 \item{pos_model}{A UDPipe model imported using \code{limpiar_pos_import_model}, and must be of class 'udpipe_model'.}
 
+\item{...}{To enable the user to supply any additional arguments.}
+
 \item{in_parallel}{A logical argument allowing the user to initiate parallel processing to speed the annotate function up. If set to TRUE,  the function will select the number of available cores minus one, processing more efficiently(faster), leaving one core to manage other computations. The default is FALSE.}
 
-\item{parse_text}{Whether to perform dependency parsing on tokens. The default is set to FALSE. If the user wishes to perform parsing on tokens, they may do so by calling TRUE.}
+\item{dependency_parse}{Whether to perform dependency parsing on tokens. The default is set to FALSE. If the user wishes to perform parsing on tokens, they may do so by calling TRUE.}
 
-\item{...}{To enable the user to supply any additional arguments.}
+\item{update_progress}{The user has the option to state how often they would like a progress report of the annotation process, posted in the console by stating whether they want a message every 100, 500 or 1000 documents. This is useful when annotating large sets of data and serves as a sanity check to ensure the session hasn't used up all available memory and the annotations have stopped running.}
 }
 \value{
 Returns a data frame with documents broken up into both a token and sentence level, in addition to the existing variables present in \code{data} supplied to the function. The returned object contains the parts of speech annotations in CONLL-U formatting, where each row is an annotation of a word. To find out more on the formatting methods, read \href{https://universaldependencies.org/format.html}{here}.
@@ -58,5 +61,6 @@ annotations <- limpiar_pos_annotate(data = data,
                                    id_var = document,
                                    pos_model = model,
                                    in_parallel = FALSE,
-                                   parse_text = TRUE)
+                                   dependency_parse = TRUE,
+                                   progress = "100")
 }

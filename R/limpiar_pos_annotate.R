@@ -5,7 +5,8 @@
 #' @param id_var The document identifier, this can be something like universal_message_id or doc_number. The default is universal_message_id.
 #' @param pos_model A UDPipe model imported using `limpiar_pos_import_model`, and must be of class 'udpipe_model'.
 #' @param in_parallel A logical argument allowing the user to initiate parallel processing to speed the annotate function up. If set to TRUE,  the function will select the number of available cores minus one, processing more efficiently(faster), leaving one core to manage other computations. The default is FALSE.
-#' @param parse_text Whether to perform dependency parsing on tokens. The default is set to FALSE. If the user wishes to perform parsing on tokens, they may do so by calling TRUE.
+#' @param dependency_parse Whether to perform dependency parsing on tokens. The default is set to FALSE. If the user wishes to perform parsing on tokens, they may do so by calling TRUE.
+#' @param update_progress The user has the option to state how often they would like a progress report of the annotation process, posted in the console by stating whether they want a message every 100, 500 or 1000 documents. This is useful when annotating large sets of data and serves as a sanity check to ensure the session hasn't used up all available memory and the annotations have stopped running.
 #' @param ... To enable the user to supply any additional arguments.
 #' @return Returns a data frame with documents broken up into both a token and sentence level, in addition to the existing variables present in `data` supplied to the function. The returned object contains the parts of speech annotations in CONLL-U formatting, where each row is an annotation of a word. To find out more on the formatting methods, read [here](https://universaldependencies.org/format.html).
 #' The additional arguments with tagged POS information are as follows:
@@ -32,17 +33,23 @@
 #'                                    id_var = document,
 #'                                    pos_model = model,
 #'                                    in_parallel = FALSE,
-#'                                    parse_text = TRUE)
+#'                                    dependency_parse = TRUE,
+#'                                    progress = "100")
 limpiar_pos_annotate <- function(data,
                                  text_var,
                                  id_var,
                                  pos_model,
+                                 ...,
                                  in_parallel = FALSE,
-                                 parse_text = FALSE,
-                                 ...) {
+                                 dependency_parse = FALSE,
+                                 update_progress = 100) {
 
-  # ensure data is of class data.frame and assign size by nrow number
-  stopifnot(is.data.frame(data))
+  # ensure data is of class data.frame and check if in_parallel and dependency_parse are logical
+  stopifnot(is.data.frame(data),
+            is.logical(in_parallel),
+            is.logical(dependency_parse))
+
+  # check if in_parallel and dependency_parse are logical
   # check that pos_model is of class udpipe_model
   if (!inherits(pos_model, "udpipe_model")) {
     stop("pos_model should be of class udpipe_model as returned by limpiar_pos_import_model()")
@@ -67,11 +74,11 @@ limpiar_pos_annotate <- function(data,
   }
 
   # if statements for POS tagging feature
-  if (parse_text == TRUE) {
-    parse_text <- "parser"
+  if (dependency_parse == TRUE) {
+    dependency_parse <- "parser"
     message("Performing dependency parsing on tokens...")
   } else {
-    parse_text <- "none"
+    dependency_parse <- "none"
   }
 
   # if statement for parallelization and chunksize bits of code that the udpipe function requires
@@ -83,14 +90,19 @@ limpiar_pos_annotate <- function(data,
     parallel_chunksize <- ceiling(size / num_cores)
   }
 
+  # ensure that progress is either set to one of the below options
+  update_progress <- match.arg(as.character(update_progress), c(100, 500, 1000, 0))
+
   # call udpipe function and produce output before handling
+  message("Parts of speech tagging in process...")
   output <- udpipe::udpipe(x = text_var,
                            object = pos_model,
                            parallel.cores = num_cores,
                            parallel.chunksize = parallel_chunksize,
-                           parser = parse_text,
-                           tagger = "tagger")
-  message("Parts of speech tagging in process...")
+                           parser = dependency_parse,
+                           tagger = "tagger",
+                           trace = as.numeric(update_progress),
+                           ...)
 
   # this rids of the annoying doc1, doc2... format in doc_id when calling FALSE for parallel processing
   if (!in_parallel) {
@@ -110,17 +122,21 @@ limpiar_pos_annotate <- function(data,
     stop("Dimensions do not add up, data was lost in the annotation process")
   }
 
-  # join the nested df and make sure no rows are duplicated and are unique
   output <- output_nested %>%
     dplyr::right_join(y = data, by = "id_var") %>%
-    dplyr::distinct()
+    tidyr::unnest(cols = data)
 
-  # unnest the data and select/rename suitable columns for ease
-  output <- output %>%
-    tidyr::unnest(cols = data) %>%
-    dplyr::select(-c("start", "end", "term_id", "deps", "misc", "doc_id")) %>%
-    dplyr::rename(pos_tag = upos,
-                  dependency_tag = dep_rel)
+  # handle output if dependancy parsing has been performed
+  if (dependency_parse == "parser") {
+    output <- output %>%
+      dplyr::rename(pos_tag = upos,
+                    dependency_tag = dep_rel) %>%
+      dplyr::select(-c("start", "end", "term_id", "deps", "misc", "doc_id"))
+  } else {
+    output <- output %>%
+      dplyr::rename(pos_tag = upos) %>%
+      dplyr::select(-c("start", "end", "term_id", "deps", "misc", "doc_id", "dep_rel", "head_token_id", "feats"))
+  }
 
   return(output)
 }

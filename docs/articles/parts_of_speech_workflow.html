@@ -91,7 +91,7 @@
 <p>In this vignette we’ll be looking at how to use LimpiaR to process a
 text variable for its parts of speech via {udpipe}. For a primer on
 parts of speech see <a href="https://en.wikipedia.org/wiki/Part_of_speech" class="external-link">Parts of Speech
-Wikipedia</a></p>
+Wikipedia</a>.</p>
 <p>The main motivation for processing and extraction parts of speech is
 to home in on the particular aspects of language which are most
 informative for answering a given research question. For example, if you
@@ -107,14 +107,14 @@ wrangling purposes.</p>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://stringr.tidyverse.org" class="external-link">stringr</a></span><span class="op">)</span></span></code></pre></div>
 <p>LimpiaR’s Parts of Speech(POS) workflow leans on existing
-functionality of {udpipe} and allow for users to import one of their
-existing trained models for parts of speech analysis, to later annotate
-texts by tokenizing(breaking sentences up into words) and also enabling
-users to perform dependency parsing on tokens, ‘a technique which
-provides to each word in a sentence the link to another word in the
-sentence, which is called its syntactical head. This link between each 2
-words furthermore has a certain type of relationship giving you further
-details about it’, see <a href="https://www.r-bloggers.com/2019/07/dependency-parsing-with-udpipe/" class="external-link">here</a>
+functionality of {udpipe} and allows for users to import one of their
+existing pre-trained models for parts of speech analysis, to later
+annotate texts by tokenizing(breaking sentences up into words) and also
+enabling users to perform dependency parsing on tokens, ‘a technique
+which provides to each word in a sentence the link to another word in
+the sentence, which is called its syntactical head. This link between
+each 2 words furthermore has a certain type of relationship giving you
+further details about it’, see <a href="https://www.r-bloggers.com/2019/07/dependency-parsing-with-udpipe/" class="external-link">here</a>
 for more.</p>
 <p>First, we must select what model it is that that we want to download.
 UDPipe pre-trained models are built upon Universal Dependencies
@@ -125,19 +125,20 @@ treebanks. For the purpose of this documentation, we will select the
 argument, <code>language</code> with the desired model.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/limpiar_pos_import_model.html">limpiar_pos_import_model</a></span><span class="op">(</span>language <span class="op">=</span> <span class="st">"english"</span><span class="op">)</span></span></code></pre></div>
-<p>Now we have our model imported into our session, lets load some data
-for us to annotate. Using the data object derived from the {stringr}
-package and containing sentences ideal for tagging, tokenizing,
-lemmatizing and parsing for parts of speech analysis, for this example
-we will mutate columns; document and universal_message_id. These two
-columns will serve as likely variables within the users data-set in a
-real-world situation or project.</p>
+<p>Now that we have our model imported into our session, lets load some
+data for us to annotate. Using the data object derived from the
+{stringr} package and containing sentences ideal for tagging,
+tokenizing, lemmatizing and parsing for parts of speech analysis. Also,
+for this example we will include a variable called
+<code>universal_message_id</code>, this column will serve as a likely
+variable within the users data-set in a real-world situation or
+project.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>text <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/chartr.html" class="external-link">tolower</a></span><span class="op">(</span><span class="fu">stringr</span><span class="fu">::</span><span class="va"><a href="https://stringr.tidyverse.org/reference/stringr-data.html" class="external-link">sentences</a></span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span><span class="op">]</span><span class="op">)</span>, document <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">1000</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>universal_message_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"TWITTER"</span>, <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>, <span class="fl">1000</span>, replace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>Now we have our data and we should have our loaded model, we can
-begin annotating with the <code><a href="../reference/limpiar_pos_annotate.html">limpiar_pos_annotate()</a></code>
-function.</p>
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>text <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/chartr.html" class="external-link">tolower</a></span><span class="op">(</span><span class="fu">stringr</span><span class="fu">::</span><span class="va"><a href="https://stringr.tidyverse.org/reference/stringr-data.html" class="external-link">sentences</a></span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>                      universal_message_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"TWITTER"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>So now we have some data and we also have our desired model loaded
+into session, we can begin annotating with the
+<code><a href="../reference/limpiar_pos_annotate.html">limpiar_pos_annotate()</a></code> function.</p>
 <p>It’s worth noting that the output can entirely depend on any cleaning
 steps performed on texts before annotating. For example, it is possible
 that with the removal of punctuation, the dependency parsing bits of the
@@ -151,22 +152,40 @@ object(data), enabling us to perform POS tagging and lemmatization on
 tokens. We can also speed this process up by calling <code>TRUE</code>
 on the parallel processing argument(in_parallel). The user can also
 decide whether to parse tokens for term dependencies, by supplying the
-parse_text argument with a logical input of <code>TRUE</code>, but is
-<code>FALSE</code> by default as this step can be expensive on compute
-and memory if performed on large sets of data unnecessarily or
-unwillingly. When using <code><a href="../reference/limpiar_pos_annotate.html">limpiar_pos_annotate()</a></code>, its
-important to supply the id_var with an appropriate identifying variable.
-This can either be; universal_message_id, doc_id, doc_number or anything
-similar that represents a unique document of text which the annotations
-are then performed upon.</p>
+dependency_parse argument with a logical input of <code>TRUE</code>.
+However, this argument is <code>FALSE</code> by default as this step can
+be expensive on compute as well as memory if performed on large sets of
+data unnecessarily or unwillingly. When using
+<code><a href="../reference/limpiar_pos_annotate.html">limpiar_pos_annotate()</a></code>, its important to supply the id_var
+with an appropriate identifying variable. This can either be;
+universal_message_id, doc_id, doc_number or anything similar that
+represents a unique document of text which the annotations are then
+performed upon. The final argument we see is update_progress, and serves
+as a sanity check when running the function as it prints the annotating
+progress in the users console and will print this progress for every
+100, 500 or 1000 documents that are annotated. The user can select
+<code>update_progress = 0</code> if they do not want updates on the
+annotating process, the default is set to emit progress updates every
+100 documents.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">annotations</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/limpiar_pos_annotate.html">limpiar_pos_annotate</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, text_var <span class="op">=</span> <span class="va">text</span>, id_var <span class="op">=</span> <span class="va">universal_message_id</span>, pos_model <span class="op">=</span> <span class="va">model</span>,parse_text <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p>Now that we have our texts tokenized, parsed and POS annotations are
-complete. Lets take a look at the output in a data table.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># annotate texts and perform dependency parsing</span></span>
+<span><span class="va">annotations</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/limpiar_pos_annotate.html">limpiar_pos_annotate</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, text_var <span class="op">=</span> <span class="va">text</span>, id_var <span class="op">=</span> <span class="va">universal_message_id</span>, pos_model <span class="op">=</span> <span class="va">model</span>, dependency_parse <span class="op">=</span> <span class="cn">TRUE</span>, in_parallel <span class="op">=</span> <span class="cn">FALSE</span>, update_progress <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## 2024-01-11 17:52:27 Annotating text fragment 1/1000</span></span>
+<span><span class="co">## 2024-01-11 17:52:28 Annotating text fragment 101/1000</span></span>
+<span><span class="co">## 2024-01-11 17:52:28 Annotating text fragment 201/1000</span></span>
+<span><span class="co">## 2024-01-11 17:52:29 Annotating text fragment 301/1000</span></span>
+<span><span class="co">## 2024-01-11 17:52:29 Annotating text fragment 401/1000</span></span>
+<span><span class="co">## 2024-01-11 17:52:30 Annotating text fragment 501/1000</span></span>
+<span><span class="co">## 2024-01-11 17:52:30 Annotating text fragment 601/1000</span></span>
+<span><span class="co">## 2024-01-11 17:52:30 Annotating text fragment 701/1000</span></span>
+<span><span class="co">## 2024-01-11 17:52:31 Annotating text fragment 801/1000</span></span>
+<span><span class="co">## 2024-01-11 17:52:31 Annotating text fragment 901/1000</span></span></code></pre>
+<p>Now that we have our texts tokenized, dependency parsed and POS
+annotations are complete. Lets take a look at the output.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">annotations</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice_head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 50 × 15</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 50 × 14</span></span></span>
 <span><span class="co">##    paragraph_id sentence_id sentence    token_id token lemma pos_tag xpos  feats</span></span>
 <span><span class="co">##           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 1</span>            1           1 the birch … 1        the   the   DET     DT    Defi…</span></span>
@@ -180,8 +199,8 @@ complete. Lets take a look at the output in a data table.</p>
 <span><span class="co">## <span style="color: #BCBCBC;"> 9</span>            1           1 the birch … 9        .     .     PUNCT   .     <span style="color: #BB0000;">NA</span>   </span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">10</span>            1           1 glue the s… 1        glue  glue  VERB    VB    Mood…</span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 40 more rows</span></span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 6 more variables: head_token_id &lt;chr&gt;, dependency_tag &lt;chr&gt;, id_var &lt;chr&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   text &lt;chr&gt;, document &lt;int&gt;, universal_message_id &lt;chr&gt;</span></span></span></code></pre>
+<span><span class="co">## <span style="color: #949494;"># ℹ 5 more variables: head_token_id &lt;chr&gt;, dependency_tag &lt;chr&gt;, id_var &lt;chr&gt;,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   text &lt;chr&gt;, universal_message_id &lt;chr&gt;</span></span></span></code></pre>
 <p>Our first observation might be that the data frame output is
 significantly larger than the one we provided in terms of row number.
 This is due to each row now representing an annotation of each token
@@ -191,7 +210,7 @@ columns we will pay closer attention to are; paragraph_id, sentence_id,
 sentence, token, lemma, pos_tag, dependency_tag and id_var, all of which
 can be useful in a number of NLP objectives.</p>
 <p>First, we must understand what they all mean. Starting with
-<code>paragraph_id</code> and <code>sentence_id</code>, we see the
+<code>paragraph_id</code> and <code>sentence_id</code>, we see that the
 identifying value for both the sentence in which the annotated token is
 derived, as well as the paragraph. As our example data consists of
 sentences its likely that the values here for paragraph_id and
@@ -202,33 +221,39 @@ being annotated along with its respective <code>lemma</code>(the token
 in its root form), understanding the lemma column can be best visualized
 when looking at row number 43 where ‘served’ of document 5 becomes
 ‘serve’ once lemmatized.</p>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
+<span><span class="co">##   sentence                             token  lemma</span></span>
+<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> rice is often served in round bowls. served serve</span></span></code></pre>
 <p>We then see <code>pos_tag</code>, <code>head_token_id</code>,
 <code>dependency_tag</code> and <code>id_var</code>. Starting with
-pos_tag(or Parts of Speech tag), this column is where information
-regarding how tokens are classified as any of the parts of speech labels
-such as; Noun(NOUN), Proper Noun(PROPN), Pronoun(PRON), Verb(VERB),
+pos_tag(Parts of Speech tag), this column is where information regarding
+how tokens are classified as any of the parts of speech labels such as;
+Noun(NOUN), Proper Noun(PROPN), Pronoun(PRON), Verb(VERB),
 Adjective(ADJ) etc. For more on the exact tags and what they mean see <a href="https://universaldependencies.org/u/pos/index.html" class="external-link">here</a>. We
 then have columns; <code>head_token_id</code> and
-<code>dependency_tag</code> which along with a few other columns we will
-need if we wish to conduct dependency parsing analysis on our documents
-and visualize those. If the user calls parse_text = FALSE, then
-dependency tags will show as NA. These two columns are important and are
-closely linked as dependency_tag shows the relationship the annotated
-token has with the head_token_id. Finally, the last and quite possibly
-most important column; <code>id_var</code>, this is the variable that
-the users inputs when calling the annotate function and is necessary to
-join the original data back to the annotations throughout the process.
-If not supplied, the function will not run, and if supplied incorrectly,
-the output is likely to be hindered and therefore causing the user
-problems further down the line, so take care when supplying the function
-with this variable.</p>
+<code>dependency_tag</code> which along with a few other columns like
+<code>token_id</code> and <code>feats</code> we will only need if we
+wish to conduct dependency parsing analysis on our documents and
+visualize those. With that said, it’s worth noting that these three
+columns; <code>head_token_id</code>, <code>dependency_tag</code> and
+<code>feats</code> will not be present in the output if we call
+<code>dependency_parse = FALSE</code>.</p>
+<p>Finally, the last and quite possibly the most important column;
+<code>id_var</code>, this is the variable that the users inputs when
+calling the annotate function and is necessary to join the original data
+back to the annotations throughout the process. If not supplied, the
+function will not run, and if supplied incorrectly, the output may be
+hindered and therefore likely to cause the user some problems further
+down the line, so take care when supplying the function with this
+variable.</p>
 <p>Now that we have a bit more context as to what all of this
 information means, lets dive in and see if we can manipulate this data
 so we can see what adjectives are most common in their lemmatized form.
 To do so, we only require some basic {dplyr} functionality and we will
 use <code><a href="https://rdrr.io/r/utils/head.html" class="external-link">head()</a></code> from {utils} package to select only the top 10
 most frequent.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">annotations</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">pos_tag</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ADJ"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>  <span class="co"># select which parts of speech we want to inspect</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span>.by <span class="op">=</span> <span class="va">lemma</span>, <span class="va">lemma</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
@@ -246,10 +271,10 @@ most frequent.</p>
 <span><span class="co">## <span style="color: #BCBCBC;"> 8</span> good   good       9</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 9</span> green  green      9</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">10</span> young  young      9</span></span></code></pre>
-<p>So here, we can see that ‘old’ is the most frequent adjective
-followed by the likes of ‘high’, ‘fine’ along with a few others within
-our text documents. Now lets look at frequent nouns.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<p>We can see that ‘old’ is the most frequent adjective followed by the
+likes of ‘high’ and ‘fine’ along with a few others within our text
+documents. Now lets look at frequent nouns.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">annotations</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">pos_tag</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NOUN"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="co"># this time selecting nouns</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span>.by <span class="op">=</span> <span class="va">lemma</span>, <span class="va">lemma</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
@@ -267,20 +292,19 @@ our text documents. Now lets look at frequent nouns.</p>
 <span><span class="co">## <span style="color: #BCBCBC;"> 8</span> time  time      8</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 9</span> book  book      7</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">10</span> box   box       7</span></span></code></pre>
-<p>Okay, so we can see that ‘man’ is the most used noun within the data
-set. This paired with the adjective counts, can start to tell a story
-about what’s in the data and how these parts of speech are distributed
-across our documents.</p>
+<p>Looking at frequent nouns shows us that ‘man’ is the most used noun
+within the data set. This paired with the adjective counts, can start to
+tell a story about what’s in the data and how these parts of speech are
+distributed across our documents.</p>
 <p>So far, we’ve observed ‘old’ as the most frequent adjective and ‘man’
 as the most used noun, this isn’t to say that a majority of posts are
 consistent of the term ‘old man’, but if we wanted to investigate
 adjective and noun relationships we can so do by calculating these
-co-occurrences within documents using
-<code><a href="https://rdrr.io/pkg/udpipe/man/cooccurrence.html" class="external-link">udpipe::cooccurrence()</a></code>.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+co-occurrences using <code><a href="https://rdrr.io/pkg/udpipe/man/cooccurrence.html" class="external-link">udpipe::cooccurrence()</a></code>.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">co_occurrences</span> <span class="op">&lt;-</span> <span class="fu">udpipe</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/udpipe/man/cooccurrence.html" class="external-link">cooccurrence</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">annotations</span>, <span class="va">pos_tag</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NOUN"</span>, <span class="st">"ADJ"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                                       term <span class="op">=</span> <span class="st">"lemma"</span>,</span>
-<span>                                       group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"paragraph_id"</span>, <span class="st">"sentence_id"</span>, <span class="st">"id_var"</span>, <span class="st">"document"</span>, <span class="st">"universal_message_id"</span><span class="op">)</span><span class="op">)</span></span>
+<span>                                       group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"paragraph_id"</span>, <span class="st">"sentence_id"</span>, <span class="st">"id_var"</span>, <span class="st">"universal_message_id"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">co_occurrences</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##   term1  term2 cooc</span></span>
 <span><span class="co">## 1   hot    sun    3</span></span>
@@ -289,8 +313,8 @@ co-occurrences within documents using
 <span><span class="co">## 4 flame   heat    2</span></span>
 <span><span class="co">## 5   bun    hot    2</span></span>
 <span><span class="co">## 6  many   name    2</span></span></code></pre>
-<p>Once we have the information regarding the co-occurrences of Nouns
-and Adjectives within our documents, we are able to evidence what
+<p>Once we have the information regarding the co-occurrences of nouns
+and adjectives within our documents, we are able to evidence what
 entities appear throughout our data, as well as the type of language
 used in conjunction with and toward them. We can later add to this, by
 visualizing the frequency of terms appearing within the same document as

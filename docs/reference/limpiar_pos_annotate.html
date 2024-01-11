@@ -68,9 +68,10 @@
 <span>  <span class="va">text_var</span>,</span>
 <span>  <span class="va">id_var</span>,</span>
 <span>  <span class="va">pos_model</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  in_parallel <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  parse_text <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  <span class="va">...</span></span>
+<span>  dependency_parse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  update_progress <span class="op">=</span> <span class="fl">100</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -92,16 +93,20 @@
 <dd><p>A UDPipe model imported using <code>limpiar_pos_import_model</code>, and must be of class 'udpipe_model'.</p></dd>
 
 
+<dt>...</dt>
+<dd><p>To enable the user to supply any additional arguments.</p></dd>
+
+
 <dt>in_parallel</dt>
 <dd><p>A logical argument allowing the user to initiate parallel processing to speed the annotate function up. If set to TRUE,  the function will select the number of available cores minus one, processing more efficiently(faster), leaving one core to manage other computations. The default is FALSE.</p></dd>
 
 
-<dt>parse_text</dt>
+<dt>dependency_parse</dt>
 <dd><p>Whether to perform dependency parsing on tokens. The default is set to FALSE. If the user wishes to perform parsing on tokens, they may do so by calling TRUE.</p></dd>
 
 
-<dt>...</dt>
-<dd><p>To enable the user to supply any additional arguments.</p></dd>
+<dt>progress</dt>
+<dd><p>The user has the option to state how often they would like a progress report of the annotation process, posted in the console by stating whether they want a message every 100, 500 or 1000 documents. This is useful when annotating large sets of data and serves as a sanity check to ensure the session hasn't used up all available memory and the annotations have stopped running.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -127,20 +132,22 @@ The additional arguments with tagged POS information are as follows:</p><ul><li>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>text <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/chartr.html" class="external-link">tolower</a></span><span class="op">(</span><span class="fu">stringr</span><span class="fu">::</span><span class="va"><a href="https://stringr.tidyverse.org/reference/stringr-data.html" class="external-link">sentences</a></span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">]</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>document <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">LimpiaR</span><span class="fu">::</span><span class="fu"><a href="limpiar_pos_import_model.html">limpiar_pos_import_model</a></span><span class="op">(</span>language <span class="op">=</span> <span class="st">"english"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Downloading udpipe model from https://raw.githubusercontent.com/jwijffels/udpipe.models.ud.2.5/master/inst/udpipe-ud-2.5-191206/english-ewt-ud-2.5-191206.udpipe to /var/folders/nc/y2v839d56c93m7bmzchn29sh0000gn/T//RtmpqgXnnN/english-ewt-ud-2.5-191206.udpipe</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Downloading udpipe model from https://raw.githubusercontent.com/jwijffels/udpipe.models.ud.2.5/master/inst/udpipe-ud-2.5-191206/english-ewt-ud-2.5-191206.udpipe to /var/folders/nc/y2v839d56c93m7bmzchn29sh0000gn/T//Rtmp0MqWRy/english-ewt-ud-2.5-191206.udpipe</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>  - This model has been trained on version 2.5 of data from https://universaldependencies.org</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>  - The model is distributed under the CC-BY-SA-NC license: https://creativecommons.org/licenses/by-nc-sa/4.0</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>  - Visit https://github.com/jwijffels/udpipe.models.ud.2.5 for model license details.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>  - For a list of all models and their licenses (most models you can download with this package have either a CC-BY-SA or a CC-BY-SA-NC license) read the documentation at ?udpipe_download_model. For building your own models: visit the documentation by typing vignette('udpipe-train', package = 'udpipe')</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Downloading finished, model stored at '/var/folders/nc/y2v839d56c93m7bmzchn29sh0000gn/T//RtmpqgXnnN/english-ewt-ud-2.5-191206.udpipe'</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Downloading finished, model stored at '/var/folders/nc/y2v839d56c93m7bmzchn29sh0000gn/T//Rtmp0MqWRy/english-ewt-ud-2.5-191206.udpipe'</span>
 <span class="r-in"><span><span class="va">annotations</span> <span class="op">&lt;-</span> <span class="fu">limpiar_pos_annotate</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>,</span></span>
 <span class="r-in"><span>                                   text_var <span class="op">=</span> <span class="va">text</span>,</span></span>
 <span class="r-in"><span>                                   id_var <span class="op">=</span> <span class="va">document</span>,</span></span>
 <span class="r-in"><span>                                   pos_model <span class="op">=</span> <span class="va">model</span>,</span></span>
 <span class="r-in"><span>                                   in_parallel <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
-<span class="r-in"><span>                                   parse_text <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span>                                   dependency_parse <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>                                   progress <span class="op">=</span> <span class="st">"100"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Performing dependency parsing on tokens...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Parts of speech tagging in process...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2024-01-11 17:52:06 Annotating text fragment 1/100</span>
 </code></pre></div>
     </div>
   </div>
