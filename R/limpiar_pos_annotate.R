@@ -46,6 +46,7 @@ limpiar_pos_annotate <- function(data,
 
   # ensure data is of class data.frame and check if in_parallel and dependency_parse are logical
   stopifnot(is.data.frame(data),
+            nrow(data) > 1,
             is.logical(in_parallel),
             is.logical(dependency_parse))
 

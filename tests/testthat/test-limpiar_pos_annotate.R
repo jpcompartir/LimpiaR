@@ -7,6 +7,9 @@ test_that("input validation", {
   # expect error as data is not of data.frame class
   expect_error(limpiar_pos_annotate(data = 123), regexp = "is.data.frame")
 
+  # error handles empty data frame
+  expect_error(limpiar_pos_annotate(data = data.frame()), regexp = "nrow\\(data\\)")
+
   # expects dependency_parse input to be logical(TRUE or FALSE)
   expect_error(limpiar_pos_annotate(data = data.frame(), dependency_parse = "yeah"), regexp = "is.logical")
 
