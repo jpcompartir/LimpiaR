@@ -11,16 +11,16 @@ test_that("input validation", {
   expect_error(limpiar_pos_annotate(data = data.frame()), regexp = "nrow\\(data\\)")
 
   # expects dependency_parse input to be logical(TRUE or FALSE)
-  expect_error(limpiar_pos_annotate(data = data.frame(), dependency_parse = "yeah"), regexp = "is.logical")
+  expect_error(limpiar_pos_annotate(data = data.frame(x = 1), dependency_parse = "yeah"), regexp = "is.logical")
 
   # expects in_parallel input to be logical(TRUE or FALSE)
-  expect_error(limpiar_pos_annotate(data = data.frame(), dependency_parse = FALSE, in_parallel = "go on then"), regexp = "is.logical")
+  expect_error(limpiar_pos_annotate(data = data.frame(x = 1), dependency_parse = FALSE, in_parallel = "go on then"), regexp = "is.logical")
 
   # expect pos_model to be of class udpipe_model
-  expect_error(limpiar_pos_annotate(data = data.frame(), pos_model = 123), regexp = "pos_model should be of class udpipe_model")
+  expect_error(limpiar_pos_annotate(data = data.frame(x =1), pos_model = 123), regexp = "pos_model should be of class udpipe_model")
 
   # expect error when text_var is missing
-  expect_error(limpiar_pos_annotate(data = data.frame(), pos_model = model_loaded), regexp = "is missing, with no default")
+  expect_error(limpiar_pos_annotate(data = data.frame(x =1), pos_model = model_loaded), regexp = "is missing, with no default")
 
   # expect to be met with error when id_var not supplied
   expect_error(limpiar_pos_annotate(data = data.frame(text = "text"), text_var = text, pos_model = model_loaded), regexp = "id_var not supplied, unable to join annotations to original data")
