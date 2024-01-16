@@ -54,42 +54,31 @@ limpiar_pos_annotate <- function(data,
                                  dependency_parse = FALSE,
                                  update_progress = 100) {
 
-  # ensure data is of class data.frame and check if in_parallel and dependency_parse are logical
+
+  # Early stopping and input validation ----
   stopifnot(is.data.frame(data),
             nrow(data) > 0,
             is.logical(in_parallel),
             is.logical(dependency_parse),
             is.numeric(update_progress),
-            update_progress >= 0)
+            update_progress >= 0,
+            inherits(pos_model, "udpipe_model"))
 
-  # check if in_parallel and dependency_parse are logical
-  # check that pos_model is of class udpipe_model
-  if (!inherits(pos_model, "udpipe_model")) {
-    stop("pos_model should be of class udpipe_model as returned by limpiar_pos_import_model()")
-  }
+  # Tidy evaluate user-supplied variables ----
+  text_sym <- rlang::ensym(text_var)
+  text_var <- data[[text_sym]]
+
+  id_sym <- rlang::ensym(id_var)
+  data[[id_sym]]
+
+  # Function main body ----
 
   # define the size of the data based on n rows and mutate doc_id for joining
   size <- nrow(data)
-  data <- data %>%
-    dplyr::mutate(doc_id = dplyr::row_number())
-
-  # some tidy evaluation on text var, convert to symbol before character
-  text_var <- rlang::ensym(text_var)
-  text_var <- as.character(dplyr::pull(data, !!text_var))
-
-  # if statement handling when input of id_var is null
-  if (!missing(id_var)) {
-    id_var_pulled <- data %>% dplyr::pull({{id_var}})
-    data <- data %>%
-      dplyr::mutate(id_var = id_var_pulled)
-  } else {
-    stop("id_var not supplied, unable to join annotations to original data")
-  }
 
   # if statements for POS tagging feature
   if (dependency_parse == TRUE) {
     dependency_parse <- "parser"
-    message("Performing dependency parsing on tokens...")
   } else {
     dependency_parse <- "none"
   }
@@ -103,11 +92,7 @@ limpiar_pos_annotate <- function(data,
     parallel_chunksize <- ceiling(size / num_cores)
   }
 
-  # ensure that progress is either set to one of the below options
-  update_progress <- match.arg(as.character(update_progress), c(100, 500, 1000, 0))
-
   # call udpipe function and produce output before handling
-  message("Parts of speech tagging in process...")
   output <- udpipe::udpipe(x = text_var,
                            object = pos_model,
                            parallel.cores = num_cores,
@@ -117,38 +102,32 @@ limpiar_pos_annotate <- function(data,
                            trace = update_progress,
                            ...)
 
-  # this rids of the annoying doc1, doc2... format in doc_id when calling FALSE for parallel processing
+  # this rids of the annoying doc1, doc2... format in doc_id when calling FALSE for parallel processing. TODO: Is this necessary?
   if (!in_parallel) {
     output$doc_id <- output$doc_id %>%
       stringr::str_remove_all(pattern = "doc")
   }
 
   # nest the data based on doc_id/row_number
-  output_nested <- output %>%
+  output <- output %>%
     tidyr::nest(.by = doc_id)
 
-  # now join using message_id but only if rows match up to original df size
-  if(nrow(output_nested) == size) {
-    output_nested$id_var <- id_var_pulled
-    output_nested <- output_nested %>% dplyr::select(-doc_id)
-  } else {
-    stop("Dimensions do not add up, data was lost in the annotation process")
-  }
+  # Add original id to output
+  output[[id_sym]] <- data[[id_sym]]
 
-  output <- output_nested %>%
-    dplyr::right_join(y = data, by = "id_var") %>%
+  output <- output %>%
     tidyr::unnest(cols = data)
 
-  # handle output if dependancy parsing has been performed
-  if (dependency_parse == "parser") {
-    output <- output %>%
-      dplyr::rename(pos_tag = upos,
-                    dependency_tag = dep_rel) %>%
-      dplyr::select(-c("start", "end", "term_id", "deps", "misc", "doc_id"))
+  # Rename cols and de-select un-needed columns
+  output <- output %>%
+    dplyr::rename(pos_tag = upos) %>%
+    dplyr::select(-c("start", "end", "term_id", "deps", "misc"))
+
+  # If the dependency's have been parsed, rename the col and remove deps.
+  if(dependency_parse == "parser") {
+    output <- dplyr::rename(output, dependency_tag = dep_rel)
   } else {
-    output <- output %>%
-      dplyr::rename(pos_tag = upos) %>%
-      dplyr::select(-c("start", "end", "term_id", "deps", "misc", "doc_id", "dep_rel", "head_token_id", "feats"))
+    output <- dplyr::select(output, -c("dep_rel", "head_token_id", "feats"))
   }
 
   return(output)
