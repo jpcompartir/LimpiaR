@@ -8,14 +8,14 @@
 #'
 #' 2) We want the mental model to be as consistent as possible, i.e. when using LimpiaR in the pre-processing pipeline the user mainly calls LimpiaR, and doesn't have to remember another package.
 #'
-#' There are many potential workflows so we won't try to enumerate them here. As clear use-cases emerge we will create new limpiar_pos_ functions on a case-by-case basis. An example workflow would be to convert all adjectives and nouns to lemma and then visualise the results.
+#' There are many potential workflows so we won't try to enumerate them here. However,  as clear use-cases emerge we will create new limpiar_pos_ functions on a case-by-case basis. An example workflow would be to convert all adjectives and nouns to lemma and then visualise the results.
 #'
 #' @param data The data.frame or tibble object containing any texts that the user wishes to conduct parts of speech analysis on.
 #' @param text_var Any texts or sentences the user wishes to perform the parts of speech annotations on.
-#' @param id_var Unique identifier for each document. No default supplied. recommended to use 'universal_message_id' if using
+#' @param id_var Unique identifier for each document. No default supplied. recommended to use 'universal_message_id' if using a social listening export.
 #' @param pos_model A UDPipe model imported using `limpiar_pos_import_model` - must be of class 'udpipe_model'.
 #' @param in_parallel A logical argument allowing the user to initiate parallel processing to speed the annotate function up. If set to TRUE,  the function will select the number of available cores minus one, processing more efficiently(faster), leaving one core to manage other computations. The default is FALSE.
-#' @param dependency_parse Whether to perform dependency parsing on tokens. The default is set to FALSE. If the user wishes to perform parsing on tokens, they may do so by calling TRUE.
+#' @param dependency_parse Whether to perform dependency parsing on tokens. The default is set to FALSE because parsing dependencies takes considerable time and they are not always needed.
 #' @param update_progress The user has the option to state how often they would like a progress report of the annotation process, posted in the console by stating whether they want a message every 100, 500 or 1000 documents. This is useful when annotating large sets of data and serves as a sanity check to ensure the session hasn't used up all available memory and the annotations have stopped running.
 #' @param ... To enable the user to supply any additional arguments to udpipe::udpipe.
 #' @return Returns a data frame with documents broken up into both a token and sentence level, in addition to the existing variables present in `data` supplied to the function. The returned object contains the parts of speech annotations in CONLL-U formatting, where each row is an annotation of a word. To find out more on the formatting methods, read [here](https://universaldependencies.org/format.html).
@@ -86,10 +86,10 @@ limpiar_pos_annotate <- function(data,
   # if statement for parallelization and chunksize bits of code that the udpipe function requires
   if (in_parallel) {
     num_cores <- parallel::detectCores() -1
-    parallel_chunksize <- ceiling(size / num_cores)
+    parallel_chunksize <- floor(size / num_cores)
   } else {
     num_cores <- 1
-    parallel_chunksize <- ceiling(size / num_cores)
+    parallel_chunksize <- floor(size / num_cores)
   }
 
   # call udpipe function and produce output before handling
