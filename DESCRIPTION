@@ -18,18 +18,16 @@ Imports:
     rlang (>= 1.0.6),
     stringr (>= 1.5.0),
     tibble (>= 3.1.8),
-    tm (>= 0.7.10),
     magrittr (>= 2.0.3),
     janitor (>= 2.1.0),
     hash (>= 2.2.6.2),
     tidytext (>= 0.4.0),
-    udpipe
+    udpipe (>= 0.8.11)
 Suggests: 
     rmarkdown (>= 2.14),
     knitr (>= 1.39),
     testthat (>= 3.0.0),
-    tidyr (>= 1.2.1),
-    LandscapeR
+    tidyr (>= 1.2.1)
 Config/testthat/edition: 3
 Remotes:
     jpcompartir/LandscapeR
