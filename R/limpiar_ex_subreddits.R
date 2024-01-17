@@ -11,12 +11,13 @@
 #'
 limpiar_ex_subreddits <- function(df, url_var = permalink){
 
-  requireNamespace("LandscapeR")
-  url_type <- LandscapeR::column_type_checker(data = df, column = {{url_var}}, type = "character")
-  if(url_type == "no") stop("url_var should be a character vector")
+  url_sym <- rlang::ensym(url_var)
+ if(!is.character(df[[url_sym]])) {
+   stop(paste0( rlang::as_string(url_sym), " should be a character vector"))
+ }
 
   df <- df %>%
-    dplyr::mutate(subreddit = stringr::str_extract({{url_var}}, "/r/\\w+"))
+    dplyr::mutate(subreddit = stringr::str_extract(!!url_sym, "/r/\\w+"))
 
   return(df)
 }

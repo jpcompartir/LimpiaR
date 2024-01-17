@@ -2,7 +2,6 @@
 
 export("%>%")
 export(limpiar_accents)
-export(limpiar_df)
 export(limpiar_duplicates)
 export(limpiar_emojis)
 export(limpiar_emojis_es)

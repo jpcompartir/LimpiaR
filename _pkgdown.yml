@@ -36,7 +36,6 @@ reference:
   contents:
   - '`limpiar_inspect`'
   - '`limpiar_na_cols`'
-  - '`limpiar_df`'
   - contains("limpiar_link_click")
   - '`limpiar_ex_subreddits`'
 
