@@ -1,73 +1,215 @@
 ---
-title: "LimpiaR X Parts of Speech Workflow"
-output: rmarkdown::html_vignette
+title: "LimpiaR - Parts of Speech Workflow"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float:
+      collapsed: false
+      smooth_scroll: true
+      side: left
+    theme: "journal"
 vignette: >
   %\VignetteIndexEntry{processing_parts_of_speech}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-In this vignette we'll be looking at how to use LimpiaR to process a text variable for its parts of speech via {udpipe}. For a primer on parts of speech see [Parts of Speech Wikipedia](https://en.wikipedia.org/wiki/Part_of_speech).
 
-The main motivation for processing and extraction parts of speech is to home in on the particular aspects of language which are most informative for answering a given research question. For example, if you want to know what people think about something, you might focus on adjectives and nouns. If you want to know how people are using something, you might focus more on verbs/phrasal verbs.
+<style>
+.callout, .callout-tip, .callout-warning {
+  background-color: #f7f7f9;
+  border-left: 5px solid #007bff;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
 
-Before we start, we must ensure that we have the necessary libraries installed and loaded, including LimpiaR, and a few others for data wrangling purposes.
+.callout-warning {
+  border-left: 5px solid #990000;
+}
 
-```{r, message=FALSE, warning=FALSE}
+.callout-tip {
+  border-left: 5px solid #66cdaa
+}
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  message = FALSE, 
+  warning = FALSE,
+  cache = TRUE
+  )
+```
+
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
 library(LimpiaR)
 library(tibble)
 library(dplyr)
 library(stringr)
 ```
 
-LimpiaR's Parts of Speech(POS) workflow leans on existing functionality of {udpipe} and allows for users to import one of their existing pre-trained models for parts of speech analysis, to later annotate texts by tokenizing(breaking sentences up into words) and also enabling users to perform dependency parsing on tokens, 'a technique which provides to each word in a sentence the link to another word in the sentence, which is called its syntactical head. This link between each 2 words furthermore has a certain type of relationship giving you further details about it', see [here](https://www.r-bloggers.com/2019/07/dependency-parsing-with-udpipe/) for more.
+We want to take a set of documents like:
+<blockquote> Who was the first person on the moon? </blockquote>
+And extract for each token (where in this case token = word) in the document its part of speech and its lemma. So that for each document we have a table like:
 
-First, we must select what model it is that that we want to download. UDPipe pre-trained models are built upon Universal Dependencies treebanks and are made available for more than 65 languages based on 101 treebanks. For the purpose of this documentation, we will select the 'english' model, and we can do so using the `limpiar_pos_import_model()` function and supplying its only argument, `language` with the desired model.
+```{r, echo = FALSE, message = FALSE}
+model <- limpiar_pos_import_model(language = "english")
+data <- tibble(text = c("Who was the first man on the moon?"), id = 1)
+data <- limpiar_pos_annotate(
+  data,
+  text,
+  id,
+  model,
+  update_progress = 0
+) %>%
+  select(token, lemma, pos_tag)
 
-```{r, message=FALSE}
+knitr::kable(data)
+```
+
+
+In this vignette we'll be looking at how to use LimpiaR via {udpipe} to achieve this. For a primer on parts of speech see [Parts of Speech Wikipedia](https://en.wikipedia.org/wiki/Part_of_speech).
+
+
+<details>
+
+<summary>For all UPOS Tags use the following table as a reference:</summary>
+
+```{r, echo = FALSE}
+pos_table <- tibble(
+  `Part of Speech` = c("Adjective", "Adposition", "Adverb", "Auxiliary", "Coordinating Conjunction", "Determiner", "Interjection", "Noun", "Numeral", "Particle", "Pronoun", "Proper Noun", "Punctuation", "Subordinating Conjunction", "Symbol", "Verb", "Other"),
+  `UPOS Tag` = c("ADJ", "ADP", "ADV", "AUX", "CCONJ", "DET", "INTJ", "NOUN", "NUM", "PART", "PRON", "PROPN", "PUNCT", "SCONJ", "SYM", "VERB", "X")
+  ,
+  Definition = c(
+    'Usually describes or modifies a noun. It provides information about an object\'s size, color, shape, etc. Example: "big", "blue".', 
+    'Class of words that includes prepositions and postpositions, used to express spatial or temporal relations or mark various semantic roles. Example: "in", "on", "before", "after".',
+    'Modifies a verb, an adjective, another adverb, or even an entire sentence. It provides information about manner, time, place, frequency, degree, etc. Example: "quickly", "very".',
+    'Special verb used to add functional or grammatical meaning to the clause in which it appears. It accompanies the main verb and forms different aspects, voices, or moods. Example: "is", "have", "will".',
+    'Joins words, phrases, or clauses of similar grammatical status and syntactic importance. Example: "and", "but", "or".',
+    'Introduces a noun and provides context in terms of definiteness, where it belongs in a sequence, quantity, or ownership. Example: "a", "the", "this", "those".',
+    'An abrupt remark, made apart from the main sentence structure, often used to express strong emotion or surprise. Example: "Oh!", "Wow!", "Ugh!".',
+    'Represents a person, place, thing, or idea. Nouns can be subjects, objects, or complement in a sentence. Example: "dog", "city", "happiness".',
+    'A word, symbol, or group of words representing a number. Example: "one", "first", "100".',
+    'A function word that does not fit into the other categories but is used to express grammatical relationships with other words or to specify the attitude of the speaker. Example: "up" in "stand up".',
+    'Replaces a noun, often used to avoid repetition. Pronouns can do most things that nouns can do. Example: "he", "they", "who".',
+    'Names a specific person, place, thing, or idea and is typically capitalized. Example: "Elizabeth", "London", "Microsoft".', 
+    'Symbols that organize writing into clauses, phrases, and sentences, clarify meaning, and indicate pauses. Example: ".", ",", "!".',
+    'Introduces a subordinate clause and indicates the relationship between the subordinate clause and the rest of the sentence. Example: "because", "although", "when".',
+    'A mark or character used as a conventional representation of an object, function, or process. Example: "$", "%", "&".',
+    'Expresses an action, occurrence, or state of being. Verbs are central to a clause. Example: "run", "be", "have".',
+    'A category used for words or tokens that do not fit into the above categories. This is less common and often used in tagging to mark anomalies or unclassifiable items.'
+  )
+)
+knitr::kable(pos_table, caption = "Source: universaldependencies.org/u/pos")
+```
+
+</details>
+
+# Workflow
+
+The main motivation for processing and extracting parts of speech is to home in on the particular aspects of language which are most informative for answering a given research question. For example, if you want to know what people think about something, you might focus on adjectives and nouns because adjectives describe things, and nouns are things. If you want to know how people are using something, you might focus more on verbs/phrasal verbs as they are 'doing words'.
+
+## Loading packages
+
+```{r, eval = FALSE, message=FALSE, warning=FALSE}
+library(LimpiaR)
+library(tibble)
+library(dplyr)
+library(stringr)
+```
+
+## Getting started
+
+LimpiaR's PoS workflow leans on pre-existing functionality of the {udpipe} package to allow users to import a pre-trained model for parts of speech analysis whilst enabling advanced users to perform 'dependency parsing'.
+
+<details>
+<summary> What is dependency parsing?</summary>
+"a technique which provides to each word in a sentence the link to another word in the sentence, which is called its syntactical head. This link between each 2 words furthermore has a certain type of relationship giving you further details about it"
+
+see [here](https://www.r-bloggers.com/2019/07/dependency-parsing-with-udpipe/) for more info.
+
+</details>
+
+## Importing a udpipe model
+
+First, we import the model we want to use. UDPipe pre-trained models are built upon Universal Dependencies treebanks and are made available for more than 65 languages based on 101 treebanks. For demonstrative purposes we'll use `language = "english"`.
+
+```{r, eval = FALSE}
 model <- limpiar_pos_import_model(language = "english")
 ```
 
-Now that we have our model imported into our session, lets load some data for us to annotate. Using the data object derived from the {stringr} package and containing sentences ideal for tagging, tokenizing, lemmatizing and parsing for parts of speech analysis. Also, for this example we will include a variable called `universal_message_id`, this column will serve as a likely variable within the users data-set in a real-world situation or project.
+## Example data
+
+Now that we have our model imported into our session, let's get some data to tag, tokenise, lemmatise, and extract parts of speech. We need a data frame with both a text variable and an ID column which uniquely identifies each text.
 
 ```{r}
-data <- dplyr::tibble(text = tolower(stringr::sentences[1:1000]),
-                      universal_message_id = paste0("TWITTER", 1:1000))
+(
+data <- dplyr::tibble(text = tolower(stringr::sentences[1:100]),
+                      universal_message_id = paste0("TWITTER", 1:100))
+)
 ```
 
-So now we have some data and we also have our desired model loaded into session, we can begin annotating with the `limpiar_pos_annotate()` function. 
+So now we have some data and we also have our desired model loaded into session, the function we need next is `limpiar_pos_annotate()`. 
 
-It's worth noting that the output can entirely depend on any cleaning steps performed on texts before annotating. For example, it is possible that with the removal of punctuation, the dependency parsing bits of the function may under-perform. This could also be said for the Parts of Speech(POS) tagging process as nouns(NOUN) and proper-nouns(PROPN) will be harder to differentiate if punctuation is removed as well as all text being lowercase.
+<div class="callout">
 
-When using LimpiaR's annotate function we first tokenize all sentences of our text variable(text_var) within a selected data frame object(data), enabling us to perform POS tagging and lemmatization on tokens. We can also speed this process up by calling `TRUE` on the parallel processing argument(in_parallel). The user can also decide whether to parse tokens for term dependencies, by supplying the dependency_parse argument with a logical input of `TRUE`. However, this argument is `FALSE` by default as this step can be expensive on compute as well as memory if performed on large sets of data unnecessarily or unwillingly. When using `limpiar_pos_annotate()`, its important to supply the id_var with an appropriate identifying variable. This can either be; universal_message_id, doc_id, doc_number or anything similar that represents a unique document of text which the annotations are then performed upon. The final argument we see is update_progress, and serves as a sanity check when running the function as it prints the annotating progress in the users console and will print this progress for every 100, 500 or 1000 documents that are annotated. The user can select `update_progress = 0` if they do not want updates on the annotating process, the default is set to emit progress updates every 100 documents.
+Before we begin, it's important to note that our output will be sensitive to cleaning steps. For example, it is possible that with the removal of punctuation, PoS Tagging may under-perform. This could also be said for the POS tagging process as nouns(NOUN) and proper-nouns(PROPN) will be harder to differentiate if punctuation is removed as well as all text being lowercase.
+
+So be careful when pre-processing your text variable if you're intending to follow the PoS workflow.
+
+</div>
+
+## Extracting parts of speech
+
+The`limpiar_pos_annotate` function converts the text of each document into its tokens, lemmas, POS tags, and dependency relationships*. The input data frame should have one document per row, the return data frame will have one row per token. This means the return data frame will have many more rows than the input data frame!
+
+<details>
+<summary> * </summary>
+*the `dependency_parse` argument is set to `FALSE` by default as this step can be costly in time and compute if performed on large data sets. Most users will get by just fine without parsing dependencies, but if you are sure you need them set this argument to `TRUE`. 
+</details>
+
+`limpiar_pos_annotate` can be sped up by using `in_parallel = TRUE`, this argument makes the function process multiple rows of the data frame in parallel. 
+
+By default the function will print its progress every 100 rows, this way you know that it's still working and roughly how long it should take to finish running. If you don't want the progress updates to print in your console set `update_progress = 0`. 
 
 ```{r, message=FALSE} 
 # annotate texts and perform dependency parsing
-annotations <- limpiar_pos_annotate(data = data, text_var = text, id_var = universal_message_id, pos_model = model, dependency_parse = TRUE, in_parallel = FALSE, update_progress = 100)
+annotations <- limpiar_pos_annotate(data = data, text_var = text, id_var = universal_message_id, pos_model = model, dependency_parse = TRUE, in_parallel = FALSE, update_progress = 25)
 ```
 
-Now that we have our texts tokenized, dependency parsed and POS annotations are complete. Lets take a look at the output.
+Now that we have our texts tokenized, dependencies parsed, and POS annotations are complete, let's take a look at the output. After annotating we have `r nrow(annotations)` rows, which is an `r nrow(annotations)/nrow(data)`x increase!
 
-```{r, message=FALSE, warning=FALSE}
-annotations %>% 
-  dplyr::slice_head(n = 50)
+```{r, message=FALSE, warning=FALSE, width = 120}
+annotations %>%
+  select(-c(sentence, feats, xpos, doc_id)) %>%
+  relocate(universal_message_id)
 ```
 
-Our first observation might be that the data frame output is significantly larger than the one we provided in terms of row number. This is due to each row now representing an annotation of each token derived from sentences belonging to documents. We can also see some additional columns containing information regarding each annotation, the columns we will pay closer attention to are; paragraph_id, sentence_id, sentence, token, lemma, pos_tag, dependency_tag and id_var, all of which can be useful in a number of NLP objectives. 
+Output has some additional columns, we will pay closest attention to paragraph_id, sentence_id, token, lemma, pos_tag, dependency_tag.
 
-First, we must understand what they all mean. Starting with `paragraph_id` and `sentence_id`, we see that the identifying value for both the sentence in which the annotated token is derived, as well as the paragraph. As our example data consists of sentences its likely that the values here for paragraph_id and sentence_id will be an equal match given that no document consists of more than one sentence. We then of course, have the `sentence` in question along with the `token` being annotated along with its respective `lemma`(the token in its root form), understanding the lemma column can be best visualized when looking at row number 43 where 'served' of document 5 becomes 'serve' once lemmatized. 
+What are these new columns? 
 
-```{r, warning=FALSE, echo=FALSE}
-annotations %>% 
-  dplyr::slice_head(n = 50) %>% 
-  dplyr::filter(token == "served") %>% 
-  dplyr::select(3, 5:6)
-```
+`paragraph_id` and `sentence_id` tell us which of the document's paragraphs, and which sentence the token is in. Because our data set contains only single sentences, all of these values are 1. 
 
-We then see `pos_tag`, `head_token_id`, `dependency_tag` and `id_var`. Starting with pos_tag(Parts of Speech tag), this column is where information regarding how tokens are classified as any of the parts of speech labels such as; Noun(NOUN), Proper Noun(PROPN), Pronoun(PRON), Verb(VERB), Adjective(ADJ) etc. For more on the exact tags and what they mean see [here](https://universaldependencies.org/u/pos/index.html). We then have columns; `head_token_id` and `dependency_tag` which along with a few other columns like `token_id` and `feats` we will only need if we wish to conduct dependency parsing analysis on our documents and visualize those. With that said, it's worth noting that these three columns; `head_token_id`, `dependency_tag` and `feats` will not be present in the output if we call `dependency_parse = FALSE`. 
+`token` is the word the rest of the columns refer to. 
 
-Finally, the last and quite possibly the most important column; `id_var`, this is the variable that the users inputs when calling the annotate function and is necessary to join the original data back to the annotations throughout the process. If not supplied, the function will not run, and if supplied incorrectly, the output may be hindered and therefore likely to cause the user some problems further down the line, so take care when supplying the function with this variable.
+`lemma` is the [lemmatised](https://en.wikipedia.org/wiki/Lemmatization) version of the token, an example of lemmatisation is 'served' being converted to 'serve'.
 
-Now that we have a bit more context as to what all of this information means, lets dive in and see if we can manipulate this data so we can see what adjectives are most common in their lemmatized form. To do so, we only require some basic {dplyr} functionality and we will use `head()` from {utils} package to select only the top 10 most frequent.
+`pos_tag` displays PoS labels such as; Noun(NOUN), Proper Noun(PROPN), Pronoun(PRON), Verb(VERB), Adjective(ADJ) etc. For more on the exact tags and what they mean see [PoS Tags](https://universaldependencies.org/u/pos/index.html) or the UPOS tags table at the top of this document. 
+
+`dependency_tag` displays the dependency relation for each token. Dependency relationships are significantly more complicated than parts of speech. see [Dependency Relations](https://universaldependencies.org/u/dep/) for more details.
+
+`head_token_id`, `dependency_tag` and `feats` will only be present if we select `dependency_parse = TRUE`,
+
+Finally, the column you inserted as `id_var = `. This variable will help you to join the results back to your original data frame.
+
+## Manipulating the output
+
+Now that we have adequate context, let's look at what we can do with our output.
+
+Now that we have a bit more context as to what all of this information means, lets dive in and see if we can manipulate this data so we can see what adjectives are most common in their lemmatised form. To do so, we only require some basic {dplyr} functionality and we will use `head()` from {utils} package to select only the top 10 most frequent.
 
 ```{r}
 annotations %>% 
@@ -92,8 +234,10 @@ So far, we've observed 'old' as the most frequent adjective and 'man' as the mos
 ```{r, message=FALSE, warning=FALSE}
 co_occurrences <- udpipe::cooccurrence(x = subset(annotations, pos_tag %in% c("NOUN", "ADJ")),
                                        term = "lemma",
-                                       group = c("paragraph_id", "sentence_id", "id_var", "universal_message_id"))
+                                       group = c("paragraph_id", "sentence_id", "universal_message_id"))
 utils::head(co_occurrences)
 ```
 
 Once we have the information regarding the co-occurrences of nouns and adjectives within our documents, we are able to evidence what entities appear throughout our data, as well as the type of language used in conjunction with and toward them. We can later add to this, by visualizing the frequency of terms appearing within the same document as well as those that are explicitly used one after another, just like the example above, where we see 'hot sun' appear as most frequent.
+
+
