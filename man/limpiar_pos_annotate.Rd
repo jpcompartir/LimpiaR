@@ -2,7 +2,7 @@
 % Please edit documentation in R/limpiar_pos_annotate.R
 \name{limpiar_pos_annotate}
 \alias{limpiar_pos_annotate}
-\title{Annotate Texts for Parts of Speech Analysis}
+\title{Annotate Texts for Parts of Speech Analysis using udpipe models.}
 \usage{
 limpiar_pos_annotate(
   data,
@@ -20,15 +20,15 @@ limpiar_pos_annotate(
 
 \item{text_var}{Any texts or sentences the user wishes to perform the parts of speech annotations on.}
 
-\item{id_var}{The document identifier, this can be something like universal_message_id or doc_number. The default is universal_message_id.}
+\item{id_var}{Unique identifier for each document. No default supplied. recommended to use 'universal_message_id' if using a social listening export.}
 
-\item{pos_model}{A UDPipe model imported using \code{limpiar_pos_import_model}, and must be of class 'udpipe_model'.}
+\item{pos_model}{A UDPipe model imported using \code{limpiar_pos_import_model} - must be of class 'udpipe_model'.}
 
-\item{...}{To enable the user to supply any additional arguments.}
+\item{...}{To enable the user to supply any additional arguments to udpipe::udpipe.}
 
 \item{in_parallel}{A logical argument allowing the user to initiate parallel processing to speed the annotate function up. If set to TRUE,  the function will select the number of available cores minus one, processing more efficiently(faster), leaving one core to manage other computations. The default is FALSE.}
 
-\item{dependency_parse}{Whether to perform dependency parsing on tokens. The default is set to FALSE. If the user wishes to perform parsing on tokens, they may do so by calling TRUE.}
+\item{dependency_parse}{Whether to perform dependency parsing on tokens. The default is set to FALSE because parsing dependencies takes considerable time and they are not always needed.}
 
 \item{update_progress}{The user has the option to state how often they would like a progress report of the annotation process, posted in the console by stating whether they want a message every 100, 500 or 1000 documents. This is useful when annotating large sets of data and serves as a sanity check to ensure the session hasn't used up all available memory and the annotations have stopped running.}
 }
@@ -50,7 +50,16 @@ The additional arguments with tagged POS information are as follows:
 }
 }
 \description{
-Annotate Texts for Parts of Speech Analysis
+Take a data frame with a text and id variable and extract its parts of speech using {udpipe models} which we import for a specific language with \code{limpiar_pos_import_model}. This function will annotate the data frame according to the language of the imported model.
+}
+\details{
+The leg work is done by {udpipe}. We have implemented it into LimpiaR because:
+\enumerate{
+\item Taking data as its first argument allows it to integrate with Tidyerse workflows (it makes the function pipe-able)
+\item We want the mental model to be as consistent as possible, i.e. when using LimpiaR in the pre-processing pipeline the user mainly calls LimpiaR, and doesn't have to remember another package.
+}
+
+There are many potential workflows so we won't try to enumerate them here. However,  as clear use-cases emerge we will create new limpiar_pos_ functions on a case-by-case basis. An example workflow would be to convert all adjectives and nouns to lemma and then visualise the results.
 }
 \examples{
 data <- dplyr::tibble(text = tolower(stringr::sentences[1:100]),
