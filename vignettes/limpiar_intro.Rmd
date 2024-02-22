@@ -14,6 +14,8 @@ knitr::opts_chunk$set(
 )
 ```
 
+LimpiaR is a package built to expedite pre-processing of text variables, with some handy functions in Spanish and R. To get started, we'll load few helpful libraries.
+
 ## Loading Everything Into R
 
 ```{r setup, echo = TRUE, results = "hide", warning = FALSE, message = FALSE}
@@ -23,7 +25,7 @@ library(stringr)
 library(LimpiaR)
 ```
 
-Productivity tip for those of you who are just setting out on your programming/R journey: all of LimpiaR's functions begin with limpiar_. Once the library has been loaded, typing limpiar_ in an Rstudio script or Rmarkdown code block, will produce a drop down menu of all LimpiaR functions, so you don't need to remember the names of all of them.
+LimpiaR's functions begin with limpiar_. Once the library has been loaded, typing limpiar_ in an Rstudio script or Rmarkdown code block, will produce a drop down menu of all LimpiaR functions, which should help you to find the name of the function you're looking for.
 
 ```{r, eval = TRUE, echo = FALSE, warning= FALSE}
 data <- data.frame(
@@ -100,7 +102,7 @@ Now we'll remove duplicate posts, notice that we don't actually need to type tex
   limpiar_duplicates())
 ```
 
-Note: If the text column in our data frame were called 'text' we would have to specify text_var = text, or call:
+>Note: If the text column in our data frame were called 'text' we would have to specify text_var = text, or call:
 
 ```r
 data %>% rename(mention_content = text) 
@@ -208,7 +210,9 @@ data %>%
 
 ```
 
-Sentences can look quite strange without stopwords, and a lot of social posts are virtually meaningless. It's also worth pointing out, that a lot of information can be lost when removing stop words. Many phrases in English and Spanish have very different meanings when a stop word is removed.
+Sentences can look quite strange without stopwords, and a lot of social posts are virtually meaningless altogether! 
+
+> It's also worth pointing out, that a lot of information can be lost when removing stop words. Many phrases in English and Spanish have very different meanings when a stop word is removed, and some stopwords lists contain negatives, which can drastically change the meaning of a sentence!
 
 ## Utility Functions
 We are nearly at the end of this introduction to LimpiaR, but before we finish, let's look at two utility functions which may be useful. We've conjoured up a new data frame called df, which we will use to show the last two functions and how to chain everything together.
