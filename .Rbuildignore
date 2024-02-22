@@ -10,3 +10,4 @@
 R/deprecated.R
 ^\.github$
 ^README\.Rmd$
+^model_cache
