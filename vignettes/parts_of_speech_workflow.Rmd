@@ -1,6 +1,8 @@
 ---
 title: "LimpiaR - Parts of Speech Workflow"
-output: 
+pkgdown:
+  as_is: true
+output:
   html_document:
     toc: true
     toc_depth: 3
@@ -51,7 +53,9 @@ library(stringr)
 ```
 
 We want to take a document (or later a set of documents) like:
+
 <blockquote> Who was the first person on the moon? </blockquote>
+
 And extract for each token (where in this case token = word) in the document its part of speech and its lemma. So that for each document we have a table like:
 
 ```{r, echo = FALSE, message = FALSE}
@@ -170,9 +174,15 @@ The`limpiar_pos_annotate` function converts the text of each document into its t
 *the `dependency_parse` argument is set to `FALSE` by default as this step can be costly in time and compute if performed on large data sets. Most users will get by just fine without parsing dependencies, but if you are sure you need them set this argument to `TRUE`. 
 </details>
 
-`limpiar_pos_annotate` can be sped up by using `in_parallel = TRUE`, this argument makes the function process multiple rows of the data frame in parallel. 
+`limpiar_pos_annotate` can be sped up by using `in_parallel = TRUE`, this argument makes the function process multiple rows of the data frame in parallel.
+
+<div class="callout-warning">
+Running the function in parallel prevents the progress from being updated. 
+</div>
 
 By default the function will print its progress every 100 rows, this way you know that it's still working and roughly how long it should take to finish running. If you don't want the progress updates to print in your console set `update_progress = 0`. 
+
+
 
 ```{r, message=FALSE} 
 # annotate texts and perform dependency parsing
@@ -293,7 +303,7 @@ spanish %>%
 
 We see immediately that 'hace' a conjugation of the verb 'hacer' is converted to hacer, muchos -> mucho, años -> año. These changes would generally be agreeable, they'll help us to reduce the overall number of words in our data set, and our text-based visualisations should be cleaner. However, it is *always* a good idea to carefully consider the effects of any transformation you perform on data, rather than doing it blindly.
 
-We can convert all vebrs to lemma and stitch the document back together using the same tricks as we did for English:
+We can convert all verbs to lemma and stitch the document back together using the same tricks as we did for English:
 ```{r}
 spanish %>%
   mutate(

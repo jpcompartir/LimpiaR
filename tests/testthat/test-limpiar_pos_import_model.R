@@ -9,4 +9,7 @@ test_that("input validation and output of appropriate class", {
 
   # expect output to be of udpipe_model class
   expect_true(inherits(model_loaded, "udpipe_model"))
+
+  expect_true(grepl("model_cache", model_loaded$file))
+
 })
