@@ -170,7 +170,7 @@ So be careful when pre-processing your text variable if you're intending to foll
 The`limpiar_pos_annotate` function converts the text of each document into its tokens, lemmas, POS tags, and dependency relationships*. The input data frame should have one document per row, the return data frame will have one row per token. This means the return data frame will have many more rows than the input data frame!
 
 <details>
-<summary> * </summary>
+<summary> dependency_parse default value</summary>
 *the `dependency_parse` argument is set to `FALSE` by default as this step can be costly in time and compute if performed on large data sets. Most users will get by just fine without parsing dependencies, but if you are sure you need them set this argument to `TRUE`. 
 </details>
 

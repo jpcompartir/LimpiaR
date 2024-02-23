@@ -69,3 +69,7 @@ home:
   links:
   - text: Report an issue
     href: https://github.com/jpcompartir/LimpiaR/issues
+
+news:
+  title: "Release Notes"
+  strip_header: true

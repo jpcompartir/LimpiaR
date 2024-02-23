@@ -1,7 +1,5 @@
 # LimpiaR (development version)
 
-# Impending Release
-
 # Parts of Speech
 
 * Import & download models with limpiar_pos_import
