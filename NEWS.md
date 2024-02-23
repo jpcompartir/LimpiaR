@@ -1,10 +1,10 @@
-# LimpiaR (development version)
+# LimpiaR 1.0.0
 
-# Parts of Speech
+# Version 1.0.0
 
 * Import & download models with limpiar_pos_import
-  [x] Multilingual
-  [x] Caching support
+  + Multilingual
+  + Caching support
 * Annotate models with limpiar_pos_annotate
 * Removed the limpiar_df function (be mindful about individual cleaning steps!)
 
