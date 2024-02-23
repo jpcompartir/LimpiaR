@@ -12,3 +12,4 @@ R/deprecated.R
 ^README\.Rmd$
 ^model_cache
 vignettes/limpiar_pos_p&p.qmd
+vignettes/parts_of_speech_workflow_cache

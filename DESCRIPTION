@@ -2,11 +2,11 @@ Package: LimpiaR
 Title: LimpiaR
 Version: 1.0.0
 Authors@R: 
-    person(given = "Jack",
-           family = "Penzer",
-           role = c("aut", "cre"),
-           email = "jack.penzer@sharecreative.com",
-           comment = c(ORCID = "SHARE Creative"))
+    as.person(c(
+    "Jack Penzer <jack.penzer@sharecreative.com> [cre]",
+    "Tim Mooney <tim.mooney@sharecreative.com> [aut]",
+    "SHARE Creative [cph]"
+    ))
 Description: SHARE & SAMY Group's dedicated pre-processing suite for Spanish & English data sets. A range of functions for getting text data ready to be analysed.
 License: MIT + file LICENSE
 Encoding: UTF-8
