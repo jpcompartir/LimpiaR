@@ -1,6 +1,20 @@
+template:
+  bootstrap: 5
+  params:
+    bootswatch: "journal"
+    hljs:
+      style: "tango"
+    toc: true
+    toc_depth: 3
+    toc_float:
+      collapsed: false
+      smooth_scroll: true
+      side: left
+    theme: "united"
+
 navbar:
   structure:
-    left: [home, intro, reference, articles]
+    left: [home, news, reference, articles]
     right: [github]
 
 reference:
@@ -36,9 +50,15 @@ reference:
   contents:
   - '`limpiar_inspect`'
   - '`limpiar_na_cols`'
-  - '`limpiar_df`'
   - contains("limpiar_link_click")
   - '`limpiar_ex_subreddits`'
+
+- title: Processing Parts of Speech
+  desc: >
+    A collection of functions that collectively make up a Parts of Speech(POS) analysis and workflow.
+  contents:
+  - '`limpiar_pos_import_model`'
+  - '`limpiar_pos_annotate`'
 
 repo:
   url:
@@ -49,3 +69,7 @@ home:
   links:
   - text: Report an issue
     href: https://github.com/jpcompartir/LimpiaR/issues
+
+news:
+  title: "Release Notes"
+  strip_header: true

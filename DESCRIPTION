@@ -1,12 +1,12 @@
 Package: LimpiaR
 Title: LimpiaR
-Version: 0.0.0.9000
+Version: 1.0.0
 Authors@R: 
-    person(given = "Jack",
-           family = "Penzer",
-           role = c("aut", "cre"),
-           email = "jack.penzer@sharecreative.com",
-           comment = c(ORCID = "SHARE Creative"))
+    as.person(c(
+    "Jack Penzer <jack.penzer@sharecreative.com> [cre]",
+    "Tim Mooney <tim.mooney@sharecreative.com> [aut]",
+    "SHARE Creative [cph]"
+    ))
 Description: SHARE & SAMY Group's dedicated pre-processing suite for Spanish & English data sets. A range of functions for getting text data ready to be analysed.
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -18,17 +18,16 @@ Imports:
     rlang (>= 1.0.6),
     stringr (>= 1.5.0),
     tibble (>= 3.1.8),
-    tm (>= 0.7.10),
     magrittr (>= 2.0.3),
-    janitor (>= 2.1.0),
     hash (>= 2.2.6.2),
-    tidytext (>= 0.4.0)
+    tidytext (>= 0.4.0),
+    udpipe (>= 0.8.11),
+    tidyr (>= 1.2.1)
 Suggests: 
     rmarkdown (>= 2.14),
     knitr (>= 1.39),
-    testthat (>= 3.0.0),
-    tidyr (>= 1.2.1),
-    LandscapeR
+    janitor (>= 2.1.0),
+    testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Remotes:
     jpcompartir/LandscapeR

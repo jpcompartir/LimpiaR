@@ -1,6 +1,6 @@
 #Record global variables
 utils::globalVariables(c("mention_content", "code_browser_emojis",
-                         "description", "cldr_short_name", "mention_url","data", "descripcion", "nombre", "document", "n_ngram", "token", "permalink"))
+                         "description", "cldr_short_name", "mention_url","data", "descripcion", "nombre", "document", "n_ngram", "token", "permalink", "doc_id", "upos", "dep_rel"))
 
 
 #' Tibble of examples for LimpiaR functions

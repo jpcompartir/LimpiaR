@@ -1,7 +1,8 @@
-pandoc: 2.19.2
+pandoc: 3.1.1
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   limpiar_intro: limpiar_intro.html
-last_built: 2023-05-16T11:37Z
+  parts_of_speech_workflow: parts_of_speech_workflow.html
+last_built: 2024-01-11T17:51Z
 
