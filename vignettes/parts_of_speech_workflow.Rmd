@@ -316,6 +316,6 @@ spanish %>%
 Clearly the sentence is now ungrammatical, but for a topic modelling workflow or some n-gram networks, the data will be cleaner and the counts will better reflect the real frequencies for each verb.
 
 <div class="callout-warning">
-No models are 100% correct, so we expect to see the occasional false output. This is particularly true when it comes to languages other than English with tend to have less training data, and be more grammatically complex.
+No models are 100% correct, so we expect to see the occasional false output. This is particularly true when it comes to languages other than English which tend to have less training data, and be more grammatically complex.
 </div> 
 
