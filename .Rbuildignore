@@ -11,3 +11,4 @@ R/deprecated.R
 ^\.github$
 ^README\.Rmd$
 ^model_cache
+vignettes/limpiar_pos_p&p.qmd
