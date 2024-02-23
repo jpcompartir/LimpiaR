@@ -14,7 +14,7 @@ template:
 
 navbar:
   structure:
-    left: [home, intro, reference, articles]
+    left: [home, news, reference, articles]
     right: [github]
 
 reference:

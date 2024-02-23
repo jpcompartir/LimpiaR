@@ -35,5 +35,7 @@ limpiar_pos_import_model <- function(language) {
   # load model from the directory
   model_loaded <- udpipe::udpipe_load_model(file = model$file)
 
+  class(model_loaded) <- "udpipe_model"
+
   return(model_loaded)
 }
