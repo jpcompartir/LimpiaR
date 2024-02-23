@@ -16,10 +16,19 @@
     <loc>/articles/limpiar_intro.html</loc>
   </url>
   <url>
+    <loc>/articles/parts_of_speech_workflow.html</loc>
+  </url>
+  <url>
+    <loc>/articles/parts_of_speech_workflow_files/jqueryui-1.13.2/index.html</loc>
+  </url>
+  <url>
     <loc>/authors.html</loc>
   </url>
   <url>
     <loc>/index.html</loc>
+  </url>
+  <url>
+    <loc>/news/index.html</loc>
   </url>
   <url>
     <loc>/reference/code_browser_emojis.html</loc>
@@ -32,9 +41,6 @@
   </url>
   <url>
     <loc>/reference/limpiar_accents.html</loc>
-  </url>
-  <url>
-    <loc>/reference/limpiar_df.html</loc>
   </url>
   <url>
     <loc>/reference/limpiar_duplicates.html</loc>
@@ -62,6 +68,12 @@
   </url>
   <url>
     <loc>/reference/limpiar_na_cols.html</loc>
+  </url>
+  <url>
+    <loc>/reference/limpiar_pos_annotate.html</loc>
+  </url>
+  <url>
+    <loc>/reference/limpiar_pos_import_model.html</loc>
   </url>
   <url>
     <loc>/reference/limpiar_pp_companies.html</loc>
