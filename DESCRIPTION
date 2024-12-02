@@ -8,6 +8,7 @@ Authors@R:
     "SHARE Creative [cph]"
     ))
 Description: SHARE & SAMY Group's dedicated pre-processing suite for Spanish & English data sets. A range of functions for getting text data ready to be analysed.
+URL: https://jpcompartir.github.io/LimpiaR
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
