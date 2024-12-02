@@ -5,3 +5,4 @@
 .DS_Store
 ^limpiar_release_
 ^model_cache
+^dev_docs

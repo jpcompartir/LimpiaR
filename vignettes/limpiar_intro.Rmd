@@ -184,19 +184,44 @@ We don't want our algorithm to have to learn the difference between 'ajajaj' and
 
 Generally, the steps we've taken so far will be used in each and every analysis/project to help clean the data. We will now look at some of the more circumstantial functions, i.e. they will not be used in every analysis.
 
-### limpiar_emojis
-We don't need to use limpiar_emojis for every analysis, as many ParseR & SegmentR functions ignore them implicitly. However, if we know that we need to for a special purpose, we can can use limpiar_emojis(). One problem with this, and the reason it is for special cases only, is the emoji's encodings are in English. We may, at some point, translate them to Spanish, but it seems unlikely.
+### Emojis
+
+Emojis are a type of non-ASCII unicode character, which means that removing all non-ASCII characters will remove emojis by force. It also means that functions designed to target certain unicode characters by patterns, may inadvertently remove other special characters as well as emojis, or instead of emojis!
+
+#### limpiar_recode_emojis()
+
+<details>
+<summary>Why not juse a regular expression? </summary>
+We scraped some lists of emojis which get the emojis directly for replacement. This approach is more computationally expensive than filtering out via RegEx, but it is often more precise as it targets the emojis directly.
+</details>
+
+We don't need to use limpiar_recode_emojis for every analysis, as many ParseR & SegmentR functions ignore them implicitly. However, if we know that we need to replace them with their text descriptios, we can can use limpiar__recode_emojis(). One problem with this, and the reason it is for special cases only, is the emoji's encodings are in English. We may, at some point, translate them to Spanish, but it seems unlikely.
 
 ```{r}
 data %>%
-  limpiar_emojis(text_var = mention_content, with_emoji_tag = FALSE)
+  limpiar_recode_emojis(text_var = mention_content, with_emoji_tag = FALSE)
 ```
 
 or with the default settings:
 ```{r}
 data %>%
-  limpiar_emojis()
+  limpiar_recode_emojis()
 ```
+
+> **Warning** the `limpiar_recode_emojis()` function is quite slow and scales poorly with the size of inputs. So if using on a large dataset with many long documents expect functions to take a while to run.
+
+#### limpiar_remove_emojis()
+
+What about in situations where we don't want to replace emojis with their text inputs, **or** we don't mind risking the loss of some other non-ASCII characters, **or** we want something that runs fast?
+
+Instead of `limpiar_recode_emojis` we can use `limpiar_remove_emojis`! This function operates with a fairly simple RegEx pattern, meaning it runs extremely efficiently.
+
+```{r}
+data %>%
+  limpiar_remove_emojis()
+```
+
+
 
 ### limpiar_stopwords
 Stop words are common words that do not provide us with much information as to an utterance's meaning. For example, in the sentence: 'the man is in prison for theft', if we knew only one word from this sentence, and that word was 'is', 'in', 'the', or 'for' then we wouldn't have much idea what the sentence is about. However, 'prison' or 'theft', would give us a lot more information.
@@ -285,7 +310,7 @@ df %>%
   limpiar_shorthands()%>%
   limpiar_repeat_chars()%>%
   limpiar_url()%>%
-  limpiar_emojis()%>%
+  limpiar_recode_emojis()%>%
   limpiar_shorthands()%>%
   limpiar_spaces()%>%
   limpiar_duplicates()

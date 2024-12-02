@@ -1,0 +1,35 @@
+---
+title: "Emojis Refactor"
+format:
+  html:
+    embed-resources: true
+---
+# Emojis Refactor
+```{r}
+
+```
+
+
+
+# String Wrapping
+For DT:: outputs and plotly etc.?
+```{r}
+df <- tibble::tibble(x = "LONG POST MADE LONGER LONG POST MADE LONGERLONG POST MADE LONGERLONG POST MADE LONGERLONG POST MADE LONGERLONG POST MADE LONGERLONG POST MADE LONGERLONG POST MADE LONGERLONG POST MADE LONGERLONG POST MADE LONGERLONG POST MADE LONGERLONG POST MADE LONGERLONG POST MADE LONGER")
+
+library(tidyverse)
+add_br <- function(text, n) {
+  words <- str_split(text, " ")[[1]]
+  words_with_br <- map_chr(seq_along(words), ~ifelse(. %% n == 0, paste0(words[.], "<br>"), words[.]))
+  paste(words_with_br, collapse = " ")
+}
+
+df <- df %>%
+  mutate(hover_text = map_chr(x, ~add_br(.x, 10)))
+
+df$hover_text
+
+
+paste0(strwrap(df$x[[1]], width = 150, prefix = "<br>"), collapse = "")
+```
+
+

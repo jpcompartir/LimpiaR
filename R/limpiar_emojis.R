@@ -1,4 +1,4 @@
-#' Replace emojis with a textual description
+#' Recode emojis with a textual description
 #'
 #' Main usage is for pre-processing the text variable as part of Deep Learning pipeline.
 #' The most important argument is whether or not to add the emoji tag, which will also print in snake case.
@@ -12,10 +12,9 @@
 #' @examples
 #' limpiar_examples %>% dplyr::select(mention_content)
 #'
-#' limpiar_examples %>% limpiar_emojis() %>% dplyr::select(mention_content)
+#' limpiar_examples %>% limpiar_recode_emojis() %>% dplyr::select(mention_content)
 #' @export
-limpiar_emojis <- function(df, text_var = mention_content, with_emoji_tag = FALSE){
-
+limpiar_recode_emojis <- function(df, text_var = mention_content, with_emoji_tag = FALSE){
 
   data("code_browser_emojis", envir = environment())
 
@@ -39,7 +38,7 @@ limpiar_emojis <- function(df, text_var = mention_content, with_emoji_tag = FALS
       limpiar_spaces(text_var = {{text_var}})
 
     #This is for situations in which we don't want the snake case or the emoji tag (such as when making a bigram network, topics etc.)
-    #But I would generally advise just not using limpiar_emojis in such cases.
+    #But I would generally advise just not using limpiar_recode_emojiss in such cases.
   }else{
     keys <- code_browser_emojis %>%
       dplyr::filter(!stringr::str_detect(cldr_short_name, "keycap: \\*"))%>%
@@ -58,11 +57,26 @@ limpiar_emojis <- function(df, text_var = mention_content, with_emoji_tag = FALS
                                                              hash::values(my_hash),
                                                             hash::keys(my_hash)))%>%
       limpiar_spaces(text_var = {{text_var}})
-
-
   }
+}
 
+
+#' Completely Remove Most Emojis from Text
+#'
+#' @description uses a simple Regular Expression (RegEx) to clear most emojis from the text variable.
+#'
+#'
+#' @param df Name of Data Frame or Tibble object
+#' @param text_var  Name of text variable
+#'
+#' @return Data Frame with the text variable cleaned in place
+#' @export
+#'
+#' @examples
+#' 2+2
+limpiar_remove_emojis <- function(df, text_var) {
 
 }
+
 
 

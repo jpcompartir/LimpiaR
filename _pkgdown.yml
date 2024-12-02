@@ -22,43 +22,43 @@ reference:
   desc: >
     Functions for editing the text variable in place.
   contents:
-  - '`limpiar_accents`'
-  - '`limpiar_spaces`'
-  - '`limpiar_url`'
-  - '`limpiar_repeat_chars`'
-  - '`limpiar_shorthands`'
-  - '`limpiar_tags`'
-  - '`limpiar_emojis`'
-  - '`limpiar_stopwords`'
-  - '`limpiar_slang`'
-  - '`limpiar_emojis`'
-  - '`limpiar_emojis_es`'
-  - '`limpiar_pp_products`'
-  - '`limpiar_pp_companies`'
+  - limpiar_accents
+  - limpiar_spaces
+  - limpiar_url
+  - limpiar_repeat_chars
+  - limpiar_shorthands
+  - limpiar_tags
+  - limpiar_stopwords
+  - limpiar_slang
+  - limpiar_recode_emojis
+  - limpiar_remove_emojis
+  - limpiar_emojis_es
+  - limpiar_pp_products
+  - limpiar_pp_companies
 
 - title: Removing Posts
   desc: >
     Functions for removing unwanted posts entirely (rather than cleaning).
   contents:
-  - '`limpiar_duplicates`'
-  - '`limpiar_retweets`'
-  - '`limpiar_spam_grams`'
+  - limpiar_duplicates
+  - limpiar_retweets
+  - limpiar_spam_grams
 
 - title: Utility Functions
   desc: >
     Miscellaneous functions designed to speed up aspects of cleaning text.
   contents:
-  - '`limpiar_inspect`'
-  - '`limpiar_na_cols`'
+  - limpiar_inspect
+  - limpiar_na_cols
   - contains("limpiar_link_click")
-  - '`limpiar_ex_subreddits`'
+  - limpiar_ex_subreddits
 
 - title: Processing Parts of Speech
   desc: >
     A collection of functions that collectively make up a Parts of Speech(POS) analysis and workflow.
   contents:
-  - '`limpiar_pos_import_model`'
-  - '`limpiar_pos_annotate`'
+  - limpiar_pos_import_model
+  - limpiar_pos_annotate
 
 repo:
   url:

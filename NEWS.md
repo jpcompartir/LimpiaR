@@ -1,6 +1,5 @@
-# LimpiaR 1.0.0
 
-# Version 1.1.0
+# LimpiaR 1.1.0
 
 * Migrating documentation to Quarto
 * refactoring limpiar_emojis
@@ -8,7 +7,7 @@
 * adding heuristics function(?)
 
 
-# Version 1.0.0
+# LimpiaR 1.0.0
 
 ## Parts of Speech Workflow
 * Import & download models with `limpiar_pos_import`
