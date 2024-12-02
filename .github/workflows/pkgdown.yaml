@@ -33,7 +33,6 @@ jobs:
       - name: Install non-CRAN package
         run: |
           install.packages("remotes")
-          remotes::install_github('jpcompartir/LandscapeR')
         shell: Rscript {0}
 
       - uses: r-lib/actions/setup-r-dependencies@v2
