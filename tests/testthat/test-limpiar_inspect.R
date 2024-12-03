@@ -13,7 +13,7 @@ test_that("Inspect errors quickly if inputs aren't right", {
 
 test_that("Inspect handles regex patterns and is case-sensitive, plus open_view argument works",{
 
-  test_df <- tibble(
+  test_df <- tibble::tibble(
     mention_content = c(
       "This is a test post about cats",
       "Looking for #dogs in the park",

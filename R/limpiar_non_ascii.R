@@ -1,18 +1,31 @@
 #' Remove non-ASCII characters except those with latin accents
 #'
+#' @description Function uses a simple RegEx to retain only basic ASCII characters plus attempts to retain characters with latin accents. If you know that you want to remove everything including accented characters then you should use `limpiar_alphanumeric`.
+#'
 #' @inheritParams data_param
 #' @inheritParams text_var
 #'
 #' @return Data frame with the text variable changed in place
-#' @export
 #'
 #' @examples
-#' 2+2
-limpiar_non_ascii <- function(df, text_var) {
+#' test_df <- data.frame(
+#' text = c(
+#'   "Simple text 123",              # Basic ASCII only
+#'   "Hello! How are you? 😊 🌟",    # ASCII + punctuation + emojis
+#'   "café München niño",            # Latin-1 accented characters
+#'   "#special@chars&(~)|[$]",       # Special characters and symbols
+#'   "混合汉字と日本語 → ⌘ £€¥"      # CJK characters + symbols + arrows
+#' )
+#' )
+#'
+#' limpiar_non_ascii(test_df, text)
+#'
+#' @export
+limpiar_non_ascii <- function(data, text_var) {
 
   text_sym <- rlang::ensym(text_var)
 
-  stopifnot(is.data.frame(df))
+  stopifnot(is.data.frame(data))
 
   # Pattern matches all non-ASCII except latin accents
   non_ascii_pattern <- paste0(
@@ -22,7 +35,7 @@ limpiar_non_ascii <- function(df, text_var) {
   )
   compiled_pattern <- stringr::regex(non_ascii_pattern)
 
-  clean_df <- df %>%
+  clean_df <- data %>%
     dplyr::mutate(
       !!text_sym := stringr::str_remove_all(
         string = !!text_sym,
