@@ -1,20 +1,35 @@
 #' Recode emojis with a textual description
 #'
-#' Main usage is for pre-processing the text variable as part of Deep Learning pipeline.
-#' The most important argument is whether or not to add the emoji tag, which will also print in snake case.
+#' @description Main usage is for pre-processing the text variable as part of Deep Learning pipeline. The most important argument is whether or not to add the emoji tag, which will also print in snake case.
 #'
-#' @param df Name of Data Frame or Tibble Object
-#' @param text_var Name of text variable
+#' @inheritParams data_param
+#' @inheritParams text_var
 #' @param with_emoji_tag Whether to replace with snakecase linked words or not
 #'
 #' @return The Data Frame or Tibble object with most emojis cleaned from the text variable
 #'
 #' @examples
-#' limpiar_examples %>% dplyr::select(mention_content)
+#'  emojis <- data.frame(
+#'  text = c("Hello 👋 World",
+#'   "Family: 👨‍👩‍👧‍👦",
+#'   "Coding 👨🏽‍💻",
+#'   "Flags 🏳️‍🌈 🇺🇸",
+#'   "Weather ☀️ ⛈️ ❄️")
+#' )
 #'
-#' limpiar_examples %>% limpiar_recode_emojis() %>% dplyr::select(mention_content)
+#' emojis
+#'
+#' # Without tagging and combining:
+#' limpiar_recode_emojis(emojis, text)
+#'
+#' # With tagging and combining:
+#' limpiar_recode_emojis(emojis, text, TRUE)
+#'
+#' # using limpiar_remove_emojis() to remove them entirely:
+#' limpiar_remove_emojis(emojis, text)
+#'
 #' @export
-limpiar_recode_emojis <- function(df, text_var = mention_content, with_emoji_tag = FALSE){
+limpiar_recode_emojis <- function(data, text_var = mention_content, with_emoji_tag = FALSE){
   data("code_browser_emojis", envir = environment())
 
   if(with_emoji_tag){
@@ -29,7 +44,7 @@ limpiar_recode_emojis <- function(df, text_var = mention_content, with_emoji_tag
 
     my_hash <- hash::hash(keys = keys, values = values)
 
-    dplyr::mutate(df,
+    dplyr::mutate(data,
                   {{ text_var }} := stringr::str_replace_all({{ text_var }},
                                                              hash::values(my_hash),
                                                              hash::keys(my_hash)),
@@ -51,7 +66,7 @@ limpiar_recode_emojis <- function(df, text_var = mention_content, with_emoji_tag
     values <- paste(" ", values)
     my_hash <- hash::hash(keys = keys, values = values)
 
-    dplyr::mutate(df,
+    dplyr::mutate(data,
                   {{ text_var }} := stringr::str_replace_all({{ text_var }},
                                                              hash::values(my_hash),
                                                             hash::keys(my_hash)))%>%
@@ -60,24 +75,35 @@ limpiar_recode_emojis <- function(df, text_var = mention_content, with_emoji_tag
 }
 
 
-#' Completely Remove Most Emojis from Text
+#' Completely Remove *Most* Emojis from Text
 #'
-#' @description uses a simple Regular Expression (RegEx) to clear most emojis from the text variable.
+#' @description uses a simple Regular Expression (RegEx) to clear most emojis from the text variable. Attempts to handle emojis which are joined together - like family emojis, and 'edited emojis' like those with skin tones etc. set
 #'
 #'
-#' @param df Name of Data Frame or Tibble object
-#' @param text_var  Name of text variable
+#' @inheritParams data_param
+#' @inheritParams text_var
 #'
 #' @return Data Frame with the text variable cleaned in place
-#' @export
-#'
 #' @examples
-#' 2+2
-limpiar_remove_emojis <- function(df, text_var) {
+#'
+#'  emojis <- data.frame(
+#'  text = c("Hello 👋 World",
+#'   "Family: 👨‍👩‍👧‍👦",
+#'   "Coding 👨🏽‍💻",
+#'   "Flags 🏳️‍🌈 🇺🇸",
+#'   "Weather ☀️ ⛈️ ❄️")
+#' )
+#'
+#' emojis
+#'
+#' # using limpiar_remove_emojis() to remove them entirely:
+#' limpiar_remove_emojis(emojis, text)
+#' @export
+limpiar_remove_emojis <- function(data, text_var) {
 
   text_sym <- rlang::ensym(text_var)
 
-  stopifnot(is.data.frame(df))
+  stopifnot(is.data.frame(data))
 
   emojis_pattern <- paste0(
     # the estimates/explanations are imprecise - complex emojis and new emojis get matched when they shouldn't, but the result in aggregate is good (i.e. we're removing emojis and not other stuff)
@@ -95,7 +121,7 @@ limpiar_remove_emojis <- function(df, text_var) {
   )
   compiled_pattern <- stringr::regex(emojis_pattern)
 
-  clean_df <- df %>%
+  clean_df <- data %>%
     dplyr::mutate(
       !!text_sym := stringr::str_remove_all(
         string = !!text_sym,
@@ -104,4 +130,6 @@ limpiar_remove_emojis <- function(df, text_var) {
 
   return(clean_df)
 }
+
+
 
