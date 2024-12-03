@@ -39,6 +39,8 @@ reference:
   - limpiar_emojis_es
   - limpiar_pp_products
   - limpiar_pp_companies
+  - limpiar_non_ascii
+  - limpiar_alphanumeric
 
 - title: Removing Posts
   desc: >

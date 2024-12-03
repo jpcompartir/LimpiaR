@@ -4,8 +4,8 @@
 #' Posts can then be removed, the pattern inspected, and the posts that were removed too.
 #' You can re-assign your current data frame to the 'clean' data frame through the third element of the list.
 #'
-#' @param data Data frame or tibble object
-#' @param text_var  Name of the text variable
+#' @inheritParams data_param
+#' @inheritParams text_var
 #' @param n_gram Number of words in the n-gram i.e. n = 2 = bigram
 #' @param min_freq Minimum number of times n-gram should be seen to be removed
 #'
