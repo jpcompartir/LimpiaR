@@ -1,6 +1,24 @@
 test_that("limpiar_recode_emojis recodes not removes", {
 
+
+  emojis <- data.frame(
+    text = c("Hello 👋 World",
+     "Family: 👨‍👩‍👧‍👦",
+     "Coding 👨🏽‍💻",
+     "Flags 🏳️‍🌈 🇺🇸",
+     "Weather ☀️ ⛈️ ❄️")
+   )
+
+  expect_true(grepl("👋", emojis$text[1]))
+  expect_true(grepl("👨‍👩‍👧‍👦", emojis$text[2]))
+
+  recoded <- limpiar_recode_emojis(emojis, text)
+  expect_true(grepl("waving hand", recoded$text[[1]]))
+  expect_true(grepl("man.*woman.*girl", recoded$text[[2]]))
+
+
 })
+
 
 test_that("limpiar_remove_emojis input validation works", {
   df <- data.frame(text = c("Hello 👋", "World 🌍"))

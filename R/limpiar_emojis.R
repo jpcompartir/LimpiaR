@@ -30,6 +30,8 @@
 #'
 #' @export
 limpiar_recode_emojis <- function(data, text_var = mention_content, with_emoji_tag = FALSE){
+
+  stopifnot(is.data.frame(data))
   data("code_browser_emojis", envir = environment())
 
   if(with_emoji_tag){
