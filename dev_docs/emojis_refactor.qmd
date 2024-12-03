@@ -5,9 +5,341 @@ format:
     embed-resources: true
 ---
 # Emojis Refactor
+```{r, emojis_tst_cases}
+test_cases_emojis<- c(
+  "Hello 👋 world", # Single emoji
+  "Family: 👨‍👩‍👧‍👦", # Complex multi-picture emoji
+  "✨⭐️🌟 stars", # Multiple single emojis
+  "café № π", # Special characters
+  "Flag: 🇺🇸", # Flag emoji
+  "Skin tone: 👍🏽", # Emoji with modifier
+  "👨🏾‍💻 coding", # Professional emoji with skin tone
+  "❤️ heart", # Heart with variation selector
+  "µm³ øre", # Scientific/foreign characters
+  "😀 🫥 🫡", # Mix of old and new emojis
+   "Family combos: 👨‍👩‍👧‍👦 👩‍👩‍👦 👨‍👨‍👧‍👧",
+  "Skin tones: 👋🏻 👋🏼 👋🏽 👋🏾 👋🏿",
+  "Professional + skin: 👨🏽‍💻 👩🏾‍🔬 👨🏿‍🌾",
+  "ZWJ sequences: 👨‍❤️‍👨 👩‍❤️‍💋‍👩",
+  "Flags: 🏳️‍🌈 🏳️‍⚧️ 🇺🇸 🇯🇵",
+  "Activities: 🤾🏽‍♀️ 🏊🏿‍♂️ 🚴🏻‍♀️",
+  "Special chars keep: café π µm³ ǽ Æ ß",
+  "Mixed: π👩🏽‍🔬√ω ∑🧪",
+  "New emojis: 🫡 🫂 🫠 🪩 🪿",
+  "Hearts: ❤️ 💝 💖 💗"
+)
+```
+
+
+```{r special_chars}
+test_cases_special_chars <- c(
+    "Hello 👋 World",           # Basic emoji - caught by all three patterns
+    "Café au lait",            # Accented 'e' - caught by pattern 2 only
+    "Star ⭐ power",           # Unicode star - caught by patterns 2 and 3
+    "Face 😀 vs star ⭐",      # Multiple symbols - different patterns
+    "树 means tree",           # Chinese character - caught by pattern 2
+    "Music ♫ note",           # Musical symbol - caught by patterns 2 and 3
+    "100% done 👍",           # Emoji with ASCII symbols
+    "Weather: 🌞☔",          # Multiple emoji - all patterns
+    "↑↓→←",                  # Arrow symbols - patterns 2 and 3
+    "Normal ASCII text!",      # Control case - no matches
+    "Family: 👨‍👩‍👧‍👦 at home",    # Family emoji (multiple people joined)
+    "Jobs: 👨🏽‍💻 👩🏾‍🌾 👨🏿‍🍳",      # Professional emojis with skin tone modifiers
+    "Love 👩‍❤️‍💋‍👨 story",         # Kiss emoji (two people joined with heart)
+    "🏳️‍🌈 Pride & 🏳️‍⚧️ Rights",    # Pride and trans flags (complex flag emojis)
+    "Science 🧬 and 🧪 with 🫧",    # Newer Unicode emojis (DNA, test tube, bubbles)
+    "日本語の勉強 📚 with 先生",      # Japanese (studying Japanese with teacher)
+    "Привет 👋 мир! ⭐",            # Russian (Hello world!)
+    "我喜欢喝咖啡 ☕ 和茶 🫖",         # Chinese (I like coffee and tea)
+    "안녕하세요 🙇‍♂️ 친구야",          # Korean (Hello friend) with bowing emoji
+    "مرحباً بالعالم 🌍 صديقي",       # Arabic (Hello world my friend)
+    "Καλημέρα 🌅 κόσμε",           # Greek (Good morning world)
+    "תפוח 🍎 ולחם 🍞",              # Hebrew (apple and bread)
+    "नमस्ते दुनिया 🙏 शांति",        # Hindi (Hello world peace)
+    "ไปกินข้าว 🍜 กัน",             # Thai (Let's go eat)
+    "ជួបគ្នាថ្ងៃក្រោយ 👋 សូមបង្ហាញ"  , #khmer stuff
+    "Hello étudiant في المدرسة",    # French accents with Arabic
+    "München ist schön 城市",       # German umlauts with Chinese
+    "café και σπίτι",              # French accent with Greek
+    "Château på björnen",          # French and Swedish accents
+    "русский язык",                # Russian
+    "漢字 と ひらがな",              # Chinese and Japanese
+    "La niña está 和 안녕",         # Spanish accents with Chinese and Korean
+   "Hello étudiant في المدرسة",    # French accents with Arabic
+    "München ist schön 城市",       # German umlauts with Chinese
+    "café και σπίτι",              # French accent with Greek
+    "Château på björnen",          # French and Swedish accents
+    "русский язык",                # Russian
+    "漢字 と ひらがな",              # Chinese and Japanese
+    "La niña está 和 안녕",         # Spanish accents with Chinese and Korean
+    "Crème brûlée 🍮"              # French accents with emoji
+
+)
+```
+
+```{r, extended_pattern_1}
+library(stringi)
+
+cleaned_claude_1 <- gsub("[\\p{Emoji_Presentation}\\p{Extended_Pictographic}]", "", test_cases_emojis)
+cleaned_claude_2 <- stri_replace_all_regex(test_cases, "[\U{1F300}-\U{1F9FF}]", "")
+
+extended_pattern <- paste0(
+  "[\U{1F000}-\U{1FFFF}]",                       # Main emoji blocks
+  "|[\U{2190}-\U{27BF}]",                        # Arrows, symbols
+  "|[\U{2B00}-\U{2BFF}]",                        # Misc symbols
+  "|[\U{1F1E6}-\U{1F1FF}]",                      # Regional indicators
+  "|[\U{1F300}-\U{1F5FF}]",                      # Additional emoji
+  "|[\U{1F600}-\U{1F64F}]",                      # Emoticons
+  "|[\U{1F680}-\U{1F6FF}]",                      # Transport
+  "|[\U{1F900}-\U{1F9FF}]",                      # Supplemental
+  "|[\U{1FA00}-\U{1FA6F}]",                      # Extended-A
+  "|[\U{1FA70}-\U{1FAFF}]",                      # Extended-B
+  "|[\U{FE00}-\U{FE0F}]"                         # Variation selectors
+)
+cleaned_extended_pattern <- stringr::str_remove_all(test_cases_emojis, extended_pattern)
+```
+
+```{r extended_pattern_2}
+extended_pattern_2 <- pattern <- paste0(
+  "[\U{1F000}-\U{1FFFF}]",                       # Main emoji blocks
+  "|[\U{2190}-\U{27BF}]",                        # Arrows, symbols
+  "|[\U{2B00}-\U{2BFF}]",                        # Misc symbols
+  "|[\U{1F1E6}-\U{1F1FF}]",                      # Regional indicators
+  "|[\U{1F300}-\U{1F5FF}]",                      # Additional emoji
+  "|[\U{1F600}-\U{1F64F}]",                      # Emoticons
+  "|[\U{1F680}-\U{1F6FF}]",                      # Transport
+  "|[\U{1F900}-\U{1F9FF}]",                      # Supplemental
+  "|[\U{1FA00}-\U{1FA6F}]",                      # Extended-A
+  "|[\U{1FA70}-\U{1FAFF}]",                      # Extended-B
+  "|[\U{FE00}-\U{FE0F}]",                        # Variation selectors
+  "|[\U{E0020}-\U{E007F}]",                      # Tags
+  "|[\U{200D}]",                                 # Zero Width Joiner
+  "|[\U{20D0}-\U{20FF}]"                         # Combining marks
+)
+cleaned_extended_pattern_2 <- stringr::str_remove_all(test_cases_emojis, extended_pattern_2)
+```
+
+```{r, extended_test_caeses}
+test_cases_extended <- c(
+  "👨‍👩‍👧‍👦",  # Family emoji (better handling of ZWJ)
+  "🏳️‍⚧️",      # Trans flag (combination of tag sequences)
+  "1️⃣",        # Keycap number (combining marks)
+  "👩🏽‍🔬",      # Professional with skin tone (ZWJ + modifier)
+  "🫱🏼‍🫲🏾"      # Handshake with different skin tones (complex ZWJ)
+)
+```
+
 ```{r}
+tibble(
+  cases = test_cases_extended,
+  x = stringr::str_remove_all(test_cases_extended, extended_pattern),
+  y = stringr::str_remove_all(test_cases_extended, extended_pattern_2)
+)
+```
+
+```{r, mixed_special_chars_emojis}
+mixed_cases <- c(
+    "Hello 👋 World",           # Basic emoji - caught by all three patterns
+    "Café au lait",            # Accented 'e' - caught by pattern 2 only
+    "Star ⭐ power",           # Unicode star - caught by patterns 2 and 3
+    "Face 😀 vs star ⭐",      # Multiple symbols - different patterns
+    "树 means tree",           # Chinese character - caught by pattern 2
+    "Music ♫ note",           # Musical symbol - caught by patterns 2 and 3
+    "100% done 👍",           # Emoji with ASCII symbols
+    "Weather: 🌞☔",          # Multiple emoji - all patterns
+    "↑↓→←",                  # Arrow symbols - patterns 2 and 3
+    "Normal ASCII text!",      # Control case - no matches
+    "Family: 👨‍👩‍👧‍👦 at home",    # Family emoji (multiple people joined)
+    "Jobs: 👨🏽‍💻 👩🏾‍🌾 👨🏿‍🍳",      # Professional emojis with skin tone modifiers
+    "Love 👩‍❤️‍💋‍👨 story",         # Kiss emoji (two people joined with heart)
+    "🏳️‍🌈 Pride & 🏳️‍⚧️ Rights",    # Pride and trans flags (complex flag emojis)
+    "Science 🧬 and 🧪 with 🫧",    # Newer Unicode emojis (DNA, test tube, bubbles)
+    "日本語の勉強 📚 with 先生",      # Japanese (studying Japanese with teacher)
+    "Привет 👋 мир! ⭐",            # Russian (Hello world!)
+    "我喜欢喝咖啡 ☕ 和茶 🫖",         # Chinese (I like coffee and tea)
+    "안녕하세요 🙇‍♂️ 친구야",          # Korean (Hello friend) with bowing emoji
+    "مرحباً بالعالم 🌍 صديقي",       # Arabic (Hello world my friend)
+    "Καλημέρα 🌅 κόσμε",           # Greek (Good morning world)
+    "תפוח 🍎 ולחם 🍞",              # Hebrew (apple and bread)
+    "नमस्ते दुनिया 🙏 शांति",        # Hindi (Hello world peace)
+    "ไปกินข้าว 🍜 กัน",             # Thai (Let's go eat)
+    "ជួបគ្នាថ្ងៃក្រោយ 👋 សូមបង្ហាញ"  , #khmer stuff
+    "Hello étudiant في المدرسة",    # French accents with Arabic
+    "München ist schön 城市",       # German umlauts with Chinese
+    "café και σπίτι",              # French accent with Greek
+    "Château på björnen",          # French and Swedish accents
+    "русский язык",                # Russian
+    "漢字 と ひらがな",              # Chinese and Japanese
+    "La niña está 和 안녕",         # Spanish accents with Chinese and Korean
+   "Hello étudiant في المدرسة",    # French accents with Arabic
+    "München ist schön 城市",       # German umlauts with Chinese
+    "café και σπίτι",              # French accent with Greek
+    "Château på björnen",          # French and Swedish accents
+    "русский язык",                # Russian
+    "漢字 と ひらがな",              # Chinese and Japanese
+    "La niña está 和 안녕",         # Spanish accents with Chinese and Korean
+    "Crème brûlée 🍮"              # French accents with emoji
+)
+
+mixed_tib <- tibble(case = mixed_cases)
+```
+
+```{r}
+names(mixed_tib)
+mixed_tib %>%
+  limpiar_remove_emojis(text_var = case) %>%
+  as.data.frame()
 
 ```
+
+```{r}
+non_ <- mixed_tib %>%
+  limpiar_non_ascii(case) %>%
+  as.data.frame()
+
+non_trim <- mixed_tib %>%
+  limpiar_non_ascii_trim(case) %>%
+  as.data.frame()
+
+identical(non_,non_trim)
+
+trust_df <- read_csv("~/Google Drive/My Drive/data_science_project_work/microsoft/project_work/789_taxonomy_of_spam/data/project_samples/trust_distrust_757_100k_sample.csv")
+```
+
+
+```{r}
+start <- Sys.time()
+cleaned  <- trust_df %>%
+  limpiar_non_ascii_trim(message)
+end <- Sys.time()
+end - start 
+
+high_emojis <- trust_df %>%
+  mutate(count_emojis = str_count(message, emojis_pattern)) %>%
+  arrange(desc(count_emojis)) %>%
+  filter(count_emojis > 20)
+
+high_emojis %>% 
+  slice(1) %>%
+  # pull(message)
+  # limpiar_non_ascii(message) %>%
+  limpiar_alphanumeric(message) %>%
+  pull(message)
+```
+
+The unextended version is actually better:
+```{r}
+tibble(
+  cases = mixed_cases,
+  x = stringr::str_remove_all(mixed_cases, extended_pattern),
+  y = stringr::str_remove_all(mixed_cases, extended_pattern_2)
+) %>%
+  as.data.frame()
+```
+
+Verify some of the emoji regexs
+```{r}
+emojis_pattern <- list(
+    main_blocks = "[\U{1F000}-\U{1FFFF}]",          # Main emoji blocks
+    arrows_symbols = "[\U{2190}-\U{27BF}]",         # Arrows, symbols
+    misc_symbols = "[\U{2B00}-\U{2BFF}]",           # Misc symbols
+    regional = "[\U{1F1E6}-\U{1F1FF}]",             # Regional indicators
+    additional = "[\U{1F300}-\U{1F5FF}]",           # Additional emoji
+    emoticons = "[\U{1F600}-\U{1F64F}]",            # Emoticons
+    transport = "[\U{1F680}-\U{1F6FF}]",            # Transport
+    supplemental = "[\U{1F900}-\U{1F9FF}]",         # Supplemental
+    extended_a = "[\U{1FA00}-\U{1FA6F}]",           # Extended-A
+    extended_b = "[\U{1FA70}-\U{1FAFF}]",           # Extended-B
+    variation = "[\U{FE00}-\U{FE0F}]"               # Variation selectors
+)
+
+# Function to view matches for each pattern
+view_matches <- function(text) {
+  purrr::imap(emojis_pattern, ~ {
+    cat("\nPattern:", .y, "\n")
+    print(stringr::str_view_all(text, stringr::regex(.x)))
+  })
+}
+view_matches
+```
+
+
+```{r}
+# Create named list of patterns
+emojis_pattern <- list(
+    main_blocks = "[\U{1F000}-\U{1FFFF}]",          # Main emoji blocks
+    arrows_symbols = "[\U{2190}-\U{27BF}]",         # Arrows, symbols
+    misc_symbols = "[\U{2B00}-\U{2BFF}]",           # Misc symbols
+    regional = "[\U{1F1E6}-\U{1F1FF}]",             # Regional indicators
+    additional = "[\U{1F300}-\U{1F5FF}]",           # Additional emoji
+    emoticons = "[\U{1F600}-\U{1F64F}]",            # Emoticons
+    transport = "[\U{1F680}-\U{1F6FF}]",            # Transport
+    supplemental = "[\U{1F900}-\U{1F9FF}]",         # Supplemental
+    extended_a = "[\U{1FA00}-\U{1FA6F}]",           # Extended-A
+    extended_b = "[\U{1FA70}-\U{1FAFF}]",           # Extended-B
+    variation = "[\U{FE00}-\U{FE0F}]"               # Variation selectors
+)
+
+# Function to check matches for a single pattern
+check_matches <- function(text, pattern_name, pattern) {
+    matches <- stringr::str_extract_all(text, stringr::regex(pattern))
+    has_match <- lengths(matches) > 0
+    if (any(has_match)) {
+        cat("\nPattern:", pattern_name, "\n")
+        matched_cases <- text[has_match]
+        matches_found <- matches[has_match]
+        for (i in seq_along(matched_cases)) {
+            cat(sprintf("Test case %2d: %s\n", 
+                       which(text == matched_cases[i]), 
+                       matched_cases[i]))
+            cat("   Matches:", paste(matches_found[[i]], collapse = " "), "\n")
+        }
+    }
+}
+
+# Function to analyse all test cases
+analyse_patterns <- function(test_cases) {
+    purrr::iwalk(emojis_pattern, ~check_matches(test_cases, .y, .x))
+}
+
+test_cases <- c(
+    "Hello 👋 world",
+    "Family: 👨‍👩‍👧‍👦",
+    "✨⭐️🌟 stars",
+    "café № π",
+    "Flag: 🇺🇸",
+    "Skin tone: 👍🏽",
+    "👨🏾‍💻 coding",
+    "❤️ heart",
+    "µm³ øre",
+    "😀 \U{01fae5} \U{01fae1}",
+    "Family combos: 👨‍👩‍👧‍👦 👩‍👩‍👦 👨‍👨‍👧‍👧",
+    "Skin tones: 👋🏻 👋🏼 👋🏽 👋🏾 👋🏿",
+    "Professional + skin: 👨🏽‍💻 👩🏾‍🔬 👨🏿‍🌾",
+    "ZWJ sequences: 👨‍❤️‍👨 👩‍❤️‍💋‍👩",
+    "Flags: 🏳️‍🌈 🏳️‍⚧️ 🇺🇸 🇯🇵",
+    "Activities: 🤾🏽‍♀️ 🏊🏿‍♂️ 🚴🏻‍♀️",
+    "Special chars keep: café π µm³ ǽ Æ ß",
+    "Mixed: π👩🏽‍🔬√ω ∑🧪",
+    "New emojis: \U{01fae1} 🫂 \U{01fae0} \U{01faa9} \U{01fabf}",
+    "Hearts: ❤️ 💝 💖 💗"
+)
+
+
+analyse_patterns(test_cases)
+```
+
+
+```{r}
+tibble::tibble(
+  original = test_cases,
+  method_1 = cleaned_claude_1,
+  method_2 = cleaned_claude_2,
+  extended_method = cleaned_extended_pattern,
+  extended_method_2 = cleaned_extended_pattern_2
+)
+```
+
 
 
 

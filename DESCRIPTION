@@ -30,8 +30,6 @@ Suggests:
     janitor (>= 2.1.0),
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
-Remotes:
-    jpcompartir/LandscapeR
 Depends: 
     R (>= 3.50)
 VignetteBuilder: knitr
