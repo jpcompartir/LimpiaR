@@ -15,7 +15,6 @@
 #' limpiar_examples %>% limpiar_recode_emojis() %>% dplyr::select(mention_content)
 #' @export
 limpiar_recode_emojis <- function(df, text_var = mention_content, with_emoji_tag = FALSE){
-
   data("code_browser_emojis", envir = environment())
 
   if(with_emoji_tag){
@@ -76,7 +75,33 @@ limpiar_recode_emojis <- function(df, text_var = mention_content, with_emoji_tag
 #' 2+2
 limpiar_remove_emojis <- function(df, text_var) {
 
+  text_sym <- rlang::ensym(text_var)
+
+  stopifnot(is.data.frame(df))
+
+  emojis_pattern <- paste0(
+    # the estimates/explanations are imprecise - complex emojis and new emojis get matched when they shouldn't, but the result in aggregate is good (i.e. we're removing emojis and not other stuff)
+    "[\U{1F000}-\U{1FFFF}]",                       # Main emoji blocks
+    "|[\U{2190}-\U{27BF}]",                        # Arrows, symbols
+    "|[\U{2B00}-\U{2BFF}]",                        # Misc symbols
+    "|[\U{1F1E6}-\U{1F1FF}]",                      # Regional indicators
+    "|[\U{1F300}-\U{1F5FF}]",                      # Additional emoji
+    "|[\U{1F600}-\U{1F64F}]",                      # Emoticons
+    "|[\U{1F680}-\U{1F6FF}]",                      # Transport
+    "|[\U{1F900}-\U{1F9FF}]",                      # Supplemental
+    "|[\U{1FA00}-\U{1FA6F}]",                      # Extended-A
+    "|[\U{1FA70}-\U{1FAFF}]",                      # Extended-B
+    "|[\U{FE00}-\U{FE0F}]"                         # Variation selectors
+  )
+  compiled_pattern <- stringr::regex(emojis_pattern)
+
+  clean_df <- df %>%
+    dplyr::mutate(
+      !!text_sym := stringr::str_remove_all(
+        string = !!text_sym,
+        pattern = compiled_pattern)
+    )
+
+  return(clean_df)
 }
-
-
 

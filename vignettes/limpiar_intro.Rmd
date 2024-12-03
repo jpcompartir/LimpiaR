@@ -104,8 +104,8 @@ Now we'll remove duplicate posts, notice that we don't actually need to type tex
 
 >Note: If the text column in our data frame were called 'text' we would have to specify text_var = text, or call:
 
-```r
-data %>% rename(mention_content = text) 
+```{r}
+data %>% rename(text = mention_content)
 ```
 
 ### limpiar_retweets
@@ -218,7 +218,7 @@ Instead of `limpiar_recode_emojis` we can use `limpiar_remove_emojis`! This func
 
 ```{r}
 data %>%
-  limpiar_remove_emojis()
+  limpiar_remove_emojis(mention_content)
 ```
 
 
