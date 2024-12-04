@@ -10,13 +10,14 @@
 #'
 #' @examples
 limpiar_wrap <- function(data, text_var = mention_content, n = 15, newline_char = "<br><br>") {
-  text_sym <- rlang::ensym(text_var)
 
   stopifnot(
     is.data.frame(data),
     is.character(newline_char),
     is.numeric(n)
   )
+
+  text_sym <- rlang::ensym(text_var)
   # optimised approach to reduce memory and computation time
 
 
@@ -31,9 +32,9 @@ limpiar_wrap <- function(data, text_var = mention_content, n = 15, newline_char 
 
         vapply(words_list, function(words) {
           len <- length(words)
-          if(len <= n) return(paste(words, collapse = " "))
+          if(len <= n) return(paste(words, collapse = " ")) # If words is less than n then don't add anything.
 
-          # Calculate dimensions once
+          # Get number of rows in advace, and calculate remainder
           complete_rows <- floor(len/n)
           remaining <- len %% n
 
@@ -53,15 +54,17 @@ limpiar_wrap <- function(data, text_var = mention_content, n = 15, newline_char 
             # Process complete rows only
             rows_as_text <- character(complete_rows)
             for(i in seq_len(complete_rows)) {
-              idx <- ((i-1) * n + 1):(i * n)
+              idx <- ((i-1) * n + 1):(i * n) # Iteratively extract ids (1:n, n+1: 2n, 2n+1:3n  etc.)
+              # paste the words in the row together, with spaces as delimiters. If we were to newline_char here we'd have a newline every word
               rows_as_text[i] <- paste(words[idx], collapse = " ")
             }
           }
 
+          # paste all the rows together (re-assemble text) with a newline_char between each row.
           paste(rows_as_text, collapse = newline_char)
-        }, character(1))
+        }, character(1)) # Tell vapply we expect a character of length 1 in return
       }
     )
 
-  return(result )
+  return(results)
 }
