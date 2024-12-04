@@ -101,7 +101,7 @@ limpiar_recode_emojis <- function(data, text_var = mention_content, with_emoji_t
 #' # using limpiar_remove_emojis() to remove them entirely:
 #' limpiar_remove_emojis(emojis, text)
 #' @export
-limpiar_remove_emojis <- function(data, text_var) {
+limpiar_remove_emojis <- function(data, text_var = mention_content) {
 
   text_sym <- rlang::ensym(text_var)
 

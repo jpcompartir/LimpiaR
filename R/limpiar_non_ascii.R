@@ -21,7 +21,7 @@
 #' limpiar_non_ascii(test_df, text)
 #'
 #' @export
-limpiar_non_ascii <- function(data, text_var) {
+limpiar_non_ascii <- function(data, text_var = mention_content) {
 
   text_sym <- rlang::ensym(text_var)
 

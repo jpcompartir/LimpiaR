@@ -21,7 +21,7 @@
 #' limpiar_alphanumeric(test_df, text)
 #'
 #' @export
-limpiar_alphanumeric <- function(data, text_var) {
+limpiar_alphanumeric <- function(data, text_var = mention_content) {
 
   text_sym <- rlang::ensym(text_var)
 
