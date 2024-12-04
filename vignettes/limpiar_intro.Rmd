@@ -1,6 +1,10 @@
 ---
 title: "Introduction to LimpiaR"
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 3
+   
 vignette: >
   %\VignetteIndexEntry{Introduction to LimpiaR}
   %\VignetteEngine{knitr::rmarkdown}
@@ -14,9 +18,11 @@ knitr::opts_chunk$set(
 )
 ```
 
-LimpiaR is a package built to expedite pre-processing of text variables, with some handy functions in Spanish and R. To get started, we'll load few helpful libraries.
+# LimpiaR Overview
 
-## Loading Everything Into R
+LimpiaR is a package built to expedite pre-processing and cleaning of text data, with some handy functions in Spanish and R. To get started, we'll load few helpful libraries.
+
+# Walkthrough
 
 ```{r setup, echo = TRUE, results = "hide", warning = FALSE, message = FALSE}
 library(magrittr)
@@ -25,7 +31,7 @@ library(stringr)
 library(LimpiaR)
 ```
 
-LimpiaR's functions begin with limpiar_. Once the library has been loaded, typing limpiar_ in an Rstudio script or Rmarkdown code block, will produce a drop down menu of all LimpiaR functions, which should help you to find the name of the function you're looking for.
+LimpiaR's functions begin with limpiar_. Once the library has been loaded, typing limpiar_ in an Rstudio script or Rmarkdown code block, will produce a drop down menu of all LimpiaR functions, which should help you to find the name of the function you're looking for - you can then use tab to autocomplete the function. Once inside the function, RStudio should give you a popover which shows the argument the function expects. You can also type 'control + space' when your cursor is inside the function's brackets to force extra help.
 
 ```{r, eval = TRUE, echo = FALSE, warning= FALSE}
 data <- data.frame(
@@ -76,7 +82,6 @@ For most workflows, the next step will be to make the text variable lower case. 
 ```{r}
 (data <- data %>%
   mutate(mention_content = tolower(mention_content)))
-
 ```
 
 
@@ -186,7 +191,7 @@ Generally, the steps we've taken so far will be used in each and every analysis/
 
 ### Emojis
 
-Emojis are a type of non-ASCII unicode character, which means that removing all non-ASCII characters will remove emojis by force. It also means that functions designed to target certain unicode characters by patterns, may inadvertently remove other special characters as well as emojis, or instead of emojis!
+Emojis are a type of non-ASCII unicode character, which means that removing all non-ASCII characters will remove emojis by force. It also means that functions designed to target certain unicode characters by patterns, may inadvertently remove other special characters - as well as emojis, or instead of emojis!
 
 #### limpiar_recode_emojis()
 
@@ -202,10 +207,10 @@ data %>%
   limpiar_recode_emojis(text_var = mention_content, with_emoji_tag = FALSE)
 ```
 
-or with the default settings:
+Or if we set `with_emoji_tag` to TRUE, our emojis are now pasted together with '_' and have an '_emoji' label.
 ```{r}
 data %>%
-  limpiar_recode_emojis()
+  limpiar_recode_emojis(mention_content, with_emoji_tag = TRUE)
 ```
 
 > **Warning** the `limpiar_recode_emojis()` function is quite slow and scales poorly with the size of inputs. So if using on a large dataset with many long documents expect functions to take a while to run.
@@ -214,14 +219,204 @@ data %>%
 
 What about in situations where we don't want to replace emojis with their text inputs, **or** we don't mind risking the loss of some other non-ASCII characters, **or** we want something that runs fast?
 
-Instead of `limpiar_recode_emojis` we can use `limpiar_remove_emojis`! This function operates with a fairly simple RegEx pattern, meaning it runs extremely efficiently.
+Instead of `limpiar_recode_emojis` we can use `limpiar_remove_emojis`! This function operates with a fairly simple RegEx pattern, meaning it runs a lot more efficiently than its recode counterpart.
 
 ```{r}
 data %>%
   limpiar_remove_emojis(mention_content)
 ```
 
+### non-ASCII characters
 
+ASCII (American Standard Code for Information Interchange)  is a character-encoding standard for representing numbers and text. There are 128 ASCII characters,  including the letters from a-z in upper and lowercase, numbers 0-9, common punctuation marks, and a few additional characters with specific uses for computers. Everything else is non-ASCII.
+
+<details>
+<summary>All 128 ASCII characters</summary>
+Dec  Hex  Char  Description
+--- ----- ----- -----------
+000  00   NUL   Null
+001  01   SOH   Start of Heading
+002  02   STX   Start of Text
+003  03   ETX   End of Text
+004  04   EOT   End of Transmission
+005  05   ENQ   Enquiry
+006  06   ACK   Acknowledge
+007  07   BEL   Bell
+008  08   BS    Backspace
+009  09   HT    Horizontal Tab
+010  0A   LF    Line Feed
+011  0B   VT    Vertical Tab
+012  0C   FF    Form Feed
+013  0D   CR    Carriage Return
+014  0E   SO    Shift Out
+015  0F   SI    Shift In
+016  10   DLE   Data Link Escape
+017  11   DC1   Device Control 1 (XON)
+018  12   DC2   Device Control 2
+019  13   DC3   Device Control 3 (XOFF)
+020  14   DC4   Device Control 4
+021  15   NAK   Negative Acknowledge
+022  16   SYN   Synchronous Idle
+023  17   ETB   End of Transmission Block
+024  18   CAN   Cancel
+025  19   EM    End of Medium
+026  1A   SUB   Substitute
+027  1B   ESC   Escape
+028  1C   FS    File Separator
+029  1D   GS    Group Separator
+030  1E   RS    Record Separator
+031  1F   US    Unit Separator
+032  20   SPACE Space
+033  21   !     Exclamation Mark
+034  22   "     Double Quote
+035  23   #     Number Sign
+036  24   $     Dollar Sign
+037  25   %     Percent
+038  26   &     Ampersand
+039  27   '     Single Quote
+040  28   (     Left Parenthesis
+041  29   )     Right Parenthesis
+042  2A   *     Asterisk
+043  2B   +     Plus
+044  2C   ,     Comma
+045  2D   -     Hyphen
+046  2E   .     Period
+047  2F   /     Forward Slash
+048  30   0     Zero
+049  31   1     One
+050  32   2     Two
+051  33   3     Three
+052  34   4     Four
+053  35   5     Five
+054  36   6     Six
+055  37   7     Seven
+056  38   8     Eight
+057  39   9     Nine
+058  3A   :     Colon
+059  3B   ;     Semicolon
+060  3C   <     Less Than
+061  3D   =     Equals
+062  3E   >     Greater Than
+063  3F   ?     Question Mark
+064  40   @     At Sign
+065  41   A     Uppercase A
+066  42   B     Uppercase B
+067  43   C     Uppercase C
+068  44   D     Uppercase D
+069  45   E     Uppercase E
+070  46   F     Uppercase F
+071  47   G     Uppercase G
+072  48   H     Uppercase H
+073  49   I     Uppercase I
+074  4A   J     Uppercase J
+075  4B   K     Uppercase K
+076  4C   L     Uppercase L
+077  4D   M     Uppercase M
+078  4E   N     Uppercase N
+079  4F   O     Uppercase O
+080  50   P     Uppercase P
+081  51   Q     Uppercase Q
+082  52   R     Uppercase R
+083  53   S     Uppercase S
+084  54   T     Uppercase T
+085  55   U     Uppercase U
+086  56   V     Uppercase V
+087  57   W     Uppercase W
+088  58   X     Uppercase X
+089  59   Y     Uppercase Y
+090  5A   Z     Uppercase Z
+091  5B   [     Left Bracket
+092  5C   \     Backslash
+093  5D   ]     Right Bracket
+094  5E   ^     Caret
+095  5F   _     Underscore
+096  60   `     Backtick
+097  61   a     Lowercase a
+098  62   b     Lowercase b
+099  63   c     Lowercase c
+100  64   d     Lowercase d
+101  65   e     Lowercase e
+102  66   f     Lowercase f
+103  67   g     Lowercase g
+104  68   h     Lowercase h
+105  69   i     Lowercase i
+106  6A   j     Lowercase j
+107  6B   k     Lowercase k
+108  6C   l     Lowercase l
+109  6D   m     Lowercase m
+110  6E   n     Lowercase n
+111  6F   o     Lowercase o
+112  70   p     Lowercase p
+113  71   q     Lowercase q
+114  72   r     Lowercase r
+115  73   s     Lowercase s
+116  74   t     Lowercase t
+117  75   u     Lowercase u
+118  76   v     Lowercase v
+119  77   w     Lowercase w
+120  78   x     Lowercase x
+121  79   y     Lowercase y
+122  7A   z     Lowercase z
+123  7B   {     Left Brace
+124  7C   |     Vertical Bar
+125  7D   }     Right Brace
+126  7E   ~     Tilde
+127  7F   DEL   Delete
+
+</details>
+
+For our purposes we have extended the ASCII characters to include Latin accents (é, í, etc.), let's get our original data frame back to demonstrate. We should remove things like emojis, but keep our punctuation and accented characters:
+
+```{r, eval = TRUE, echo = FALSE, warning= FALSE}
+data <- data.frame(
+  `Mention Url` = c("www.twitter.com/post1",
+                  "www.twitter.com/post2",
+                  "www.facebook.com/post1",
+                  "www.facebook.com/post2",
+                  "www.twitter.com/post3",
+                  "www.youtube.com/post1",
+                  "www.instagram.com/post1",
+                  "www.youtube.com/post2",
+                  "www.youtube.com/post3",
+                  "www.youtube.com/post4"),
+  `Mention Content` = c(  "holaaaaaa! cóómo    estás @magdalena   ?!",
+                      "  han visto este articulo!? Que horror! https://guardian.com/emojisbanned NO SE PUEDE!!",
+                      "ayyyyyy a mi me   gustaria ir a londres yaaa #llevame #porfavor",
+                      "jajajajaja eres un wn!",
+                      "RT dale un click a ver una mujer baila con su perro",
+                      "grax ntonces q?",
+                      "yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣 ",
+                      "grax ntonces q?",
+                      "grax ntonces q?",
+                      "grax ntonces q?"))%>%
+  tibble()%>%
+  relocate(Mention.Content) %>%
+  janitor::clean_names()
+
+data
+```
+
+```{r}
+data %>%
+  limpiar_non_ascii(mention_content)
+```
+
+
+### limpiar_alphanumeric
+Similar to non-ASCII characters, we can retain only the alphanumeric characters (a-zA-Z0-9 + spaces). This is a heavy-duty option which *will* remove all accented characters.
+```{r}
+data %>%
+  limpiar_alphanumeric(mention_content)
+```
+
+If we want to use `limpiar_alphanumeric` **and retain** our accented characters, then we should recode the accents first with `limpiar_accents`:
+```{r}
+data %>%
+  limpiar_accents(mention_content) %>%
+  limpiar_alphanumeric(mention_content)
+```
+
+> You'll need to make an informed choice between `limpiar_alphanumeric`, `limpiar_non_ascii` and other functions like `limpiar_accents` and `limpiar_*_emojis`
 
 ### limpiar_stopwords
 Stop words are common words that do not provide us with much information as to an utterance's meaning. For example, in the sentence: 'the man is in prison for theft', if we knew only one word from this sentence, and that word was 'is', 'in', 'the', or 'for' then we wouldn't have much idea what the sentence is about. However, 'prison' or 'theft', would give us a lot more information.
@@ -232,12 +427,18 @@ For many analyses, we remove stop words to help us see the 'highest information'
 data %>%
   limpiar_stopwords(stop_words = "topics") %>%
   limpiar_spaces() #to clear the spaces of words that were removed
-
 ```
 
-Sentences can look quite strange without stopwords, and a lot of social posts are virtually meaningless altogether! 
+However, sometimes we want to keep words that would usually be treated as stopwords for a specific purpose. For example, when we're analysing sentiment 'negatives' can invert the sentiment of a text - 'no me gusta' vs 'me gusta'. If we remove all instances of 'no' from our data, we will do a worse job at analysing sentiment. For Spanish we have a slightly shorter list of stopwords for sentiment than topics, where we have removed a few choice terms.
+```{r}
+data %>%
+  limpiar_stopwords(stop_words = "sentiment") %>%
+  limpiar_spaces() 
+```
 
-> It's also worth pointing out, that a lot of information can be lost when removing stop words. Many phrases in English and Spanish have very different meanings when a stop word is removed, and some stopwords lists contain negatives, which can drastically change the meaning of a sentence!
+Warning - sentences can look quite strange without stopwords, and a lot of social posts are virtually meaningless altogether! 
+
+> It's also worth pointing out, that a lot of information can be lost when removing stop words. Many phrases in English and Spanish have very different meanings when a stop word is removed, and some stopwords lists contain negatives, which can drastically change the meaning of a sentence! So use with care.
 
 ## Utility Functions
 We are nearly at the end of this introduction to LimpiaR, but before we finish, let's look at two utility functions which may be useful. We've conjoured up a new data frame called df, which we will use to show the last two functions and how to chain everything together.
@@ -277,20 +478,24 @@ df
 So, imagine that we see a strange pattern, and we want to check what's going on with that specific pattern. We can use limpiar_inspect to view all posts which contain that pattern in an interactive frame!
 
 ```{r, eval = FALSE}
-limpiar_inspect(df, pattern = "ntonces", text_var = mention_content,
-                url_var = mention_url, title = "ntonces")
+limpiar_inspect(df, 
+                pattern = "ntonces", 
+                text_var = mention_content,
+                url_var = mention_url,
+                title = "ntonces")
 ```
 
 
 ```{r, eval = TRUE, echo = FALSE}
-limpiar_inspect(df, pattern = "ntonces", text_var = mention_content,
-                url_var = mention_url, title = "ntonces")%>%
+limpiar_inspect(df, 
+                pattern = "ntonces", 
+                text_var = mention_content,
+                url_var = mention_url, 
+                title = "ntonces") %>%
   knitr::kable() 
-
-df
 ```
 
-Whilst it's pretty obvious that all of the 'grax ntonces q?' posts are exactly the same, in the real world we're going to have 10,000 times as many posts, and searching for suspicious patterns will take up a lot of our time. The vie
+Whilst it's pretty obvious that all of the 'grax ntonces q?' posts are exactly the same, in the real world we're going to have 10,000 times as many posts, and searching for suspicious patterns may take up a lot of our time. 
 
 ### limpiar_na_cols
 This final function is useful when we want to remove 'mostly NA' columns of a data frame. We may want to do this to save memory, for example if we have 400,000 posts and 80 columns. In this case we'll get rid of all columns for which 25% or more of their values are NA.
@@ -301,7 +506,7 @@ limpiar_na_cols(df,threshold =  0.25)
 
 ## Putting It All Together
 
-To speed things up, we can call the functions together in one big long pipe.  
+To speed things up, we **could** call the functions together in one big long pipe.  
 ```{r}
 df %>%
   limpiar_na_cols(threshold = 0.25)%>%
@@ -310,12 +515,13 @@ df %>%
   limpiar_shorthands()%>%
   limpiar_repeat_chars()%>%
   limpiar_url()%>%
-  limpiar_recode_emojis()%>%
+  limpiar_remove_emojis()%>%
   limpiar_shorthands()%>%
   limpiar_spaces()%>%
   limpiar_duplicates()
 ```
-However, on very large data frames, it will often be better to prioritise one, or a few functions at a time, assigning your data frame as you go.
+
+However, we generally want to check what the effects of our transformations are on our data, so doing a lot of operations like this without any intermediate checks is risky. 
 
 
 
