@@ -14,9 +14,8 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, message=FALSE, warning=FALSE}
 library(LimpiaR)
-library(tidyverse)
 ```
 
 # The Problem
@@ -37,11 +36,29 @@ To make a bad situation worse, there is no one-size fits all definition of 'near
 > i. @jiryan_2 wants to make you rich! Click here for amazing crypto opportunity www.definitelynotascam.com/get_rich_quick
 ii. @jiryan_2 wants to make you wealthy! Click here for amazing crypto opportunity www.definitelynotascam.com/get_rich_quick
 
-It should be quite clear that one of these pairs of documents is more problematic than the other, and yet both documents only differ by a single world. So even in principle, we couldn't write something like 'check if there is another document which only differs by one word, and remove both documents if there is.' 
+It should be quite clear that one of these pairs of documents is more problematic than the other, and yet both documents only differ by a single world. So even in principle, we wouldn't want to write some code to 'check if there is another document which only differs by one word, and remove both documents if there is' - we need something a bit more nuanced. 
 
-# A Solution 
+# A Solution - `limpiar_spam_grams()`
+
+We developed an in-house solution which looks at recurrent n-grams ^[elsewhere called shingles] within a dataset, where grams are words - n = 1, bigrams are n = 2, trigrams are n = 3 and so on. The algorithm is not language specific, so it can be applied across any language which has clear delimiters between words.
+
+The algorithm works as follows:
+
+1. We count the occurrence of every n-gram across all documents in our dataset. Where the value of n is set by the user in the `n_gram` parameter.
+2. We filter the n-grams for those that occur above a `min_freq`.
+3. We filter our documents that have any n-gram from this list, we retain documents that do not have any n-gram.
+4. We return a list of the 'spam grams' - the n-grams which occur above the `min_freq`, the remaining data, and the deleted data, for the user to inspect.
+
+It is a very simple aproach, but it is quite effective.
+
+
 `limpiar_spam_grams()`
 
+## Trade-off
+
+![Fig.1 Classification Metrics](images/spam_grams_classification_metrics.png){width=800 height=400}
+
+## Limitations
 
 # Another Solution
 Locality Sensitive Hashing

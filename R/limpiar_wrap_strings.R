@@ -1,11 +1,13 @@
 #' Wrap strings for visual ease
 #'
+#' @description Useful for pre-processing a dataset in which you need to read many documents, or scan over a lot of documents, e.g. when rendering an interactive scatter plot and using plotly's hover, or when using `DT::datatable(escape = FALSE)`.
+#'
 #' @inheritParams data_param
 #' @inheritParams text_var
 #' @param n number of words
 #' @param newline_char the specific delimiter to wrap the texts with
 #'
-#' @return
+#' @return Data Frame with text variable edited in place
 #' @export
 #'
 #' @examples
