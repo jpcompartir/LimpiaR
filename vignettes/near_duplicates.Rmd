@@ -1,0 +1,47 @@
+---
+title: "Near Duplicate Removal"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Near Duplicate Removal}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(LimpiaR)
+library(tidyverse)
+```
+
+# The Problem
+
+Extracting useful information from large, unstructured internet datasets is a difficult task even when the datasets are clean. It is an *impossible* task with datasets riddled by bot network content, spammers, duplicates, and near-duplicates. 
+
+Sadly our datasets do not come ready-cleaned, and we often have to remove hundreds and thousands of almost identical documents. Without automated, or semi-automated, assistance, this process is extremely time consuming and quickly becomes intractable as the size of our dataset grows.
+
+To make a bad situation worse, there is no one-size fits all definition of 'near duplicate'. Let's look at two pairs of documents:
+
+**Pair 1**
+  
+  >i. Arsenal are my favourite team
+  ii. Liverpool are my favourite team
+
+**Pair 2**
+
+> i. @jiryan_2 wants to make you rich! Click here for amazing crypto opportunity www.definitelynotascam.com/get_rich_quick
+ii. @jiryan_2 wants to make you wealthy! Click here for amazing crypto opportunity www.definitelynotascam.com/get_rich_quick
+
+It should be quite clear that one of these pairs of documents is more problematic than the other, and yet both documents only differ by a single world. So even in principle, we couldn't write something like 'check if there is another document which only differs by one word, and remove both documents if there is.' 
+
+# A Solution 
+`limpiar_spam_grams()`
+
+
+# Another Solution
+Locality Sensitive Hashing

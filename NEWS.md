@@ -1,10 +1,10 @@
 
 # LimpiaR 1.1.0
 
-* Migrating documentation to Quarto
-* refactoring limpiar_emojis
-* adding remove non-ascii
-* adding heuristics function(?)
+* refactoring limpiar_emojis into limpiar_recode_emojis and limpiar_remove_emojis
+* adding limpiar_non_ascii and limpiar_alphanumeric
+* behind doors improvements to documentation and tests
+* introduce limpiar_wrap_string for reading outputs in Data Tables (DT package)
 
 
 # LimpiaR 1.0.0
