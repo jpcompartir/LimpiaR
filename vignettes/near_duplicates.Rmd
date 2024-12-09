@@ -10,7 +10,9 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  message = FALSE,
+  warning =  FALSE
 )
 ```
 
@@ -47,12 +49,53 @@ The algorithm works as follows:
 1. We count the occurrence of every n-gram across all documents in our dataset. Where the value of n is set by the user in the `n_gram` parameter.
 2. We filter the n-grams for those that occur above a `min_freq`.
 3. We filter our documents that have any n-gram from this list, we retain documents that do not have any n-gram.
-4. We return a list of the 'spam grams' - the n-grams which occur above the `min_freq`, the remaining data, and the deleted data, for the user to inspect.
+4. We return a list of: the 'spam_grams' - the n-grams which occur above the `min_freq`, the remaining data, and the deleted data, for the user to inspect.
 
-It is a very simple aproach, but it is quite effective.
+## Example code
 
+We should save the output of `limpiar_spam_grams()` to a variable, as this variable will contain our list of \$spam_grams, \$data, \$deleted. We'll use the `limpiar_examples` dataset, which is a small, toy dataset of only 10 rows. We can read every document in this dataset, and quickly verify the outputs; so it is handy for learning, but in reality we will be working with much larger datasets so verification will take up more of our time.
+
+We run the code with low values for `n_gram` and `min_freq` because our dataset is small, and it does not contain many near duplicates. We ask the function to find any substring within a document of 3 words that is seen in the entire dataset that is seen in at least 2 documents.
+
+```{r}
+spam_grams_output <- limpiar_examples %>%
+  limpiar_spam_grams(mention_content, n_gram = 3, min_freq = 2)
+```
+
+We can check what's in the list simply with `names()`.
+```{r}
+names(spam_grams_output)
+```
+
+We confirm that we have the three elements of the list that we expect. Now we can take a look at `spam_grams` to see what strings the function is suggesting we delete:
+```{r}
+spam_grams_output$spam_grams
+```
+
+Upon visual inspection, we see that the strings are coming from two pairs of documents - one is a tweet + a retweet - by authors Don Quijote & Sancho Panza. The way retweets are formulated, it makes sense for them to be treated as near duplicates. We also have a pair of exact duplicates by EL Sordo and Commander Miranda - we would expect duplicates to be flagged as near duplicates. So in this case the function is working. 
+
+However, if we look at the `ngrams` that have been picked out to do the filtering, it's clear that they ar e not the most robust. We could imagine many documents that we do not in fact want to remove from a datset, containing at least one of these ngrams. It's vital that the user inspects these ngrams and considers whether documents containing them are likely to be spam-like.
+
+
+
+
+## Working with the output
+
+When we run the code and save it to a variable, we see that we have a list of 3 data frames (or tibbles).
+
+
+`limpiar_spam_grams()` is an heuristic approach to cleaning, it is simple but effective. To mitigate risks, it's *very important* to check the outputs of both \$spam_grams and \$deleted. For large datasets this can be time consuming, but it is bad practice to remove large swathes of a dataset without having a clear idea of what you are removing.
+
+We recommend the following strategy:
+
+1. 
 
 `limpiar_spam_grams()`
+
+## Parameter Settings
+
+Useful defaults based on our early research
+Data-driven exploration
 
 ## Trade-off
 
