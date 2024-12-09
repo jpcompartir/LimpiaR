@@ -1,120 +1,49 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/articles/limpiar_intro.html</loc>
-  </url>
-  <url>
-    <loc>/articles/parts_of_speech_workflow.html</loc>
-  </url>
-  <url>
-    <loc>/articles/parts_of_speech_workflow_files/jqueryui-1.13.2/index.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/code_browser_emojis.html</loc>
-  </url>
-  <url>
-    <loc>/reference/entities.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/limpiar_accents.html</loc>
-  </url>
-  <url>
-    <loc>/reference/limpiar_duplicates.html</loc>
-  </url>
-  <url>
-    <loc>/reference/limpiar_emojis.html</loc>
-  </url>
-  <url>
-    <loc>/reference/limpiar_emojis_es.html</loc>
-  </url>
-  <url>
-    <loc>/reference/limpiar_ex_subreddits.html</loc>
-  </url>
-  <url>
-    <loc>/reference/limpiar_examples.html</loc>
-  </url>
-  <url>
-    <loc>/reference/limpiar_inspect.html</loc>
-  </url>
-  <url>
-    <loc>/reference/limpiar_link_click.html</loc>
-  </url>
-  <url>
-    <loc>/reference/limpiar_link_click_reverse.html</loc>
-  </url>
-  <url>
-    <loc>/reference/limpiar_na_cols.html</loc>
-  </url>
-  <url>
-    <loc>/reference/limpiar_pos_annotate.html</loc>
-  </url>
-  <url>
-    <loc>/reference/limpiar_pos_import_model.html</loc>
-  </url>
-  <url>
-    <loc>/reference/limpiar_pp_companies.html</loc>
-  </url>
-  <url>
-    <loc>/reference/limpiar_pp_products.html</loc>
-  </url>
-  <url>
-    <loc>/reference/limpiar_repeat_chars.html</loc>
-  </url>
-  <url>
-    <loc>/reference/limpiar_retweets.html</loc>
-  </url>
-  <url>
-    <loc>/reference/limpiar_shorthands.html</loc>
-  </url>
-  <url>
-    <loc>/reference/limpiar_slang.html</loc>
-  </url>
-  <url>
-    <loc>/reference/limpiar_spaces.html</loc>
-  </url>
-  <url>
-    <loc>/reference/limpiar_spam_grams.html</loc>
-  </url>
-  <url>
-    <loc>/reference/limpiar_stopwords.html</loc>
-  </url>
-  <url>
-    <loc>/reference/limpiar_tags.html</loc>
-  </url>
-  <url>
-    <loc>/reference/limpiar_url.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pipe.html</loc>
-  </url>
-  <url>
-    <loc>/reference/sentiment_stops.html</loc>
-  </url>
-  <url>
-    <loc>/reference/topic_stops.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://jpcompartir.github.io/LimpiaR/404.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/LICENSE-text.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/LICENSE.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/articles/index.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/articles/limpiar_intro.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/articles/near_duplicates.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/articles/parts_of_speech_workflow.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/articles/parts_of_speech_workflow_files/jqueryui-1.13.2/index.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/authors.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/index.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/news/index.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/reference/code_browser_emojis.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/reference/data_param.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/reference/entities.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/reference/index.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/reference/limpiar_accents.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/reference/limpiar_alphanumeric.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/reference/limpiar_duplicates.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/reference/limpiar_emojis_es.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/reference/limpiar_ex_subreddits.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/reference/limpiar_examples.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/reference/limpiar_inspect.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/reference/limpiar_link_click.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/reference/limpiar_link_click_reverse.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/reference/limpiar_na_cols.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/reference/limpiar_non_ascii.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/reference/limpiar_pos_annotate.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/reference/limpiar_pos_import_model.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/reference/limpiar_pp_companies.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/reference/limpiar_pp_products.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/reference/limpiar_recode_emojis.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/reference/limpiar_remove_emojis.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/reference/limpiar_repeat_chars.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/reference/limpiar_retweets.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/reference/limpiar_shorthands.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/reference/limpiar_slang.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/reference/limpiar_spaces.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/reference/limpiar_spam_grams.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/reference/limpiar_stopwords.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/reference/limpiar_tags.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/reference/limpiar_url.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/reference/limpiar_wrap.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/reference/pipe.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/reference/sentiment_stops.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/reference/text_var.html</loc></url>
+<url><loc>https://jpcompartir.github.io/LimpiaR/reference/topic_stops.html</loc></url>
 </urlset>
+

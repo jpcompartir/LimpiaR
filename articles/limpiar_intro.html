@@ -5,65 +5,47 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="LimpiaR">
 <title>Introduction to LimpiaR • LimpiaR</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Introduction to LimpiaR">
-<meta property="og:description" content="LimpiaR">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Introduction to LimpiaR">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-    
 
-    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light" data-bs-theme="light"><div class="container">
-    
+
+    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="../index.html">LimpiaR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
 
-    
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item">
-  <a class="nav-link" href="../news/index.html">Changelog</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../reference/index.html">Reference</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
+<li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="active nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/limpiar_intro.html">Introduction to LimpiaR</a>
-    <a class="dropdown-item" href="../articles/parts_of_speech_workflow.html">LimpiaR - Parts of Speech Workflow</a>
-  </div>
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><a class="dropdown-item" href="../articles/limpiar_intro.html">Introduction to LimpiaR</a></li>
+    <li><a class="dropdown-item" href="../articles/near_duplicates.html">Near Duplicate Removal</a></li>
+    <li><a class="dropdown-item" href="../articles/parts_of_speech_workflow.html">LimpiaR - Parts of Speech Workflow</a></li>
+  </ul>
 </li>
       </ul>
-<form class="form-inline my-2 my-lg-0" role="search">
-        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
-</form>
-
-      <ul class="navbar-nav">
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/jpcompartir/LimpiaR" aria-label="github">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/jpcompartir/LimpiaR" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
-    
+
   </div>
 </nav><div class="container template-article">
 
@@ -72,30 +54,39 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="" class="logo" alt=""><h1>Introduction to LimpiaR</h1>
+
+      <h1>Introduction to LimpiaR</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/jpcompartir/LimpiaR/tree/mainvignettes/limpiar_intro.Rmd" class="external-link"><code>vignettes/limpiar_intro.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/jpcompartir/LimpiaR/tree/main/vignettes/limpiar_intro.Rmd" class="external-link"><code>vignettes/limpiar_intro.Rmd</code></a></small>
       <div class="d-none name"><code>limpiar_intro.Rmd</code></div>
     </div>
 
     
     
-<p>LimpiaR is a package built to expedite pre-processing of text
-variables, with some handy functions in Spanish and R. To get started,
-we’ll load few helpful libraries.</p>
 <div class="section level2">
-<h2 id="loading-everything-into-r">Loading Everything Into R<a class="anchor" aria-label="anchor" href="#loading-everything-into-r"></a>
+<h2 id="limpiar-overview">LimpiaR Overview<a class="anchor" aria-label="anchor" href="#limpiar-overview"></a>
+</h2>
+<p>LimpiaR is a package built to expedite pre-processing and cleaning of
+text data, with some handy functions in Spanish and R. To get started,
+we’ll load few helpful libraries.</p>
+</div>
+<div class="section level2">
+<h2 id="walkthrough">Walkthrough<a class="anchor" aria-label="anchor" href="#walkthrough"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://stringr.tidyverse.org" class="external-link">stringr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">LimpiaR</span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jpcompartir.github.io/LimpiaR">LimpiaR</a></span><span class="op">)</span></span></code></pre></div>
 <p>LimpiaR’s functions begin with limpiar_. Once the library has been
 loaded, typing limpiar_ in an Rstudio script or Rmarkdown code block,
 will produce a drop down menu of all LimpiaR functions, which should
-help you to find the name of the function you’re looking for.</p>
+help you to find the name of the function you’re looking for - you can
+then use tab to autocomplete the function. Once inside the function,
+RStudio should give you a popover which shows the argument the function
+expects. You can also type ‘control + space’ when your cursor is inside
+the function’s brackets to force extra help.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 2</span></span></span>
@@ -111,9 +102,9 @@ help you to find the name of the function you’re looking for.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span></code></pre></div>
-<div class="section level3">
-<h3 id="column-names">Column Names<a class="anchor" aria-label="anchor" href="#column-names"></a>
-</h3>
+<div class="section level4">
+<h4 id="column-names">Column Names<a class="anchor" aria-label="anchor" href="#column-names"></a>
+</h4>
 <p>We created a data frame of posts and URLs. After loading libraries
 and data, the first part of any workflow should be to clean the column
 names, this makes using tab completion, and accessing column names much
@@ -140,10 +131,9 @@ if it is not already installed on your machine.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span></code></pre></div>
 </div>
-</div>
-<div class="section level2">
-<h2 id="lower-case-text-variable">Lower Case Text Variable<a class="anchor" aria-label="anchor" href="#lower-case-text-variable"></a>
-</h2>
+<div class="section level3">
+<h3 id="lower-case-text-variable">Lower Case Text Variable<a class="anchor" aria-label="anchor" href="#lower-case-text-variable"></a>
+</h3>
 <p>For most workflows, the next step will be to make the text variable
 lower case. We do this to make tokens like ‘AMAZING’ or ‘Amazing’ -&gt;
 ‘amazing’. You do not need a LimpiaR function for this, as the base R
@@ -165,13 +155,13 @@ function tolower() works just fine.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="limpiar-functions">Limpiar Functions<a class="anchor" aria-label="anchor" href="#limpiar-functions"></a>
-</h2>
+<div class="section level3">
+<h3 id="limpiar-functions">Limpiar Functions<a class="anchor" aria-label="anchor" href="#limpiar-functions"></a>
+</h3>
 </div>
-<div class="section level2">
-<h2 id="limpiar_accents">limpiar_accents<a class="anchor" aria-label="anchor" href="#limpiar_accents"></a>
-</h2>
+<div class="section level3">
+<h3 id="limpiar_accents">limpiar_accents<a class="anchor" aria-label="anchor" href="#limpiar_accents"></a>
+</h3>
 <p>Now we’re going to look at LimpiaR’s functions individually. The
 first function is limpiar_accents, this will replace the accents most
 common in Spanish words from the text variable, with their
@@ -195,9 +185,9 @@ see which arguments you need to fill in.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span></code></pre></div>
-<div class="section level3">
-<h3 id="limpiar_duplicates">limpiar_duplicates<a class="anchor" aria-label="anchor" href="#limpiar_duplicates"></a>
-</h3>
+<div class="section level4">
+<h4 id="limpiar_duplicates">limpiar_duplicates<a class="anchor" aria-label="anchor" href="#limpiar_duplicates"></a>
+</h4>
 <p>Now we’ll remove duplicate posts, notice that we don’t actually need
 to type text_var = mention_content, because the default argument for
 text_var is already mention_content.</p>
@@ -219,11 +209,21 @@ text_var is already mention_content.</p>
 would have to specify text_var = text, or call:</p>
 </blockquote>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>mention_content <span class="op">=</span> <span class="va">text</span><span class="op">)</span> </span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>text <span class="op">=</span> <span class="va">mention_content</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7 × 2</span></span></span>
+<span><span class="co">#&gt;   text                                                               mention_url</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> <span style="color: #949494;">"</span>holaaaaaa! coomo    estas @magdalena   ?!<span style="color: #949494;">"</span>                        www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> <span style="color: #949494;">"</span>  han visto este articulo!? que horror! https://guardian.com/emo… www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> <span style="color: #949494;">"</span>ayyyyyy a mi me   gustaria ir a londres yaaa #llevame #porfavor<span style="color: #949494;">"</span>  www.facebo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> <span style="color: #949494;">"</span>jajajajaja eres un wn!<span style="color: #949494;">"</span>                                           www.facebo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> <span style="color: #949494;">"</span>rt dale un click a ver una mujer baila con su perro<span style="color: #949494;">"</span>              www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                  www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> <span style="color: #949494;">"</span>yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣 <span style="color: #949494;">"</span>                     www.instag…</span></span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="limpiar_retweets">limpiar_retweets<a class="anchor" aria-label="anchor" href="#limpiar_retweets"></a>
-</h3>
+<div class="section level4">
+<h4 id="limpiar_retweets">limpiar_retweets<a class="anchor" aria-label="anchor" href="#limpiar_retweets"></a>
+</h4>
 <p>If you need to remove retweets, for example to create a bigram
 network, limpiar has a function just for that.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -239,9 +239,9 @@ network, limpiar has a function just for that.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                  www.youtub…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> <span style="color: #949494;">"</span>yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣 <span style="color: #949494;">"</span>                     www.instag…</span></span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="limpiar_url">limpiar_url<a class="anchor" aria-label="anchor" href="#limpiar_url"></a>
-</h3>
+<div class="section level4">
+<h4 id="limpiar_url">limpiar_url<a class="anchor" aria-label="anchor" href="#limpiar_url"></a>
+</h4>
 <p>We generally don’t want URLs appearing in our charts or analyses, so
 we can remove them with the limpiar_url function.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -257,9 +257,9 @@ we can remove them with the limpiar_url function.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtube…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> <span style="color: #949494;">"</span>yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣 <span style="color: #949494;">"</span>                    www.instagr…</span></span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="limpiar_spaces">limpiar_spaces<a class="anchor" aria-label="anchor" href="#limpiar_spaces"></a>
-</h3>
+<div class="section level4">
+<h4 id="limpiar_spaces">limpiar_spaces<a class="anchor" aria-label="anchor" href="#limpiar_spaces"></a>
+</h4>
 <p>Next we’ll look at how to use LimpiaR to remove annoying white
 spaces, like those at the beginning of a sentence, or between
 punctuation, or multiple white spaces for no reason; as is common in the
@@ -277,9 +277,9 @@ messy data we often encounter.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> grax ntonces q?                                               www.youtube.com…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣                   www.instagram.c…</span></span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="limpiar_tags">limpiar_tags<a class="anchor" aria-label="anchor" href="#limpiar_tags"></a>
-</h3>
+<div class="section level4">
+<h4 id="limpiar_tags">limpiar_tags<a class="anchor" aria-label="anchor" href="#limpiar_tags"></a>
+</h4>
 <p>We can also remove user handles (e.g. <span class="citation">@magdalena</span>) and hashtags with the limpiar_tags
 function. Remember, you can type ?limpiar_tags to access
 documentation.</p>
@@ -323,9 +323,9 @@ documentation.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> grax ntonces q?                                            www.youtube.com/po…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣                www.instagram.com/…</span></span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="quick-recap---weve-looked-at">Quick recap - we’ve looked at:<a class="anchor" aria-label="anchor" href="#quick-recap---weve-looked-at"></a>
-</h3>
+<div class="section level4">
+<h4 id="quick-recap---weve-looked-at">Quick recap - we’ve looked at:<a class="anchor" aria-label="anchor" href="#quick-recap---weve-looked-at"></a>
+</h4>
 <ul>
 <li>cleaning column names with janitor::clean_names()</li>
 <li>making the text variable lower case with mutate() &amp;
@@ -338,9 +338,9 @@ tolower()</li>
 <li>cleaning user handles and hashtags with limpiar_tags()</li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="limpiar_shorthands">limpiar_shorthands<a class="anchor" aria-label="anchor" href="#limpiar_shorthands"></a>
-</h3>
+<div class="section level4">
+<h4 id="limpiar_shorthands">limpiar_shorthands<a class="anchor" aria-label="anchor" href="#limpiar_shorthands"></a>
+</h4>
 <p>One of the biggest problems with the messy data we encounter, are
 shorthands. Generally, algorithms have been trained on clean, standard
 language, so they do not encounter shorthands and abbreviations.
@@ -361,9 +361,9 @@ shorthands.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> gracias entonces que?                                         www.youtube.com…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣                   www.instagram.c…</span></span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="limpiar_repeated_chars">limpiar_repeated_chars<a class="anchor" aria-label="anchor" href="#limpiar_repeated_chars"></a>
-</h3>
+<div class="section level4">
+<h4 id="limpiar_repeated_chars">limpiar_repeated_chars<a class="anchor" aria-label="anchor" href="#limpiar_repeated_chars"></a>
+</h4>
 <p>We don’t want our algorithm to have to learn the difference between
 ‘ajajaj’ and ‘jaja’ or ‘ay’ and ‘ayyyy’ as practically speaking, there
 is none. We also don’t want to introduce unnecessary tokens, so we
@@ -386,18 +386,34 @@ every analysis/project to help clean the data. We will now look at some
 of the more circumstantial functions, i.e. they will not be used in
 every analysis.</p>
 </div>
-<div class="section level3">
-<h3 id="limpiar_emojis">limpiar_emojis<a class="anchor" aria-label="anchor" href="#limpiar_emojis"></a>
-</h3>
-<p>We don’t need to use limpiar_emojis for every analysis, as many
-ParseR &amp; SegmentR functions ignore them implicitly. However, if we
-know that we need to for a special purpose, we can can use
-limpiar_emojis(). One problem with this, and the reason it is for
-special cases only, is the emoji’s encodings are in English. We may, at
-some point, translate them to Spanish, but it seems unlikely.</p>
+<div class="section level4">
+<h4 id="emojis">Emojis<a class="anchor" aria-label="anchor" href="#emojis"></a>
+</h4>
+<p>Emojis are a type of non-ASCII unicode character, which means that
+removing all non-ASCII characters will remove emojis by force. It also
+means that functions designed to target certain unicode characters by
+patterns, may inadvertently remove other special characters - as well as
+emojis, or instead of emojis!</p>
+<div class="section level5">
+<h5 id="limpiar_recode_emojis">limpiar_recode_emojis()<a class="anchor" aria-label="anchor" href="#limpiar_recode_emojis"></a>
+</h5>
+<details><summary>
+Why not juse a regular expression?
+</summary>
+We scraped some lists of emojis which get the emojis directly for
+replacement. This approach is more computationally expensive than
+filtering out via RegEx, but it is often more precise as it targets the
+emojis directly.
+</details><p>We don’t need to use limpiar_recode_emojis for every analysis, as
+many ParseR &amp; SegmentR functions ignore them implicitly. However, if
+we know that we need to replace them with their text descriptios, we can
+can use limpiar__recode_emojis(). One problem with this, and the reason
+it is for special cases only, is the emoji’s encodings are in English.
+We may, at some point, translate them to Spanish, but it seems
+unlikely.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/limpiar_emojis.html">limpiar_emojis</a></span><span class="op">(</span>text_var <span class="op">=</span> <span class="va">mention_content</span>, with_emoji_tag <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/limpiar_recode_emojis.html">limpiar_recode_emojis</a></span><span class="op">(</span>text_var <span class="op">=</span> <span class="va">mention_content</span>, with_emoji_tag <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span></span>
 <span><span class="co">#&gt;   mention_content                                                    mention_url</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
@@ -407,10 +423,11 @@ some point, translate them to Spanish, but it seems unlikely.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> jaja eres un wuevon!                                               www.facebo…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> gracias entonces que?                                              www.youtub…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> yo soy el mejor face with tears of joy face with tears of joy fac… www.instag…</span></span></code></pre></div>
-<p>or with the default settings:</p>
+<p>Or if we set <code>with_emoji_tag</code> to TRUE, our emojis are now
+pasted together with ’_’ and have an ’_emoji’ label.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/limpiar_emojis.html">limpiar_emojis</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/limpiar_recode_emojis.html">limpiar_recode_emojis</a></span><span class="op">(</span><span class="va">mention_content</span>, with_emoji_tag <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span></span>
 <span><span class="co">#&gt;   mention_content                                                    mention_url</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
@@ -419,11 +436,913 @@ some point, translate them to Spanish, but it seems unlikely.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> ay a mi me gustaria ir a londres ya #llevame #porfavor             www.facebo…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> jaja eres un wuevon!                                               www.facebo…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> gracias entonces que?                                              www.youtub…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> yo soy el mejor face with tears of joy face with tears of joy fac… www.instag…</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> yo soy el mejor face_with_tears_of_joy_emoji face_with_tears_of_j… www.instag…</span></span></code></pre></div>
+<blockquote>
+<p><strong>Warning</strong> the <code><a href="../reference/limpiar_recode_emojis.html">limpiar_recode_emojis()</a></code>
+function is quite slow and scales poorly with the size of inputs. So if
+using on a large dataset with many long documents expect functions to
+take a while to run.</p>
+</blockquote>
 </div>
-<div class="section level3">
-<h3 id="limpiar_stopwords">limpiar_stopwords<a class="anchor" aria-label="anchor" href="#limpiar_stopwords"></a>
-</h3>
+<div class="section level5">
+<h5 id="limpiar_remove_emojis">limpiar_remove_emojis()<a class="anchor" aria-label="anchor" href="#limpiar_remove_emojis"></a>
+</h5>
+<p>What about in situations where we don’t want to replace emojis with
+their text inputs, <strong>or</strong> we don’t mind risking the loss of
+some other non-ASCII characters, <strong>or</strong> we want something
+that runs fast?</p>
+<p>Instead of <code>limpiar_recode_emojis</code> we can use
+<code>limpiar_remove_emojis</code>! This function operates with a fairly
+simple RegEx pattern, meaning it runs a lot more efficiently than its
+recode counterpart.</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/limpiar_remove_emojis.html">limpiar_remove_emojis</a></span><span class="op">(</span><span class="va">mention_content</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span></span>
+<span><span class="co">#&gt;   mention_content                                          mention_url          </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> <span style="color: #949494;">"</span>hola! coomo estas @magdalena?!<span style="color: #949494;">"</span>                         www.twitter.com/post1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> <span style="color: #949494;">"</span>han visto este articulo!? que horror! no se puede!!<span style="color: #949494;">"</span>    www.twitter.com/post2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> <span style="color: #949494;">"</span>ay a mi me gustaria ir a londres ya #llevame #porfavor<span style="color: #949494;">"</span> www.facebook.com/pos…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> <span style="color: #949494;">"</span>jaja eres un wuevon!<span style="color: #949494;">"</span>                                   www.facebook.com/pos…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> <span style="color: #949494;">"</span>gracias entonces que?<span style="color: #949494;">"</span>                                  www.youtube.com/post1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> <span style="color: #949494;">"</span>yo soy el mejor , no eres nada!! <span style="color: #949494;">"</span>                      www.instagram.com/po…</span></span></code></pre></div>
+</div>
+</div>
+<div class="section level4">
+<h4 id="non-ascii-characters">non-ASCII characters<a class="anchor" aria-label="anchor" href="#non-ascii-characters"></a>
+</h4>
+<p>ASCII (American Standard Code for Information Interchange) is a
+character-encoding standard for representing numbers and text. There are
+128 ASCII characters, including the letters from a-z in upper and
+lowercase, numbers 0-9, common punctuation marks, and a few additional
+characters with specific uses for computers. Everything else is
+non-ASCII.</p>
+<details><summary>
+All 128 ASCII characters
+</summary><table class="table">
+<thead><tr class="header">
+<th>Dec</th>
+<th align="center">Hex</th>
+<th align="left">Char</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>000</td>
+<td align="center">00</td>
+<td align="left">NUL</td>
+<td>Null</td>
+</tr>
+<tr class="even">
+<td>001</td>
+<td align="center">01</td>
+<td align="left">SOH</td>
+<td>Start of Heading</td>
+</tr>
+<tr class="odd">
+<td>002</td>
+<td align="center">02</td>
+<td align="left">STX</td>
+<td>Start of Text</td>
+</tr>
+<tr class="even">
+<td>003</td>
+<td align="center">03</td>
+<td align="left">ETX</td>
+<td>End of Text</td>
+</tr>
+<tr class="odd">
+<td>004</td>
+<td align="center">04</td>
+<td align="left">EOT</td>
+<td>End of Transmission</td>
+</tr>
+<tr class="even">
+<td>005</td>
+<td align="center">05</td>
+<td align="left">ENQ</td>
+<td>Enquiry</td>
+</tr>
+<tr class="odd">
+<td>006</td>
+<td align="center">06</td>
+<td align="left">ACK</td>
+<td>Acknowledge</td>
+</tr>
+<tr class="even">
+<td>007</td>
+<td align="center">07</td>
+<td align="left">BEL</td>
+<td>Bell</td>
+</tr>
+<tr class="odd">
+<td>008</td>
+<td align="center">08</td>
+<td align="left">BS</td>
+<td>Backspace</td>
+</tr>
+<tr class="even">
+<td>009</td>
+<td align="center">09</td>
+<td align="left">HT</td>
+<td>Horizontal Tab</td>
+</tr>
+<tr class="odd">
+<td>010</td>
+<td align="center">0A</td>
+<td align="left">LF</td>
+<td>Line Feed</td>
+</tr>
+<tr class="even">
+<td>011</td>
+<td align="center">0B</td>
+<td align="left">VT</td>
+<td>Vertical Tab</td>
+</tr>
+<tr class="odd">
+<td>012</td>
+<td align="center">0C</td>
+<td align="left">FF</td>
+<td>Form Feed</td>
+</tr>
+<tr class="even">
+<td>013</td>
+<td align="center">0D</td>
+<td align="left">CR</td>
+<td>Carriage Return</td>
+</tr>
+<tr class="odd">
+<td>014</td>
+<td align="center">0E</td>
+<td align="left">SO</td>
+<td>Shift Out</td>
+</tr>
+<tr class="even">
+<td>015</td>
+<td align="center">0F</td>
+<td align="left">SI</td>
+<td>Shift In</td>
+</tr>
+<tr class="odd">
+<td>016</td>
+<td align="center">10</td>
+<td align="left">DLE</td>
+<td>Data Link Escape</td>
+</tr>
+<tr class="even">
+<td>017</td>
+<td align="center">11</td>
+<td align="left">DC1</td>
+<td>Device Control 1 (XON)</td>
+</tr>
+<tr class="odd">
+<td>018</td>
+<td align="center">12</td>
+<td align="left">DC2</td>
+<td>Device Control 2</td>
+</tr>
+<tr class="even">
+<td>019</td>
+<td align="center">13</td>
+<td align="left">DC3</td>
+<td>Device Control 3 (XOFF)</td>
+</tr>
+<tr class="odd">
+<td>020</td>
+<td align="center">14</td>
+<td align="left">DC4</td>
+<td>Device Control 4</td>
+</tr>
+<tr class="even">
+<td>021</td>
+<td align="center">15</td>
+<td align="left">NAK</td>
+<td>Negative Acknowledge</td>
+</tr>
+<tr class="odd">
+<td>022</td>
+<td align="center">16</td>
+<td align="left">SYN</td>
+<td>Synchronous Idle</td>
+</tr>
+<tr class="even">
+<td>023</td>
+<td align="center">17</td>
+<td align="left">ETB</td>
+<td>End of Transmission Block</td>
+</tr>
+<tr class="odd">
+<td>024</td>
+<td align="center">18</td>
+<td align="left">CAN</td>
+<td>Cancel</td>
+</tr>
+<tr class="even">
+<td>025</td>
+<td align="center">19</td>
+<td align="left">EM</td>
+<td>End of Medium</td>
+</tr>
+<tr class="odd">
+<td>026</td>
+<td align="center">1A</td>
+<td align="left">SUB</td>
+<td>Substitute</td>
+</tr>
+<tr class="even">
+<td>027</td>
+<td align="center">1B</td>
+<td align="left">ESC</td>
+<td>Escape</td>
+</tr>
+<tr class="odd">
+<td>028</td>
+<td align="center">1C</td>
+<td align="left">FS</td>
+<td>File Separator</td>
+</tr>
+<tr class="even">
+<td>029</td>
+<td align="center">1D</td>
+<td align="left">GS</td>
+<td>Group Separator</td>
+</tr>
+<tr class="odd">
+<td>030</td>
+<td align="center">1E</td>
+<td align="left">RS</td>
+<td>Record Separator</td>
+</tr>
+<tr class="even">
+<td>031</td>
+<td align="center">1F</td>
+<td align="left">US</td>
+<td>Unit Separator</td>
+</tr>
+<tr class="odd">
+<td>032</td>
+<td align="center">20</td>
+<td align="left">SPACE</td>
+<td>Space</td>
+</tr>
+<tr class="even">
+<td>033</td>
+<td align="center">21</td>
+<td align="left">!</td>
+<td>Exclamation Mark</td>
+</tr>
+<tr class="odd">
+<td>034</td>
+<td align="center">22</td>
+<td align="left">”</td>
+<td>Double Quote</td>
+</tr>
+<tr class="even">
+<td>035</td>
+<td align="center">23</td>
+<td align="left">#</td>
+<td>Number Sign</td>
+</tr>
+<tr class="odd">
+<td>036</td>
+<td align="center">24</td>
+<td align="left">$</td>
+<td>Dollar Sign</td>
+</tr>
+<tr class="even">
+<td>037</td>
+<td align="center">25</td>
+<td align="left">%</td>
+<td>Percent</td>
+</tr>
+<tr class="odd">
+<td>038</td>
+<td align="center">26</td>
+<td align="left">&amp;</td>
+<td>Ampersand</td>
+</tr>
+<tr class="even">
+<td>039</td>
+<td align="center">27</td>
+<td align="left">’</td>
+<td>Single Quote</td>
+</tr>
+<tr class="odd">
+<td>040</td>
+<td align="center">28</td>
+<td align="left">(</td>
+<td>Left Parenthesis</td>
+</tr>
+<tr class="even">
+<td>041</td>
+<td align="center">29</td>
+<td align="left">)</td>
+<td>Right Parenthesis</td>
+</tr>
+<tr class="odd">
+<td>042</td>
+<td align="center">2A</td>
+<td align="left">*</td>
+<td>Asterisk</td>
+</tr>
+<tr class="even">
+<td>043</td>
+<td align="center">2B</td>
+<td align="left">+</td>
+<td>Plus</td>
+</tr>
+<tr class="odd">
+<td>044</td>
+<td align="center">2C</td>
+<td align="left">,</td>
+<td>Comma</td>
+</tr>
+<tr class="even">
+<td>045</td>
+<td align="center">2D</td>
+<td align="left">-</td>
+<td>Hyphen</td>
+</tr>
+<tr class="odd">
+<td>046</td>
+<td align="center">2E</td>
+<td align="left">.</td>
+<td>Period</td>
+</tr>
+<tr class="even">
+<td>047</td>
+<td align="center">2F</td>
+<td align="left">/</td>
+<td>Forward Slash</td>
+</tr>
+<tr class="odd">
+<td>048</td>
+<td align="center">30</td>
+<td align="left">0</td>
+<td>Zero</td>
+</tr>
+<tr class="even">
+<td>049</td>
+<td align="center">31</td>
+<td align="left">1</td>
+<td>One</td>
+</tr>
+<tr class="odd">
+<td>050</td>
+<td align="center">32</td>
+<td align="left">2</td>
+<td>Two</td>
+</tr>
+<tr class="even">
+<td>051</td>
+<td align="center">33</td>
+<td align="left">3</td>
+<td>Three</td>
+</tr>
+<tr class="odd">
+<td>052</td>
+<td align="center">34</td>
+<td align="left">4</td>
+<td>Four</td>
+</tr>
+<tr class="even">
+<td>053</td>
+<td align="center">35</td>
+<td align="left">5</td>
+<td>Five</td>
+</tr>
+<tr class="odd">
+<td>054</td>
+<td align="center">36</td>
+<td align="left">6</td>
+<td>Six</td>
+</tr>
+<tr class="even">
+<td>055</td>
+<td align="center">37</td>
+<td align="left">7</td>
+<td>Seven</td>
+</tr>
+<tr class="odd">
+<td>056</td>
+<td align="center">38</td>
+<td align="left">8</td>
+<td>Eight</td>
+</tr>
+<tr class="even">
+<td>057</td>
+<td align="center">39</td>
+<td align="left">9</td>
+<td>Nine</td>
+</tr>
+<tr class="odd">
+<td>058</td>
+<td align="center">3A</td>
+<td align="left">:</td>
+<td>Colon</td>
+</tr>
+<tr class="even">
+<td>059</td>
+<td align="center">3B</td>
+<td align="left">;</td>
+<td>Semicolon</td>
+</tr>
+<tr class="odd">
+<td>060</td>
+<td align="center">3C</td>
+<td align="left">&lt;</td>
+<td>Less Than</td>
+</tr>
+<tr class="even">
+<td>061</td>
+<td align="center">3D</td>
+<td align="left">=</td>
+<td>Equals</td>
+</tr>
+<tr class="odd">
+<td>062</td>
+<td align="center">3E</td>
+<td align="left">&gt;</td>
+<td>Greater Than</td>
+</tr>
+<tr class="even">
+<td>063</td>
+<td align="center">3F</td>
+<td align="left">?</td>
+<td>Question Mark</td>
+</tr>
+<tr class="odd">
+<td>064</td>
+<td align="center">40</td>
+<td align="left">@</td>
+<td>At Sign</td>
+</tr>
+<tr class="even">
+<td>065</td>
+<td align="center">41</td>
+<td align="left">A</td>
+<td>Uppercase A</td>
+</tr>
+<tr class="odd">
+<td>066</td>
+<td align="center">42</td>
+<td align="left">B</td>
+<td>Uppercase B</td>
+</tr>
+<tr class="even">
+<td>067</td>
+<td align="center">43</td>
+<td align="left">C</td>
+<td>Uppercase C</td>
+</tr>
+<tr class="odd">
+<td>068</td>
+<td align="center">44</td>
+<td align="left">D</td>
+<td>Uppercase D</td>
+</tr>
+<tr class="even">
+<td>069</td>
+<td align="center">45</td>
+<td align="left">E</td>
+<td>Uppercase E</td>
+</tr>
+<tr class="odd">
+<td>070</td>
+<td align="center">46</td>
+<td align="left">F</td>
+<td>Uppercase F</td>
+</tr>
+<tr class="even">
+<td>071</td>
+<td align="center">47</td>
+<td align="left">G</td>
+<td>Uppercase G</td>
+</tr>
+<tr class="odd">
+<td>072</td>
+<td align="center">48</td>
+<td align="left">H</td>
+<td>Uppercase H</td>
+</tr>
+<tr class="even">
+<td>073</td>
+<td align="center">49</td>
+<td align="left">I</td>
+<td>Uppercase I</td>
+</tr>
+<tr class="odd">
+<td>074</td>
+<td align="center">4A</td>
+<td align="left">J</td>
+<td>Uppercase J</td>
+</tr>
+<tr class="even">
+<td>075</td>
+<td align="center">4B</td>
+<td align="left">K</td>
+<td>Uppercase K</td>
+</tr>
+<tr class="odd">
+<td>076</td>
+<td align="center">4C</td>
+<td align="left">L</td>
+<td>Uppercase L</td>
+</tr>
+<tr class="even">
+<td>077</td>
+<td align="center">4D</td>
+<td align="left">M</td>
+<td>Uppercase M</td>
+</tr>
+<tr class="odd">
+<td>078</td>
+<td align="center">4E</td>
+<td align="left">N</td>
+<td>Uppercase N</td>
+</tr>
+<tr class="even">
+<td>079</td>
+<td align="center">4F</td>
+<td align="left">O</td>
+<td>Uppercase O</td>
+</tr>
+<tr class="odd">
+<td>080</td>
+<td align="center">50</td>
+<td align="left">P</td>
+<td>Uppercase P</td>
+</tr>
+<tr class="even">
+<td>081</td>
+<td align="center">51</td>
+<td align="left">Q</td>
+<td>Uppercase Q</td>
+</tr>
+<tr class="odd">
+<td>082</td>
+<td align="center">52</td>
+<td align="left">R</td>
+<td>Uppercase R</td>
+</tr>
+<tr class="even">
+<td>083</td>
+<td align="center">53</td>
+<td align="left">S</td>
+<td>Uppercase S</td>
+</tr>
+<tr class="odd">
+<td>084</td>
+<td align="center">54</td>
+<td align="left">T</td>
+<td>Uppercase T</td>
+</tr>
+<tr class="even">
+<td>085</td>
+<td align="center">55</td>
+<td align="left">U</td>
+<td>Uppercase U</td>
+</tr>
+<tr class="odd">
+<td>086</td>
+<td align="center">56</td>
+<td align="left">V</td>
+<td>Uppercase V</td>
+</tr>
+<tr class="even">
+<td>087</td>
+<td align="center">57</td>
+<td align="left">W</td>
+<td>Uppercase W</td>
+</tr>
+<tr class="odd">
+<td>088</td>
+<td align="center">58</td>
+<td align="left">X</td>
+<td>Uppercase X</td>
+</tr>
+<tr class="even">
+<td>089</td>
+<td align="center">59</td>
+<td align="left">Y</td>
+<td>Uppercase Y</td>
+</tr>
+<tr class="odd">
+<td>090</td>
+<td align="center">5A</td>
+<td align="left">Z</td>
+<td>Uppercase Z</td>
+</tr>
+<tr class="even">
+<td>091</td>
+<td align="center">5B</td>
+<td align="left">[</td>
+<td>Left Bracket</td>
+</tr>
+<tr class="odd">
+<td>092</td>
+<td align="center">5C</td>
+<td align="left">\</td>
+<td>Backslash</td>
+</tr>
+<tr class="even">
+<td>093</td>
+<td align="center">5D</td>
+<td align="left">]</td>
+<td>Right Bracket</td>
+</tr>
+<tr class="odd">
+<td>094</td>
+<td align="center">5E</td>
+<td align="left">^</td>
+<td>Caret</td>
+</tr>
+<tr class="even">
+<td>095</td>
+<td align="center">5F</td>
+<td align="left">_</td>
+<td>Underscore</td>
+</tr>
+<tr class="odd">
+<td>096</td>
+<td align="center">60</td>
+<td align="left">`</td>
+<td>Backtick</td>
+</tr>
+<tr class="even">
+<td>097</td>
+<td align="center">61</td>
+<td align="left">a</td>
+<td>Lowercase a</td>
+</tr>
+<tr class="odd">
+<td>098</td>
+<td align="center">62</td>
+<td align="left">b</td>
+<td>Lowercase b</td>
+</tr>
+<tr class="even">
+<td>099</td>
+<td align="center">63</td>
+<td align="left">c</td>
+<td>Lowercase c</td>
+</tr>
+<tr class="odd">
+<td>100</td>
+<td align="center">64</td>
+<td align="left">d</td>
+<td>Lowercase d</td>
+</tr>
+<tr class="even">
+<td>101</td>
+<td align="center">65</td>
+<td align="left">e</td>
+<td>Lowercase e</td>
+</tr>
+<tr class="odd">
+<td>102</td>
+<td align="center">66</td>
+<td align="left">f</td>
+<td>Lowercase f</td>
+</tr>
+<tr class="even">
+<td>103</td>
+<td align="center">67</td>
+<td align="left">g</td>
+<td>Lowercase g</td>
+</tr>
+<tr class="odd">
+<td>104</td>
+<td align="center">68</td>
+<td align="left">h</td>
+<td>Lowercase h</td>
+</tr>
+<tr class="even">
+<td>105</td>
+<td align="center">69</td>
+<td align="left">i</td>
+<td>Lowercase i</td>
+</tr>
+<tr class="odd">
+<td>106</td>
+<td align="center">6A</td>
+<td align="left">j</td>
+<td>Lowercase j</td>
+</tr>
+<tr class="even">
+<td>107</td>
+<td align="center">6B</td>
+<td align="left">k</td>
+<td>Lowercase k</td>
+</tr>
+<tr class="odd">
+<td>108</td>
+<td align="center">6C</td>
+<td align="left">l</td>
+<td>Lowercase l</td>
+</tr>
+<tr class="even">
+<td>109</td>
+<td align="center">6D</td>
+<td align="left">m</td>
+<td>Lowercase m</td>
+</tr>
+<tr class="odd">
+<td>110</td>
+<td align="center">6E</td>
+<td align="left">n</td>
+<td>Lowercase n</td>
+</tr>
+<tr class="even">
+<td>111</td>
+<td align="center">6F</td>
+<td align="left">o</td>
+<td>Lowercase o</td>
+</tr>
+<tr class="odd">
+<td>112</td>
+<td align="center">70</td>
+<td align="left">p</td>
+<td>Lowercase p</td>
+</tr>
+<tr class="even">
+<td>113</td>
+<td align="center">71</td>
+<td align="left">q</td>
+<td>Lowercase q</td>
+</tr>
+<tr class="odd">
+<td>114</td>
+<td align="center">72</td>
+<td align="left">r</td>
+<td>Lowercase r</td>
+</tr>
+<tr class="even">
+<td>115</td>
+<td align="center">73</td>
+<td align="left">s</td>
+<td>Lowercase s</td>
+</tr>
+<tr class="odd">
+<td>116</td>
+<td align="center">74</td>
+<td align="left">t</td>
+<td>Lowercase t</td>
+</tr>
+<tr class="even">
+<td>117</td>
+<td align="center">75</td>
+<td align="left">u</td>
+<td>Lowercase u</td>
+</tr>
+<tr class="odd">
+<td>118</td>
+<td align="center">76</td>
+<td align="left">v</td>
+<td>Lowercase v</td>
+</tr>
+<tr class="even">
+<td>119</td>
+<td align="center">77</td>
+<td align="left">w</td>
+<td>Lowercase w</td>
+</tr>
+<tr class="odd">
+<td>120</td>
+<td align="center">78</td>
+<td align="left">x</td>
+<td>Lowercase x</td>
+</tr>
+<tr class="even">
+<td>121</td>
+<td align="center">79</td>
+<td align="left">y</td>
+<td>Lowercase y</td>
+</tr>
+<tr class="odd">
+<td>122</td>
+<td align="center">7A</td>
+<td align="left">z</td>
+<td>Lowercase z</td>
+</tr>
+<tr class="even">
+<td>123</td>
+<td align="center">7B</td>
+<td align="left">{</td>
+<td>Left Brace</td>
+</tr>
+<tr class="odd">
+<td>124</td>
+<td align="center">7C</td>
+<td align="left">|</td>
+<td>Vertical Bar</td>
+</tr>
+<tr class="even">
+<td>125</td>
+<td align="center">7D</td>
+<td align="left">}</td>
+<td>Right Brace</td>
+</tr>
+<tr class="odd">
+<td>126</td>
+<td align="center">7E</td>
+<td align="left">~</td>
+<td>Tilde</td>
+</tr>
+<tr class="even">
+<td>127</td>
+<td align="center">7F</td>
+<td align="left">DEL</td>
+<td>Delete</td>
+</tr>
+</tbody>
+</table></details><p>For our purposes we have extended the ASCII characters to include
+Latin accents (é, í, etc.), let’s get our original data frame back to
+demonstrate. We should remove things like emojis, but keep our
+punctuation and accented characters:</p>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 2</span></span></span>
+<span><span class="co">#&gt;    mention_content                                                   mention_url</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">"</span>holaaaaaa! cóómo    estás @magdalena   ?!<span style="color: #949494;">"</span>                       www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> <span style="color: #949494;">"</span>  han visto este articulo!? Que horror! https://guardian.com/em… www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> <span style="color: #949494;">"</span>ayyyyyy a mi me   gustaria ir a londres yaaa #llevame #porfavor<span style="color: #949494;">"</span> www.facebo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> <span style="color: #949494;">"</span>jajajajaja eres un wn!<span style="color: #949494;">"</span>                                          www.facebo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> <span style="color: #949494;">"</span>RT dale un click a ver una mujer baila con su perro<span style="color: #949494;">"</span>             www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> <span style="color: #949494;">"</span>yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣 <span style="color: #949494;">"</span>                    www.instag…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span></code></pre>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/limpiar_non_ascii.html">limpiar_non_ascii</a></span><span class="op">(</span><span class="va">mention_content</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 2</span></span></span>
+<span><span class="co">#&gt;    mention_content                                                   mention_url</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">"</span>holaaaaaa! cóómo    estás @magdalena   ?!<span style="color: #949494;">"</span>                       www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> <span style="color: #949494;">"</span>  han visto este articulo!? Que horror! https://guardian.com/em… www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> <span style="color: #949494;">"</span>ayyyyyy a mi me   gustaria ir a londres yaaa #llevame #porfavor<span style="color: #949494;">"</span> www.facebo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> <span style="color: #949494;">"</span>jajajajaja eres un wn!<span style="color: #949494;">"</span>                                          www.facebo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> <span style="color: #949494;">"</span>RT dale un click a ver una mujer baila con su perro<span style="color: #949494;">"</span>             www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> <span style="color: #949494;">"</span>yo soy el mejor , no eres nada!!  <span style="color: #949494;">"</span>                              www.instag…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="limpiar_alphanumeric">limpiar_alphanumeric<a class="anchor" aria-label="anchor" href="#limpiar_alphanumeric"></a>
+</h4>
+<p>Similar to non-ASCII characters, we can retain only the alphanumeric
+characters (a-zA-Z0-9 + spaces). This is a heavy-duty option which
+<em>will</em> remove all accented characters.</p>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/limpiar_alphanumeric.html">limpiar_alphanumeric</a></span><span class="op">(</span><span class="va">mention_content</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 2</span></span></span>
+<span><span class="co">#&gt;    mention_content                                                   mention_url</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">"</span>holaaaaaa cmo    ests magdalena   <span style="color: #949494;">"</span>                              www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> <span style="color: #949494;">"</span>  han visto este articulo Que horror httpsguardiancomemojisbann… www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> <span style="color: #949494;">"</span>ayyyyyy a mi me   gustaria ir a londres yaaa llevame porfavor<span style="color: #949494;">"</span>   www.facebo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> <span style="color: #949494;">"</span>jajajajaja eres un wn<span style="color: #949494;">"</span>                                           www.facebo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> <span style="color: #949494;">"</span>RT dale un click a ver una mujer baila con su perro<span style="color: #949494;">"</span>             www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> <span style="color: #949494;">"</span>grax ntonces q<span style="color: #949494;">"</span>                                                  www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> <span style="color: #949494;">"</span>yo soy el mejor  no eres nada  <span style="color: #949494;">"</span>                                 www.instag…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">"</span>grax ntonces q<span style="color: #949494;">"</span>                                                  www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span>grax ntonces q<span style="color: #949494;">"</span>                                                  www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>grax ntonces q<span style="color: #949494;">"</span>                                                  www.youtub…</span></span></code></pre></div>
+<p>If we want to use <code>limpiar_alphanumeric</code> <strong>and
+retain</strong> our accented characters, then we should recode the
+accents first with <code>limpiar_accents</code>:</p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/limpiar_accents.html">limpiar_accents</a></span><span class="op">(</span><span class="va">mention_content</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/limpiar_alphanumeric.html">limpiar_alphanumeric</a></span><span class="op">(</span><span class="va">mention_content</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 2</span></span></span>
+<span><span class="co">#&gt;    mention_content                                                   mention_url</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">"</span>holaaaaaa coomo    estas magdalena   <span style="color: #949494;">"</span>                           www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> <span style="color: #949494;">"</span>  han visto este articulo Que horror httpsguardiancomemojisbann… www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> <span style="color: #949494;">"</span>ayyyyyy a mi me   gustaria ir a londres yaaa llevame porfavor<span style="color: #949494;">"</span>   www.facebo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> <span style="color: #949494;">"</span>jajajajaja eres un wn<span style="color: #949494;">"</span>                                           www.facebo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> <span style="color: #949494;">"</span>RT dale un click a ver una mujer baila con su perro<span style="color: #949494;">"</span>             www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> <span style="color: #949494;">"</span>grax ntonces q<span style="color: #949494;">"</span>                                                  www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> <span style="color: #949494;">"</span>yo soy el mejor  no eres nada  <span style="color: #949494;">"</span>                                 www.instag…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">"</span>grax ntonces q<span style="color: #949494;">"</span>                                                  www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span>grax ntonces q<span style="color: #949494;">"</span>                                                  www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>grax ntonces q<span style="color: #949494;">"</span>                                                  www.youtub…</span></span></code></pre></div>
+<blockquote>
+<p>You’ll need to make an informed choice between
+<code>limpiar_alphanumeric</code>, <code>limpiar_non_ascii</code> and
+other functions like <code>limpiar_accents</code> and
+<code>limpiar_*_emojis</code></p>
+</blockquote>
+</div>
+<div class="section level4">
+<h4 id="limpiar_stopwords">limpiar_stopwords<a class="anchor" aria-label="anchor" href="#limpiar_stopwords"></a>
+</h4>
 <p>Stop words are common words that do not provide us with much
 information as to an utterance’s meaning. For example, in the sentence:
 ‘the man is in prison for theft’, if we knew only one word from this
@@ -435,38 +1354,66 @@ information’ words, to get a high-level understanding of large bodies of
 texts (such as in topic modelling and bigram networks.) For virtually
 all scenarios, you will want to use the limpiar_stopwords() with the
 argument stop_words = “topics” like so:</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/limpiar_stopwords.html">limpiar_stopwords</a></span><span class="op">(</span>stop_words <span class="op">=</span> <span class="st">"topics"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/limpiar_spaces.html">limpiar_spaces</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#to clear the spaces of words that were removed</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span></span>
-<span><span class="co">#&gt;   mention_content                        mention_url            </span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> hola! coomo @magdalena?!               www.twitter.com/post1  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> visto articulo!? horror!!!             www.twitter.com/post2  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> ay gustaria londres #llevame #porfavor www.facebook.com/post1 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> jaja wuevon!                           www.facebook.com/post2 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> gracias?                               www.youtube.com/post1  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 😂😂😂,!! 🤣🤣                         www.instagram.com/post1</span></span></code></pre></div>
-<p>Sentences can look quite strange without stopwords, and a lot of
-social posts are virtually meaningless altogether!</p>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 2</span></span></span>
+<span><span class="co">#&gt;    mention_content                                                   mention_url</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> holaaaaaa! cóómo estás @magdalena?!                               www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> visto articulo!? Que horror! https://guardian.com/emojisbanned N… www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> ayyyyyy gustaria londres yaaa #llevame #porfavor                  www.facebo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> jajajajaja wn!                                                    www.facebo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> RT dale click mujer baila perro                                   www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> grax ntonces q?                                                   www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 😂😂😂,!! 🤣🤣                                                    www.instag…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> grax ntonces q?                                                   www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> grax ntonces q?                                                   www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> grax ntonces q?                                                   www.youtub…</span></span></code></pre></div>
+<p>However, sometimes we want to keep words that would usually be
+treated as stopwords for a specific purpose. For example, when we’re
+analysing sentiment ‘negatives’ can invert the sentiment of a text - ‘no
+me gusta’ vs ‘me gusta’. If we remove all instances of ‘no’ from our
+data, we will do a worse job at analysing sentiment. For Spanish we have
+a slightly shorter list of stopwords for sentiment than topics, where we
+have removed a few choice terms.</p>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/limpiar_stopwords.html">limpiar_stopwords</a></span><span class="op">(</span>stop_words <span class="op">=</span> <span class="st">"sentiment"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/limpiar_spaces.html">limpiar_spaces</a></span><span class="op">(</span><span class="op">)</span> </span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 2</span></span></span>
+<span><span class="co">#&gt;    mention_content                                                   mention_url</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> holaaaaaa! cóómo estás @magdalena?!                               www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> visto articulo!? Que horror! https://guardian.com/emojisbanned N… www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> ayyyyyy gustaria londres yaaa #llevame #porfavor                  www.facebo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> jajajajaja wn!                                                    www.facebo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> RT dale click mujer baila perro                                   www.twitte…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> grax ntonces q?                                                   www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> mejor 😂😂😂, no nada!! 🤣🤣                                      www.instag…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> grax ntonces q?                                                   www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> grax ntonces q?                                                   www.youtub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> grax ntonces q?                                                   www.youtub…</span></span></code></pre></div>
+<p>Warning - sentences can look quite strange without stopwords, and a
+lot of social posts are virtually meaningless altogether!</p>
 <blockquote>
 <p>It’s also worth pointing out, that a lot of information can be lost
 when removing stop words. Many phrases in English and Spanish have very
 different meanings when a stop word is removed, and some stopwords lists
 contain negatives, which can drastically change the meaning of a
-sentence!</p>
+sentence! So use with care.</p>
 </blockquote>
 </div>
 </div>
-<div class="section level2">
-<h2 id="utility-functions">Utility Functions<a class="anchor" aria-label="anchor" href="#utility-functions"></a>
-</h2>
+<div class="section level3">
+<h3 id="utility-functions">Utility Functions<a class="anchor" aria-label="anchor" href="#utility-functions"></a>
+</h3>
 <p>We are nearly at the end of this introduction to LimpiaR, but before
 we finish, let’s look at two utility functions which may be useful.
 We’ve conjoured up a new data frame called df, which we will use to show
 the last two functions and how to chain everything together.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 3</span></span></span>
 <span><span class="co">#&gt;    mention_content                                            mention_url na_col</span></span>
@@ -481,16 +1428,19 @@ the last two functions and how to chain everything together.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                          www.youtub… <span style="color: #BB0000;">NA</span>    </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                          www.youtub… tadaa </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                          www.youtub… <span style="color: #BB0000;">NA</span></span></span></code></pre></div>
-<div class="section level3">
-<h3 id="limpiar_inpsect">limpiar_inpsect<a class="anchor" aria-label="anchor" href="#limpiar_inpsect"></a>
-</h3>
+<div class="section level4">
+<h4 id="limpiar_inpsect">limpiar_inpsect<a class="anchor" aria-label="anchor" href="#limpiar_inpsect"></a>
+</h4>
 <p>So, imagine that we see a strange pattern, and we want to check
 what’s going on with that specific pattern. We can use limpiar_inspect
 to view all posts which contain that pattern in an interactive
 frame!</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/limpiar_inspect.html">limpiar_inspect</a></span><span class="op">(</span><span class="va">df</span>, pattern <span class="op">=</span> <span class="st">"ntonces"</span>, text_var <span class="op">=</span> <span class="va">mention_content</span>,</span>
-<span>                url_var <span class="op">=</span> <span class="va">mention_url</span>, title <span class="op">=</span> <span class="st">"ntonces"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/limpiar_inspect.html">limpiar_inspect</a></span><span class="op">(</span><span class="va">df</span>, </span>
+<span>                pattern <span class="op">=</span> <span class="st">"ntonces"</span>, </span>
+<span>                text_var <span class="op">=</span> <span class="va">mention_content</span>,</span>
+<span>                url_var <span class="op">=</span> <span class="va">mention_url</span>,</span>
+<span>                title <span class="op">=</span> <span class="st">"ntonces"</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">mention_content</th>
@@ -515,32 +1465,19 @@ frame!</p>
 </tr>
 </tbody>
 </table>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 3</span></span></span>
-<span><span class="co">#&gt;    mention_content                                            mention_url na_col</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">"</span>holaaaaaa! cóómo    estás @magdalena   ?!<span style="color: #949494;">"</span>                www.twitte… <span style="color: #BB0000;">NA</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> <span style="color: #949494;">"</span>  han visto este articulo!? Que horror! https://guardian… www.twitte… <span style="color: #BB0000;">NA</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> <span style="color: #949494;">"</span>ayyyyyy a mi me   gustaria ir a londres yaaa #llevame #p… www.facebo… <span style="color: #BB0000;">NA</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> <span style="color: #949494;">"</span>jajajajaja eres un wn!<span style="color: #949494;">"</span>                                   www.facebo… <span style="color: #BB0000;">NA</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> <span style="color: #949494;">"</span>RT dale un click a ver una mujer baila con su perro<span style="color: #949494;">"</span>      www.twitte… <span style="color: #BB0000;">NA</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                          www.youtub… <span style="color: #BB0000;">NA</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> <span style="color: #949494;">"</span>yo soy el mejor 😂😂😂, no eres nada!! 🤣🤣 <span style="color: #949494;">"</span>             www.instag… <span style="color: #BB0000;">NA</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                          www.youtub… <span style="color: #BB0000;">NA</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                          www.youtub… tadaa </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                          www.youtub… <span style="color: #BB0000;">NA</span></span></span></code></pre>
 <p>Whilst it’s pretty obvious that all of the ‘grax ntonces q?’ posts
 are exactly the same, in the real world we’re going to have 10,000 times
-as many posts, and searching for suspicious patterns will take up a lot
-of our time. The vie</p>
+as many posts, and searching for suspicious patterns may take up a lot
+of our time.</p>
 </div>
-<div class="section level3">
-<h3 id="limpiar_na_cols">limpiar_na_cols<a class="anchor" aria-label="anchor" href="#limpiar_na_cols"></a>
-</h3>
+<div class="section level4">
+<h4 id="limpiar_na_cols">limpiar_na_cols<a class="anchor" aria-label="anchor" href="#limpiar_na_cols"></a>
+</h4>
 <p>This final function is useful when we want to remove ‘mostly NA’
 columns of a data frame. We may want to do this to save memory, for
 example if we have 400,000 posts and 80 columns. In this case we’ll get
 rid of all columns for which 25% or more of their values are NA.</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/limpiar_na_cols.html">limpiar_na_cols</a></span><span class="op">(</span><span class="va">df</span>,threshold <span class="op">=</span>  <span class="fl">0.25</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 2</span></span></span>
 <span><span class="co">#&gt;    mention_content                                                   mention_url</span></span>
@@ -557,12 +1494,12 @@ rid of all columns for which 25% or more of their values are NA.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>grax ntonces q?<span style="color: #949494;">"</span>                                                 www.youtub…</span></span></code></pre></div>
 </div>
 </div>
-<div class="section level2">
-<h2 id="putting-it-all-together">Putting It All Together<a class="anchor" aria-label="anchor" href="#putting-it-all-together"></a>
-</h2>
-<p>To speed things up, we can call the functions together in one big
-long pipe.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="section level3">
+<h3 id="putting-it-all-together">Putting It All Together<a class="anchor" aria-label="anchor" href="#putting-it-all-together"></a>
+</h3>
+<p>To speed things up, we <strong>could</strong> call the functions
+together in one big long pipe.</p>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/limpiar_na_cols.html">limpiar_na_cols</a></span><span class="op">(</span>threshold <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span><span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/limpiar_accents.html">limpiar_accents</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -570,24 +1507,25 @@ long pipe.</p>
 <span>  <span class="fu"><a href="../reference/limpiar_shorthands.html">limpiar_shorthands</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/limpiar_repeat_chars.html">limpiar_repeat_chars</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/limpiar_url.html">limpiar_url</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/limpiar_emojis.html">limpiar_emojis</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/limpiar_remove_emojis.html">limpiar_remove_emojis</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/limpiar_shorthands.html">limpiar_shorthands</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/limpiar_spaces.html">limpiar_spaces</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/limpiar_duplicates.html">limpiar_duplicates</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span></span>
-<span><span class="co">#&gt;   mention_content                                                    mention_url</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> hola! coomo estas @magdalena?!                                     www.twitte…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> han visto este articulo!? Que horror! NO SE PUEDE!!                www.twitte…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> ay a mi me gustaria ir a londres ya #llevame #porfavor             www.facebo…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> jaja eres un wuevon!                                               www.facebo…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> gracias entonces que?                                              www.youtub…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> yo soy el mejor face with tears of joy face with tears of joy fac… www.instag…</span></span></code></pre></div>
-<p>However, on very large data frames, it will often be better to
-prioritise one, or a few functions at a time, assigning your data frame
-as you go.</p>
+<span><span class="co">#&gt;   mention_content                                        mention_url            </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> hola! coomo estas @magdalena?!                         www.twitter.com/post1  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> han visto este articulo!? Que horror! NO SE PUEDE!!    www.twitter.com/post2  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> ay a mi me gustaria ir a londres ya #llevame #porfavor www.facebook.com/post1 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> jaja eres un wuevon!                                   www.facebook.com/post2 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> gracias entonces que?                                  www.youtube.com/post1  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> yo soy el mejor, no eres nada!!                        www.instagram.com/post1</span></span></code></pre></div>
+<p>However, we generally want to check what the effects of our
+transformations are on our data, so doing a lot of operations like this
+without any intermediate checks is risky.</p>
 </div>
-  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+</div>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
 </div>
 
@@ -598,15 +1536,15 @@ as you go.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>
 </div>
 
-  
 
-  
+
+
 
   </body>
 </html>

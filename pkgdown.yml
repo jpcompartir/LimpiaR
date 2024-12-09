@@ -1,8 +1,11 @@
 pandoc: 3.1.11
-pkgdown: 2.0.9
+pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   limpiar_intro: limpiar_intro.html
+  near_duplicates: near_duplicates.html
   parts_of_speech_workflow: parts_of_speech_workflow.html
-last_built: 2024-05-21T11:54Z
-
+last_built: 2024-12-09T11:19Z
+urls:
+  reference: https://jpcompartir.github.io/LimpiaR/reference
+  article: https://jpcompartir.github.io/LimpiaR/articles
