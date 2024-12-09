@@ -17,11 +17,3 @@ Data Frame or Tibble object with text variable edited inline
 \description{
 Remove known companies for pits & peaks
 }
-\examples{
-\dontrun{
-Example 1
-df \%>\% limpiar_pp_companies(message)
-Example 2
-limpiar_pp_companies(df, message)
-}
-}

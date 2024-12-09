@@ -58,6 +58,7 @@ reference:
   - limpiar_na_cols
   - contains("limpiar_link_click")
   - limpiar_ex_subreddits
+  - limpiar_wrap
 
 - title: Processing Parts of Speech
   desc: >

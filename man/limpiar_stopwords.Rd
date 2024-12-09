@@ -4,12 +4,12 @@
 \alias{limpiar_stopwords}
 \title{Clean stop words for visualisations}
 \usage{
-limpiar_stopwords(df, text_var = mention_content, stop_words)
+limpiar_stopwords(data, text_var = mention_content, stop_words)
 }
 \arguments{
-\item{df}{Name of Data Frame or Tibble object}
+\item{data}{Name of your Data Frame or Tibble object}
 
-\item{text_var}{name of the text variable}
+\item{text_var}{Name of your text variable. Can be given as a 'string' or a symbol - should refer to a column inside \code{data}}
 
 \item{stop_words}{"sentiment" or "topics" - sentiment retains negation cues}
 }

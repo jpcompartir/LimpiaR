@@ -21,7 +21,6 @@ Undoes the effects of the limpiar_link_click function, giving you the original u
 df <- LimpiaR::limpiar_examples[1, ]
 
 df <- df \%>\% limpiar_link_click(mention_url)
-df$mention_url
 df \%>\% limpiar_link_click_reverse(mention_url)
 
 }

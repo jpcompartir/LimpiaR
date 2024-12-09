@@ -7,9 +7,9 @@
 limpiar_spam_grams(data, text_var, n_gram, min_freq)
 }
 \arguments{
-\item{data}{Data frame or tibble object}
+\item{data}{Name of your Data Frame or Tibble object}
 
-\item{text_var}{Name of the text variable}
+\item{text_var}{Name of your text variable. Can be given as a 'string' or a symbol - should refer to a column inside \code{data}}
 
 \item{n_gram}{Number of words in the n-gram i.e. n = 2 = bigram}
 

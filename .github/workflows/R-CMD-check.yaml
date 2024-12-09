@@ -5,6 +5,8 @@ on:
     branches: [main, master]
   pull_request:
     branches: [main, master]
+  release:
+    types: [published]
   schedule:
     # Runs at 15:20 PM UTC every Thursday
     - cron: '00 09 * * 0'

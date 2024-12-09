@@ -9,24 +9,31 @@ limpiar_inspect(
   pattern,
   text_var = mention_content,
   url_var = mention_url,
-  title = "inspect"
+  title = "inspect",
+  open_view = TRUE,
+  ignore_case = TRUE
 )
 }
 \arguments{
-\item{data}{Data frame or tibble object}
+\item{data}{Name of your Data Frame or Tibble object}
 
 \item{pattern}{Pattern you wish to inspect e.g. "link bio"}
 
-\item{text_var}{Name of the text variable/character vector}
+\item{text_var}{Name of your text variable. Can be given as a 'string' or a symbol - should refer to a column inside \code{data}}
 
 \item{url_var}{Name of the data frame's URL-column}
 
 \item{title}{Name of the viewable pane}
+
+\item{open_view}{For testing purposes, default is set to TRUE}
+
+\item{ignore_case}{Whether the pattern should ignore the upper case/lower case distinction}
 }
 \description{
-Produces a viewable data frame with posts matching a regular expression and their url.
-Useful for investigating suspected spam posts, or other patterns of interest.
-Set the name of the title to avoid new frames overwriting old ones.
+Produces a viewable data frame with posts matching a regular expression and    Useful for investigating suspected spam posts, or other patterns of interest. Set the name of the title to avoid new frames overwriting old ones.
+}
+\details{
+add boundary tags e.g. \verb{\\\\b} to either side of your pattern if you wish to only match words rather than parts of words. For example, \code{pattern="cats"} will match '#cats', but also 'catch up'. If we add a word boundary: \verb{pattern = \\\\bcats\\\\b} we won't match either '#cats' or 'catch up'.
 }
 \examples{
 df <- data.frame(
