@@ -12,13 +12,12 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' Example 1:
-#' df %>% limpiar_link_click(permalink)
+#' df <- LimpiaR::limpiar_examples[1, ]
+#' df["mention_url"]
 #'
-#' Example 2:
-#' limpiar_link_click(data, mention_url)
-#' }
+#' df <- df %>% limpiar_link_click(mention_url)
+#' df["mention_url"]
+#'
 limpiar_link_click <- function(df, url_var){
   url_sym <- rlang::ensym(url_var)
 
@@ -54,7 +53,6 @@ limpiar_link_click <- function(df, url_var){
 #' df <- LimpiaR::limpiar_examples[1, ]
 #'
 #' df <- df %>% limpiar_link_click(mention_url)
-#' df$mention_url
 #' df %>% limpiar_link_click_reverse(mention_url)
 #'
 limpiar_link_click_reverse <- function(df, url_var) {

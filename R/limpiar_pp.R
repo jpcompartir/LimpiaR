@@ -5,15 +5,6 @@
 #'
 #' @return Data Frame or Tibble object with text variable edited inline
 #' @export
-#'
-#' @examples
-#' \dontrun{
-#' Example 1
-#'df %>% limpiar_pp_products(message)
-#' Example 2
-#'limpiar_pp_products(df, message)
-#' }
-#'
 limpiar_pp_products <- function(df, text_var){
   entities <- LimpiaR::entities
 
@@ -40,14 +31,6 @@ limpiar_pp_products <- function(df, text_var){
 #'
 #' @return Data Frame or Tibble object with text variable edited inline
 #' @export
-#'
-#' @examples
-#' \dontrun{
-#' Example 1
-#'df %>% limpiar_pp_companies(message)
-#' Example 2
-#'limpiar_pp_companies(df, message)
-#' }
 limpiar_pp_companies <- function(df, text_var){
   companies <- c("\\bapple\\b", "\\bmicrosoft\\b", "\\bmsft\\b", "\\bnvidia\\b", "\\bsony\\b", "\\binstagram\\b",
                  "\\bwhatsapp\\b", "duckduckgo", "\\bddg\\b", "\\bduck duck go\\b", "\\bsamsung\\b", "\\blenovo\\b",

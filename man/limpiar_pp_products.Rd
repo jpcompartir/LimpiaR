@@ -17,12 +17,3 @@ Data Frame or Tibble object with text variable edited inline
 \description{
 Replace entities for the Peaks&Pit classifier
 }
-\examples{
-\dontrun{
-Example 1
-df \%>\% limpiar_pp_products(message)
-Example 2
-limpiar_pp_products(df, message)
-}
-
-}

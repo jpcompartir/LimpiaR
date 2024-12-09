@@ -1,0 +1,273 @@
+---
+title: "Dependency Parsing & Phrase Mining with udpipe"
+format: 
+  html:
+    toc: true
+    toc-location: left
+    code-fold: show
+    code-copy: hover
+    code-overflow: wrap
+    embed-resources: true
+execute:
+  message: false
+  warning: false
+---
+
+# Motivation
+
+When mining opinion we often want to separate what people are saying about something directly from when they're mentioning it indirectly.
+
+<details>
+<summary>Can I just use GPT for this?</summary>
+You can, but it'll cost you a lot of money and a lot of time. This is an ideal way of reducing the size of the data set and finding the needle in the haystack.
+</details>
+
+Compare
+
+> 1. Company are really impressing me, I'll be purchasing the pro subscription later this month.
+
+> 2. Enterprise's subscription is miles better than Company's, I've never used anything better.
+
+1. Is entirely about Company, whereas in 2. Company is used in reference to something else. Wouldn't it be great if we could use some syntactic clues to help us differentiate sentences of these two types, at scale? 
+
+We'll look at how to do just that in this vignette, using dependency parsing courtesy of {udpipe}.
+
+First we load our libraries:
+
+```{r}
+library(tidyverse) 
+library(LimpiaR)
+```
+
+Then we download the English model from `udpipe` via LimpiaR, create a dummy dataset, and then annotate the dataset.
+```{r}
+model <- limpiar_pos_import_model("english")
+
+dummy <- tibble(
+  text = c("Company are really impressing me, I'll be purchasing the pro subscription later this month.", 
+           "Enterprise's subscription is miles better than Company's, I've never used anything better.", "Company suck."),
+  doc_id = as.character(c(1, 2, 3))
+)
+
+dependencies <- dummy %>%
+  limpiar_pos_annotate(
+    text_var = text, 
+    id_var = id, 
+    pos_model = model,
+    dependency_parse = TRUE
+  )
+
+dependencies %>%
+  select(-c(doc_id, sentence, xpos, token_id, feats, paragraph_id, sentence_id))
+```
+
+Our data has been transformed, we now have `r paste(ncol(dependencies), "columns and", nrow(dependencies), "rows")`, where before we had `r paste(ncol(dummy), "columns and ", nrow(dummy), "rows")` respectively. Each row now contains a word from our input texts. 
+
+The important column that we'll look at is 'dependency_tag'. In the first text we find that "Company" is labelled as 'nsubj'. nsubj stands for the nominal subject. Grammatically the nominal subject is the part of the clause which is doing the thing that is being done (for want of better language). So in this case the thing being done is impressing, and it's Company that's doing the impressing. Roughly speaking we can say that when Company's dependency is nsubj, the following clause will relate closely to Company.
+```{r}
+dependencies %>%
+  filter(token == "Company") %>%
+  relocate(token, dependency_tag, .after = "token_id") %>%
+  select(-c(doc_id, sentence, xpos, token_id, feats, paragraph_id, sentence_id))
+```
+
+2. Is quite a lot more complicated than 1. The nominal subject is Enterprise's subscription, Enterprise itself is labelled as nmod:poss, this means that it's possessive over another noun, and that noun is the subscription. The subscription is the nominal subject in this case, so the clause is primarily about Enterprise's subscription.
+
+Company is tagged as 'obl' or oblique - this means that it is mentioned in relation to something else, and that thing is Enterprise's subscription. 
+
+```{r}
+dependencies %>%
+  filter(doc_id == 2) %>%
+  select(-c(doc_id, paragraph_id, sentence_id, sentence, feats, xpos)) %>%
+  relocate(dependency_tag, .after = token)
+```
+
+# How can we use this information?
+
+If we were tasked with identifying what people really think about Company, we could start with finding the sentences, paragraphs, or documents where Company is pos_tag is one of "nsubj", "obj", "nsubj:pass". This would likely reduce our data set significantly and return a set of high-quality documents.
+
+However, we would certainly be dispensing with a lot of useful data; by Probability Theory, if we look for just "nsubj" we'll find fewer (or as many) documents as if we look for ["nsubj" or "obj"] likewise ["nsubj" or "obj" or "nsubj:pass"].
+
+<details>
+nsubj passive example:
+Man United were defeated by Liverpool. Man United is the nsubj, the sentence is in the passive voice.
+</details>
+
+# Real world data
+
+Let's up the ante and read in some data from a Peaks & Pits project which has been classified by our Peaks & Pits SetFit model. 
+
+```{r}
+data <- read_csv("~/Downloads/peaks_pits_sample_v2.csv") %>%
+  mutate(doc_id = as.character(row_number()))
+
+model <- limpiar_pos_import_model("english")
+```
+
+Then we perform the annotation, and we extract all of the sentences that have Excel in them.
+
+```{r, echo = FALSE}
+data_annotate <- read_csv("~/Downloads/p_p_annotated_sample.csv")
+
+excel <- filter(data_annotate,token == "excel")
+```
+
+```{r, eval = FALSE}
+data_annotate <- data %>%
+  limpiar_pos_annotate(message_og, doc_id, model, dependency_parse = TRUE, in_parallel = TRUE, update_progress = 200)
+
+data_annotate <- data_annotate %>%
+  mutate(token = tolower(token)) 
+
+excel <- filter(data_annotate, token == "excel")
+```
+
+# Dependencies
+
+The simple counts of the dependencies suggest that Excel is often referred to as a compound, so we would expect to find something else next to it, like Microsoft or MS.
+
+```{r}
+excel %>%
+  count(dependency_tag, sort = TRUE)
+```
+
+<details>
+
+<summary>Dependency tags count (for while developing)</summary>
+
+dependency_tag n 1 compound 2533 2 nmod 764 3 obl 701 4 nsubj 669 5 obj 543 6 conj 460 7 flat 228 8 root 146 9 nmod:poss 52 10 appos 49 11 amod 27 12 nsubj:pass 26 13 parataxis 15 14 advcl 12 15 xcomp 10 16 ccomp 9 17 obl:npmod 7 18 acl:relcl 5 19 acl 3 20 iobj 2 21 list 1 22 vocative 1
+
+</details>
+
+## Compound
+
+::: {.callout-tip}
+Recall that nouns are things, and noun-phrases are multiple words which refer to a single thing. It takes a bit of training to spot noun-phrases but take the following sentence:
+>"The man with sunglasses sipped his orange juice"
+
+There are two noun-phrases - "The man with sunglasses" forms one noun-phrase, and "orange juice" forms the other.
+:::
+
+Compounds tend to be  Excel in noun-phrases, like 'Excel spreadsheet', 'Excel files', 'Excel functions'. It's not to say that these are not useful, but we'd want to do some more processing on them to combine the compounds and find out what the dependency relation of the entire compound is.
+
+::: {.callout-caution collapse="true"}
+## Combining compounds
+
+It's not as trivial as it may seem to combine the compounds - we don't have a nice function like `extract_nounphrases` from {spacyr} and the function I made is presumably somewhere in the middle of Bangkok because I cannot find the bugger
+:::
+
+```{r}
+excel %>%
+  filter(dependency_tag == "compound") %>%
+  slice(1:10) %>%
+  pull(sentence)
+```
+
+However, I think the most important dependencies we should be looking to analyse if we want to find sentences and potential peak/pit moments which are <i>specifically about Excel</i> are nsubj, obj, nsubj:pass (nominal subject in the passive voice).
+
+Nsubj vs obj is mostly around whether the thing is doing something, or is having something done to it, just like subject-object e.g. "The dog barks at the cat", the dog is the nsubj, the cat is the obj.
+
+[this paper](https://faculty.ksu.edu.sa/sites/default/files/aspect-based_opinion_mining_using_dependency_relations_.pdf) is useful to look at some pre-defined combinations of dependencies to mine.
+
+## Nominal Subject - nsubj 
+
+Let's take a look at some examples where excel is either an nsubj, or an nsubj passive. Clearly everything is very quite specific and pointed towards Excel. It's worth keeping in mind that SetFit has already classified this data, and some cleaning will have been done to the initial data set, but it's good nonetheless.
+
+```{r}
+excel %>% 
+  filter(str_detect(dependency_tag, "nsubj")) %>%
+  slice(1:10) %>%
+  pull(sentence)
+```
+
+## Object - obj
+
+When we look at Excel as the obj of the sentence, we should find that it's preceded by verbs, so we'll find people doing specific things with Excel.
+
+```{r}
+excel %>%
+  filter(dependency_tag == "obj") %>%
+  slice(1:10) %>%
+  pull(sentence)
+```
+
+::: callout-note
+We're currently retrieving individual sentences rather than whole documents, we have a choice whether to retrieve all of the sentences or just the sentence in which Excel is the dependency (or one of) tag we're after
+:::
+
+## Multiple Excel Tags
+
+When a document comprises a number of sentences, and multiple of those sentences contain Excel, it's more likely the document really is about Excel than if it's just mentioned once (once more by basics of Probability Theory). This is particularly the case if Excel is the nominal subject in those sentences. These documents should be ideal candidate documents to send to an expensive classifier like GPT.
+
+```{r}
+excel %>%
+  filter(str_detect(dependency_tag, "nsubj")) %>%
+  count(doc_id, sort = TRUE)
+```
+
+For example, doc_ids 2674 and 2421 have multiple sentences containing Excel, of which multiple are also 'nsubj' or the nominal subject. This suggests there will be multiple things said about Excel, and it's likely any sentiment/classification we attach to this post will be to do with Excel
+
+```{r}
+data_annotate %>%
+  filter(doc_id == 2421) %>%
+  pull(sentence) %>%
+  unique()
+```
+
+```{r}
+data_annotate %>% 
+  filter(doc_id == 2674) %>% 
+  pull(sentence) %>%
+  unique()
+```
+
+The nmod relationship is used when the modifying noun phrase or prepositional phrase specifies something about the noun it modifies, like location, possession, purpose, e.g. "\[something\] on MS Excel", "\[something else\] in excel"
+
+```{r}
+excel %>%
+  filter(dependency_tag == "nmod") %>%
+  slice(1:10) %>%
+  pull(sentence)
+```
+
+<details>Seems often like when Excel == "compound" the other part of the compound will be something like Microsoft, and prior to that we'd get a preposition, which would make it an nmod -\> compound type situation. Verify that...</details>
+
+Oblique reference to Excel - i.e. not the nominal subj (nsubj), the object (obj) or the iobj (indirect obj?). These are sentences where people are mentioning Excel but not directly, which can be v interesting to know about.
+
+Like for example we can see in the 10th example, Copilot in Excel. We could look at what people are saying about Copilot + x this way - I'd guess (but need to check) that Copilot is the nsubj
+
+::: callout-note
+This dep rel seems quite similar to nmod, they might be able to be treated together.
+:::
+
+```{r}
+excel %>% 
+  filter(dependency_tag == "obl") %>%
+  slice(11:20) %>%
+  pull(sentence)
+```
+
+
+# Further research / development
+
+[ ] shrinking the data set to a manageable size for any project which uses one of the larger LLMs
+
+[ ] explore how this dovetails with semantic search stuff and whether there's stuff to build together 
+
+[ ] explanatory / introductory slides
+
+[ ] which dep. relations are most useful for what research questions
+
+[ ] how to manage multiple tokens of interest
+
+[ ] consolidate compounds
+
+
+<s>We're just scratching the surface here, I think there's a lot of potential, though.</s>
+
+<s>What's lacking? A data set to figure out what type of recall/precision we get here. I'd guess precision would be quite high, recall quite low if using any single of these methods, but in combination we might be able to make it quite high.</s>
+
+<s>How will/would it dovetail with BERTopic/Landscape workflows? Could see us filtering for the appropriate dependency tags for products before running embeddings/topic modelling. Should be a cleaner output overall.</s>
+
+
+ 

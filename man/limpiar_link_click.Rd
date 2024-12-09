@@ -23,11 +23,10 @@ Make sure that DataTable is rendered with the argument 'escape = FALSE' or colum
 The function now checks if your url_var was a clickable link, and if it is then it won't add any new formatting.
 }
 \examples{
-\dontrun{
-Example 1:
-df \%>\% limpiar_link_click(permalink)
+df <- LimpiaR::limpiar_examples[1, ]
+df["mention_url"]
 
-Example 2:
-limpiar_link_click(data, mention_url)
-}
+df <- df \%>\% limpiar_link_click(mention_url)
+df["mention_url"]
+
 }
