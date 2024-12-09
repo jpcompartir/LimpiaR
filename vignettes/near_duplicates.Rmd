@@ -20,6 +20,16 @@ knitr::opts_chunk$set(
 library(LimpiaR)
 ```
 
+#  Quick Start - Code
+
+Quick example of how to run the code for the function - get a dataset with a text variable and:
+```{r}
+limpiar_examples %>%
+  limpiar_spam_grams(mention_content, n_gram = 3, min_freq = 2)
+```
+
+Now read the docs!
+
 # The Problem
 
 Extracting useful information from large, unstructured internet datasets is a difficult task even when the datasets are clean. It is an *impossible* task with datasets riddled by bot network content, spammers, duplicates, and near-duplicates. 
@@ -93,7 +103,6 @@ spam_grams_output$deleted
 However, given what we noticed in the \$spam_grams output, we would not want to use these exact parameters on a larger dataset, because we have too many ngrams which could be used in non-spam-like documents. 
 
 This raises a question, what should we set as starting parameters for working with `limpiar_spam_grams()` on larger datasets?
-
 
 ## Parameter Settings
 

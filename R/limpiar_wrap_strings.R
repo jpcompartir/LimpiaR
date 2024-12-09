@@ -11,6 +11,8 @@
 #' @export
 #'
 #' @examples
+#'
+#' limpiar_examples %>% limpiar_wrap(mention_content, n = 5, newline_char = "<br>")
 limpiar_wrap <- function(data, text_var = mention_content, n = 15, newline_char = "<br><br>") {
 
   stopifnot(
