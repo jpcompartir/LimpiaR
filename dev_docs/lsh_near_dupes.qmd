@@ -1,0 +1,117 @@
+---
+title: "Locality Sensitive Hashing"
+format:
+  html: 
+    embed-resources: true
+    theme: united
+execute:
+  message: false
+  warning: false
+editor_options: 
+  chunk_output_type: console
+---
+
+# Background Information
+
+-   [MinHash On the Resemblance and Containment of Documents](https://www.cs.princeton.edu/courses/archive/spring13/cos598C/broder97resemblance.pdf)
+-   [LSH - Approximate Nearest Neighbours Towards Removing the Curse of Dimensionality](https://graphics.stanford.edu/courses/cs468-06-fall/Papers/06%20indyk%20motwani%20-%20stoc98.pdf)
+- [LSH R package](https://github.com/dselivanov/LSHR) with implementations in Rcpp for speed
+- [Walkthrough of MinHash & LSH](https://dzone.com/articles/minhash-lsh-implementation-walkthrough)
+
+In the [Near Duplicates](vignettes/near_duplicates.Rmd) vignette we cover an approach to handling near duplicates that we have developed in-house. The approach is a good heuristic and saves a lot of time, but there are potential scaling issues, and we think we can do better.
+
+One approach to removing near duplicates would be to check every document against every other document, and measure their similarity. However, this approach requires N(N-1)/2 ^[We don't compare documents against themselves, and for each pair of documents we compare them once, not twice] comparisons, where N is the number of documents in the dataset. We *always*^[nearly always...] want to avoid this type of scaling where we can.
+
+When we think about it, if we try this pairwise approach, we are going to compare a lot of documents against other documents that they are not even close to being near duplicates of, which means we're going to do a lot of wasted computation. If we could arrange the rows of our dataset so that each document is near to other documents that it is similar to, we could compare our documents against the documents around them, and drastically reduce the number of comparisons we need to make.
+
+The question then becomes: how do we arrange our documents so that each document is close to other documents that it is similar to?
+
+
+
+```{r}
+library(tidytext)
+library(LimpiaR)
+library(tidyverse)
+library(LSHR)
+```
+
+```{r}
+#| eval: false
+trust_df <- read_csv("~/Google Drive/My Drive/data_science_project_work/microsoft/project_work/789_taxonomy_of_spam/data/project_samples/trust_distrust_757_100k_sample.csv")
+
+trust_df <- slice(trust_df, 1:10000)
+```
+
+
+```{r}
+#| eval: false
+trust_df <- trust_df %>%
+  mutate(id = row_number()) %>%
+  select(id, text = message)
+
+trust_df <- trust_df %>%
+  limpiar_retweets(text) %>%
+  limpiar_duplicates(text) %>%
+  limpiar_alphanumeric(text) %>%
+  limpiar_spaces(text) %>%
+  filter(!is.na(text), text != "")
+
+trust_df <- trust_df %>%
+  mutate(word_count = str_count(text, "\\b")) %>%
+  filter(word_count > 5)
+```
+
+# A tibble: 70 × 3
+      id text                                                                word_count
+   <int> <chr>                                                                    <int>
+ 1     1 I think what Lampy123678 and myself are implying is that Hamas and…         46
+ 2     2 How could they have warned anyone if they said it was a Hamas rock…         56
+ 3     3 ByronDonalds JimJordan A testament to your lack of morals support …         80
+ 4     4 Dallas Texas DataMasters a leading data services company based in …       1216
+ 5     5 b d bop said Ive been on the new G7 system for about a month now I…       1230
+ 6     6 travelerdoor Its interesting how every computer related one is a c…         48
+ 7    12 Home Depots Revenue Forecast Dims Amid Slowdown in Home Renovation…        856
+ 8    13 We could often check for a sound license hunt for safety steps rea…       1360
+ 9    14 We offer unique and innovative programs that allow Owners and Memb…        902
+10    15 This is a Fakespot Reviews Analysis bot Fakespot detects fake revi…        262
+# ℹ 60 more rows
+
+
+We need to shingle our dataset (or cut into ngrams)
+```{r}
+shingles <- trust_df %>%
+  tidytext::unnest_tokens(
+  output = shingles,
+  input = text,
+  token = "ngrams",
+  n = 5
+) %>%
+  filter(!is.na(shingles))
+
+
+dtm <- Matrix::sparseMatrix(
+  i = as.numeric(factor(shingles$id)),
+  j = as.numeric(factor(shingles$shingles)), 
+  x = 1,
+  dimnames = list(levels(factor(shingles$id)),
+                  levels(factor(shingles$shingles)))
+  )
+
+dtm <- as(dtm, "RsparseMatrix")
+```
+
+
+Get the minhashes from the DTM using LSHR's internal function
+```{r}
+n_hash_functions <- 100  
+unique_shingles_length <- ncol(dtm) 
+seed <- 42  
+
+# use LSHR's internal func for the minhash matrix
+hash_matrix <- LSHR:::get_minhash_matrix(
+  unique_shingles_length, 
+  n_hash_functions, 
+  seed
+)
+```
+
