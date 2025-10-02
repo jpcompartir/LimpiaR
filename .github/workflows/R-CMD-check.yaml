@@ -8,7 +8,6 @@ on:
   release:
     types: [published]
   schedule:
-    # Runs at 15:20 PM UTC every Thursday
     - cron: '00 09 * * 0'
   workflow_dispatch:
 
