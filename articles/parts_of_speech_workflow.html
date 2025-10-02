@@ -392,10 +392,10 @@ your console set <code>update_progress = 0</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># annotate texts and perform dependency parsing</span></span>
 <span><span class="va">annotations</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/limpiar_pos_annotate.html">limpiar_pos_annotate</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, text_var <span class="op">=</span> <span class="va">text</span>, id_var <span class="op">=</span> <span class="va">universal_message_id</span>, pos_model <span class="op">=</span> <span class="va">model</span>, dependency_parse <span class="op">=</span> <span class="cn">TRUE</span>, in_parallel <span class="op">=</span> <span class="cn">FALSE</span>, update_progress <span class="op">=</span> <span class="fl">25</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 2024-12-09 11:20:05.235727 Annotating text fragment 1/100</span></span>
-<span><span class="co">## 2024-12-09 11:20:05.401948 Annotating text fragment 26/100</span></span>
-<span><span class="co">## 2024-12-09 11:20:05.542495 Annotating text fragment 51/100</span></span>
-<span><span class="co">## 2024-12-09 11:20:05.700728 Annotating text fragment 76/100</span></span></code></pre>
+<pre><code><span><span class="co">## 2025-10-02 10:16:22.195173 Annotating text fragment 1/100</span></span>
+<span><span class="co">## 2025-10-02 10:16:22.340397 Annotating text fragment 26/100</span></span>
+<span><span class="co">## 2025-10-02 10:16:22.461573 Annotating text fragment 51/100</span></span>
+<span><span class="co">## 2025-10-02 10:16:22.599985 Annotating text fragment 76/100</span></span></code></pre>
 <p>Now that we have our texts tokenized, dependencies parsed, and POS
 annotations are complete, let’s take a look at the output. After
 annotating we have 882 rows, which is an 8.82x increase!</p>
@@ -589,7 +589,7 @@ ensayo a su obra.”
 <span></span>
 <span><span class="va">spanish</span> <span class="op">&lt;-</span> <span class="va">spanish</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/limpiar_pos_annotate.html">limpiar_pos_annotate</a></span><span class="op">(</span><span class="va">text</span>, <span class="va">id</span>, <span class="va">spanish_model</span>, udpate_progress <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="co"># Extract Pos Tags  </span></span></code></pre></div>
-<pre><code><span><span class="co">## 2024-12-09 11:20:08.091523 Annotating text fragment 1/1</span></span></code></pre>
+<pre><code><span><span class="co">## 2025-10-02 10:16:25.14254 Annotating text fragment 1/1</span></span></code></pre>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spanish</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">token</span>, <span class="va">lemma</span>, <span class="va">pos_tag</span><span class="op">)</span> <span class="co"># Select relevant columns</span></span></code></pre></div>
@@ -648,7 +648,7 @@ complex.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>
