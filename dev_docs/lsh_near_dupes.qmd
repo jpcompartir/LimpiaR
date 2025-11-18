@@ -79,6 +79,7 @@ trust_df <- trust_df %>%
 
 We need to shingle our dataset (or cut into ngrams)
 ```{r}
+(
 shingles <- trust_df %>%
   tidytext::unnest_tokens(
   output = shingles,
@@ -87,17 +88,21 @@ shingles <- trust_df %>%
   n = 5
 ) %>%
   filter(!is.na(shingles))
+  
+)
 
 
-dtm <- Matrix::sparseMatrix(
+(dtm <- Matrix::sparseMatrix(
   i = as.numeric(factor(shingles$id)),
   j = as.numeric(factor(shingles$shingles)), 
   x = 1,
   dimnames = list(levels(factor(shingles$id)),
                   levels(factor(shingles$shingles)))
   )
+)
 
 dtm <- as(dtm, "RsparseMatrix")
+object.size(dtm)/(1024^2)
 ```
 
 
@@ -113,5 +118,6 @@ hash_matrix <- LSHR:::get_minhash_matrix(
   n_hash_functions, 
   seed
 )
+object.size(hash_matrix)/(1024^2)
 ```
 
