@@ -1,6 +1,6 @@
 Package: LimpiaR
 Title: LimpiaR
-Version: 1.1.0
+Version: 1.1.1
 Authors@R: 
     as.person(c(
     "Jack Penzer <jack.penzer@sharecreative.com> [cre]",

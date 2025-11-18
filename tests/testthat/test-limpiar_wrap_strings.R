@@ -19,12 +19,13 @@ test_that("limpiar_wrap_strings output is correct and the parameters work", {
   test_output <- limpiar_examples %>%
     limpiar_wrap(mention_content, n = 5)
 
-  expect_equal(stringr::str_count(test_output[1, "mention_content"], "<br>"), 2)
+  expect_equal(stringr::str_count(test_output$mention_content[[1]], stringr::fixed("<br>")), 2)
 
   test_breaker <- limpiar_examples %>%
     limpiar_wrap(mention_content, n = 5, newline_char = "<testing>")
 
-  expect_equal(stringr::str_count(test_breaker[1, "mention_content"], "<br>"), 0)
-  expect_equal(stringr::str_count(test_breaker[1, "mention_content"], "<testing>"), 1)
+  test_breaker$mention_content[[1]]
+  expect_equal(stringr::str_count(test_breaker$mention_content[[1]], stringr::fixed("<br>")), 0)
+  expect_equal(stringr::str_count(test_breaker$mention_content[[1]], stringr::fixed("<testing>")), 1)
 
 })
