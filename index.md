@@ -1,18 +1,20 @@
-# LimpiaR Functions Overview
+# LimpiaR
 
-![](reference/figures/SHARExLimpiaR.png)
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+
+![](reference/figures/limpiar_hex.png)
 
 ## What is LimpiaR?
 
 LimpiaR is an R library of functions for cleaning & pre-processing text
-data. The name comes from ‘limpiar’ the Spanish verb’to clean’.
+data. The name comes from ‘limpiar’ the Spanish verb ‘to clean’.
 Generally when calling a LimpiaR function, you can think of it as
 ‘clean…’.
 
 LimpiaR is primarily used for cleaning unstructured text data, such as
-that which comes from social media or reviews. In its initial release,
-it is focused around the Spanish language, however, some of its
-functions are language-ambivalent.
+that which comes from social media or reviews.
 
 ## Installation
 
@@ -23,6 +25,8 @@ You can install the development version of LimpiaR from
 # install.packages("devtools")
 devtools::install_github("jpcompartir/LimpiaR")
 ```
+
+# LimpiaR Functions Overview
 
 LimpiaR provides a comprehensive suite of text cleaning and processing
 functions, primarily focused on preparing text data for machine learning
@@ -79,3 +83,7 @@ A collection of functions that collectively make up a Parts of Speech
 |-----------------------------------------------------------------------------------------------------------|-------------------------------------------|------------------|-------------------|-----------------------------|
 | [limpiar_pos_import_model](https://jpcompartir.github.io/LimpiaR/reference/limpiar_pos_import_model.html) | Imports Parts of Speech models and caches | 65+ languages    | POS analysis prep | Uses UDPipe models          |
 | [limpiar_pos_annotate](https://jpcompartir.github.io/LimpiaR/reference/limpiar_pos_annotate.html)         | Performs POS analysis                     | 65+ languages    | Text analysis     | Includes dependency parsing |
+
+------------------------------------------------------------------------
+
+![SAMY Data Science](reference/figures/samy_banner.png)

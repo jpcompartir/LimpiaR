@@ -8,21 +8,24 @@
 <title>LimpiaR • LimpiaR</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/Lato-0.4.10/font.css" rel="stylesheet">
+<link href="deps/Fira_Code-0.4.10/font.css" rel="stylesheet">
+<link href="deps/Merriweather-0.4.10/font.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="LimpiaR">
-<meta name="description" content="SHARE &amp; SAMY Group's dedicated pre-processing suite for Spanish &amp; English data sets. A range of functions for getting text data ready to be analysed.">
-<meta property="og:description" content="SHARE &amp; SAMY Group's dedicated pre-processing suite for Spanish &amp; English data sets. A range of functions for getting text data ready to be analysed.">
+<meta name="description" content="An R library of functions for cleaning &amp; pre-processing text data">
+<meta property="og:description" content="An R library of functions for cleaning &amp; pre-processing text data">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
-    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
+    <nav class="navbar navbar-expand-lg fixed-top bg-dark" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
 
     <a class="navbar-brand me-2" href="index.html">LimpiaR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,18 +34,25 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
+<li class="nav-item"><a class="nav-link" href="articles/limpiar_intro.html">Get Started</a></li>
 <li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="articles/limpiar_intro.html">Introduction to LimpiaR</a></li>
-    <li><a class="dropdown-item" href="articles/near_duplicates.html">Near Duplicate Removal</a></li>
-    <li><a class="dropdown-item" href="articles/parts_of_speech_workflow.html">LimpiaR - Parts of Speech Workflow</a></li>
+<li><h6 class="dropdown-header" data-toc-skip>Getting Started</h6></li>
+    <li><a class="dropdown-item" href="articles/limpiar_intro.html">Introduction to LimpiaR</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Advanced Topics</h6></li>
+    <li><a class="dropdown-item" href="articles/near_duplicates.html">Near Duplicates</a></li>
+    <li><a class="dropdown-item" href="articles/parts_of_speech_workflow.html">Parts of Speech Workflow</a></li>
   </ul>
 </li>
+<li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
       </ul>
 <ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
+</form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/jpcompartir/LimpiaR" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
@@ -51,14 +61,18 @@
   </div>
 </nav><div class="container template-home">
 <div class="row">
-  <main id="main" class="col-md-9"><p><img src="reference/figures/SHARExLimpiaR.png" align="center" width="100%" style="padding: 25px 50px 25px 0px;"></p>
+  <main id="main" class="col-md-9"><div class="section level1">
+<div class="page-header"><h1 id="limpiar">LimpiaR<a class="anchor" aria-label="anchor" href="#limpiar"></a>
+</h1></div>
+<hr>
 <!-- badges: start -->
-
+<hr>
+<p><img src="reference/figures/limpiar_hex.png" align="right" width="300px" height="300px" style="padding: 25px 25px 25px 25px;"></p>
 <div class="section level2">
 <h2 id="what-is-limpiar">What is LimpiaR?<a class="anchor" aria-label="anchor" href="#what-is-limpiar"></a>
 </h2>
-<p>LimpiaR is an R library of functions for cleaning &amp; pre-processing text data. The name comes from ‘limpiar’ the Spanish verb’to clean’. Generally when calling a LimpiaR function, you can think of it as ‘clean…’.</p>
-<p>LimpiaR is primarily used for cleaning unstructured text data, such as that which comes from social media or reviews. In its initial release, it is focused around the Spanish language, however, some of its functions are language-ambivalent.</p>
+<p>LimpiaR is an R library of functions for cleaning &amp; pre-processing text data. The name comes from ‘limpiar’ the Spanish verb ‘to clean’. Generally when calling a LimpiaR function, you can think of it as ‘clean…’.</p>
+<p>LimpiaR is primarily used for cleaning unstructured text data, such as that which comes from social media or reviews.</p>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -68,9 +82,10 @@
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"jpcompartir/LimpiaR"</span><span class="op">)</span></span></code></pre></div>
 </div>
+</div>
 <div class="section level1">
-<div class="page-header"><h1 id="limpiar-functions-overview">LimpiaR Functions Overview<a class="anchor" aria-label="anchor" href="#limpiar-functions-overview"></a>
-</h1></div>
+<h1 id="limpiar-functions-overview">LimpiaR Functions Overview<a class="anchor" aria-label="anchor" href="#limpiar-functions-overview"></a>
+</h1>
 <p>LimpiaR provides a comprehensive suite of text cleaning and processing functions, primarily focused on preparing text data for machine learning and analytics tasks. Below you’ll find the functions organised by their primary purpose.</p>
 <p>Functions for editing the text variable in place.</p>
 <table class="table">
@@ -327,6 +342,8 @@
 </tr>
 </tbody>
 </table>
+<hr>
+<p><img src="reference/figures/samy_banner.png" alt="SAMY Data Science" width="100%"></p>
 </div>
 </div>
 
@@ -334,7 +351,6 @@
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
 <li><a href="https://github.com/jpcompartir/LimpiaR" class="external-link">Browse source code</a></li>
-<li><a href="https://github.com/jpcompartir/LimpiaR/issues" class="external-link">Report an issue</a></li>
 </ul>
 </div>
 
@@ -363,13 +379,7 @@
 </ul>
 </div>
 
-<div class="dev-status">
-<h2 data-toc-skip>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://github.com/jpcompartir/LimpiaR/actions/workflows/pkgdown.yaml" class="external-link"><img src="https://github.com/jpcompartir/LimpiaR/actions/workflows/pkgdown.yaml/badge.svg" alt="pkgdown"></a></li>
-<li><a href="https://github.com/jpcompartir/LimpiaR/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/jpcompartir/LimpiaR/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
-</ul>
-</div>
+
 
   </aside>
 </div>

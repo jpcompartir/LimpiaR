@@ -81,8 +81,8 @@ Miscellaneous functions designed to speed up aspects of cleaning text.
 
 ## Processing Parts of Speech
 
-A collection of functions that collectively make up a Parts of
-Speech(POS) analysis and workflow.
+A collection of functions that collectively make up a Parts of Speech
+(POS) analysis workflow.
 
 - [`limpiar_pos_import_model()`](https://jpcompartir.github.io/LimpiaR/reference/limpiar_pos_import_model.md)
   : Import UDPipe models to begin Parts of Speech Analysis

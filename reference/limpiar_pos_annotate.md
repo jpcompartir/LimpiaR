@@ -149,5 +149,5 @@ annotations <- limpiar_pos_annotate(data = data,
                                    in_parallel = FALSE,
                                    dependency_parse = TRUE,
                                    progress = "100")
-#> 2025-11-18 10:11:52.403604 Annotating text fragment 1/100
+#> 2025-12-10 12:30:26.416985 Annotating text fragment 1/100
 ```

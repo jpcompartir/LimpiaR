@@ -171,10 +171,10 @@ console set `update_progress = 0`.
 annotations <- limpiar_pos_annotate(data = data, text_var = text, id_var = universal_message_id, pos_model = model, dependency_parse = TRUE, in_parallel = FALSE, update_progress = 25)
 ```
 
-    ## 2025-11-18 10:12:09.301735 Annotating text fragment 1/100
-    ## 2025-11-18 10:12:09.439675 Annotating text fragment 26/100
-    ## 2025-11-18 10:12:09.55791 Annotating text fragment 51/100
-    ## 2025-11-18 10:12:09.691152 Annotating text fragment 76/100
+    ## 2025-12-10 12:30:44.503284 Annotating text fragment 1/100
+    ## 2025-12-10 12:30:44.667172 Annotating text fragment 26/100
+    ## 2025-12-10 12:30:44.807189 Annotating text fragment 51/100
+    ## 2025-12-10 12:30:44.96691 Annotating text fragment 76/100
 
 Now that we have our texts tokenized, dependencies parsed, and POS
 annotations are complete, let’s take a look at the output. After
@@ -397,7 +397,7 @@ spanish <- spanish %>%
   limpiar_pos_annotate(text, id, spanish_model, udpate_progress = 0) # Extract Pos Tags  
 ```
 
-    ## 2025-11-18 10:12:11.957439 Annotating text fragment 1/1
+    ## 2025-12-10 12:30:47.955884 Annotating text fragment 1/1
 
 ``` r
 spanish %>%
