@@ -1,15 +1,8 @@
 
 # LimpiaR
 
-------------------------------------------------------------------------
-
-<!-- badges: start -->
-
 [![R-CMD-check](https://github.com/jpcompartir/LimpiaR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jpcompartir/LimpiaR/actions/workflows/R-CMD-check.yaml)
 [![pkgdown](https://github.com/jpcompartir/LimpiaR/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/jpcompartir/LimpiaR/actions/workflows/pkgdown.yaml)
-<!-- badges: end -->
-
-------------------------------------------------------------------------
 
 <img src="man/figures/limpiar_hex.png" align="right" width="300px" height="300px" style="padding: 25px 25px 25px 25px;"/>
 
