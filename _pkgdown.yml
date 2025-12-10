@@ -1,25 +1,70 @@
-url: https://jpcompartir.github.io/LimpiaR
+url: https://jpcompartir.github.io/LimpiaR/
 
 template:
   bootstrap: 5
-  params:
-    bootswatch: "journal"
-    hljs:
-      style: "tango"
-    toc: true
-    toc_depth: 3
-    toc_float:
-      collapsed: false
-      smooth_scroll: true
-      side: left
-    theme: "united"
-    search: true
+  favicon: man/figures/samy_logo_small.png
+  bslib:
+    # SAMY Brand Colours
+    bg: "#F5F5F4"
+    fg: "#2C2E35"
+    primary: "#B5651D"
+    secondary: "#D4A574"
+    success: "#7C9885"
+    info: "#5B7C99"
+    warning: "#D4A574"
+    danger: "#8B5A6F"
 
+    # Typography
+    base_font:
+      google: "Lato"
+    heading_font:
+      google: "Merriweather"
+    code_font:
+      google: "Fira Code"
+
+    # Component Styling
+    navbar-bg: "#2C2E35"
+    code-bg: "#FDFDFD"
+    code-color: "#5B7C99"
+
+home:
+  title: "LimpiaR"
+  description: "An R library of functions for cleaning & pre-processing text data"
+  sidebar:
+    structure: [links, license, community, citation, authors, dev]
 
 navbar:
+  bg: dark
   structure:
-    left: [home, news, reference, articles]
-    right: [github]
+    left: [intro, reference, articles, news]
+    right: [search, github]
+  components:
+    intro:
+      text: Get Started
+      href: articles/limpiar_intro.html
+    reference:
+      text: Reference
+      href: reference/index.html
+    articles:
+      text: Articles
+      menu:
+      - text: Getting Started
+      - text: Introduction to LimpiaR
+        href: articles/limpiar_intro.html
+      - text: "---"
+      - text: Advanced Topics
+      - text: Near Duplicates
+        href: articles/near_duplicates.html
+      - text: Parts of Speech Workflow
+        href: articles/parts_of_speech_workflow.html
+    news:
+      text: Changelog
+      href: news/index.html
+
+footer:
+  structure:
+    left: developed_by
+    right: built_with
 
 reference:
 - title: Cleaning Posts
@@ -62,7 +107,7 @@ reference:
 
 - title: Processing Parts of Speech
   desc: >
-    A collection of functions that collectively make up a Parts of Speech(POS) analysis and workflow.
+    A collection of functions that collectively make up a Parts of Speech (POS) analysis workflow.
   contents:
   - limpiar_pos_import_model
   - limpiar_pos_annotate
@@ -72,8 +117,5 @@ repo:
     home: https://github.com/jpcompartir/LimpiaR
     source: https://github.com/jpcompartir/LimpiaR/tree/main
 
-home:
-  links:
-  - text: Report an issue
-    href: https://github.com/jpcompartir/LimpiaR/issues
-
+development:
+  mode: auto

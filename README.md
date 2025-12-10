@@ -1,23 +1,27 @@
 
-<img src="man/figures/SHARExLimpiaR.png" align="center" width="100%" style="padding: 25px 50px 25px 0px;"/>
+# LimpiaR
+
+------------------------------------------------------------------------
 
 <!-- badges: start -->
 
-[![pkgdown](https://github.com/jpcompartir/LimpiaR/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/jpcompartir/LimpiaR/actions/workflows/pkgdown.yaml)
 [![R-CMD-check](https://github.com/jpcompartir/LimpiaR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jpcompartir/LimpiaR/actions/workflows/R-CMD-check.yaml)
+[![pkgdown](https://github.com/jpcompartir/LimpiaR/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/jpcompartir/LimpiaR/actions/workflows/pkgdown.yaml)
 <!-- badges: end -->
+
+------------------------------------------------------------------------
+
+<img src="man/figures/limpiar_hex.png" align="right" width="300px" height="300px" style="padding: 25px 25px 25px 25px;"/>
 
 ## What is LimpiaR?
 
 LimpiaR is an R library of functions for cleaning & pre-processing text
-data. The name comes from ‘limpiar’ the Spanish verb’to clean’.
+data. The name comes from ‘limpiar’ the Spanish verb ‘to clean’.
 Generally when calling a LimpiaR function, you can think of it as
 ‘clean…’.
 
 LimpiaR is primarily used for cleaning unstructured text data, such as
-that which comes from social media or reviews. In its initial release,
-it is focused around the Spanish language, however, some of its
-functions are language-ambivalent.
+that which comes from social media or reviews.
 
 ## Installation
 
@@ -86,3 +90,7 @@ A collection of functions that collectively make up a Parts of Speech
 |----|----|----|----|----|
 | [limpiar_pos_import_model](https://jpcompartir.github.io/LimpiaR/reference/limpiar_pos_import_model.html) | Imports Parts of Speech models and caches | 65+ languages | POS analysis prep | Uses UDPipe models |
 | [limpiar_pos_annotate](https://jpcompartir.github.io/LimpiaR/reference/limpiar_pos_annotate.html) | Performs POS analysis | 65+ languages | Text analysis | Includes dependency parsing |
+
+------------------------------------------------------------------------
+
+<img src="man/figures/samy_banner.png" alt="SAMY Data Science" width="100%"/>
