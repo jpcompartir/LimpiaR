@@ -4,8 +4,6 @@ output: github_document
 
 # LimpiaR
 
----
-
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -15,12 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-<!-- badges: start -->
-[![R-CMD-check](https://github.com/jpcompartir/LimpiaR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jpcompartir/LimpiaR/actions/workflows/R-CMD-check.yaml)
-[![pkgdown](https://github.com/jpcompartir/LimpiaR/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/jpcompartir/LimpiaR/actions/workflows/pkgdown.yaml)
-<!-- badges: end -->
-
----
+[![R-CMD-check](https://github.com/jpcompartir/LimpiaR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jpcompartir/LimpiaR/actions/workflows/R-CMD-check.yaml) [![pkgdown](https://github.com/jpcompartir/LimpiaR/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/jpcompartir/LimpiaR/actions/workflows/pkgdown.yaml)
 
 <img src="man/figures/limpiar_hex.png" align="right" width="300px" height="300px" style="padding: 25px 25px 25px 25px;"/>
 
@@ -34,11 +27,10 @@ LimpiaR is primarily used for cleaning unstructured text data, such as that whic
 
 You can install the development version of LimpiaR from [GitHub](https://github.com/) with:
 
-``` {r, eval = FALSE}
+```{r, eval = FALSE}
 # install.packages("devtools")
 devtools::install_github("jpcompartir/LimpiaR")
 ```
-
 
 # LimpiaR Functions Overview
 
@@ -47,7 +39,7 @@ LimpiaR provides a comprehensive suite of text cleaning and processing functions
 Functions for editing the text variable in place.
 
 | Function | Description | Language Support | Primary Use Case | Notes |
-|----------|-------------|------------------|------------------|-------|
+|----|----|----|----|----|
 | [limpiar_accents](https://jpcompartir.github.io/LimpiaR/reference/limpiar_accents.html) | Removes accented characters | Language-agnostic | Text normalisation | Useful for reducing token complexity |
 | [limpiar_spaces](https://jpcompartir.github.io/LimpiaR/reference/limpiar_spaces.html) | Removes redundant spaces | Language-agnostic | Text cleaning | Also standardises punctuation spacing |
 | [limpiar_url](https://jpcompartir.github.io/LimpiaR/reference/limpiar_url.html) | Removes URLs from text | Language-agnostic | Text cleaning | Handles various URL formats |
@@ -69,7 +61,7 @@ Functions for editing the text variable in place.
 Functions for removing unwanted posts entirely (rather than cleaning).
 
 | Function | Description | Language Support | Primary Use Case | Notes |
-|----------|-------------|------------------|------------------|-------|
+|----|----|----|----|----|
 | [limpiar_duplicates](https://jpcompartir.github.io/LimpiaR/reference/limpiar_duplicates.html) | Removes duplicate content | Language-agnostic | Data cleaning | Also removes protected content |
 | [limpiar_retweets](https://jpcompartir.github.io/LimpiaR/reference/limpiar_retweets.html) | Removes retweet content | Language-agnostic | Social media cleaning | Identifies RT patterns |
 | [limpiar_spam_grams](https://jpcompartir.github.io/LimpiaR/reference/limpiar_spam_grams.html) | Removes spam-like patterns | Language-agnostic | Content filtering | Uses n-gram analysis |
@@ -79,7 +71,7 @@ Functions for removing unwanted posts entirely (rather than cleaning).
 Miscellaneous functions designed to speed up aspects of cleaning text.
 
 | Function | Description | Language Support | Primary Use Case | Notes |
-|----------|-------------|------------------|------------------|-------|
+|----|----|----|----|----|
 | [limpiar_inspect](https://jpcompartir.github.io/LimpiaR/reference/limpiar_inspect.html) | Viewable pane for pattern matches | Language-agnostic | Data exploration | Interactive viewing |
 | [limpiar_na_cols](https://jpcompartir.github.io/LimpiaR/reference/limpiar_na_cols.html) | Removes NA-heavy columns | Language-agnostic | Data cleaning | Configurable threshold |
 | [limpiar_link_click](https://jpcompartir.github.io/LimpiaR/reference/limpiar_link_click.html) | Makes URLs clickable and short | Language-agnostic | UI enhancement | For Shiny/DataTable |
@@ -90,10 +82,10 @@ Miscellaneous functions designed to speed up aspects of cleaning text.
 A collection of functions that collectively make up a Parts of Speech (POS) analysis workflow.
 
 | Function | Description | Language Support | Primary Use Case | Notes |
-|----------|-------------|------------------|------------------|-------|
+|----|----|----|----|----|
 | [limpiar_pos_import_model](https://jpcompartir.github.io/LimpiaR/reference/limpiar_pos_import_model.html) | Imports Parts of Speech models and caches | 65+ languages | POS analysis prep | Uses UDPipe models |
 | [limpiar_pos_annotate](https://jpcompartir.github.io/LimpiaR/reference/limpiar_pos_annotate.html) | Performs POS analysis | 65+ languages | Text analysis | Includes dependency parsing |
 
----
+------------------------------------------------------------------------
 
 <img src="man/figures/samy_banner.png" alt="SAMY Data Science" width="100%"/>
