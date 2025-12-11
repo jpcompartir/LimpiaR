@@ -1,8 +1,7 @@
 # LimpiaR
 
-------------------------------------------------------------------------
-
-------------------------------------------------------------------------
+[![R-CMD-check](https://github.com/jpcompartir/LimpiaR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jpcompartir/LimpiaR/actions/workflows/R-CMD-check.yaml)
+[![pkgdown](https://github.com/jpcompartir/LimpiaR/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/jpcompartir/LimpiaR/actions/workflows/pkgdown.yaml)
 
 ![](reference/figures/limpiar_hex.png)
 
