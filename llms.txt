@@ -56,11 +56,12 @@ Functions for editing the text variable in place.
 
 Functions for removing unwanted posts entirely (rather than cleaning).
 
-| Function                                                                                      | Description                | Language Support  | Primary Use Case      | Notes                          |
-|-----------------------------------------------------------------------------------------------|----------------------------|-------------------|-----------------------|--------------------------------|
-| [limpiar_duplicates](https://jpcompartir.github.io/LimpiaR/reference/limpiar_duplicates.html) | Removes duplicate content  | Language-agnostic | Data cleaning         | Also removes protected content |
-| [limpiar_retweets](https://jpcompartir.github.io/LimpiaR/reference/limpiar_retweets.html)     | Removes retweet content    | Language-agnostic | Social media cleaning | Identifies RT patterns         |
-| [limpiar_spam_grams](https://jpcompartir.github.io/LimpiaR/reference/limpiar_spam_grams.html) | Removes spam-like patterns | Language-agnostic | Content filtering     | Uses n-gram analysis           |
+| Function                                                                                      | Description                 | Language Support  | Primary Use Case      | Notes                          |
+|-----------------------------------------------------------------------------------------------|-----------------------------|-------------------|-----------------------|--------------------------------|
+| [limpiar_duplicates](https://jpcompartir.github.io/LimpiaR/reference/limpiar_duplicates.html) | Removes duplicate content   | Language-agnostic | Data cleaning         | Also removes protected content |
+| [limpiar_retweets](https://jpcompartir.github.io/LimpiaR/reference/limpiar_retweets.html)     | Removes retweet content     | Language-agnostic | Social media cleaning | Identifies RT patterns         |
+| [limpiar_spam_grams](https://jpcompartir.github.io/LimpiaR/reference/limpiar_spam_grams.html) | Removes spam-like patterns  | Language-agnostic | Content filtering     | Uses n-gram analysis           |
+| [limpiar_phone_numbers](https://jpcompartir.github.io/LimpiaR/reference/limpiar_phones.html)  | Tags phone numbers in posts | Language-agnostic | Content filtering     | For removing spam/advertising  |
 
 ## Utility
 
@@ -150,6 +151,8 @@ Functions for removing unwanted posts entirely (rather than cleaning).
   : Clean retweets from the text variable
 - [`limpiar_spam_grams()`](https://jpcompartir.github.io/LimpiaR/reference/limpiar_spam_grams.md)
   : Remove posts containing spam-like n-grams
+- [`limpiar_phone_numbers()`](https://jpcompartir.github.io/LimpiaR/reference/limpiar_phone_numbers.md)
+  : Clean phone numbers from text
 
 ## Utility Functions
 

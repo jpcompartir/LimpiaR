@@ -1,5 +1,12 @@
 # Changelog
 
+## LimpiaR 1.1.2
+
+- [`limpiar_phone_numbers()`](https://jpcompartir.github.io/LimpiaR/reference/limpiar_phone_numbers.md)
+  function introduced - flags documents that have phone numbers in the
+  text, see package’s function reference section and README for more
+  information
+
 ## LimpiaR 1.1.1
 
 - Small fix for tests failing following a package change in the CI/CD VM

@@ -61,6 +61,8 @@ Functions for removing unwanted posts entirely (rather than cleaning).
   : Clean retweets from the text variable
 - [`limpiar_spam_grams()`](https://jpcompartir.github.io/LimpiaR/reference/limpiar_spam_grams.md)
   : Remove posts containing spam-like n-grams
+- [`limpiar_phone_numbers()`](https://jpcompartir.github.io/LimpiaR/reference/limpiar_phone_numbers.md)
+  : Clean phone numbers from text
 
 ## Utility Functions
 
