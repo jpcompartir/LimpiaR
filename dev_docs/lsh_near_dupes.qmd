@@ -164,7 +164,7 @@ The comparison reflects each tool's natural usage, and a few things could narrow
 
 For peak memory, wrap any of the R commands in `/usr/bin/time -l` (macOS) and read "maximum resident set size", and use `R_MAX_VSIZE` to test behaviour under a heap cap.
 
-## Interactively
+## Interactive exploration
 
 The benchmark script only takes the real-data path via command-line arguments, so in an interactive session run the equivalent directly (from the package root):
 
@@ -182,4 +182,28 @@ out$duplicates       # 4,712 groups, biggest is 721 docs
 out$deleted          # removed rows with group and similarity, for exploring
 ```
 
+```{r}
+rows <- purrr::map(out, nrow) |>  as.data.frame()
+```
+
+```{r}
+library(tidyverse)
+df_no_rt <- df |>  limpiar_retweets(text)
+
+out_no_rt <- limpiar_near_duplicates(df_no_rt, text, similarity = 0.7)
+
+rows_no_rt <- purrr::map(out_no_rt, nrow) |>  as.data.frame()
+
+rbind(rows, rows_no_rt)
+```
+
+```{r}
+
+out_no_rt |> pluck('deleted') |> 
+  count(group, sort = TRUE)
+
+out_no_rt$deleted |>  filter(group == 17761) |>  pull(text)
+```
+
 Timings from an interactive session are comparable to the script's. Peak memory is not: measure that with a fresh process under `/usr/bin/time -l`, because a long-lived session carries whatever memory it has already accumulated.
+
