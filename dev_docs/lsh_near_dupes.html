@@ -2483,6 +2483,24 @@ vertical-align: -.125em;
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#    Rscript dev_docs/benchmarks/compare_removals.R</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>For peak memory, wrap any of the R commands in <code>/usr/bin/time -l</code> (macOS) and read “maximum resident set size”, and use <code>R_MAX_VSIZE</code> to test behaviour under a heap cap.</p>
+<section id="interactively" class="level2">
+<h2 class="anchored" data-anchor-id="interactively">Interactively</h2>
+<p>The benchmark script only takes the real-data path via command-line arguments, so in an interactive session run the equivalent directly (from the package root):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">load_all</span>()</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">&quot;~/data/trust/trust_slice.csv&quot;</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(text))</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">limpiar_near_duplicates</span>(df, text, <span class="at">similarity =</span> <span class="fl">0.7</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(out<span class="sc">$</span>deleted)    <span class="co"># expect 26,323</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>out<span class="sc">$</span>duplicates       <span class="co"># 4,712 groups, biggest is 721 docs</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>out<span class="sc">$</span>deleted          <span class="co"># removed rows with group and similarity, for exploring</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Timings from an interactive session are comparable to the script’s. Peak memory is not: measure that with a fresh process under <code>/usr/bin/time -l</code>, because a long-lived session carries whatever memory it has already accumulated.</p>
+</section>
 </section>
 
 </main>
