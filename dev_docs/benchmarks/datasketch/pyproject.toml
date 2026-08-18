@@ -1,0 +1,10 @@
+[project]
+name = "pybench"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "datasketch>=2.0.0",
+]
+
+[tool.uv]
+exclude-newer = "2026-08-04"
