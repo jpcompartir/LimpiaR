@@ -1,7 +1,7 @@
 # Compare limpiar_near_duplicates() and datasketch removal sets on the shared
 # 100,000 document corpus.
 #
-# Run bench_limpiar.R first (writes corpus_1e5.csv and removed_r.csv), then
+# Run bench_near_duplicates.R first (writes corpus_1e5.csv and removed_r.csv), then
 # the datasketch benchmark (writes removed_py.csv), then this script from the
 # package root. For each document only datasketch removed, we find its most
 # similar other document by exact Jaccard, which shows how many of those

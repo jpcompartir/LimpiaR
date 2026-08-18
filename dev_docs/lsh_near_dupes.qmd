@@ -94,6 +94,19 @@ The uncapped numbers overstate what the function needs, because they were measur
 
 So the function needs about 1GB of working memory at 100,000 documents and runs at essentially full speed under that cap. An 8GB laptop is comfortably enough at these scales. Memory scales with total word count rather than document count, so very long documents (articles rather than posts) will cost more per document.
 
+## Real data
+
+The synthetic corpus shapes its document counts and lengths to resemble social data, but its tokens are artificial, so we also benchmarked a real dataset: `trust_slice.csv` from the spam taxonomy project, which parses to 66,509 documents averaging 35 words (2.2 million shingle rows, 1.1 million unique shingles).
+
+| measurement | result |
+|:---|---:|
+| elapsed | 9.2s |
+| elapsed under a 1GB heap cap | 9.4s |
+| peak RSS | 2.09GB |
+| documents removed | 26,323 (40%) in 4,712 groups |
+
+Real text is somewhat heavier per document than the synthetic corpus, as predicted: longer word strings make shingling cost more, and this dataset's heavy spam load (40% removed) gives the verification stage far more candidate pairs than the synthetic mix does. The largest group had 721 documents at a mean similarity of 0.72, which is templated near-duplicate content rather than exact copies, and there were several exact-duplicate clusters of 300 to 460 documents. The median group is a pair. One behaviour worth knowing when reading `$deleted` on data like this: groups are transitive closures, so in a large chained group a removed document's similarity to the kept document can sit below the threshold (the minimum in the 721 document group was 0.56) even though every link in the chain was verified at or above it.
+
 ## Recall against exact ground truth
 
 `recall_check.R` builds a 3,000 document corpus, computes the exact Jaccard similarity of every pair sharing at least one shingle, and derives the set of documents an exhaustive comparison would remove. Against that ground truth:
@@ -138,7 +151,9 @@ The comparison reflects each tool's natural usage, and a few things could narrow
 ```{r}
 # from the package root
 # 1. timing and scaling, also writes corpus_1e5.csv and removed_r.csv
-#    Rscript dev_docs/benchmarks/bench_limpiar.R
+#    Rscript dev_docs/benchmarks/bench_near_duplicates.R
+#    (pass a CSV path and text column to benchmark real data instead, e.g.
+#     Rscript dev_docs/benchmarks/bench_near_duplicates.R ~/data/trust/trust_slice.csv text)
 # 2. recall against exact ground truth
 #    Rscript dev_docs/benchmarks/recall_check.R
 # 3. datasketch on the same corpus (needs uv; writes removed_py.csv)
