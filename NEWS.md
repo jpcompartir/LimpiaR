@@ -1,3 +1,9 @@
+# LimpiaR 1.2.0
+
+-   Introduced `limpiar_near_duplicates()` for finding and removing near-duplicate documents at scale. It uses minhash signatures with locality sensitive hashing, implemented in R with no new compiled dependencies, and handles 100,000 documents in seconds on a laptop. Candidate pairs are verified with exact Jaccard similarity before removal, and results are reproducible through a `seed` argument. The `engine` argument leaves room for other methods later.
+-   Updated the `near_duplicates.Rmd` vignette with guidance on when to use `limpiar_near_duplicates()` and how to set its parameters.
+-   Raised the minimum dplyr version to 1.1.0 and added purrr to Imports.
+
 # LimpiaR 1.1.1
 
 -   Small fix for tests failing following a package change in the CI/CD VM

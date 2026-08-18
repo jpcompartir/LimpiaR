@@ -1,123 +1,150 @@
 ---
 title: "Locality Sensitive Hashing"
 format:
-  html: 
+  html:
     embed-resources: true
     theme: united
 execute:
-  message: false
-  warning: false
-editor_options: 
+  eval: false
+editor_options:
   chunk_output_type: console
 ---
 
-# Background Information
+# What this document is
+
+Design notes and benchmark log for `limpiar_near_duplicates()`, the near-duplicate removal function introduced in LimpiaR 1.2.0. The user-facing documentation lives in the `near_duplicates` vignette. This document records how the implementation works, how we validated it, and how it compares with Python's `datasketch` library. Everything here can be reproduced with the scripts in `dev_docs/benchmarks/`.
+
+# Background information
 
 -   [MinHash On the Resemblance and Containment of Documents](https://www.cs.princeton.edu/courses/archive/spring13/cos598C/broder97resemblance.pdf)
 -   [LSH - Approximate Nearest Neighbours Towards Removing the Curse of Dimensionality](https://graphics.stanford.edu/courses/cs468-06-fall/Papers/06%20indyk%20motwani%20-%20stoc98.pdf)
-- [LSH R package](https://github.com/dselivanov/LSHR) with implementations in Rcpp for speed
-- [Walkthrough of MinHash & LSH](https://dzone.com/articles/minhash-lsh-implementation-walkthrough)
+-   [Walkthrough of MinHash & LSH](https://dzone.com/articles/minhash-lsh-implementation-walkthrough)
+-   [datasketch documentation](https://ekzhu.com/datasketch/lsh.html)
 
-In the [Near Duplicates](vignettes/near_duplicates.Rmd) vignette we cover an approach to handling near duplicates that we have developed in-house. The approach is a good heuristic and saves a lot of time, but there are potential scaling issues, and we think we can do better.
+An earlier draft of this document explored the [LSHR package](https://github.com/dselivanov/LSHR). We did not adopt it because it is not on CRAN, and its performance comes from Rcpp. We wanted an implementation in plain R that we can read, test, and maintain ourselves.
 
-One approach to removing near duplicates would be to check every document against every other document, and measure their similarity. However, this approach requires N(N-1)/2 ^[We don't compare documents against themselves, and for each pair of documents we compare them once, not twice] comparisons, where N is the number of documents in the dataset. We *always*^[nearly always...] want to avoid this type of scaling where we can.
+# The problem
 
-When we think about it, if we try this pairwise approach, we are going to compare a lot of documents against other documents that they are not even close to being near duplicates of, which means we're going to do a lot of wasted computation. If we could arrange the rows of our dataset so that each document is near to other documents that it is similar to, we could compare our documents against the documents around them, and drastically reduce the number of comparisons we need to make.
+Comparing every document with every other document needs N(N-1)/2 comparisons. At 100,000 documents that is five billion comparisons, which is not workable on a laptop. Minhash with LSH banding avoids almost all of those comparisons. Each document is compressed into a short signature, the signatures are split into bands, and only documents that agree on a whole band are compared properly. Similar documents agree on a band with high probability and dissimilar documents rarely do.
 
-The question then becomes: how do we arrange our documents so that each document is close to other documents that it is similar to?
+# The implementation
 
+`limpiar_near_duplicates()` runs the following pipeline. The engine part, steps 2 to 4, sits behind an `engine` argument so we can add other methods later behind the same contract: shingle sets and a threshold in, verified pairs out.
 
+1.  Shingle each document into distinct word n-grams with `tidytext::unnest_tokens()`, and map each distinct shingle to a dense integer id with `match()`.
+2.  Build a minhash signature per document: `n_hashes` universal hash functions of the form (a * x + b) mod p, applied to the shingle ids, taking the minimum per document per hash function.
+3.  Band the signatures. The band layout (b bands of r rows, b * r = n_hashes) is chosen from the divisors of `n_hashes` so the collision curve sits just below the user's `similarity` threshold, which favours recall. Documents that agree on all r rows of any band become candidate pairs.
+4.  Verify every candidate pair with exact Jaccard similarity on the true shingle sets, and keep pairs at or above the threshold.
+5.  Connect verified pairs into groups with union-find, keep the first document of each group, and remove the rest.
+
+Step 4 is the design decision that most distinguishes us from off-the-shelf LSH usage. It costs a little time and buys exact precision: a document can only be removed because its true similarity reached the threshold.
+
+## Why plain R is fast enough
+
+The implementation stays within base R and the tidyverse, and gets its speed from doing corpus-level vectorised work instead of per-document work.
+
+-   No string hashing. Shingles become dense integer ids once, via `match()`. Every hash function after that is arithmetic on integer vectors.
+-   Each hash function is applied to all unique shingles in one vectorised call. At 100,000 documents the corpus has about 1.9 million unique shingles, so one hash function is one arithmetic pass over a 1.9 million element vector, not 100,000 separate operations.
+-   The per-document minimum is computed with a loop over within-document positions, not over documents. Iteration j does one vectorised `pmin()` across every document that has at least j shingles, so the loop runs for the length of the longest document rather than the number of documents.
+-   Banding is a vectorised polynomial fold over signature columns, and buckets are found with `duplicated()` and `split()` rather than per-document dictionary operations.
+-   Buckets larger than 100 documents are compared to their first member only, instead of all-pairs. Buckets that size are almost always mass-duplicate content, and union-find still connects the whole group. This keeps a corpus with thousands of copies of one message from generating millions of candidate pairs.
+-   Hash arithmetic stays exact in doubles. R doubles hold integers exactly up to 2^53, and the multiplier is split into two parts so no intermediate product exceeds that. Two overflow traps came up in development: 32-bit integer multiplication overflows past roughly 46,000 documents when building pair keys, and naive (a * x) with both values near 2^31 loses precision silently.
+-   The shingle strings are dropped as soon as integer ids are assigned, which releases most of the peak memory before the minhash stage. This one change cut peak memory by about 0.5GB and run time by about 2 seconds at 100,000 documents.
+
+# Benchmark protocol
+
+All numbers below come from a MacBook Pro with an Apple M4 Max and 128GB of RAM, on R 4.4.2 with dplyr 1.1.4 and tidytext 0.4.2, and Python 3.12 with datasketch 2.0.0. Every run used `similarity = 0.7`, `shingle_size = 3`, and `n_hashes = 100`.
+
+The synthetic corpus (`bench_corpus.R`) is built to resemble social listening data: a 5,000 word vocabulary sampled with a Zipf distribution, document lengths of 6 to 60 words, 55% independent base documents, 25% near duplicates made by swapping 10% of a base document's words, 5% exact copies of a single document (one mass-duplicate cluster, which stresses the large-bucket path), and 15% random noise. At 100,000 documents this produces about 3.0 million (document, shingle) rows and 1.9 million unique shingles.
+
+This is not a small-data comparison. The headline numbers are at 100,000 documents, and the scaling table goes to 200,000.
+
+# Results
+
+## Speed and scaling
+
+| documents | elapsed | removed |
+|----------:|--------:|--------:|
+| 1,000 | 0.1s | 80 |
+| 10,000 | 0.9s | 758 |
+| 100,000 | 9.8s | 7,484 |
+| 200,000 | 21.7s | 14,949 |
+
+Growth is close to linear, so the banding step is doing its job of avoiding the quadratic comparison.
+
+## Memory
+
+Peak resident set size (via `/usr/bin/time -l`, one fresh R process per run):
+
+| measurement | peak RSS |
+|:---|---:|
+| baseline: R, loaded packages, and the corpus, no run | 0.56GB |
+| through shingling only, 100,000 documents | 0.97GB |
+| full run, 100,000 documents | 2.32GB |
+| full run, 200,000 documents | 3.44GB |
+
+The uncapped numbers overstate what the function needs, because they were measured on a 128GB machine where the garbage collector has no reason to be tidy. Capping R's vector heap shows the true requirement:
+
+| cap (R_MAX_VSIZE) | documents | outcome |
+|---:|---:|:---|
+| 1.0GB | 100,000 | completes, 10.3s |
+| 1.5GB | 100,000 | completes, 10.2s |
+| 1.5GB | 200,000 | completes, 22.0s |
+| uncapped | 100,000 | 9.9s |
+
+So the function needs about 1GB of working memory at 100,000 documents and runs at essentially full speed under that cap. An 8GB laptop is comfortably enough at these scales. Memory scales with total word count rather than document count, so very long documents (articles rather than posts) will cost more per document.
+
+## Recall against exact ground truth
+
+`recall_check.R` builds a 3,000 document corpus, computes the exact Jaccard similarity of every pair sharing at least one shingle, and derives the set of documents an exhaustive comparison would remove. Against that ground truth:
+
+| seed | true removable | found | recall | removals outside truth |
+|-----:|---------------:|------:|-------:|-----------------------:|
+| 42 | 221 | 220 | 0.995 | 0 |
+| 1 | 221 | 221 | 1.000 | 0 |
+| 7 | 221 | 221 | 1.000 | 0 |
+
+Precision is 1.0 by construction, because of the verification step. Recall at the default settings was 99.5 to 100%, with the occasional miss being a pair close to the threshold.
+
+## Comparison with Python's datasketch
+
+`dev_docs/benchmarks/datasketch/` holds a uv project that runs the same task with datasketch's `MinHash` and `MinHashLSH`: the same 100,000 document corpus, the same 3-word shingles, 100 permutations, threshold 0.7, union-find grouping, first document kept. Timings are end to end for both sides.
+
+| | LimpiaR (pure R) | datasketch (Python) |
+|:---|---:|---:|
+| total time | 9.8s | 20.5s |
+| peak RSS | 2.32GB | 1.11GB |
+| documents removed | 7,484 | 9,044 |
+| removals confirmed at or above threshold | all (verified) | see below |
+
+Of the 2,541 documents only datasketch removed, we sampled 300 and computed each one's best exact Jaccard against any other document in the corpus. Only 4 of 300 reached 0.7, and the median best similarity was 0.636. In other words, roughly 28% of datasketch's removals at these settings were below the requested threshold. Conversely, 86.9% of LimpiaR's removals were also removed by datasketch; the remainder are true pairs that datasketch's banding missed, plus differences in which member of a group each implementation kept.
+
+### Why datasketch took longer, at the code level
+
+datasketch's cost structure is per-document Python work. For every one of the 100,000 documents it: creates a `MinHash` object; applies SHA1 (its default `hashfunc`) to every shingle string; builds an m-by-100 NumPy array of permuted hash values for the document's m shingles and takes the columnwise minimum; then inserts the signature into each of the b bands of the LSH index, where each insertion packs the band slice to bytes and appends to a Python dictionary. Querying repeats the dictionary lookups per document per band. NumPy is fast on large arrays, but a typical social post here has 20 to 40 shingles, so datasketch does 100,000 rounds of interpreter overhead wrapped around very small array operations, plus 100,000 SHA1 passes over strings, plus millions of per-band dictionary operations.
+
+LimpiaR's per-document work is close to zero. Shingle strings are interned to integer ids once for the whole corpus, each hash function is one vectorised pass over the 1.9 million unique shingle ids, the per-document minimum costs one `pmin()` per within-document position across all documents at once, and banding is column arithmetic plus one `duplicated()` per band. The R implementation wins not because R is faster than Python, but because its inner loops run over the corpus, while datasketch's run over documents.
+
+### Why datasketch removed more documents, at the code level
+
+`MinHashLSH.query()` returns every document that shares a band bucket with the query. datasketch does not verify those candidates against the true sets; acting on its output means acting on band collisions. Two things then produce removals below the threshold. First, a band collision only requires r of the 100 signature positions to agree, and signature agreement is itself an estimate of similarity with a standard error of about sqrt(t(1 - t) / 100), which is 0.046 at t = 0.7, so pairs at 0.6 to 0.65 collide regularly. Second, datasketch chooses its band layout by minimising a weighted sum of false positive and false negative probabilities with equal weights by default, which deliberately tolerates sub-threshold collisions to protect recall. LimpiaR generates candidates the same way, and this is exactly why it verifies every candidate with exact Jaccard on the real shingle sets before anything is removed.
+
+### Caveats on fairness
+
+The comparison reflects each tool's natural usage, and a few things could narrow the gap. A user could add their own exact verification pass on top of datasketch's candidates, at extra cost in Python. datasketch also offers variants we did not benchmark (`LeanMinHash`, weighted minhash, LSH Forest, and Redis-backed storage for corpora that do not fit in memory). datasketch's peak memory was lower than ours, and if memory rather than time ever becomes the binding constraint, that is worth revisiting. These are single-machine, single-run timings, though the margins are large and stable across repeats.
+
+# Reproducing
 
 ```{r}
-library(tidytext)
-library(LimpiaR)
-library(tidyverse)
-library(LSHR)
+# from the package root
+# 1. timing and scaling, also writes corpus_1e5.csv and removed_r.csv
+#    Rscript dev_docs/benchmarks/bench_limpiar.R
+# 2. recall against exact ground truth
+#    Rscript dev_docs/benchmarks/recall_check.R
+# 3. datasketch on the same corpus (needs uv; writes removed_py.csv)
+#    cd dev_docs/benchmarks/datasketch && uv run python bench_datasketch.py ../corpus_1e5.csv
+# 4. removal-set comparison and false positive analysis
+#    Rscript dev_docs/benchmarks/compare_removals.R
 ```
 
-```{r}
-#| eval: false
-trust_df <- read_csv("~/Google Drive/My Drive/data_science_project_work/microsoft/project_work/789_taxonomy_of_spam/data/project_samples/trust_distrust_757_100k_sample.csv")
-
-trust_df <- slice(trust_df, 1:10000)
-```
-
-
-```{r}
-#| eval: false
-trust_df <- trust_df %>%
-  mutate(id = row_number()) %>%
-  select(id, text = message)
-
-trust_df <- trust_df %>%
-  limpiar_retweets(text) %>%
-  limpiar_duplicates(text) %>%
-  limpiar_alphanumeric(text) %>%
-  limpiar_spaces(text) %>%
-  filter(!is.na(text), text != "")
-
-trust_df <- trust_df %>%
-  mutate(word_count = str_count(text, "\\b")) %>%
-  filter(word_count > 5)
-```
-
-# A tibble: 70 × 3
-      id text                                                                word_count
-   <int> <chr>                                                                    <int>
- 1     1 I think what Lampy123678 and myself are implying is that Hamas and…         46
- 2     2 How could they have warned anyone if they said it was a Hamas rock…         56
- 3     3 ByronDonalds JimJordan A testament to your lack of morals support …         80
- 4     4 Dallas Texas DataMasters a leading data services company based in …       1216
- 5     5 b d bop said Ive been on the new G7 system for about a month now I…       1230
- 6     6 travelerdoor Its interesting how every computer related one is a c…         48
- 7    12 Home Depots Revenue Forecast Dims Amid Slowdown in Home Renovation…        856
- 8    13 We could often check for a sound license hunt for safety steps rea…       1360
- 9    14 We offer unique and innovative programs that allow Owners and Memb…        902
-10    15 This is a Fakespot Reviews Analysis bot Fakespot detects fake revi…        262
-# ℹ 60 more rows
-
-
-We need to shingle our dataset (or cut into ngrams)
-```{r}
-(
-shingles <- trust_df %>%
-  tidytext::unnest_tokens(
-  output = shingles,
-  input = text,
-  token = "ngrams",
-  n = 5
-) %>%
-  filter(!is.na(shingles))
-  
-)
-
-
-(dtm <- Matrix::sparseMatrix(
-  i = as.numeric(factor(shingles$id)),
-  j = as.numeric(factor(shingles$shingles)), 
-  x = 1,
-  dimnames = list(levels(factor(shingles$id)),
-                  levels(factor(shingles$shingles)))
-  )
-)
-
-dtm <- as(dtm, "RsparseMatrix")
-object.size(dtm)/(1024^2)
-```
-
-
-Get the minhashes from the DTM using LSHR's internal function
-```{r}
-n_hash_functions <- 100  
-unique_shingles_length <- ncol(dtm) 
-seed <- 42  
-
-# use LSHR's internal func for the minhash matrix
-hash_matrix <- LSHR:::get_minhash_matrix(
-  unique_shingles_length, 
-  n_hash_functions, 
-  seed
-)
-object.size(hash_matrix)/(1024^2)
-```
-
+For peak memory, wrap any of the R commands in `/usr/bin/time -l` (macOS) and read "maximum resident set size", and use `R_MAX_VSIZE` to test behaviour under a heap cap.

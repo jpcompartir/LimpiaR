@@ -22,10 +22,15 @@ library(LimpiaR)
 
 #  Quick Start - Code
 
-Quick example of how to run the code for the function - get a dataset with a text variable and:
+Quick example of how to run the code for the functions - get a dataset with a text variable and:
 ```{r}
 limpiar_examples %>%
   limpiar_spam_grams(mention_content, n_gram = 3, min_freq = 2)
+```
+
+```{r}
+limpiar_examples %>%
+  limpiar_near_duplicates(mention_content, similarity = 0.5)
 ```
 
 Now read the docs!
@@ -136,8 +141,75 @@ It's often used in blogs, articles, explainers etc. as a hook or as supporting e
 
 Another limitation is that the function scales somewhat poorly with the size of documents - if we have many long documents in a large corpus of text, we will need a lot of time and memory to use `limpiar_spam_grams` as it currently works. As we often need to iterate over the parameters, this can be a barrier to usage.
 
-# Another Solution
+# Another Solution - `limpiar_near_duplicates()`
 
-Coming soon:
+`limpiar_spam_grams()` removes documents that contain a suspicious n-gram. `limpiar_near_duplicates()` asks a different question. It compares whole documents, finds groups of documents that are nearly identical, keeps the first document of each group, and removes the rest. Use it when you want to keep one copy of each repeated message rather than remove every document that matches a pattern.
 
-Approximate Nearest Neighbours, Locality Sensitive Hashing, and Jaccard Similarity
+## How similarity is measured
+
+The function cuts each document into shingles, which are runs of `shingle_size` consecutive words. Text is lowercased and punctuation is removed before shingling, but your original text is returned untouched. Two documents are then compared with the Jaccard similarity of their shingle sets, which is the number of shingles they share divided by the number of shingles they have between them. A pair of identical documents scores 1, and a pair with no shared shingles scores 0. Any pair that scores at or above the `similarity` threshold counts as a near-duplicate pair.
+
+Checking every pair of documents directly would need N(N-1)/2 comparisons, which becomes impractical long before 100,000 documents. The function avoids this with minhash and locality sensitive hashing (LSH). Each document's shingle set is compressed into a short signature of `n_hashes` numbers, built so that the probability of two signatures agreeing in any one position equals the Jaccard similarity of the two documents. The signatures are then split into bands, and only documents that agree on every position within some band are compared properly. Similar documents agree on a band with high probability, and dissimilar documents rarely do, so the function only compares pairs that are likely to be near duplicates.
+
+Every candidate pair is then checked with an exact Jaccard calculation before anything is removed. A document is only ever deleted because its true similarity to a kept document reached your threshold, never because of a hash collision.
+
+## Example code
+
+As with `limpiar_spam_grams()`, the output is a list. `$duplicates` summarises each group of near duplicates, `$data` holds the remaining documents, and `$deleted` holds the removed documents so you can inspect them.
+
+```{r}
+near_dupes <- limpiar_examples %>%
+  limpiar_near_duplicates(mention_content, similarity = 0.5)
+
+names(near_dupes)
+```
+
+`$duplicates` has one row per group. `group` is the row number of the document that was kept, `n_duplicates` counts the documents removed from that group, and the similarity columns describe how close the removed documents were to the kept one.
+
+```{r}
+near_dupes$duplicates
+```
+
+`$deleted` shows every removed document with its `group` and its `similarity` to the kept document. Here the function found the tweet and retweet pair, and the pair of exact duplicates, which matches what `limpiar_spam_grams()` found on this dataset.
+
+```{r}
+near_dupes$deleted
+```
+
+When you are happy with what was removed, re-assign your data frame from the list:
+
+```{r}
+clean_df <- near_dupes$data
+```
+
+## The process is stochastic
+
+The minhash signatures are built from randomly drawn hash functions, so the method is probabilistic. It is worth being clear about what is and is not left to chance:
+
+- Precision is not left to chance. Every removal is confirmed with an exact similarity calculation, so a removed document really was at or above your threshold.
+- Recall is left to chance. A small share of true near-duplicate pairs, mostly those close to the threshold, can fail to land in a shared band and go unnoticed.
+- Results are reproducible. The hash functions are drawn from the `seed` argument, so the same data, parameters, and seed always return the same output. Changing the seed can change which borderline pairs are found.
+
+You control the recall trade-off with `n_hashes`. More hash functions make the band check sharper, so fewer true pairs are missed, and the cost in run time grows linearly. The default of 100 recovered over 99% of true pairs in our testing against an exhaustive pairwise comparison. If a small number of missed borderline pairs would be a problem for your analysis, raise `n_hashes` to 200 and accept the longer run time.
+
+## Parameter settings
+
+`similarity` is the main dial, and it maps directly onto a measurable quantity, the share of shingles two documents have in common. A good starting point is 0.7. Raise it towards 0.9 if you only want to catch copies with light edits, and lower it towards 0.5 if you also want to catch heavier rewrites. As with `limpiar_spam_grams()`, you should sample `$deleted`, judge how many removals you agree with, and adjust.
+
+`shingle_size` defaults to 3 words. Larger shingles make the comparison stricter, because a single changed word breaks more shingles. Note that documents with fewer words than `shingle_size` produce no shingles, so they are always kept. Handle very short documents separately if they matter to you.
+
+Very low `similarity` values make the banding step coarse, so the function checks many more candidate pairs and slows down. If you find yourself below 0.4, `limpiar_spam_grams()` is probably the better tool for what you are trying to do.
+
+## Which function should I use?
+
+Use `limpiar_spam_grams()` when a recurring phrase is the problem, for example a spam template where every message shares one sentence but the rest of the text varies. Near-duplicate detection can miss these, because the documents as a whole may not be similar enough.
+
+Use `limpiar_near_duplicates()` when repeated documents are the problem, for example retweets, reposted copypasta, or syndicated articles. It judges whole documents, so a common but harmless phrase cannot cause a removal on its own, which is the main failure mode of `limpiar_spam_grams()`.
+
+The two functions compose well. A reasonable pipeline removes exact duplicates with `limpiar_duplicates()`, then near duplicates with `limpiar_near_duplicates()`, then inspects what remains with `limpiar_spam_grams()`.
+
+## Performance
+
+The function is designed to run on an ordinary laptop. On a corpus of 100,000 social-media-length documents it runs in about 10 seconds, and in our benchmarks it was faster than the equivalent pipeline in Python's `datasketch` library. Run time grows close to linearly with the number of documents, because the banding step avoids the quadratic pairwise comparison.
+
+Memory is not a barrier on smaller machines. At 100,000 documents the algorithm needs about 1GB of working memory, and it completed at full speed in our tests even when R was capped at that amount, so an 8GB laptop is enough. Memory scales with the total number of words rather than the number of documents, so a corpus of very long documents costs more than the same number of short posts. The full benchmark protocol and results live in `dev_docs/` in the package repository.

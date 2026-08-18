@@ -47,6 +47,7 @@ reference:
     Functions for removing unwanted posts entirely (rather than cleaning).
   contents:
   - limpiar_duplicates
+  - limpiar_near_duplicates
   - limpiar_retweets
   - limpiar_spam_grams
 
