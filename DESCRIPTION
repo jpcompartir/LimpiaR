@@ -3,11 +3,12 @@ Title: LimpiaR
 Version: 1.2.0
 Authors@R: 
     as.person(c(
-    "Jack Penzer <jack.penzer@sharecreative.com> [cre]",
+    "Jack Penzer <jack.penzer@samy.com> [cre]",
     "Tim Mooney <tim.mooney@sharecreative.com> [aut]",
-    "SHARE Creative [cph]"
+    "Ben Jessup <ben.jessup@samy.com> [aut]",
+    "SAMY[cph]"
     ))
-Description: SHARE & SAMY Group's dedicated pre-processing suite for Spanish & English data sets. A range of functions for getting text data ready to be analysed.
+Description: SAMY Data Science's dedicated pre-processing suite for Spanish & English data sets. A range of functions for getting text data ready to be analysed.
 URL: https://jpcompartir.github.io/LimpiaR
 License: MIT + file LICENSE
 Encoding: UTF-8

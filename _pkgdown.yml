@@ -95,6 +95,7 @@ reference:
   - limpiar_near_duplicates
   - limpiar_retweets
   - limpiar_spam_grams
+  - limpiar_phone_numbers
 
 - title: Utility Functions
   desc: >
@@ -120,3 +121,5 @@ repo:
 
 development:
   mode: auto
+  version_label: default
+  version_tooltip: "Version"
