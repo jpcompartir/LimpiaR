@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>LimpiaR • LimpiaR</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/Lato-0.4.10/font.css" rel="stylesheet">
+<link href="deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/Lato-0.4.10/font.css" rel="stylesheet">
 <link href="deps/Fira_Code-0.4.10/font.css" rel="stylesheet">
 <link href="deps/Merriweather-0.4.10/font.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="index.html">LimpiaR</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.1.2</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -94,7 +94,7 @@
 <col width="20%">
 <col width="20%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>Function</th>
 <th>Description</th>
 <th>Language Support</th>
@@ -102,105 +102,105 @@
 <th>Notes</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><a href="https://jpcompartir.github.io/LimpiaR/reference/limpiar_accents.html">limpiar_accents</a></td>
 <td>Removes accented characters</td>
 <td>Language-agnostic</td>
 <td>Text normalisation</td>
 <td>Useful for reducing token complexity</td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="https://jpcompartir.github.io/LimpiaR/reference/limpiar_spaces.html">limpiar_spaces</a></td>
 <td>Removes redundant spaces</td>
 <td>Language-agnostic</td>
 <td>Text cleaning</td>
 <td>Also standardises punctuation spacing</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="https://jpcompartir.github.io/LimpiaR/reference/limpiar_url.html">limpiar_url</a></td>
 <td>Removes URLs from text</td>
 <td>Language-agnostic</td>
 <td>Text cleaning</td>
 <td>Handles various URL formats</td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="https://jpcompartir.github.io/LimpiaR/reference/limpiar_repeat_chars.html">limpiar_repeat_chars</a></td>
 <td>Normalises repeated characters</td>
 <td>Spanish-focused</td>
 <td>Text normalisation</td>
 <td>Handles laugh patterns (jajaja)</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="https://jpcompartir.github.io/LimpiaR/reference/limpiar_shorthands.html">limpiar_shorthands</a></td>
 <td>Expands common abbreviations</td>
 <td>Spanish-focused</td>
 <td>Text normalisation</td>
 <td>e.g., “porq” → “porque”</td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="https://jpcompartir.github.io/LimpiaR/reference/limpiar_tags.html">limpiar_tags</a></td>
 <td>Normalises social media tags</td>
 <td>Language-agnostic</td>
 <td>Social media prep</td>
 <td>Handles @mentions and #hashtags</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="https://jpcompartir.github.io/LimpiaR/reference/limpiar_stopwords.html">limpiar_stopwords</a></td>
 <td>Removes common stopwords</td>
 <td>Spanish-focused</td>
 <td>Text analysis</td>
 <td>Offers “sentiment” and “topics” modes</td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="https://jpcompartir.github.io/LimpiaR/reference/limpiar_slang.html">limpiar_slang</a></td>
 <td>Normalises dialectal variations</td>
 <td>Spanish-focused</td>
 <td>Text normalisation</td>
 <td>Handles multiple Spanish dialects</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="https://jpcompartir.github.io/LimpiaR/reference/limpiar_emojis_es.html">limpiar_emojis_es</a></td>
 <td>Converts emojis to Spanish text</td>
 <td>Spanish</td>
 <td>Text normalisation</td>
 <td>Spanish-specific emoji descriptions</td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="https://jpcompartir.github.io/LimpiaR/reference/limpiar_recode_emojis.html">limpiar_recode_emojis</a></td>
 <td>Recodes emojis to text</td>
 <td>Language-agnostic</td>
 <td>Text normalisation</td>
 <td>General emoji handling</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="https://jpcompartir.github.io/LimpiaR/reference/limpiar_remove_emojis.html">limpiar_remove_emojis</a></td>
 <td>Removes emojis completely</td>
 <td>Language-agnostic</td>
 <td>Text cleaning</td>
 <td>Complete emoji removal</td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="https://jpcompartir.github.io/LimpiaR/reference/limpiar_pp_products.html">limpiar_pp_products</a></td>
 <td>Replaces product mentions</td>
 <td>English/Spanish</td>
 <td>Entity normalisation</td>
 <td>For product analysis</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="https://jpcompartir.github.io/LimpiaR/reference/limpiar_pp_companies.html">limpiar_pp_companies</a></td>
 <td>Replaces company mentions</td>
 <td>English/Spanish</td>
 <td>Entity normalisation</td>
 <td>For company analysis</td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="https://jpcompartir.github.io/LimpiaR/reference/limpiar_non_ascii.html">limpiar_non_ascii</a></td>
 <td>Removes non-ASCII characters</td>
 <td>Language-agnostic</td>
 <td>Text cleaning</td>
 <td>Less aggressive than alphanumeric</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="https://jpcompartir.github.io/LimpiaR/reference/limpiar_alphanumeric.html">limpiar_alphanumeric</a></td>
 <td>Keeps only letters/numbers</td>
 <td>Language-agnostic</td>
@@ -221,7 +221,7 @@
 <col width="20%">
 <col width="20%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>Function</th>
 <th>Description</th>
 <th>Language Support</th>
@@ -229,28 +229,28 @@
 <th>Notes</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><a href="https://jpcompartir.github.io/LimpiaR/reference/limpiar_duplicates.html">limpiar_duplicates</a></td>
 <td>Removes duplicate content</td>
 <td>Language-agnostic</td>
 <td>Data cleaning</td>
 <td>Also removes protected content</td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="https://jpcompartir.github.io/LimpiaR/reference/limpiar_retweets.html">limpiar_retweets</a></td>
 <td>Removes retweet content</td>
 <td>Language-agnostic</td>
 <td>Social media cleaning</td>
 <td>Identifies RT patterns</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="https://jpcompartir.github.io/LimpiaR/reference/limpiar_spam_grams.html">limpiar_spam_grams</a></td>
 <td>Removes spam-like patterns</td>
 <td>Language-agnostic</td>
 <td>Content filtering</td>
 <td>Uses n-gram analysis</td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="https://jpcompartir.github.io/LimpiaR/reference/limpiar_phones.html">limpiar_phone_numbers</a></td>
 <td>Tags phone numbers in posts</td>
 <td>Language-agnostic</td>
@@ -272,7 +272,7 @@
 <col width="20%">
 <col width="20%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>Function</th>
 <th>Description</th>
 <th>Language Support</th>
@@ -280,28 +280,28 @@
 <th>Notes</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><a href="https://jpcompartir.github.io/LimpiaR/reference/limpiar_inspect.html">limpiar_inspect</a></td>
 <td>Viewable pane for pattern matches</td>
 <td>Language-agnostic</td>
 <td>Data exploration</td>
 <td>Interactive viewing</td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="https://jpcompartir.github.io/LimpiaR/reference/limpiar_na_cols.html">limpiar_na_cols</a></td>
 <td>Removes NA-heavy columns</td>
 <td>Language-agnostic</td>
 <td>Data cleaning</td>
 <td>Configurable threshold</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="https://jpcompartir.github.io/LimpiaR/reference/limpiar_link_click.html">limpiar_link_click</a></td>
 <td>Makes URLs clickable and short</td>
 <td>Language-agnostic</td>
 <td>UI enhancement</td>
 <td>For Shiny/DataTable</td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="https://jpcompartir.github.io/LimpiaR/reference/limpiar_ex_subreddits.html">limpiar_ex_subreddits</a></td>
 <td>Extracts subreddit names</td>
 <td>Language-agnostic</td>
@@ -323,7 +323,7 @@
 <col width="20%">
 <col width="20%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>Function</th>
 <th>Description</th>
 <th>Language Support</th>
@@ -331,14 +331,14 @@
 <th>Notes</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><a href="https://jpcompartir.github.io/LimpiaR/reference/limpiar_pos_import_model.html">limpiar_pos_import_model</a></td>
 <td>Imports Parts of Speech models and caches</td>
 <td>65+ languages</td>
 <td>POS analysis prep</td>
 <td>Uses UDPipe models</td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="https://jpcompartir.github.io/LimpiaR/reference/limpiar_pos_annotate.html">limpiar_pos_annotate</a></td>
 <td>Performs POS analysis</td>
 <td>65+ languages</td>
@@ -396,7 +396,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

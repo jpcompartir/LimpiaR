@@ -29,6 +29,7 @@ Data Frame with the text variable cleaned in place
 ## Examples
 
 ``` r
+
  emojis <- data.frame(
  text = c("Hello 👋 World",
   "Family: 👨‍👩‍👧‍👦",

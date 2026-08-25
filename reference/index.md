@@ -57,6 +57,8 @@ Functions for removing unwanted posts entirely (rather than cleaning).
 
 - [`limpiar_duplicates()`](https://jpcompartir.github.io/LimpiaR/reference/limpiar_duplicates.md)
   : Clean the text variable of duplicate posts
+- [`limpiar_near_duplicates()`](https://jpcompartir.github.io/LimpiaR/reference/limpiar_near_duplicates.md)
+  : Remove near-duplicate posts
 - [`limpiar_retweets()`](https://jpcompartir.github.io/LimpiaR/reference/limpiar_retweets.md)
   : Clean retweets from the text variable
 - [`limpiar_spam_grams()`](https://jpcompartir.github.io/LimpiaR/reference/limpiar_spam_grams.md)

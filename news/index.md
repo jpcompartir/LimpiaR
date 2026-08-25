@@ -1,11 +1,21 @@
 # Changelog
 
-## LimpiaR 1.1.2
+## LimpiaR 1.2.0
 
-- [`limpiar_phone_numbers()`](https://jpcompartir.github.io/LimpiaR/reference/limpiar_phone_numbers.md)
-  function introduced - flags documents that have phone numbers in the
-  text, see package’s function reference section and README for more
-  information
+- Introduced
+  [`limpiar_near_duplicates()`](https://jpcompartir.github.io/LimpiaR/reference/limpiar_near_duplicates.md)
+  for finding and removing near-duplicate documents at scale. It uses
+  minhash signatures with locality sensitive hashing, implemented in R
+  with no new compiled dependencies, and handles 100,000 documents in
+  seconds on a laptop. Candidate pairs are verified with exact Jaccard
+  similarity before removal, and results are reproducible through a
+  `seed` argument. The `engine` argument leaves room for other methods
+  later.
+- Updated the `near_duplicates.Rmd` vignette with guidance on when to
+  use
+  [`limpiar_near_duplicates()`](https://jpcompartir.github.io/LimpiaR/reference/limpiar_near_duplicates.md)
+  and how to set its parameters.
+- Raised the minimum dplyr version to 1.1.0 and added purrr to Imports.
 
 ## LimpiaR 1.1.1
 

@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Near Duplicate Removal • LimpiaR</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Lato-0.4.10/font.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/Lato-0.4.10/font.css" rel="stylesheet">
 <link href="../deps/Fira_Code-0.4.10/font.css" rel="stylesheet">
 <link href="../deps/Merriweather-0.4.10/font.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
@@ -23,7 +23,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">LimpiaR</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.1.2</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,10 +79,10 @@
 <div class="section level2">
 <h2 id="quick-start---code">Quick Start - Code<a class="anchor" aria-label="anchor" href="#quick-start---code"></a>
 </h2>
-<p>Quick example of how to run the code for the function - get a dataset
-with a text variable and:</p>
+<p>Quick example of how to run the code for the functions - get a
+dataset with a text variable and:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">limpiar_examples</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">limpiar_examples</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/limpiar_spam_grams.html">limpiar_spam_grams</a></span><span class="op">(</span><span class="va">mention_content</span>, n_gram <span class="op">=</span> <span class="fl">3</span>, min_freq <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $spam_grams</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 13 × 2</span></span></span>
@@ -121,6 +121,36 @@ with a text variable and:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>      2 sancho_panza RT mi amigo sa… www.twitte… <span style="color: #BB0000;">NA</span>                           2</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>      4 el_sordo     nos han metido… www.fakebo… <span style="color: #BB0000;">NA</span>                           4</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>      5 commander_m… nos han metido… www.fakebo… <span style="color: #BB0000;">NA</span>                           5</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">limpiar_examples</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/limpiar_near_duplicates.html">limpiar_near_duplicates</a></span><span class="op">(</span><span class="va">mention_content</span>, similarity <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
+<span><span class="co">#&gt; $duplicates</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 5</span></span></span>
+<span><span class="co">#&gt;   group mention_content              n_duplicates mean_similarity min_similarity</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                               <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 mi amigo sancho es un wn de…            1           0.875          0.875</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     4 nos han metido en una muy d…            1           1              1    </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $data</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 6</span></span></span>
+<span><span class="co">#&gt;   doc_id author_name  mention_content mention_url platform_interactions document</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>      1 don_quijote  <span style="color: #949494;">"</span>mi amigo sanc… www.twitte… <span style="color: #BB0000;">NA</span>                           1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>      3 edmond_dant… <span style="color: #949494;">"</span>@don_quijote … www.twitte… <span style="color: #BB0000;">NA</span>                           3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>      4 el_sordo     <span style="color: #949494;">"</span>nos han metid… www.fakebo… <span style="color: #BB0000;">NA</span>                           4</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>      6 robert_jord… <span style="color: #949494;">"</span>   Lo q no te… www.youtub… <span style="color: #BB0000;">NA</span>                           6</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>      7 anselmo      <span style="color: #949494;">"</span>a mi es muy g… www.twitte… <span style="color: #BB0000;">NA</span>                           7</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>      8 maria        <span style="color: #949494;">"</span>ayyy nooo @ro… www.twitte… <span style="color: #BB0000;">NA</span>                           8</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span>      9 pablo        <span style="color: #949494;">"</span>todos se unen… www.instag… <span style="color: #BB0000;">NA</span>                           9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span>     10 pilar        <span style="color: #949494;">"</span>a mi me gusta… www.instag… <span style="color: #BB0000;">NA</span>                          10</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $deleted</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 8</span></span></span>
+<span><span class="co">#&gt;   doc_id author_name  mention_content mention_url platform_interactions document</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>      2 sancho_panza RT mi amigo sa… www.twitte… <span style="color: #BB0000;">NA</span>                           2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>      5 commander_m… nos han metido… www.fakebo… <span style="color: #BB0000;">NA</span>                           5</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: group &lt;int&gt;, similarity &lt;dbl&gt;</span></span></span></code></pre></div>
 <p>Now read the docs!</p>
 </div>
 <div class="section level2">
@@ -224,17 +254,17 @@ verification will take up more of our time.</p>
 contain many near duplicates. We ask the function to find any substring
 within a document of 3 words that is seen in the entire dataset that is
 seen in at least 2 documents.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">spam_grams_output</span> <span class="op">&lt;-</span> <span class="va">limpiar_examples</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">spam_grams_output</span> <span class="op">&lt;-</span> <span class="va">limpiar_examples</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/limpiar_spam_grams.html">limpiar_spam_grams</a></span><span class="op">(</span><span class="va">mention_content</span>, n_gram <span class="op">=</span> <span class="fl">3</span>, min_freq <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <p>We can check what’s in the list simply with <code><a href="https://rdrr.io/r/base/names.html" class="external-link">names()</a></code>.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">spam_grams_output</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "spam_grams" "data"       "deleted"</span></span></code></pre></div>
 <p>We confirm that we have the three elements of the list that we
 expect. Now we can take a look at <code>spam_grams</code> to see what
 ngrams the function is suggesting we delete:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spam_grams_output</span><span class="op">$</span><span class="va">spam_grams</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 13 × 2</span></span></span>
 <span><span class="co">#&gt;    ngrams                    n</span></span>
@@ -266,7 +296,7 @@ to be treated as near duplicates. We also have a pair of exact
 duplicates by EL Sordo and Commander Miranda - we would expect
 duplicates to be flagged as near duplicates. So <strong>in this
 case</strong> the function is working as intended.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spam_grams_output</span><span class="op">$</span><span class="va">deleted</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 6</span></span></span>
 <span><span class="co">#&gt;   doc_id author_name  mention_content mention_url platform_interactions document</span></span>
@@ -309,8 +339,8 @@ spam-like. Record the outputs of your experiments.</p>
 dataset that has 1 word in it. This will result in 100% recall of spam
 documents - because you remove every document. However, precision would
 be low.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">limpiar_examples</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">limpiar_examples</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/limpiar_spam_grams.html">limpiar_spam_grams</a></span><span class="op">(</span><span class="va">mention_content</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $spam_grams</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 56 × 2</span></span></span>
@@ -380,11 +410,447 @@ to iterate over the parameters, this can be a barrier to usage.</p>
 </div>
 </div>
 <div class="section level2">
-<h2 id="another-solution">Another Solution<a class="anchor" aria-label="anchor" href="#another-solution"></a>
+<h2 id="another-solution---limpiar_near_duplicates">Another Solution - <code>limpiar_near_duplicates()</code><a class="anchor" aria-label="anchor" href="#another-solution---limpiar_near_duplicates"></a>
 </h2>
-<p>Coming soon:</p>
-<p>Approximate Nearest Neighbours, Locality Sensitive Hashing, and
-Jaccard Similarity</p>
+<p><code><a href="../reference/limpiar_spam_grams.html">limpiar_spam_grams()</a></code> removes documents that contain a
+suspicious n-gram. <code><a href="../reference/limpiar_near_duplicates.html">limpiar_near_duplicates()</a></code> asks a
+different question. It compares whole documents, finds groups of
+documents that are nearly identical, keeps the first document of each
+group, and removes the rest. Use it when you want to keep one copy of
+each repeated message rather than remove every document that matches a
+pattern.</p>
+<div class="section level3">
+<h3 id="how-similarity-is-measured">How similarity is measured<a class="anchor" aria-label="anchor" href="#how-similarity-is-measured"></a>
+</h3>
+<p>The function cuts each document into shingles, which are runs of
+<code>shingle_size</code> consecutive words. Text is lowercased and
+punctuation is removed before shingling, but your original text is
+returned untouched. Two documents are then compared with the Jaccard
+similarity of their shingle sets, which is the number of shingles they
+share divided by the number of shingles they have between them. A pair
+of identical documents scores 1, and a pair with no shared shingles
+scores 0. Any pair that scores at or above the <code>similarity</code>
+threshold counts as a near-duplicate pair.</p>
+<p>Checking every pair of documents directly would need
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo stretchy="false" form="prefix">(</mo><mi>N</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">N(N-1)/2</annotation></semantics></math>
+comparisons, which becomes impractical long before 100,000 documents.
+The function avoids this with minhash and locality sensitive hashing
+(LSH). Each document’s shingle set is compressed into a short signature
+of <code>n_hashes</code> numbers, built so that, for any pair of
+documents, the probability that their signatures agree in any one
+position is proportionate to their Jaccard similarity (which is unknown
+at runtime, and what we’re trying to estimate). The signatures are then
+split into bands, and only documents that agree on every position within
+some band are compared properly. Similar documents agree on a band with
+high probability, and dissimilar documents rarely do, so the function
+only compares pairs that are likely to be near duplicates.</p>
+<p>Every candidate pair is then checked with an exact Jaccard
+calculation before anything is removed. A document is only ever deleted
+because its true similarity to a kept document reached your threshold,
+never because of a hash collision.</p>
+<p>The number of bands is chosen automatically (derivation below in
+appendix) from <code>similarity</code> and <code>n_hashes</code>. The
+signature is split into bands of equal width, and each candidate width
+implies a similarity level at which pairs start to reliably share a
+band. The function picks the widest band whose implied level does not
+exceed your threshold. Erring on the low side means some extra candidate
+pairs are checked, but the exact verification step removes those,
+whereas a pair that never shares a band is never recovered. Lowering
+<code>similarity</code> therefore forces narrower bands and more
+candidate pairs, which is why very low thresholds slow the function
+down. A larger <code>n_hashes</code> offers more widths to choose from,
+which is why it makes the band check sharper. The exact numbers are in
+the appendix at the end of this vignette.</p>
+</div>
+<div class="section level3">
+<h3 id="example-code-1">Example code<a class="anchor" aria-label="anchor" href="#example-code-1"></a>
+</h3>
+<p>As with <code><a href="../reference/limpiar_spam_grams.html">limpiar_spam_grams()</a></code>, the output is a list.
+<code>$duplicates</code> summarises each group of near duplicates,
+<code>$data</code> holds the remaining documents, and
+<code>$deleted</code> holds the removed documents so you can inspect
+them.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">near_dupes</span> <span class="op">&lt;-</span> <span class="va">limpiar_examples</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/limpiar_near_duplicates.html">limpiar_near_duplicates</a></span><span class="op">(</span><span class="va">mention_content</span>, similarity <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">near_dupes</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "duplicates" "data"       "deleted"</span></span></code></pre></div>
+<p><code>$duplicates</code> has one row per group. <code>group</code> is
+the row number of the document that was kept, <code>n_duplicates</code>
+counts the documents removed from that group, and the similarity columns
+describe how close the removed documents were to the kept one.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">near_dupes</span><span class="op">$</span><span class="va">duplicates</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 5</span></span></span>
+<span><span class="co">#&gt;   group mention_content              n_duplicates mean_similarity min_similarity</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                               <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 mi amigo sancho es un wn de…            1           0.875          0.875</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     4 nos han metido en una muy d…            1           1              1</span></span></code></pre></div>
+<p><code>$deleted</code> shows every removed document with its
+<code>group</code> and its <code>similarity</code> to the kept document.
+Here the function found the tweet and retweet pair, and the pair of
+exact duplicates, which matches what <code><a href="../reference/limpiar_spam_grams.html">limpiar_spam_grams()</a></code>
+found on this dataset.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">near_dupes</span><span class="op">$</span><span class="va">deleted</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 8</span></span></span>
+<span><span class="co">#&gt;   doc_id author_name  mention_content mention_url platform_interactions document</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>      2 sancho_panza RT mi amigo sa… www.twitte… <span style="color: #BB0000;">NA</span>                           2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>      5 commander_m… nos han metido… www.fakebo… <span style="color: #BB0000;">NA</span>                           5</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: group &lt;int&gt;, similarity &lt;dbl&gt;</span></span></span></code></pre></div>
+<p>When you are happy with what was removed, re-assign your data frame
+from the list:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">clean_df</span> <span class="op">&lt;-</span> <span class="va">near_dupes</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="inspecting-a-group">Inspecting a group<a class="anchor" aria-label="anchor" href="#inspecting-a-group"></a>
+</h3>
+<p>Every <code>group</code> value is a document ID: the original row
+number of the document that was kept. The function adds this row number
+to the data as a <code>document</code> column, and <code>$data</code>
+keeps that column, so you can look up any group’s kept document
+directly.</p>
+<p>On a large dataset, start with <code>$duplicates</code>. It is
+already sorted so the groups that caused the most removals come first,
+and it carries the kept document’s text, so it answers “which documents
+are the primary offenders?” without any extra counting:</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">near_dupes</span><span class="op">$</span><span class="va">duplicates</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 5</span></span></span>
+<span><span class="co">#&gt;   group mention_content              n_duplicates mean_similarity min_similarity</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                               <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 mi amigo sancho es un wn de…            1           0.875          0.875</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     4 nos han metido en una muy d…            1           1              1</span></span></code></pre></div>
+<p>To see one group in full, filter both sides by its ID. The kept
+document lives in <code>$data</code>, and everything removed for it
+lives in <code>$deleted</code>:</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">group_id</span> <span class="op">&lt;-</span> <span class="va">near_dupes</span><span class="op">$</span><span class="va">duplicates</span><span class="op">$</span><span class="va">group</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
+<span></span>
+<span><span class="co"># the document that was kept</span></span>
+<span><span class="va">near_dupes</span><span class="op">$</span><span class="va">data</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">document</span> <span class="op">==</span> <span class="va">group_id</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 6</span></span></span>
+<span><span class="co">#&gt;   doc_id author_name mention_content  mention_url platform_interactions document</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>      1 don_quijote mi amigo sancho… www.twitte… <span style="color: #BB0000;">NA</span>                           1</span></span>
+<span></span>
+<span><span class="co"># the documents removed because they were near it</span></span>
+<span><span class="va">near_dupes</span><span class="op">$</span><span class="va">deleted</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">group</span> <span class="op">==</span> <span class="va">group_id</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 8</span></span></span>
+<span><span class="co">#&gt;   doc_id author_name  mention_content mention_url platform_interactions document</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>      2 sancho_panza RT mi amigo sa… www.twitte… <span style="color: #BB0000;">NA</span>                           2</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: group &lt;int&gt;, similarity &lt;dbl&gt;</span></span></span></code></pre></div>
+<p>Because <code>document</code> records the row number from the
+<em>input</em> data, these lookups stay correct after rows have been
+removed - filter on <code>document</code>, not on the current row
+position.</p>
+<p>The minhash signatures are built from randomly drawn hash functions,
+so the method is probabilistic. It is worth being clear about what is
+and is not left to chance:</p>
+<ul>
+<li>Precision is not left to chance. Every removal is confirmed with an
+exact similarity calculation, so a removed document really was at or
+above your threshold.</li>
+<li>Recall is left to chance. A small share of true near-duplicate
+pairs, mostly those close to the threshold, can fail to land in a shared
+band and go unnoticed.</li>
+<li>Results are reproducible. The hash functions are drawn from the
+<code>seed</code> argument, so the same data, parameters, and seed
+always return the same output. Changing the seed can change which
+borderline pairs are found.</li>
+</ul>
+<p>You control the recall trade-off with <code>n_hashes</code>. More
+hash functions make the band check sharper, so fewer true pairs are
+missed, and the cost in run time grows linearly. The default of 100
+recovered over 99% of true pairs in our testing against an exhaustive
+pairwise comparison. If a small number of missed borderline pairs would
+be a problem for your analysis, raise <code>n_hashes</code> to 200 and
+accept the longer run time.</p>
+</div>
+<div class="section level3">
+<h3 id="parameter-settings-1">Parameter settings<a class="anchor" aria-label="anchor" href="#parameter-settings-1"></a>
+</h3>
+<p><code>similarity</code>, or the share of shingles two documents have
+in common, is the most important tuneable parameter - this has the most
+pronounced effect on how strict or lenient the near-duplicate removal
+will be. In theory, a value of 1 would tend only to remove exact
+duplicates, a value of 0 would tend to removal all documents longer than
+the minimum shingle size. A good starting point is 0.7. Raise it towards
+0.9 if you only want to catch copies with light edits, and lower it
+towards 0.5 if you also want to catch heavier rewrites. As with
+<code><a href="../reference/limpiar_spam_grams.html">limpiar_spam_grams()</a></code>, you should sample
+<code>$deleted</code>, judge how many removals you agree with, and
+adjust.</p>
+<p><code>shingle_size</code> defaults to 3 words. Larger shingles make
+the comparison stricter, because a single changed word breaks more
+shingles. Documents with fewer words than <code>shingle_size</code>
+produce no shingles and are always kept, which the Limitations section
+below shows in detail.</p>
+<p>Very low <code>similarity</code> values make the banding step coarse,
+so the function checks many more candidate pairs and slows down. If you
+find yourself below 0.4, <code><a href="../reference/limpiar_spam_grams.html">limpiar_spam_grams()</a></code> is probably
+the better tool for what you are trying to do.</p>
+</div>
+<div class="section level3">
+<h3 id="limitations-1">Limitations<a class="anchor" aria-label="anchor" href="#limitations-1"></a>
+</h3>
+<div class="section level4">
+<h4 id="containment-is-not-similarity">Containment is not similarity<a class="anchor" aria-label="anchor" href="#containment-is-not-similarity"></a>
+</h4>
+<p>Jaccard similarity compares whole documents, so a short document
+copied inside a much longer one scores roughly the ratio of their
+lengths. Let’s make this concrete with four documents. The bicycle quote
+from earlier appears word for word inside a longer article, a second
+copy of the quote has two words added, and a fourth document is
+unrelated.</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">quote</span> <span class="op">&lt;-</span> <span class="st">"Life is like riding a bicycle. To keep your balance, you must keep moving."</span></span>
+<span></span>
+<span><span class="va">article</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span></span>
+<span>  <span class="st">"Einstein wrote to his son Eduard in 1930 with a piece of advice that has"</span>,</span>
+<span>  <span class="st">"been shared millions of times since."</span>,</span>
+<span>  <span class="va">quote</span>,</span>
+<span>  <span class="st">"The letter was sold at auction decades later, and the phrase now appears"</span>,</span>
+<span>  <span class="st">"on posters, mugs, and motivational accounts across every social network."</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">quote_edited</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">quote</span>, <span class="st">"So true!"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">unrelated</span> <span class="op">&lt;-</span> <span class="st">"The unexpected shower forced all the beachgoers to seek shelter in nearby buildings."</span></span>
+<span></span>
+<span><span class="va">containment_df</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
+<span>  doc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"quote"</span>, <span class="st">"article"</span>, <span class="st">"quote_edited"</span>, <span class="st">"unrelated"</span><span class="op">)</span>,</span>
+<span>  mention_content <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">quote</span>, <span class="va">article</span>, <span class="va">quote_edited</span>, <span class="va">unrelated</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="op">(</span></span>
+<span><span class="va">containment_out</span> <span class="op">&lt;-</span> <span class="va">containment_df</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/limpiar_near_duplicates.html">limpiar_near_duplicates</a></span><span class="op">(</span><span class="va">mention_content</span>, similarity <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; $duplicates</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 5</span></span></span>
+<span><span class="co">#&gt;   group mention_content              n_duplicates mean_similarity min_similarity</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                               <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 Life is like riding a bicyc…            1           0.857          0.857</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $data</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 3</span></span></span>
+<span><span class="co">#&gt;   doc       mention_content                                             document</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> quote     Life is like riding a bicycle. To keep your balance, you m…        1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> article   Einstein wrote to his son Eduard in 1930 with a piece of a…        2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> unrelated The unexpected shower forced all the beachgoers to seek sh…        4</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $deleted</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 5</span></span></span>
+<span><span class="co">#&gt;   doc          mention_content                         document group similarity</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> quote_edited Life is like riding a bicycle. To keep…        3     1      0.857</span></span></code></pre></div>
+<p>Only <code>quote_edited</code> is removed. Against the original quote
+it scores 0.86, because almost all of its shingles are shared.</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">containment_out</span><span class="op">$</span><span class="va">deleted</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">doc</span>, <span class="va">group</span>, <span class="va">similarity</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
+<span><span class="co">#&gt;   doc          group similarity</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> quote_edited     1      0.857</span></span></code></pre></div>
+<p>The article survives, even though it contains the quote word for
+word. It scores about 0.21 against the quote, because the article’s own
+shingles outnumber the shared ones, and no realistic
+<code>similarity</code> setting would remove it. The unrelated document
+shares no shingles with any other document and scores 0.</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">containment_out</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">doc</span></span>
+<span><span class="co">#&gt; [1] "quote"     "article"   "unrelated"</span></span></code></pre></div>
+<p>Whether the surviving article is a problem depends on your task. For
+social listening it is often what you want, because an article that
+quotes a viral post is a genuine document and should survive
+deduplication. If you do want to remove contained copies, no
+<code>similarity</code> setting will get you there, and you need a
+containment measure instead.</p>
+</div>
+<div class="section level4">
+<h4 id="word-order-barely-matters">Word order barely matters<a class="anchor" aria-label="anchor" href="#word-order-barely-matters"></a>
+</h4>
+<p>Documents are compared as sets of shingles, so order is only
+preserved within each shingle’s window of <code>shingle_size</code>
+words. A document with its paragraphs shuffled scores close to 1 against
+the original. For deduplication this is usually fine, because reordered
+boilerplate is still boilerplate, but the function cannot distinguish
+rearrangement from repetition.</p>
+</div>
+<div class="section level4">
+<h4 id="very-short-documents-are-never-removed">Very short documents are never removed<a class="anchor" aria-label="anchor" href="#very-short-documents-are-never-removed"></a>
+</h4>
+<p>Documents with fewer words than <code>shingle_size</code> produce no
+shingles, so they are always kept, even when they are exact duplicates
+of each other. With the default <code>shingle_size = 3</code>, the
+two-word documents below never produce a shingle, so the function
+removes nothing.</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">short_df</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
+<span>  doc <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>,</span>
+<span>  mention_content <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Great product!"</span>, <span class="st">"Great product!"</span>, <span class="st">"Buy now"</span>, <span class="st">"Buy now"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">short_out</span> <span class="op">&lt;-</span> <span class="va">short_df</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/limpiar_near_duplicates.html">limpiar_near_duplicates</a></span><span class="op">(</span><span class="va">mention_content</span>, similarity <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">short_out</span><span class="op">$</span><span class="va">deleted</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0</span></span>
+<span><span class="va">short_out</span><span class="op">$</span><span class="va">data</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span></span>
+<span><span class="co">#&gt;     doc mention_content document</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 Great product!         1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 Great product!         2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 Buy now                3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 Buy now                4</span></span></code></pre></div>
+<p>All four documents are kept, including both exact duplicate pairs. If
+very short documents matter to your analysis, handle them separately,
+for example with <code><a href="../reference/limpiar_duplicates.html">limpiar_duplicates()</a></code> for exact copies.</p>
+</div>
+</div>
+<div class="section level3">
+<h3 id="which-function-should-i-use">Which function should I use?<a class="anchor" aria-label="anchor" href="#which-function-should-i-use"></a>
+</h3>
+<p>Use <code><a href="../reference/limpiar_spam_grams.html">limpiar_spam_grams()</a></code> when a recurring phrase is the
+problem, for example a spam template where every message shares one
+sentence but the rest of the text varies. Near-duplicate detection can
+miss these, because the documents as a whole may not be similar
+enough.</p>
+<p>Use <code><a href="../reference/limpiar_near_duplicates.html">limpiar_near_duplicates()</a></code> when repeated documents
+are the problem, for example retweets, reposted copypasta, or syndicated
+articles. It judges whole documents, so a common but harmless phrase
+cannot cause a removal on its own, which is the main failure mode of
+<code><a href="../reference/limpiar_spam_grams.html">limpiar_spam_grams()</a></code>.</p>
+<p>The two functions compose well. A reasonable pipeline removes exact
+duplicates with <code><a href="../reference/limpiar_duplicates.html">limpiar_duplicates()</a></code>, then near duplicates
+with <code><a href="../reference/limpiar_near_duplicates.html">limpiar_near_duplicates()</a></code>, then inspects what remains
+with <code><a href="../reference/limpiar_spam_grams.html">limpiar_spam_grams()</a></code>.</p>
+</div>
+<div class="section level3">
+<h3 id="performance">Performance<a class="anchor" aria-label="anchor" href="#performance"></a>
+</h3>
+<p>The function is designed to run on an ordinary laptop. On a corpus of
+100,000 social-media-length documents it runs in about 10 seconds, and
+in our benchmarks it was faster than the equivalent pipeline in Python’s
+<code>datasketch</code> library. Run time grows close to linearly with
+the number of documents, because the banding step avoids the quadratic
+pairwise comparison.</p>
+<p>Memory is not a barrier on smaller machines. At 100,000 documents the
+algorithm needs about 1GB of working memory, and it completed at full
+speed in our tests even when R was capped at that amount, so an 8GB
+laptop is enough. Memory scales with the total number of words rather
+than the number of documents, so a corpus of very long documents costs
+more than the same number of short posts. The full benchmark protocol
+and results live in <code>dev_docs/</code> in the package
+repository.</p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="appendix-how-the-banding-threshold-is-derived">Appendix: how the banding threshold is derived<a class="anchor" aria-label="anchor" href="#appendix-how-the-banding-threshold-is-derived"></a>
+</h2>
+<p>The main text says that the number of bands is chosen automatically
+from <code>similarity</code> and <code>n_hashes</code>. The derivation
+takes three steps.<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;The analysis treats signature positions as independent.
+The linear hash functions the implementation uses are only pairwise
+independent, and the standard treatment makes the same simplification,
+which is why we say the analysis “follows” the standard one rather than
+“proves” the result.&lt;/p&gt;"><sup>2</sup></a> First, for a pair of documents with Jaccard
+similarity
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>s</mi><annotation encoding="application/x-tex">s</annotation></semantics></math>,
+their signatures agree in any one position with probability
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>s</mi><annotation encoding="application/x-tex">s</annotation></semantics></math>.
+Second, if the signature is split into
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>
+bands of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>
+rows each, the pair agrees on all
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>
+rows of one band with probability
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>s</mi><mi>r</mi></msup><annotation encoding="application/x-tex">s^r</annotation></semantics></math>,
+so a single band fails to match with probability
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>−</mo><msup><mi>s</mi><mi>r</mi></msup></mrow><annotation encoding="application/x-tex">1 - s^r</annotation></semantics></math>.
+Third, across all
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>
+bands, the pair shares at least one band, and so becomes a candidate
+pair, with probability</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mtext mathvariant="normal">candidate</mtext><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>1</mn><mo>−</mo><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><msup><mi>s</mi><mi>r</mi></msup><msup><mo stretchy="false" form="postfix">)</mo><mi>b</mi></msup></mrow><annotation encoding="application/x-tex">P(\text{candidate}) = 1 - (1 - s^r)^b</annotation></semantics></math></p>
+<p>Plotted against
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>s</mi><annotation encoding="application/x-tex">s</annotation></semantics></math>,
+the probability forms an S-shaped curve, and the curve rises steepest at
+approximately</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>≈</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mn>1</mn><mi>b</mi></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mn>1</mn><mi>/</mi><mi>r</mi></mrow></msup></mrow><annotation encoding="application/x-tex">t \approx \left(\frac{1}{b}\right)^{1/r}</annotation></semantics></math></p>
+<p>which acts as the effective threshold of the band layout. Since
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi><mo>=</mo><msub><mi>n</mi><mtext mathvariant="normal">hashes</mtext></msub><mi>/</mi><mi>r</mi></mrow><annotation encoding="application/x-tex">b = n_\text{hashes} / r</annotation></semantics></math>,
+the function computes it as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>r</mi><mi>/</mi><msub><mi>n</mi><mtext mathvariant="normal">hashes</mtext></msub><msup><mo stretchy="false" form="postfix">)</mo><mrow><mn>1</mn><mi>/</mi><mi>r</mi></mrow></msup></mrow><annotation encoding="application/x-tex">(r / n_\text{hashes})^{1/r}</annotation></semantics></math>.
+Given your <code>similarity</code> and <code>n_hashes</code>, it
+considers every divisor
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>
+of <code>n_hashes</code> and picks the largest
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>
+whose effective threshold does not exceed your
+<code>similarity</code>.</p>
+<p>The table below evaluates the formula for every band layout available
+at the default <code>n_hashes = 100</code>. Each row shows a layout’s
+effective threshold, and the probability that a pair at similarity 0.3,
+0.5, 0.7, or 0.9 becomes a candidate pair. The table is computed
+directly from the formula, so it is reproducible arithmetic rather than
+an empirical benchmark.</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">n_hashes</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
+<span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">n_hashes</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="va">n_hashes</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span></span>
+<span><span class="va">b</span> <span class="op">&lt;-</span> <span class="va">n_hashes</span> <span class="op">/</span> <span class="va">r</span></span>
+<span></span>
+<span><span class="va">p_candidate</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">s</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">s</span><span class="op">^</span><span class="va">r</span><span class="op">)</span><span class="op">^</span><span class="va">b</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
+<span>  bands <span class="op">=</span> <span class="va">b</span>,</span>
+<span>  rows <span class="op">=</span> <span class="va">r</span>,</span>
+<span>  threshold <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="op">(</span><span class="va">r</span> <span class="op">/</span> <span class="va">n_hashes</span><span class="op">)</span><span class="op">^</span><span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="va">r</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>,</span>
+<span>  s_0.3 <span class="op">=</span> <span class="fu">p_candidate</span><span class="op">(</span><span class="fl">0.3</span><span class="op">)</span>,</span>
+<span>  s_0.5 <span class="op">=</span> <span class="fu">p_candidate</span><span class="op">(</span><span class="fl">0.5</span><span class="op">)</span>,</span>
+<span>  s_0.7 <span class="op">=</span> <span class="fu">p_candidate</span><span class="op">(</span><span class="fl">0.7</span><span class="op">)</span>,</span>
+<span>  s_0.9 <span class="op">=</span> <span class="fu">p_candidate</span><span class="op">(</span><span class="fl">0.9</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 9 × 7</span></span></span>
+<span><span class="co">#&gt;   bands  rows threshold s_0.3 s_0.5 s_0.7 s_0.9</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>   100     1      0.01 1     1     1     1    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>    50     2      0.14 0.991 1     1     1    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>    25     4      0.45 0.184 0.801 0.999 1    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>    20     5      0.55 0.047 0.47  0.975 1    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>    10    10      0.79 0     0.01  0.249 0.986</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>     5    20      0.92 0     0     0.004 0.477</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span>     4    25      0.95 0     0     0.001 0.258</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span>     2    50      0.99 0     0     0     0.01 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">9</span>     1   100      1    0     0     0     0</span></span></code></pre></div>
+<p>Reading the table explains both claims from the main text. A low
+<code>similarity</code> threshold forces a layout with few rows per
+band, and those layouts flag a large share of dissimilar pairs as
+candidates, all of which must be checked exactly, which is why low
+thresholds slow the function down. A larger <code>n_hashes</code> has
+more divisors, so the available effective thresholds are spaced more
+closely, and the function can pick a layout that sits nearer to your
+requested <code>similarity</code>, which is why more hash functions make
+the band check sharper.</p>
+<p>The banding analysis follows Leskovec, Rajaraman and Ullman,
+<em>Mining of Massive Datasets</em>, 3rd edition, chapter 3, which is
+free to read at <a href="http://www.mmds.org" class="external-link">mmds.org</a>; the table
+evaluates
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>−</mo><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><msup><mi>s</mi><mi>r</mi></msup><msup><mo stretchy="false" form="postfix">)</mo><mi>b</mi></msup></mrow><annotation encoding="application/x-tex">1 - (1 - s^r)^b</annotation></semantics></math>
+for the divisors of <code>n_hashes = 100</code>. The minhash technique,
+and the containment measure mentioned in the Limitations section, come
+from Broder (1997), “On the resemblance and containment of
+documents”.</p>
 </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -398,7 +864,7 @@ Jaccard Similarity</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

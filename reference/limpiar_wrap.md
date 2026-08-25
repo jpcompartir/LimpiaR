@@ -42,6 +42,7 @@ Data Frame with text variable edited in place
 ## Examples
 
 ``` r
+
 limpiar_examples %>% limpiar_wrap(mention_content, n = 5, newline_char = "<br>")
 #> # A tibble: 10 × 5
 #>    doc_id author_name       mention_content    mention_url platform_interactions

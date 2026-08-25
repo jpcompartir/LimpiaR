@@ -33,6 +33,7 @@ variable
 ## Examples
 
 ``` r
+
 limpiar_examples %>% limpiar_emojis_es() %>% dplyr::select(mention_content)
 #> # A tibble: 10 × 1
 #>    mention_content                                                    

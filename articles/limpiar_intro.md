@@ -9,6 +9,7 @@ we’ll load few helpful libraries.
 ## Walkthrough
 
 ``` r
+
 library(magrittr)
 library(dplyr)
 library(stringr)
@@ -25,6 +26,7 @@ expects. You can also type ‘control + space’ when your cursor is inside
 the function’s brackets to force extra help.
 
 ``` r
+
 data
 #> # A tibble: 10 × 2
 #>    Mention.Content                                                   Mention.Url
@@ -51,6 +53,7 @@ use the janitor package. You can uncomment the code to install janitor
 if it is not already installed on your machine.
 
 ``` r
+
 # ifelse(!"janitor" %in% installed.packages(),
 #    install.packages("janitor"), library(janitor))
 
@@ -79,6 +82,7 @@ lower case. We do this to make tokens like ‘AMAZING’ or ‘Amazing’ -\>
 function tolower() works just fine.
 
 ``` r
+
 (data <- data %>%
   mutate(mention_content = tolower(mention_content)))
 #> # A tibble: 10 × 2
@@ -110,6 +114,7 @@ Tip: you can type ?limpiar_accents to access the documentation, and see
 which arguments you need to fill in.
 
 ``` r
+
 (data <- data %>%
   limpiar_accents(text_var = mention_content))
 #> # A tibble: 10 × 2
@@ -134,6 +139,7 @@ type text_var = mention_content, because the default argument for
 text_var is already mention_content.
 
 ``` r
+
 (data <- data %>%
   limpiar_duplicates())
 #> # A tibble: 7 × 2
@@ -152,6 +158,7 @@ text_var is already mention_content.
 > have to specify text_var = text, or call:
 
 ``` r
+
 data %>% rename(text = mention_content)
 #> # A tibble: 7 × 2
 #>   text                                                               mention_url
@@ -171,6 +178,7 @@ If you need to remove retweets, for example to create a bigram network,
 limpiar has a function just for that.
 
 ``` r
+
 (data <- data %>% 
    limpiar_retweets())
 #> # A tibble: 6 × 2
@@ -190,6 +198,7 @@ We generally don’t want URLs appearing in our charts or analyses, so we
 can remove them with the limpiar_url function.
 
 ``` r
+
 (data <- data %>%
    limpiar_url())
 #> # A tibble: 6 × 2
@@ -211,6 +220,7 @@ multiple white spaces for no reason; as is common in the messy data we
 often encounter.
 
 ``` r
+
 (data <- data %>%
   limpiar_spaces())
 #> # A tibble: 6 × 2
@@ -233,6 +243,7 @@ documentation.
 Replace only hashtags:
 
 ``` r
+
 data %>%
   limpiar_tags(user = FALSE, hashtag = TRUE)
 #> # A tibble: 6 × 2
@@ -249,6 +260,7 @@ data %>%
 Replace only user tags:
 
 ``` r
+
 data %>%
   limpiar_tags(user = TRUE, hashtag = FALSE)
 #> # A tibble: 6 × 2
@@ -265,6 +277,7 @@ data %>%
 Replace both hashtags and user handles:
 
 ``` r
+
 data %>%
   limpiar_tags()
 #> # A tibble: 6 × 2
@@ -299,6 +312,7 @@ continuously train algorithms as new shorthands arise. This function
 attempts to bridge that gap, by normalising the most common shorthands.
 
 ``` r
+
 (data <- data %>%
    limpiar_shorthands())
 #> # A tibble: 6 × 2
@@ -321,6 +335,7 @@ normalise the most common occurrences of repeated or additional
 characters.
 
 ``` r
+
 (data <- data %>%
    limpiar_repeat_chars())
 #> # A tibble: 6 × 2
@@ -364,6 +379,7 @@ for special cases only, is the emoji’s encodings are in English. We may,
 at some point, translate them to Spanish, but it seems unlikely.
 
 ``` r
+
 data %>%
   limpiar_recode_emojis(text_var = mention_content, with_emoji_tag = FALSE)
 #> # A tibble: 6 × 2
@@ -381,6 +397,7 @@ Or if we set `with_emoji_tag` to TRUE, our emojis are now pasted
 together with ’\_’ and have an ’\_emoji’ label.
 
 ``` r
+
 data %>%
   limpiar_recode_emojis(mention_content, with_emoji_tag = TRUE)
 #> # A tibble: 6 × 2
@@ -411,6 +428,7 @@ This function operates with a fairly simple RegEx pattern, meaning it
 runs a lot more efficiently than its recode counterpart.
 
 ``` r
+
 data %>%
   limpiar_remove_emojis(mention_content)
 #> # A tibble: 6 × 2
@@ -586,6 +604,7 @@ punctuation and accented characters:
     #> 10 "grax ntonces q?"                                                 www.youtub…
 
 ``` r
+
 data %>%
   limpiar_non_ascii(mention_content)
 #> # A tibble: 10 × 2
@@ -610,6 +629,7 @@ characters (a-zA-Z0-9 + spaces). This is a heavy-duty option which
 *will* remove all accented characters.
 
 ``` r
+
 data %>%
   limpiar_alphanumeric(mention_content)
 #> # A tibble: 10 × 2
@@ -632,6 +652,7 @@ characters, then we should recode the accents first with
 `limpiar_accents`:
 
 ``` r
+
 data %>%
   limpiar_accents(mention_content) %>%
   limpiar_alphanumeric(mention_content)
@@ -670,6 +691,7 @@ all scenarios, you will want to use the limpiar_stopwords() with the
 argument stop_words = “topics” like so:
 
 ``` r
+
 data %>%
   limpiar_stopwords(stop_words = "topics") %>%
   limpiar_spaces() #to clear the spaces of words that were removed
@@ -697,6 +719,7 @@ shorter list of stopwords for sentiment than topics, where we have
 removed a few choice terms.
 
 ``` r
+
 data %>%
   limpiar_stopwords(stop_words = "sentiment") %>%
   limpiar_spaces() 
@@ -732,6 +755,7 @@ conjoured up a new data frame called df, which we will use to show the
 last two functions and how to chain everything together.
 
 ``` r
+
 df
 #> # A tibble: 10 × 3
 #>    mention_content                                            mention_url na_col
@@ -755,6 +779,7 @@ going on with that specific pattern. We can use limpiar_inspect to view
 all posts which contain that pattern in an interactive frame!
 
 ``` r
+
 limpiar_inspect(df, 
                 pattern = "ntonces", 
                 text_var = mention_content,
@@ -782,6 +807,7 @@ we have 400,000 posts and 80 columns. In this case we’ll get rid of all
 columns for which 25% or more of their values are NA.
 
 ``` r
+
 limpiar_na_cols(df,threshold =  0.25)
 #> # A tibble: 10 × 2
 #>    mention_content                                                   mention_url
@@ -804,6 +830,7 @@ To speed things up, we **could** call the functions together in one big
 long pipe.
 
 ``` r
+
 df %>%
   limpiar_na_cols(threshold = 0.25)%>%
   limpiar_accents()%>%

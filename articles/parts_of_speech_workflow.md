@@ -26,27 +26,27 @@ Wikipedia](https://en.wikipedia.org/wiki/Part_of_speech).
 
 For all UPOS Tags use the following table as a reference:
 
-| Part of Speech            | UPOS Tag | Definition                                                                                                                                                                                               |
-|:--------------------------|:---------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Adjective                 | ADJ      | Usually describes or modifies a noun. It provides information about an object’s size, color, shape, etc. Example: “big”, “blue”.                                                                         |
-| Adposition                | ADP      | Class of words that includes prepositions and postpositions, used to express spatial or temporal relations or mark various semantic roles. Example: “in”, “on”, “before”, “after”.                       |
-| Adverb                    | ADV      | Modifies a verb, an adjective, another adverb, or even an entire sentence. It provides information about manner, time, place, frequency, degree, etc. Example: “quickly”, “very”.                        |
-| Auxiliary                 | AUX      | Special verb used to add functional or grammatical meaning to the clause in which it appears. It accompanies the main verb and forms different aspects, voices, or moods. Example: “is”, “have”, “will”. |
-| Coordinating Conjunction  | CCONJ    | Joins words, phrases, or clauses of similar grammatical status and syntactic importance. Example: “and”, “but”, “or”.                                                                                    |
-| Determiner                | DET      | Introduces a noun and provides context in terms of definiteness, where it belongs in a sequence, quantity, or ownership. Example: “a”, “the”, “this”, “those”.                                           |
-| Interjection              | INTJ     | An abrupt remark, made apart from the main sentence structure, often used to express strong emotion or surprise. Example: “Oh!”, “Wow!”, “Ugh!”.                                                         |
-| Noun                      | NOUN     | Represents a person, place, thing, or idea. Nouns can be subjects, objects, or complement in a sentence. Example: “dog”, “city”, “happiness”.                                                            |
-| Numeral                   | NUM      | A word, symbol, or group of words representing a number. Example: “one”, “first”, “100”.                                                                                                                 |
-| Particle                  | PART     | A function word that does not fit into the other categories but is used to express grammatical relationships with other words or to specify the attitude of the speaker. Example: “up” in “stand up”.    |
-| Pronoun                   | PRON     | Replaces a noun, often used to avoid repetition. Pronouns can do most things that nouns can do. Example: “he”, “they”, “who”.                                                                            |
-| Proper Noun               | PROPN    | Names a specific person, place, thing, or idea and is typically capitalized. Example: “Elizabeth”, “London”, “Microsoft”.                                                                                |
-| Punctuation               | PUNCT    | Symbols that organize writing into clauses, phrases, and sentences, clarify meaning, and indicate pauses. Example: “.”, “,”, “!”.                                                                        |
-| Subordinating Conjunction | SCONJ    | Introduces a subordinate clause and indicates the relationship between the subordinate clause and the rest of the sentence. Example: “because”, “although”, “when”.                                      |
-| Symbol                    | SYM      | A mark or character used as a conventional representation of an object, function, or process. Example: “\$”, “%”, “&”.                                                                                   |
-| Verb                      | VERB     | Expresses an action, occurrence, or state of being. Verbs are central to a clause. Example: “run”, “be”, “have”.                                                                                         |
-| Other                     | X        | A category used for words or tokens that do not fit into the above categories. This is less common and often used in tagging to mark anomalies or unclassifiable items.                                  |
+| Part of Speech | UPOS Tag | Definition |
+|:---|:---|:---|
+| Adjective | ADJ | Usually describes or modifies a noun. It provides information about an object’s size, color, shape, etc. Example: “big”, “blue”. |
+| Adposition | ADP | Class of words that includes prepositions and postpositions, used to express spatial or temporal relations or mark various semantic roles. Example: “in”, “on”, “before”, “after”. |
+| Adverb | ADV | Modifies a verb, an adjective, another adverb, or even an entire sentence. It provides information about manner, time, place, frequency, degree, etc. Example: “quickly”, “very”. |
+| Auxiliary | AUX | Special verb used to add functional or grammatical meaning to the clause in which it appears. It accompanies the main verb and forms different aspects, voices, or moods. Example: “is”, “have”, “will”. |
+| Coordinating Conjunction | CCONJ | Joins words, phrases, or clauses of similar grammatical status and syntactic importance. Example: “and”, “but”, “or”. |
+| Determiner | DET | Introduces a noun and provides context in terms of definiteness, where it belongs in a sequence, quantity, or ownership. Example: “a”, “the”, “this”, “those”. |
+| Interjection | INTJ | An abrupt remark, made apart from the main sentence structure, often used to express strong emotion or surprise. Example: “Oh!”, “Wow!”, “Ugh!”. |
+| Noun | NOUN | Represents a person, place, thing, or idea. Nouns can be subjects, objects, or complement in a sentence. Example: “dog”, “city”, “happiness”. |
+| Numeral | NUM | A word, symbol, or group of words representing a number. Example: “one”, “first”, “100”. |
+| Particle | PART | A function word that does not fit into the other categories but is used to express grammatical relationships with other words or to specify the attitude of the speaker. Example: “up” in “stand up”. |
+| Pronoun | PRON | Replaces a noun, often used to avoid repetition. Pronouns can do most things that nouns can do. Example: “he”, “they”, “who”. |
+| Proper Noun | PROPN | Names a specific person, place, thing, or idea and is typically capitalized. Example: “Elizabeth”, “London”, “Microsoft”. |
+| Punctuation | PUNCT | Symbols that organize writing into clauses, phrases, and sentences, clarify meaning, and indicate pauses. Example: “.”, “,”, “!”. |
+| Subordinating Conjunction | SCONJ | Introduces a subordinate clause and indicates the relationship between the subordinate clause and the rest of the sentence. Example: “because”, “although”, “when”. |
+| Symbol | SYM | A mark or character used as a conventional representation of an object, function, or process. Example: “\$”, “%”, “&”. |
+| Verb | VERB | Expresses an action, occurrence, or state of being. Verbs are central to a clause. Example: “run”, “be”, “have”. |
+| Other | X | A category used for words or tokens that do not fit into the above categories. This is less common and often used in tagging to mark anomalies or unclassifiable items. |
 
-Source: universaldependencies.org/u/pos
+Source: universaldependencies.org/u/pos {.table}
 
 ## Workflow
 
@@ -61,6 +61,7 @@ verbs/phrasal verbs as they are ‘doing words’.
 ### Loading packages
 
 ``` r
+
 library(LimpiaR)
 library(tibble)
 library(dplyr)
@@ -93,6 +94,7 @@ more than 65 languages based on 101 treebanks. For demonstrative
 purposes we’ll use `language = "english"`.
 
 ``` r
+
 model <- limpiar_pos_import_model(language = "english")
 ```
 
@@ -104,6 +106,7 @@ data frame with both a text variable and an ID column which uniquely
 identifies each text.
 
 ``` r
+
 (
 data <-tibble(text = tolower(stringr::sentences[1:100]),
                       universal_message_id = paste0("TWITTER", 1:100))
@@ -167,20 +170,22 @@ finish running. If you don’t want the progress updates to print in your
 console set `update_progress = 0`.
 
 ``` r
+
 # annotate texts and perform dependency parsing
 annotations <- limpiar_pos_annotate(data = data, text_var = text, id_var = universal_message_id, pos_model = model, dependency_parse = TRUE, in_parallel = FALSE, update_progress = 25)
 ```
 
-    ## 2026-02-02 15:51:07.498525 Annotating text fragment 1/100
-    ## 2026-02-02 15:51:07.652432 Annotating text fragment 26/100
-    ## 2026-02-02 15:51:07.782925 Annotating text fragment 51/100
-    ## 2026-02-02 15:51:07.929949 Annotating text fragment 76/100
+    ## 2026-08-25 09:11:29.808977 Annotating text fragment 1/100
+    ## 2026-08-25 09:11:29.961712 Annotating text fragment 26/100
+    ## 2026-08-25 09:11:30.09526 Annotating text fragment 51/100
+    ## 2026-08-25 09:11:30.242498 Annotating text fragment 76/100
 
 Now that we have our texts tokenized, dependencies parsed, and POS
 annotations are complete, let’s take a look at the output. After
 annotating we have 882 rows, which is an 8.82x increase!
 
 ``` r
+
 annotations %>%
   select(-c(sentence, feats, xpos, doc_id)) %>%
   relocate(universal_message_id)
@@ -251,6 +256,7 @@ from the counts, but if we just want to know which adjectives are seen
 most frequently:
 
 ``` r
+
 # Count adjectives
 annotations %>% 
   filter(pos_tag %in% c("ADJ")) %>%
@@ -276,6 +282,7 @@ Alternatively we could do the same thing for nouns, but this time count
 the lemma (in case of plurals).
 
 ``` r
+
 #Count the lemma of each noun
 annotations %>% 
   filter(pos_tag %in% c("NOUN")) %>% # this time selecting nouns
@@ -308,6 +315,7 @@ token and the value in the next row, so first we need
 and to group by the doc_id, paragraph_id and sentence_id.
 
 ``` r
+
 adj_to_noun <- annotations %>% 
   filter(
     pos_tag == "ADJ" & lead(pos_tag) == "NOUN" | pos_tag == "NOUN" & lag(pos_tag) == "ADJ", .by = c(doc_id, paragraph_id, sentence_id))
@@ -321,6 +329,7 @@ cumsum meshes with logicals in R, and a ‘grouped, summarise paste with a
 flourish of collapse’ trick.
 
 ``` r
+
 adj_to_noun %>%
   mutate(collocation_id = row_number() %% 2, .before = 1) %>% 
   mutate(collocation_id = cumsum(collocation_id == 1)) %>%
@@ -360,6 +369,7 @@ universal_message_id we’ll get back a 100 row data frame which we can
 join back to our original data frame.
 
 ``` r
+
 annotations <- annotations %>%
   mutate(token =
            case_when(pos_tag == "ADJ" ~ lemma,
@@ -391,15 +401,17 @@ data frame named ‘spanish’
 > intenso ensayo a su obra.”
 
 ``` r
+
 spanish_model <- limpiar_pos_import_model("spanish") # Load the model 
 
 spanish <- spanish %>%
   limpiar_pos_annotate(text, id, spanish_model, udpate_progress = 0) # Extract Pos Tags  
 ```
 
-    ## 2026-02-02 15:51:10.4207 Annotating text fragment 1/1
+    ## 2026-08-25 09:11:33.39152 Annotating text fragment 1/1
 
 ``` r
+
 spanish %>%
   select(token, lemma, pos_tag) # Select relevant columns
 ```
@@ -431,6 +443,7 @@ We can convert all verbs to lemma and stitch the document back together
 using the same tricks as we did for English:
 
 ``` r
+
 spanish %>%
   mutate(
     token = ifelse(pos_tag == "VERB", lemma, token)
